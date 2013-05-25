@@ -24,25 +24,6 @@ def Sin(x):
 """
 TODO: 自己实现
 """
-def CloseEnough(x, y):
-    gInfiniteSimal = 1e-6
-    if abs(x - y) < gInfiniteSimal:
-        return True
-    else:
-        return False
-
-def Square(n):
-  return n*n
-
-"""
-TODO: 自己实现
-"""
-def Sqrt(n):
-  return math.sqrt(n)
-
-"""
-TODO: 自己实现
-"""
 def Ceil(n):
   return math.ceil(n)
 
@@ -88,6 +69,16 @@ def IsEven(n):
 
   return rst
 
+def Square(n):
+  return n*n
+
+def CloseEnough(x, y):
+    gInfiniteSimal = 1e-6
+    if abs(x - y) < gInfiniteSimal:
+        return True
+    else:
+        return False
+
 if __name__ == '__main__':
   print("测试IsInt")
   for i in range(0,10):
@@ -105,11 +96,6 @@ if __name__ == '__main__':
   print("测试IsEven")
   for i in range(0,10):
     print(i, IsEven(i))
-
-  print()
-  print("测试Sqrt")
-  for i in range(0,10):
-    print(i, Sqrt(i))
 
   print()
   print("测试Ceil")

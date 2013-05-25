@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from tool.base import IsInt, IsDivisibility,Sqrt,Ceil,Random
+from tool.base import IsInt, IsDivisibility,Ceil,Random
 from Power import Power
+from Sqrt import Sqrt
 
 def IsPrime(n):
   if n <= 1:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from tool.base import Square, IsEven, Sqrt
+from tool.base import Square, IsEven
 
 """
 TODO: 使算法可以处理负数幂 及 实数幂
