@@ -9,7 +9,7 @@ from tool.base import Square
 def Derivative(func):
   dx = 1e-6
   if not callable(func):
-    print(str(deal), "不可调用.")
+    print(str(func), "不可调用.")
     return None
 
   rst = lambda x : (func(x + dx) - func(x)) / dx
