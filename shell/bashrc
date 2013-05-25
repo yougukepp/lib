@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Umask
+#
+# /etc/profile sets 022, removing write perms to group + others.
+# Set a more restrictive umask: i.e. no exec perms for others:
+# Paranoid: neither group nor others have any perms:
+# umask 077
+umask 027
+
+export PS1="\u@\h&\w:"
+
+alias df='df -h'
+alias du='du -h'
+
+alias grep='egrep -nr --color'
+alias egrep='egrep --color=auto'
+
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
+
+# You may uncomment the following lines if you want `ls' to be colorized:
+export LS_OPTIONS='-hF --color=auto'
+eval "`dircolors`"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -lA'
+alias l='ls $LS_OPTIONS -l'
+alias la='ls $LS_OPTIONS -al'
+
+alias gcc='gcc -Wall -pedantic -std=c99'
+
+export EDITOR=vim
+

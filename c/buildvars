@@ -1,0 +1,9 @@
+
+ROOT_DIR=/cygdrive/e/workspace/c_lib
+INC=${ROOT_DIR}/inc
+
+CC=gcc -c -Wall -O2 -pedantic -std=c99 -I${INC}
+LD=gcc -fPIC -shared -O2
+RM=rm -f
+MAKE=make
+CP=cp -rvf

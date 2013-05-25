@@ -1,0 +1,25 @@
+# Object files
+*.o
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+#调试跟踪
+ *.stackdump
+
+#python临时文件
+python/sicp/tool/__init__.py
+python/sicp/tool/__pycache__/__init__.cpython-32.pyc
+python/sicp/tool/__pycache__/base.cpython-32.pyc
