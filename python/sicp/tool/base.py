@@ -4,6 +4,33 @@
 import math
 import random
 
+"""
+TODO: 自己实现
+"""
+Pi = math.pi
+
+"""
+TODO: 自己实现
+"""
+def Cos(x):
+    return math.cos(x)
+
+"""
+TODO: 自己实现
+"""
+def Sin(x):
+    return math.sin(x)
+
+"""
+TODO: 自己实现
+"""
+def CloseEnough(x, y):
+    gInfiniteSimal = 1e-6
+    if abs(x - y) < gInfiniteSimal:
+        return True
+    else:
+        return False
+
 def Square(n):
   return n*n
 
@@ -96,3 +123,30 @@ if __name__ == '__main__':
   high = 10
   for i in range(0,70):
     print(low, high, Random(low, high))
+
+  print()
+  print("测试Cos")
+  low = 0
+  high = 2 * Pi
+  i = low
+  while i < high:
+      print("Cos(%f) = %f" % (i, Cos(i)))
+      i += 0.01
+
+  print()
+  print("测试Sin")
+  low = 0
+  high = 2 * Pi
+  i = low
+  while i < high:
+      print("Sin(%f) = %f" % (i, Sin(i)))
+      i += 0.01
+
+  print()
+  print("测试CloseEnough")
+  low = 0.999999
+  high = 1.000002
+  i = low
+  while i < high:
+      print("CloseEnough(%.8f, 1) = " % i + str(CloseEnough(i, 1)))
+      i += 0.000001
