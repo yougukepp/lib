@@ -4,22 +4,17 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from ATSqlite import ATSqlite
+from ATTableView import ATTableView
+from ATSqliteModel import ATSqliteModel
 
 class ATMainWindow(QMainWindow):
   def __init__(self, parent=None):
     super(ATMainWindow, self).__init__(parent)
 
-    tableView = QTableView()
-    model = ATSqlite()
+    model = ATSqliteModel()
+    tableView = ATTableView()
     tableView.setModel(model)
     self.setCentralWidget(tableView)
-
-    """
-    centralLabel = QLabel("中心部件")
-    centralLabel.setAlignment(Qt.AlignCenter)
-    self.setCentralWidget(centralLabel)
-    """
 
     statusBar = QStatusBar(self)
     statusBarLabel1 = QLabel("标签1")
@@ -35,6 +30,6 @@ if __name__ == '__main__':
 
   app = QApplication(sys.argv)
   win = ATMainWindow()
-  win.showMaximized () 
+  win.showMaximized ()
   sys.exit(app.exec_())
 
