@@ -168,7 +168,7 @@ if exists("c_gnu")
   syn keyword	cOperator	typeof __real__ __imag__
 endif
 
-syn keyword	cType		int long short char void
+syn keyword	cType		int long short char void GLint GLvoid GLfloat GLuint GLchar
 syn keyword	cType		signed unsigned float double
 
 if !exists("c_no_ansi") || exists("c_ansi_typedefs")
