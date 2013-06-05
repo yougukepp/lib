@@ -29,6 +29,7 @@ sudo apt-get install python3-pyqt4
 #sudo apt-get install freeglut3-dev
 #sudo apt-get install libglew-dev
 #sudo apt-get install libglui-dev
+sudo apt-get install libgles2-mesa-dev
 
 # Game
 #sudo apt-get install wesnoth
