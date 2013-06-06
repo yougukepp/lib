@@ -5,37 +5,55 @@ import os
 import sqlite3
 
 gDbName="db.sqlite3"
+gATTableName="AT"
+gATTableHeader="ID INTEGER PRIMARY KEY, VALUE VARCHAR(20)"
+gATTableHeaderWithOutAttrib="ID,VALUE"
+gATTablePrimary="ID"
 
 class ATDataBase:
-    mCur = None
-    def __init__(self, dbName): 
+    m_Cur = None
+    m_Con = None
+    def __init__(self, dbName):
         needCreateTable = True
         if os.path.exists(dbName):
-            needCreateTable = False 
-            
-        con = sqlite3.connect(dbName)
-        self.mCur = con.cursor() 
-        
+            needCreateTable = False
+
+        self.m_Con = sqlite3.connect(dbName)
+        self.m_Cur = self.m_Con.cursor()
+
         if needCreateTable:
-            tableHeader={"id":"INTEGER PRIMARY KEY", "value":"VARCHAR(20)"}
-            self.CreatTable("AT", tableHeader)
-            #使用成员函数
-            self.InsertRow()
-            cmd = 'INSERT INTO foo (o_id, fruit, veges) VALUES(NULL, "apple", "broccoli")'
-            Execute(cmd)
+            self.CreatTable(gATTableName, gATTableHeader)
 
     def CreatTable(self, tableName, tableHeader):
         #TODO:参数检查
-        cmd = "CREATE TABLE" + tableName + foo (o_id INTEGER PRIMARY KEY, fruit VARCHAR(20), veges VARCHAR(30))'
-        Execute(cmd)
-        pass
+        cmd = "CREATE TABLE IF NOT EXISTS " + tableName + "(" + tableHeader + ")"
+        #print(cmd)
+        self.Execute(cmd)
 
-    def InsertRow(Row):
-        pass
+    def InsertARow(self, row):
+        values = "("
+        for v in row:
+          values += "'" + str(v) + "', "
+        values = values[:-2]      # 删除最后的 逗号和空格
+        values += ")"
+        cmd = "INSERT INTO " + gATTableName + "(" + gATTableHeaderWithOutAttrib + ")" + " VALUES " + (values)
+        #print(cmd)
+        self.Execute(cmd)
 
-    def Execute(cmd):
-        con.commit()
-        pass
+    def DelARow(self, Identifier):
+        cmd = "DELETE FROM " + gATTableName + " WHERE " + gATTablePrimary + " = " + str(Identifier)
+        #print(cmd)
+        self.Execute(cmd)
+
+    def FetchARow(self):
+        cmd = "SELECT * FROM " + gATTableName
+        self.Execute(cmd)
+        rst = self.m_Cur.fetchone()
+        return rst
+
+    def Execute(self, cmd):
+        self.m_Cur.execute(cmd)
+        self.m_Con.commit()
 
 """
 import sqlite3
@@ -86,6 +104,21 @@ conn.close()
 
 
 if __name__ == '__main__':
-    cur.execute('SELECT * FROM foo')
-    print(cur.fetchall())
+    row = (1,"PP is Good!")
+    #row = {2,"LY is Good!"}
+
+    db = ATDataBase(gDbName)
+    print("DB INIT:")
+    print(db.FetchARow())
+    print()
+
+    db.InsertARow(row)
+    print("DB Insert" + str(row))
+    print(db.FetchARow())
+    print()
+
+    db.DelARow(row[0])
+    print("DB Del row ID=" + str(row[0]))
+    print(db.FetchARow())
+    print()
 
