@@ -11,11 +11,11 @@ class ATSqliteModel(QAbstractTableModel):
         super(ATSqliteModel, self).__init__(parent)
 
     def rowCount(self, index):
-        print("TODO:返回行数")
+        #print("TODO:返回行数")
         return 2
 
     def columnCount(self, index):
-        print("TODO:返回列数")
+        #print("TODO:返回列数")
         return 3
 
     def data(self, index, role):
@@ -25,7 +25,7 @@ class ATSqliteModel(QAbstractTableModel):
         return None
 
     def headerData(self, section, orientation, role):
-        print("TODO:显示表头")
+        #print("TODO:显示表头")
         if role == Qt.DisplayRole:
             if orientation == Qt.Horizontal:
                 if 0 == section:
@@ -39,7 +39,7 @@ class ATSqliteModel(QAbstractTableModel):
         return None
 
     def setData(self, index, value, role = Qt.EditRole):
-        print("TODO:实现数据保存")
+        #print("TODO:实现数据保存")
         if role != Qt.EditRole:
             return True
         return True
