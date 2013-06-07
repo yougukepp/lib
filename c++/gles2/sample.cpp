@@ -45,9 +45,9 @@ static void draw(void)
     GisColor c3(0.0f, 0.0f, 1.0f);
 
     std::vector<GisPoint> points4;
-    GisColor c4(1.0f, 1.0f, 1.0f);
+    GisColor c4(1.0f, 1.0f, 0.0f);
 
-    GisColor c5(1.0f, 1.0f, 0.0f);
+    GisColor c5(0.0f, 1.0f, 1.0f);
 
     pLine = new GisLines(points1);
     pPolygon = new GisPolygon(points2);

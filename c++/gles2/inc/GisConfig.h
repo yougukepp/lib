@@ -15,12 +15,11 @@
 #define __GIS_CONFIG_H__
 
 /***************************** 头文件 ****************************/
-
-
+#include "HyConfig.h"
 
 /***************************** 宏定义 ****************************/
-#define         GIS_PI                          (3.14159265358979323846)
-#define         GIS_INFINITE_SIMAL              (1e-6)
+#define         GIS_PI                          (HY_PI)
+#define         GIS_INFINITE_SIMAL              (HY_INFINITE_SIMAL)
 
 #define         GIS_SHADER_SRC_BUF              (4096)
 #define         GIS_CIRCLE_LINE_NUM             (1000)

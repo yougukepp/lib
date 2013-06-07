@@ -1,11 +1,14 @@
 obj=X11
 
-INC_DIR			= /home/pp/workspace/lib/c++/gles2/inc
+ROOT_DIR		= /home/pp/workspace/lib/c++/gles2/
+HY_DIR			= $(ROOT_DIR)../HyLib/
+INC_DIR			= $(ROOT_DIR)inc
+HY_INC_DIR		= $(HY_DIR)
 
 CC_X11			= c++
 LD_X11			= $(CC_X11)
 AR_X11			= ar
-CFLAGS_X11		= -Wall -pedantic -I$(INC_DIR)
+CFLAGS_X11		= -Wall -pedantic -I$(INC_DIR) -I$(HY_INC_DIR)
 LFLAGS_X11		= -Wl,-Bdynamic -L/usr/lib/i386-linux-gnu/mesa-egl/ -lm -lX11 -lEGL -lGLESv2 
 
 CC			= $(CC_X11)
