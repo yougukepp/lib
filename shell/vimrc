@@ -120,11 +120,6 @@ autocmd FileType c,cpp  map <buffer> <leader><space> :w<CR>:make<CR><CR>
 nmap <leader>cn :cn<CR>
 nmap <leader>cp :cp<CR>
 
-" 打开c/h/py)文件时自动加入骨架文件
-autocmd BufNewFile *.c  0read ~/.vim/skeletons/c.c
-autocmd BufNewFile *.h  0read ~/.vim/skeletons/h.h
-autocmd BufNewFile *.py  0read ~/.vim/skeletons/py.py
-
 """"""""""""""""""""""""""""""
 " => 状态栏
 """"""""""""""""""""""""""""""
@@ -173,6 +168,7 @@ au BufNewFile,BufRead *.glsl set syntax=glsl
 " 打开C(H)文件时自动加入骨架文件
 autocmd BufNewFile *.[c]  0read ~/.vim/skeletons/c.c
 autocmd BufNewFile *.[h]  0read ~/.vim/skeletons/h.h
+autocmd BufNewFile *.py  0read ~/.vim/skeletons/py.py
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 色彩方案
