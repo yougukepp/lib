@@ -169,6 +169,7 @@ au BufNewFile,BufRead *.glsl set syntax=glsl
 autocmd BufNewFile *.[c]  0read ~/.vim/skeletons/c.c
 autocmd BufNewFile *.[h]  0read ~/.vim/skeletons/h.h
 autocmd BufNewFile *.py  0read ~/.vim/skeletons/py.py
+autocmd BufNewFile *.cpp  0read ~/.vim/skeletons/cpp.cpp
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 色彩方案
