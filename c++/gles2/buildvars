@@ -1,6 +1,6 @@
 obj=X11
 
-INC_DIR			= /home/pp/lib/c++/gles2/inc
+INC_DIR			= /home/pp/workspace/lib/c++/gles2/inc
 
 CC_X11			= c++
 LD_X11			= $(CC_X11)
