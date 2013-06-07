@@ -1,10 +1,10 @@
 include 	../../buildvars
 
-OBJS = egl.o
+OBJS = GisEgl.o
 
 all:$(OBJS)
 
-$(OBJS): %.o: %.c
+$(OBJS): %.o: %.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:

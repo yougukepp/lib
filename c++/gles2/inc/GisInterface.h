@@ -23,7 +23,7 @@
 #include        "GisProgram.h"
 #include        "GisShader.h"
 
-#include        "egl.h"
+#include        "GisEgl.h"
 
 /***************************** 宏定义 ****************************/
 

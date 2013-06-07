@@ -1,31 +1,6 @@
-/*****************************************************************
- * Copyright(c) 2012, 武汉中原电子集团 应用电子研发中心
- * All rights reserved.
- * *
- * 文件名称:
- *
- * 摘要:
- *
- * 作者:
- *
- * 完成日期:
- *****************************************************************/
-/*--------------------------- 预处理区 --------------------------*/
-/***************************** 头文件 ****************************/
-#include "egl.h"
+#include "GisEgl.h"
 
-/*-------------------------- 变量实现区 -------------------------*/
-/**************************** 全局变量 ***************************/
-
-/**************************** 文件变量 ***************************/
-static EGLDisplay egldisplay;
-static EGLSurface eglsurface;
-static Display *display;
-
-/*------------------------ 局部函数声明区 -----------------------*/
-
-/*-------------------------- 函数实现区 --------------------------*/
-extern GLint EsInit(void)
+GisEgl::GisEgl(void)
 {
     static const GLint s_configAttribs[] =
     {
@@ -95,11 +70,9 @@ extern GLint EsInit(void)
     assert(eglGetError() == EGL_SUCCESS);
     eglMakeCurrent(egldisplay, eglsurface, eglsurface, eglcontext);
     assert(eglGetError() == EGL_SUCCESS);
-
-    return 1;
 }
 
-extern void EsDeInit(void)
+GisEgl::~GisEgl(void)
 {
     eglMakeCurrent(egldisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
     assert(eglGetError() == EGL_SUCCESS);
@@ -109,21 +82,53 @@ extern void EsDeInit(void)
     XCloseDisplay(display);
 }
 
-GLint getWidth(void)
+void GisEgl::SetDisplayFunc(GisCallBackFunc draw)
+{
+    m_draw = draw;
+}
+
+void GisEgl::BeginRender(void)
+{
+    int frameId = 0;
+
+    frameId = 1;
+
+    glViewport(0, 0, GetWidth(), GetHeight());
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    while(true)
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        m_draw(); 
+        glFinish();
+        SwapBuffers();
+
+        sleep(1);
+
+#ifdef __DEBUG_GIS_TRACE_DRAWED_FRAME__
+        printf("frame:%d\n", frameId++);
+        fflush(stdout);
+#endif
+    }
+}
+
+void GisEgl::SwapBuffers(void)
+{
+    eglSwapBuffers(egldisplay, eglsurface);
+}
+
+int GisEgl::GetWidth(void)
 {
     GLint width = 0;
     eglQuerySurface(egldisplay, eglsurface, EGL_WIDTH, &width);
     return width;
 }
 
-GLint getHeight(void)
+int GisEgl::GetHeight(void)
 {
     GLint height = 0;
     eglQuerySurface(egldisplay, eglsurface, EGL_HEIGHT, &height);
     return height;
 }
 
-void ESSwapBuffers(void)
-{
-    eglSwapBuffers(egldisplay, eglsurface);
-}

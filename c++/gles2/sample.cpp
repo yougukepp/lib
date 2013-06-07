@@ -1,28 +1,14 @@
-#include <unistd.h>
 #include "GisInterface.h"
 
 static void draw(void);
 
 int main(int argc, char *argv[])
 {
-    EsInit();
-    int frameId = 0;
+    GisEgl egl = GisEgl();
 
-    frameId = 1;
-    while(true)
-    {
-        draw(); 
-        glFinish();
-        ESSwapBuffers();
+    egl.SetDisplayFunc(draw); 
+    egl.BeginRender();
 
-        sleep(1);
-#ifdef __DEBUG_GIS_TRACE_DRAWED_FRAME__
-        printf("frame:%d\n", frameId++);
-        fflush(stdout);
-#endif
-    }
-
-    EsDeInit();
     return 0;
 }
 
