@@ -26,7 +26,7 @@ sudo apt-get install python3-pyqt4
 
 # OpenGL
 #sudo apt-get install libopenvg1-mes*
-#sudo apt-get install freeglut3-dev
+sudo apt-get install freeglut3-dev python-opengl
 #sudo apt-get install libglew-dev
 #sudo apt-get install libglui-dev
 sudo apt-get install libgles2-mesa-dev
