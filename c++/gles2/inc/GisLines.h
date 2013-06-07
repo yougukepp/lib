@@ -12,6 +12,7 @@ public:
     void draw(std::vector<GisPoint> &points, GisColor &c);
 
 protected: 
+    void draw(std::vector<GisPoint> &points, GisColor &c, GLenum drawType);
     void setVertexShader(const char *pFileName);
     void setFragmentShader(const char *pFileName); 
     void Link(void);

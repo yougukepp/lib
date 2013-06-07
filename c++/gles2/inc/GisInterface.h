@@ -16,6 +16,7 @@
 /***************************** 头文件 ****************************/
 #include        "GisPoint.h"
 #include        "GisLines.h"
+#include        "GisPolygon.h"
 #include        "GisProgram.h"
 #include        "GisShader.h"
 

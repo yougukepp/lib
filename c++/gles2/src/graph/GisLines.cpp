@@ -22,11 +22,18 @@ void GisLines::Link()
 {
     m_pProgram->Link();
 }
+/*
+ * TODO: 参数检查
+ * */
+void GisLines::draw(std::vector<GisPoint> &points, GisColor &c)
+{
+    draw(points, c, GL_LINES);
+}
 
 /*
  * TODO: 限定参数不可修改
  * */
-void GisLines::draw(std::vector<GisPoint> &points, GisColor &c)
+void GisLines::draw(std::vector<GisPoint> &points, GisColor &c, GLenum drawType)
 {
     const int cCoordsPerVertex = 2;        
 
@@ -60,8 +67,7 @@ void GisLines::draw(std::vector<GisPoint> &points, GisColor &c)
     glVertexAttribPointer(posHandle, cCoordsPerVertex,
             GL_FLOAT, false,
             0, pVertexBuf);
-    //glDrawArrays(drawType, 0, iMax);
-    glDrawArrays(GL_LINES, 0, iMax);
+    glDrawArrays(drawType, 0, iMax);
 
     glDisableVertexAttribArray(posHandle);
 
