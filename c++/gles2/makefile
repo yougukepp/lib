@@ -4,7 +4,7 @@ APPNAME		= test
 LIB_DIR	        = ./lib/
 LFLAGS         += -Bstatic -L./lib -lGis
 LIB_GIS		= ./lib/libGis.a
-LIB_ES_DIR      = ./src/es
+LIB_PLATFORM_DIR= ./src/platform
 LIB_GRAPH_DIR   = ./src/graph
 
 OBJS		= sample.o
@@ -20,12 +20,12 @@ mk_lib_dir:
 	if [ ! -d $(LIB_DIR) ]; then mkdir $(LIB_DIR); fi
 
 $(LIB_GIS):mk_lib_dir lib_es lib_graph
-	$(CP) $(LIB_ES_DIR)/*.o $(LIB_DIR)
+	$(CP) $(LIB_PLATFORM_DIR)/*.o $(LIB_DIR)
 	$(CP) $(LIB_GRAPH_DIR)/*.o $(LIB_DIR)
 	$(AR) $(LIB_GIS) $(LIB_DIR)*.o
 
 lib_es:
-	$(MAKE) -C $(LIB_ES_DIR)
+	$(MAKE) -C $(LIB_PLATFORM_DIR)
 
 lib_graph:
 	$(MAKE) -C $(LIB_GRAPH_DIR)
@@ -38,6 +38,6 @@ d:distclean
 
 distclean:clean
 	$(RM) $(LIB_DIR)
-	$(MAKE) -C $(LIB_ES_DIR) clean
+	$(MAKE) -C $(LIB_PLATFORM_DIR) clean
 	$(MAKE) -C $(LIB_GRAPH_DIR) clean
 
