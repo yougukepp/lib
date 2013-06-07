@@ -83,7 +83,7 @@ extern GLint EsInit(void)
 
     printf("XCreateSimpleWindow \n");
     window = XCreateSimpleWindow(display, rootwindow, 0, 0,
-            800, 480, 0, 0, WhitePixel (display, screen));
+            800, 800, 0, 0, WhitePixel (display, screen));
 
     XMapWindow(display, window);
 

@@ -1,5 +1,10 @@
 #include "GisPolygon.h"
 
+GisPolygon::GisPolygon(void)
+{
+    ;
+}
+
 GisPolygon::GisPolygon(const std::vector<GisPoint> &points)
     :GisLines(points)
 {

@@ -18,6 +18,8 @@
 #include        "GisLines.h"
 #include        "GisPolygon.h"
 #include        "GisRect.h"
+#include        "GisCircle.h"
+#include        "GisArc.h"
 #include        "GisProgram.h"
 #include        "GisShader.h"
 

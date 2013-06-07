@@ -16,7 +16,10 @@ int main(int argc, char *argv[])
         ESSwapBuffers();
 
         sleep(1);
-        fprintf(stderr, "frame:%d\n", frameId++);
+#ifdef __DEBUG_GIS_TRACE_DRAWED_FRAME__
+        printf("frame:%d\n", frameId++);
+        fflush(stdout);
+#endif
     }
 
     EsDeInit();
@@ -28,6 +31,8 @@ static void draw(void)
     GisLines *pLine = NULL;
     GisPolygon *pPolygon = NULL;
     GisRect *pRect = NULL;
+    GisCircle *pCircle = NULL;
+    GisArc *pArc = NULL;
 
     GisPoint p1(-0.9f, -0.9f);
     GisPoint p2(0.9f, 0.9f);
@@ -51,39 +56,26 @@ static void draw(void)
     points2.push_back(p8);
     GisColor c2(0.0f, 1.0f, 0.0f);
 
-    GisPoint p9(-0.9f, 0.9f);
-    GisPoint p10(-0.9f, -0.9f);
-    GisPoint p11(0.9f, -0.9f);
-    GisPoint p12(0.9f, 0.9f);
-    std::vector<GisPoint> points3;
-    points3.push_back(p9);
-    points3.push_back(p10);
-    points3.push_back(p11);
-    points3.push_back(p12);
     GisColor c3(0.0f, 0.0f, 1.0f);
+
+    std::vector<GisPoint> points4;
+    GisColor c4(1.0f, 1.0f, 1.0f);
+
+    GisColor c5(1.0f, 1.0f, 0.0f);
 
     pLine = new GisLines(points1);
     pPolygon = new GisPolygon(points2);
-    pRect = new GisRect(points3);
+    pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f);
+    pCircle = new GisCircle(GisPoint(0, 0), 0.8f);
+    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 4, GIS_PI / 2);
 
     pLine->draw(c1);
     pPolygon->draw(c2);
     pRect->draw(c3);
+    pCircle->draw(c4);
+    pArc->draw(c5);
 
-#if 0
-    pLine->draw(points1, c1);
-    pPolygon->draw(points2, c2);
-
-    float[][] points4 = {
-        {-0.9f, 0.9f},
-        {-0.9f, 0f},
-        {0.0f, -0.9f},
-        {0.9f, 0f} 
-    };
-    float[] rgb4 = {0.0f, 0.0f, 1.0f};
-    mArc.draw(points4, rgb4);
-#endif
-
+    delete pCircle;
     delete pRect;
     delete pPolygon;
     delete pLine;

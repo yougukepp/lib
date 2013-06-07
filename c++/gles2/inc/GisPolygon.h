@@ -9,6 +9,9 @@ public:
     GisPolygon(const std::vector<GisPoint> &points);
     void draw(GisColor c);
 
+protected:
+    GisPolygon(void);
+
 private:
 };
 

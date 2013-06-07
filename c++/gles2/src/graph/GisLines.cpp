@@ -2,18 +2,32 @@
 
 GisLines::GisLines(const std::vector<GisPoint> &points)
 { 
-    m_pProgram = new GisProgram();
-    setVertexShader("./glsl/LinesVertex.glsl");
-    setFragmentShader("./glsl/LinesFragment.glsl");
-    Link();
+    AddPoints(points);
+    CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
+} 
 
+GisLines::GisLines(void)
+{
+    CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
+}
+
+void GisLines::CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName)
+{
+    m_pProgram = new GisProgram();
+    setVertexShader(vShaderFileName);
+    setFragmentShader(fShaderFileName);
+    Link();
+}
+
+void GisLines::AddPoints(const std::vector<GisPoint> &points)
+{
     int iMax = 0;
     iMax = points.size();
     for(int i=0; i<iMax; i++)
     {
         m_points.push_back(points[i]);
     }
-} 
+}
 
 void GisLines::setVertexShader(const char *pFileName)
 {
@@ -54,10 +68,19 @@ void GisLines::draw(GisColor &c, GLenum drawType)
     iMax = m_points.size();
     pVertexBuf = (float *)malloc(2 * iMax * sizeof(float));
     j = 0;
+
+#ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
+    printf("GisLines:\n");
+#endif
     for(i=0;i<iMax;i++)
     {
         pVertexBuf[j++] = m_points[i].GetX();
-        pVertexBuf[j++] = m_points[i].GetY();
+        pVertexBuf[j++] = m_points[i].GetY(); 
+#ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
+        printf("point %d:");
+        m_points[i].print(NULL);
+        fflush(stdout);
+#endif
     }
 
     pColorBuf = (float *)malloc(4 * sizeof(float));

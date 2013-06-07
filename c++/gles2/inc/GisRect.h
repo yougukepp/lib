@@ -6,10 +6,17 @@
 class GisRect : public GisPolygon
 {
 public:
-    GisRect(const std::vector<GisPoint> &p1);
-    void draw(GisColor c);
+    GisRect(float x, float y, float w, float h);
+
+    GisPoint GetOrigin(void);
+    float GetWidth(void);
+    float GetHeight(void);
 
 private:
+    float m_x;
+    float m_y;
+    float m_w;
+    float m_h;
 };
 
 #endif

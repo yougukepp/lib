@@ -12,10 +12,13 @@ public:
     void draw(GisColor &c);
 
 protected: 
+    GisLines(void);
+    void AddPoints(const std::vector<GisPoint> &points);
     void draw(GisColor &c, GLenum drawType);
     void setVertexShader(const char *pFileName);
     void setFragmentShader(const char *pFileName); 
-    void Link(void);
+    void Link(void); 
+    void CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName);
 
 private:
     GisProgram *m_pProgram;

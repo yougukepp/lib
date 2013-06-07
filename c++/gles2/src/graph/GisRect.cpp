@@ -1,18 +1,38 @@
 #include "GisRect.h"
 
-GisRect::GisRect(const std::vector<GisPoint> &points)
-    :GisPolygon(points)
+GisRect::GisRect(float x, float y, float w, float h)
 {
-#if 0
-    /*TODO: 参数检查
-     * 1、四个点
-     * 2、邻边垂直
-     * */
-#endif
+    m_x = x;
+    m_y = y;
+    m_w = w;
+    m_h = h;
+
+    GisPoint leftTop(x, y);
+    GisPoint rightTop(x + w, y);
+    GisPoint leftBottom(x, y - h);
+    GisPoint rightBootom(x + w, y - h);
+    std::vector<GisPoint> points;
+    points.push_back(leftTop);
+    points.push_back(rightTop);
+    points.push_back(rightBootom);
+    points.push_back(leftBottom);
+
+    GisPolygon::AddPoints(points);
+} 
+
+GisPoint GisRect::GetOrigin(void)
+{
+    GisPoint origin(m_x, m_y);
+    return origin;
+} 
+
+float GisRect::GetWidth(void)
+{
+    return m_w;
 }
 
-void GisRect::draw(GisColor c)
+float GisRect::GetHeight(void)
 {
-    GisPolygon::draw(c);
+    return m_h;
 }
 
