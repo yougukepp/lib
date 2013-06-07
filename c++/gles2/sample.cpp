@@ -25,8 +25,9 @@ int main(int argc, char *argv[])
 
 static void draw(void)
 {
-    GisLines *pLine = new GisLines();
-    GisPolygon *pPolygon = new GisPolygon();
+    GisLines *pLine = NULL;
+    GisPolygon *pPolygon = NULL;
+    GisRect *pRect = NULL;
 
     GisPoint p1(-0.9f, -0.9f);
     GisPoint p2(0.9f, 0.9f);
@@ -50,8 +51,24 @@ static void draw(void)
     points2.push_back(p8);
     GisColor c2(0.0f, 1.0f, 0.0f);
 
-    pLine->draw(points1, c1);
-    pPolygon->draw(points2, c2);
+    GisPoint p9(-0.9f, 0.9f);
+    GisPoint p10(-0.9f, -0.9f);
+    GisPoint p11(0.9f, -0.9f);
+    GisPoint p12(0.9f, 0.9f);
+    std::vector<GisPoint> points3;
+    points3.push_back(p9);
+    points3.push_back(p10);
+    points3.push_back(p11);
+    points3.push_back(p12);
+    GisColor c3(0.0f, 0.0f, 1.0f);
+
+    pLine = new GisLines(points1);
+    pPolygon = new GisPolygon(points2);
+    pRect = new GisRect(points3);
+
+    pLine->draw(c1);
+    pPolygon->draw(c2);
+    pRect->draw(c3);
 
 #if 0
     pLine->draw(points1, c1);
@@ -67,6 +84,7 @@ static void draw(void)
     mArc.draw(points4, rgb4);
 #endif
 
+    delete pRect;
     delete pPolygon;
     delete pLine;
 }

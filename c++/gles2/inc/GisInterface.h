@@ -17,6 +17,7 @@
 #include        "GisPoint.h"
 #include        "GisLines.h"
 #include        "GisPolygon.h"
+#include        "GisRect.h"
 #include        "GisProgram.h"
 #include        "GisShader.h"
 

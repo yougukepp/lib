@@ -7,11 +7,9 @@ class GisRect : public GisPolygon
 {
 public:
     GisRect(const std::vector<GisPoint> &p1);
-    draw(GisColor &c);
+    void draw(GisColor c);
 
 private:
-    GisProgram *m_pProgram;
-    std::vector<GisPoint> m_points;
 };
 
 #endif

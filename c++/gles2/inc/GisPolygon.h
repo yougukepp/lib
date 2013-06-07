@@ -6,11 +6,10 @@
 class GisPolygon : public GisLines
 {
 public:
-    GisPolygon(void);
-    void draw(std::vector<GisPoint> &points, GisColor &c);
+    GisPolygon(const std::vector<GisPoint> &points);
+    void draw(GisColor c);
 
 private:
-    GisProgram *m_pProgram;
 };
 
 #endif
