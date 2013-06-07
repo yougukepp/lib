@@ -1,6 +1,6 @@
 include 	../../buildvars
 
-OBJS = glu3.o fslutil.o egl.o shader.o utils.o
+OBJS = egl.o
 
 all:$(OBJS)
 
