@@ -67,6 +67,8 @@ void GisLines::draw(GisColor &c, GLenum drawType)
 
     iMax = m_points.size();
     pVertexBuf = (float *)malloc(2 * iMax * sizeof(float));
+    pColorBuf = (float *)malloc(4 * sizeof(float));
+
     j = 0;
 
 #ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
@@ -83,7 +85,6 @@ void GisLines::draw(GisColor &c, GLenum drawType)
 #endif
     }
 
-    pColorBuf = (float *)malloc(4 * sizeof(float));
     pColorBuf[0] = c.GetR();
     pColorBuf[1] = c.GetG();
     pColorBuf[2] = c.GetB();
