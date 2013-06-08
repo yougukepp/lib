@@ -3,4 +3,6 @@
 
 #include "HyDataType.h"
 
+typedef HyCallBackFunc GisCallBackFunc;
+
 #endif
