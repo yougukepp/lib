@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Base
-sudo apt-get install git gnupg curl libx11-dev libxi-dev libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ttf-wqy-microhei ttf-wqy-zenhei ntpdate sudo vim vim-tiny mpg123 build-essential autoconf automake gdb gcc binutils linux-headers-$(uname -r) gnuplot flashplugin-nonfree libtool tree rar unrar zip meld chmsee mplayer2 gnome-mplayer ttf-arphic-uming xfonts-intl-chinese xfonts-wqy ibus-googlepinyin gedit
+sudo apt-get install git gnupg curl libx11-dev libxi-dev libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ttf-wqy-microhei ttf-wqy-zenhei ntpdate sudo vim vim-tiny mpg123 build-essential autoconf automake gdb gcc binutils linux-headers-$(uname -r) gnuplot flashplugin-nonfree libtool tree rar unrar zip meld mplayer2 gnome-mplayer ttf-arphic-uming xfonts-intl-chinese xfonts-wqy ibus-googlepinyin gedit 
+# firefox 可以看chm文件
+chmsee 
 # TODO: fix this problem
 #sudo apt-get ia32-libs
 
