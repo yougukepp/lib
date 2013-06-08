@@ -1,5 +1,7 @@
 #include "GisEgl.h"
 
+static void printFps(void *pFrameId);
+
 GisEgl::GisEgl(void)
 {
     static const GLint s_configAttribs[] =
