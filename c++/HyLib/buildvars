@@ -1,0 +1,14 @@
+obj=X11
+
+ROOT_DIR		= /home/pp/workspace/lib/c++/HyLib/
+INC_DIR			= $(ROOT_DIR)
+
+CC			= c++
+LD			= $(CC)
+CFLAGS			= -Wall -pedantic -I$(INC_DIR)
+LFLAGS			= -Wl,-Bdynamic
+
+RM			= rm -rf
+MAKE			= make
+CP			= cp -rf
+AR			= ar -rcs
