@@ -15,12 +15,13 @@ GisEgl::GisEgl(void)
         EGL_NONE
     };
 
+    GLint ContextAttribList[] = {
+        EGL_CONTEXT_CLIENT_VERSION, 2,
+        EGL_NONE };
+
     GLint               numconfigs;
     EGLConfig           eglconfig;
     EGLContext          eglcontext;
-    GLint               ContextAttribList[] = {
-        EGL_CONTEXT_CLIENT_VERSION, 2,
-        EGL_NONE };
 
     GLint               screen;
     Window              window;
