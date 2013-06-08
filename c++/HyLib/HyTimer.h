@@ -8,17 +8,19 @@ class HyTimer
 public:
     HyTimer(void);
     void SetInterval(int ms);
-    void SetCallBackFunc(HyCallBackFunc callBackFunc);
+    void SetCallBackFunc(HyCallBackFuncWithPara callBackFunc, void *pPara);
     void Start(void);
     void Stop(void); 
 
     bool Running(void);
-    HyCallBackFunc CallBackFunc(void);
+    void CallBackFunc(void);
     int Interval(void);
 
 private:
     int m_interval;
-    HyCallBackFunc m_callBackFunc;
+    HyCallBackFuncWithPara m_callBackFunc;
+    void *m_pCallBackPara;
+
     pthread_t m_tid;
     bool m_running;
 };

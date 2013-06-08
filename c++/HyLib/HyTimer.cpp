@@ -13,17 +13,18 @@ void HyTimer::SetInterval(int ms)
     m_interval = ms;
 }
 
-void HyTimer::SetCallBackFunc(HyCallBackFunc callBackFunc)
+void HyTimer::SetCallBackFunc(HyCallBackFuncWithPara callBackFunc, void *pPara)
 {
     m_callBackFunc = callBackFunc;
+    m_pCallBackPara = pPara;
 } 
 
 void HyTimer::Start(void)
 {
     int rst = 0;
+    m_running = true;
     rst = pthread_create(&m_tid, NULL, ThreadLoop, this);
     assert(0 == rst);
-    m_running = true;
 }
 
 void HyTimer::Stop(void)
@@ -37,9 +38,9 @@ bool HyTimer::Running(void)
     return m_running;
 }
 
-HyCallBackFunc HyTimer::CallBackFunc(void)
+void HyTimer::CallBackFunc(void)
 {
-    return m_callBackFunc;
+    m_callBackFunc(m_pCallBackPara);
 }
 
 int HyTimer::Interval(void)
@@ -50,12 +51,16 @@ int HyTimer::Interval(void)
 static void *ThreadLoop(void *arg)
 {
     assert(NULL != arg);
+
     HyTimer *pTimer = (HyTimer *)arg;
+
+    useconds_t us = 0;
+    us = 1000 * pTimer->Interval();
 
     while(pTimer->Running())
     {
         pTimer->CallBackFunc();
-        sleep(pTimer->Interval());
+        usleep(us);
     }
     pthread_exit(NULL);
 }

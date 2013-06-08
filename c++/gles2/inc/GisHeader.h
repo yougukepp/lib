@@ -30,6 +30,7 @@
 
 #include "GisConfig.h"
 #include "GisDataType.h"
+#include "HyInterface.h"
 
 
 /***************************** 宏定义 ****************************/

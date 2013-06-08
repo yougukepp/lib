@@ -27,7 +27,7 @@
 
 /* 调试开关 */
 //#define __DEBUG_GIS_TRACE_DRAWED_POINTS__
-#define __DEBUG_GIS_TRACE_DRAWED_FRAME__
+#define __DEBUG_GIS_PRINT_FPS__
 
 /**************************** 类型定义 ***************************/
 

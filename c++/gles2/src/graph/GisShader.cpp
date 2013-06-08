@@ -15,6 +15,7 @@ void GisShader::ReadSrc(const char *pFileName)
         assert(readBytes < GIS_SHADER_SRC_BUF);
         m_src.append(buf, readBytes);
     }
+    fclose(f);
 } 
 
 GisShader::GisShader(void)

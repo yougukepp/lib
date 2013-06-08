@@ -85,6 +85,24 @@ GisEgl::~GisEgl(void)
 void GisEgl::SetDisplayFunc(GisCallBackFunc draw)
 {
     m_draw = draw;
+} 
+
+static void printFps(void *pFrameId)
+{
+    int *pFId = NULL;
+    static int lastId = 0;
+    int framePlayed = 0;
+
+    pFId = (int *)pFrameId;
+
+    framePlayed = *pFId - lastId;
+
+    /* printf("\b\b\b\b\b\b\b\b"); */
+    printf("bps:% 3d\n", framePlayed);
+    fflush(stdout);
+
+    lastId =*pFId;
+
 }
 
 void GisEgl::BeginRender(void)
@@ -94,7 +112,14 @@ void GisEgl::BeginRender(void)
     frameId = 1;
 
     glViewport(0, 0, GetWidth(), GetHeight());
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT); 
+    
+#ifdef __DEBUG_GIS_PRINT_FPS__
+    HyTimer timer = HyTimer();
+    timer.SetInterval(1000);                                    // 1 Second
+    timer.SetCallBackFunc(printFps, &frameId);
+    timer.Start();
+#endif
 
     while(true)
     {
@@ -102,15 +127,15 @@ void GisEgl::BeginRender(void)
 
         m_draw(); 
         glFinish();
-        SwapBuffers();
+        SwapBuffers(); 
 
-        sleep(1);
-
-#ifdef __DEBUG_GIS_TRACE_DRAWED_FRAME__
-        printf("frame:%d\n", frameId++);
-        fflush(stdout);
-#endif
+        frameId++;
     }
+
+#ifdef __DEBUG_GIS_PRINT_FPS__
+    timer.Stop();
+#endif
+
 }
 
 void GisEgl::SwapBuffers(void)
