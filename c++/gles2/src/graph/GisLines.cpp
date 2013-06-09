@@ -62,7 +62,12 @@ void GisLines::Link()
 void GisLines::draw(void)
 {
     draw(GL_LINES);
-} 
+}
+
+void GisLines::Translate(int x, int y, int z)
+{
+    ;
+}
 
 void GisLines::draw(GLenum drawType)
 {

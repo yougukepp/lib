@@ -12,6 +12,7 @@ public:
     virtual void draw(void);
     void SetGLPosBuf(void);
     void SetGLColorBuf(void);
+    void Translate(int x, int y, int z);
     virtual ~GisLines(void);
 
 protected: 
@@ -34,6 +35,7 @@ private:
     GisProgram *m_pProgram;
     float *m_pPosBuf;
     float *m_pColorBuf;
+    float m_matrix[4][4];
 };
 
 #endif
