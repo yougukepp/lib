@@ -1,6 +1,7 @@
 #include "GisArc.h"
 
 GisArc::GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle, GisColor c)
+    :GisLines()
 {
     std::vector<GisPoint> points;
     makePoints(points, pOrig, r, startAngle, spanAngle);
@@ -8,16 +9,9 @@ GisArc::GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle, Gi
     SetColor(c);
 }
 
-void GisArc::draw(bool loop)
+void GisArc::draw(void)
 {
-    if(true == loop)
-    {
-        GisLines::draw(GL_LINE_LOOP);
-    }
-    else
-    {
-        GisLines::draw(GL_LINE_STRIP);
-    }
+    GisLines::draw(GL_LINE_STRIP);
 }
 
 void GisArc::makePoints(std::vector<GisPoint> &points, GisPoint pOrig, 

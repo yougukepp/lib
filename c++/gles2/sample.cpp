@@ -9,7 +9,7 @@ GisPolygon *pPolygon = NULL;
 GisRect *pRect = NULL;
 GisCircle *pCircle = NULL;
 GisArc *pArc = NULL;
-GisArc *pArcLoop = NULL;
+GisChord *pChord = NULL;
 
 GisColor c1(1.0f, 0.0f, 0.0f);
 GisColor c2(0.0f, 1.0f, 0.0f);
@@ -37,8 +37,8 @@ static void draw(void)
     pPolygon->draw();
     pRect->draw();
     pCircle->draw();
-    pArc->draw(false);
-    pArcLoop->draw(true);
+    pArc->draw();
+    pChord->draw();
 }
 
 static void InitShape(void)
@@ -70,7 +70,7 @@ static void InitShape(void)
     pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
     pCircle = new GisCircle(GisPoint(0, 0), 0.8f, c4);
     pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 4, GIS_PI / 2, c5);
-    pArcLoop = new GisArc(GisPoint(0,0), 0.6, GIS_PI, GIS_PI / 2, c6);
+    pChord = new GisChord(GisPoint(0,0), 0.6, GIS_PI, GIS_PI / 2, c6);
 }
 
 static void DeinitShape(void)
@@ -80,6 +80,6 @@ static void DeinitShape(void)
     delete pRect;
     delete pCircle;
     delete pArc;
-    delete pArcLoop;
+    delete pChord;
 }
 

@@ -20,6 +20,7 @@
 #include        "GisRect.h"
 #include        "GisCircle.h"
 #include        "GisArc.h"
+#include        "GisChord.h"
 #include        "GisProgram.h"
 #include        "GisShader.h"
 
