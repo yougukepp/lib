@@ -45,6 +45,8 @@ static void draw(void)
     pChord->draw();
     pPie->draw();
     pOval->draw();
+
+    pCircle->Translate(0.001, 0.001, 0);
 }
 
 static void InitShape(void)
@@ -74,7 +76,7 @@ static void InitShape(void)
     pLine = new GisLines(points1, c1);
     pPolygon = new GisPolygon(points2, c2);
     pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
-    pCircle = new GisCircle(GisPoint(0, 0), 0.8f, c4);
+    pCircle = new GisCircle(GisPoint(0, 0), 0.1f, c4);
     pPie = new GisPie(GisPoint(0,0), 0.5, 3 * GIS_PI / 8, GIS_PI / 7, c7);
     pChord = new GisChord(GisPoint(0,0), 0.6, GIS_PI / 7, GIS_PI / 6, c6);
     pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 5, GIS_PI / 4, c5);

@@ -12,7 +12,7 @@ public:
     virtual void draw(void);
     void SetGLPosBuf(void);
     void SetGLColorBuf(void);
-    void Translate(int x, int y, int z);
+    void Translate(float x, float y, float z);
     virtual ~GisLines(void);
 
 protected: 
