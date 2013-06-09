@@ -72,11 +72,11 @@ void GisProgram::Use(void)
 
 void GisProgram::BindUniform4fv(const char *uniformName, float *color)
 {
-    GLint colorHandle = 0;
+    GLint uniformHandle = 0;
 
-    colorHandle = glGetUniformLocation(m_programId, "vColor");
-    assert(-1 != colorHandle);
-    glUniform4fv(colorHandle, 1, color);
+    uniformHandle = glGetUniformLocation(m_programId, uniformName);
+    assert(-1 != uniformHandle);
+    glUniform4fv(uniformHandle, 1, color);
 } 
 
 int GisProgram::GetAttribLocation(const char *AttribName)
