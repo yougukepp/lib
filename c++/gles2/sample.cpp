@@ -10,13 +10,17 @@ GisLines *pRect = NULL;
 GisLines *pCircle = NULL;
 GisLines *pArc = NULL;
 GisLines *pChord = NULL;
+GisLines *pPie = NULL;
+GisLines *pOval = NULL;
 
 GisColor c1(1.0f, 0.0f, 0.0f);
 GisColor c2(0.0f, 1.0f, 0.0f);
 GisColor c3(0.0f, 0.0f, 1.0f);
-GisColor c4(1.0f, 1.0f, 0.0f);
-GisColor c5(0.0f, 1.0f, 1.0f);
-GisColor c6(1.0f, 0.0f, 1.0f);
+GisColor c4(0.0f, 1.0f, 1.0f);
+GisColor c5(1.0f, 0.0f, 1.0f);
+GisColor c6(1.0f, 1.0f, 0.0f);
+GisColor c7(1.0f, 1.0f, 1.0f);
+GisColor c8(0.5f, 0.0f, 0.0f);
 
 int main(int argc, char *argv[])
 {
@@ -39,6 +43,8 @@ static void draw(void)
     pCircle->draw();
     pArc->draw();
     pChord->draw();
+    pPie->draw();
+    pOval->draw();
 }
 
 static void InitShape(void)
@@ -69,8 +75,10 @@ static void InitShape(void)
     pPolygon = new GisPolygon(points2, c2);
     pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
     pCircle = new GisCircle(GisPoint(0, 0), 0.8f, c4);
-    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 4, GIS_PI / 2, c5);
-    pChord = new GisChord(GisPoint(0,0), 0.6, GIS_PI, GIS_PI / 2, c6);
+    pPie = new GisPie(GisPoint(0,0), 0.5, 3 * GIS_PI / 8, GIS_PI / 7, c7);
+    pChord = new GisChord(GisPoint(0,0), 0.6, GIS_PI / 7, GIS_PI / 6, c6);
+    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 5, GIS_PI / 4, c5);
+    pOval = new GisOval(GisPoint(0,0), 0.2, 0.6, c8);
 }
 
 static void DeinitShape(void)
@@ -81,5 +89,7 @@ static void DeinitShape(void)
     delete pCircle;
     delete pArc;
     delete pChord;
+    delete pPie;
+    delete pOval;
 }
 

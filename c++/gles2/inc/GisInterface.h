@@ -21,6 +21,8 @@
 #include        "GisCircle.h"
 #include        "GisArc.h"
 #include        "GisChord.h"
+#include        "GisPie.h"
+#include        "GisOval.h"
 #include        "GisProgram.h"
 #include        "GisShader.h"
 
