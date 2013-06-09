@@ -49,6 +49,11 @@ void GisCircle::makePoints(std::vector<GisPoint> &points, GisPoint pOrig, double
  */
 void GisCircle::draw(GisColor c)
 {
+    GisLines::draw(c, GL_LINE_LOOP);
+}
+
+void GisCircle::drawPart(GisColor c)
+{
     GisLines::draw(c, GL_LINE_STRIP);
 }
 

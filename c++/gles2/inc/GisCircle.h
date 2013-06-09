@@ -11,8 +11,8 @@ public:
     GisCircle(GisPoint pOrig, double r, double startAngle, double spanAngle);
 
     GisCircle(void);
-
     void draw(GisColor c);
+    void drawPart(GisColor c);
 protected: 
     void makePoints(std::vector<GisPoint> &points, GisPoint pOrig, double r, double startAngle, double spanAngle);
 

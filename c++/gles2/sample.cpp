@@ -9,6 +9,7 @@ GisPolygon *pPolygon = NULL;
 GisRect *pRect = NULL;
 GisCircle *pCircle = NULL;
 GisArc *pArc = NULL;
+GisArc *pArcLoop = NULL;
 
 int main(int argc, char *argv[])
 {
@@ -30,12 +31,14 @@ static void draw(void)
     GisColor c3(0.0f, 0.0f, 1.0f);
     GisColor c4(1.0f, 1.0f, 0.0f);
     GisColor c5(0.0f, 1.0f, 1.0f);
+    GisColor c6(1.0f, 0.0f, 1.0f);
 
     pLine->draw(c1);
     pPolygon->draw(c2);
     pRect->draw(c3);
     pArc->draw(c5);
     pCircle->draw(c4);
+    pArcLoop->drawLoop(c6);
 }
 
 static void InitShape(void)
@@ -67,6 +70,7 @@ static void InitShape(void)
     pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f);
     pCircle = new GisCircle(GisPoint(0, 0), 0.8f);
     pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 4, GIS_PI / 2);
+    pArcLoop = new GisArc(GisPoint(0,0), 0.6, GIS_PI, GIS_PI / 2);
 }
 
 static void DeinitShape(void)
