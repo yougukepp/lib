@@ -5,11 +5,11 @@ static void DeinitShape(void);
 static void draw(void);
 
 GisLines *pLine = NULL;
-GisPolygon *pPolygon = NULL;
-GisRect *pRect = NULL;
-GisCircle *pCircle = NULL;
-GisArc *pArc = NULL;
-GisChord *pChord = NULL;
+GisLines *pPolygon = NULL;
+GisLines *pRect = NULL;
+GisLines *pCircle = NULL;
+GisLines *pArc = NULL;
+GisLines *pChord = NULL;
 
 GisColor c1(1.0f, 0.0f, 0.0f);
 GisColor c2(0.0f, 1.0f, 0.0f);

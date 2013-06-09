@@ -9,7 +9,7 @@ class GisLines
 {
 public:
     GisLines(const std::vector<GisPoint> &points, GisColor c);
-    void draw(void);
+    virtual void draw(void);
 
 protected: 
     GisLines(void);
