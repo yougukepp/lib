@@ -8,19 +8,21 @@
 class GisLines
 {
 public:
-    GisLines(const std::vector<GisPoint> &points);
-    void draw(GisColor &c);
+    GisLines(const std::vector<GisPoint> &points, GisColor c);
+    void draw(void);
 
 protected: 
     GisLines(void);
+    void draw(GLenum drawType);
     void AddPoints(const std::vector<GisPoint> &points);
-    void draw(GisColor &c, GLenum drawType);
+    void SetColor(GisColor c);
     void setVertexShader(const char *pFileName);
     void setFragmentShader(const char *pFileName); 
     void Link(void); 
     void CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName);
 
 private:
+    GisColor m_c;
     GisProgram *m_pProgram;
     std::vector<GisPoint> m_points;
 };

@@ -11,6 +11,13 @@ GisCircle *pCircle = NULL;
 GisArc *pArc = NULL;
 GisArc *pArcLoop = NULL;
 
+GisColor c1(1.0f, 0.0f, 0.0f);
+GisColor c2(0.0f, 1.0f, 0.0f);
+GisColor c3(0.0f, 0.0f, 1.0f);
+GisColor c4(1.0f, 1.0f, 0.0f);
+GisColor c5(0.0f, 1.0f, 1.0f);
+GisColor c6(1.0f, 0.0f, 1.0f);
+
 int main(int argc, char *argv[])
 {
     GisEgl egl = GisEgl();
@@ -26,19 +33,12 @@ int main(int argc, char *argv[])
 
 static void draw(void)
 {
-    GisColor c1(1.0f, 0.0f, 0.0f);
-    GisColor c2(0.0f, 1.0f, 0.0f);
-    GisColor c3(0.0f, 0.0f, 1.0f);
-    GisColor c4(1.0f, 1.0f, 0.0f);
-    GisColor c5(0.0f, 1.0f, 1.0f);
-    GisColor c6(1.0f, 0.0f, 1.0f);
-
-    pLine->draw(c1);
-    pPolygon->draw(c2);
-    pRect->draw(c3);
-    pArc->draw(c5);
-    pCircle->draw(c4);
-    pArcLoop->drawLoop(c6);
+    pLine->draw();
+    pPolygon->draw();
+    pRect->draw();
+    pCircle->draw();
+    pArc->draw(false);
+    pArcLoop->draw(true);
 }
 
 static void InitShape(void)
@@ -65,19 +65,21 @@ static void InitShape(void)
 
     std::vector<GisPoint> points4;
 
-    pLine = new GisLines(points1);
-    pPolygon = new GisPolygon(points2);
-    pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f);
-    pCircle = new GisCircle(GisPoint(0, 0), 0.8f);
-    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 4, GIS_PI / 2);
-    pArcLoop = new GisArc(GisPoint(0,0), 0.6, GIS_PI, GIS_PI / 2);
+    pLine = new GisLines(points1, c1);
+    pPolygon = new GisPolygon(points2, c2);
+    pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
+    pCircle = new GisCircle(GisPoint(0, 0), 0.8f, c4);
+    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 4, GIS_PI / 2, c5);
+    pArcLoop = new GisArc(GisPoint(0,0), 0.6, GIS_PI, GIS_PI / 2, c6);
 }
 
 static void DeinitShape(void)
 {
-    delete pCircle;
-    delete pRect;
-    delete pPolygon;
     delete pLine;
+    delete pPolygon;
+    delete pRect;
+    delete pCircle;
+    delete pArc;
+    delete pArcLoop;
 }
 

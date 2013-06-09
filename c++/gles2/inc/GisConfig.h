@@ -22,7 +22,7 @@
 #define         GIS_INFINITE_SIMAL              (HY_INFINITE_SIMAL)
 
 #define         GIS_SHADER_SRC_BUF              (4096)
-#define         GIS_CIRCLE_LINE_NUM             (1000)
+#define         GIS_CIRCLE_LINE_NUM             (20)
 #define         GIS_CIRCLE_ANGLE_PER_LINE       (2 * GIS_PI / GIS_CIRCLE_LINE_NUM)
 
 /* 调试开关 */

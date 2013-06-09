@@ -1,20 +1,20 @@
 #include "GisPolygon.h"
 
-GisPolygon::GisPolygon(void)
+GisPolygon::GisPolygon(const std::vector<GisPoint> &points, GisColor c)
+    :GisLines(points, c)
 {
-    ;
-}
+} 
 
-GisPolygon::GisPolygon(const std::vector<GisPoint> &points)
-    :GisLines(points)
+GisPolygon::GisPolygon(void)
+    :GisLines()
 {
 }
 
 /*
  * TODO: 参数检查
  */
-void GisPolygon::draw(GisColor c)
+void GisPolygon::draw(void)
 {
-    GisLines::draw(c, GL_LINE_LOOP);
+    GisLines::draw(GL_LINE_LOOP);
 }
 

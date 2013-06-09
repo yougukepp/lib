@@ -1,6 +1,7 @@
 #include "GisRect.h"
 
-GisRect::GisRect(float x, float y, float w, float h)
+GisRect::GisRect(float x, float y, float w, float h, GisColor c)
+    :GisPolygon()
 {
     m_x = x;
     m_y = y;
@@ -17,7 +18,8 @@ GisRect::GisRect(float x, float y, float w, float h)
     points.push_back(rightBootom);
     points.push_back(leftBottom);
 
-    GisPolygon::AddPoints(points);
+    AddPoints(points);
+    SetColor(c);
 } 
 
 GisPoint GisRect::GetOrigin(void)

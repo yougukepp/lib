@@ -1,14 +1,23 @@
-#include "GisLines.h"
-
-GisLines::GisLines(const std::vector<GisPoint> &points)
-{ 
-    AddPoints(points);
-    CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
-} 
+#include "GisLines.h" 
 
 GisLines::GisLines(void)
 {
+    GisColor c;
+    m_c = c;
+
     CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
+}
+
+GisLines::GisLines(const std::vector<GisPoint> &points, GisColor c)
+{ 
+    AddPoints(points);
+    SetColor(c);
+    CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
+} 
+
+void GisLines::SetColor(GisColor c)
+{
+    m_c = c;
 }
 
 void GisLines::CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName)
@@ -43,18 +52,13 @@ void GisLines::Link()
 {
     m_pProgram->Link();
 }
-/*
- * TODO: 参数检查
- * */
-void GisLines::draw(GisColor &c)
-{
-    draw(c, GL_LINES);
-}
 
-/*
- * TODO: 限定参数不可修改
- * */
-void GisLines::draw(GisColor &c, GLenum drawType)
+void GisLines::draw(void)
+{
+    draw(GL_LINES);
+} 
+
+void GisLines::draw(GLenum drawType)
 {
     const int cCoordsPerVertex = 2;        
 
@@ -85,9 +89,9 @@ void GisLines::draw(GisColor &c, GLenum drawType)
 #endif
     }
 
-    pColorBuf[0] = c.GetR();
-    pColorBuf[1] = c.GetG();
-    pColorBuf[2] = c.GetB();
+    pColorBuf[0] = m_c.GetR();
+    pColorBuf[1] = m_c.GetG();
+    pColorBuf[2] = m_c.GetB();
     pColorBuf[3] = 1.0f;
 
     m_pProgram->Use();

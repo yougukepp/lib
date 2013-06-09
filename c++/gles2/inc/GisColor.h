@@ -24,6 +24,7 @@
 class GisColor
 {
 public:
+    GisColor(void);
     GisColor(float r, float g, float b);
     float GetR(void);
     float GetG(void);

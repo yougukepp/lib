@@ -1,17 +1,48 @@
 #include "GisArc.h"
 
-GisArc::GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle)
+GisArc::GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle, GisColor c)
 {
-    m_circle = GisCircle(pOrig, r, startAngle, spanAngle);
+    std::vector<GisPoint> points;
+    makePoints(points, pOrig, r, startAngle, spanAngle);
+    AddPoints(points);
+    SetColor(c);
 }
 
-void GisArc::drawLoop(GisColor c)
+void GisArc::draw(bool loop)
 {
-    m_circle.draw(c);
+    if(true == loop)
+    {
+        GisLines::draw(GL_LINE_LOOP);
+    }
+    else
+    {
+        GisLines::draw(GL_LINE_STRIP);
+    }
 }
 
-void GisArc::draw(GisColor c)
+void GisArc::makePoints(std::vector<GisPoint> &points, GisPoint pOrig, 
+        double r, double startAngle, double spanAngle)
 {
-    m_circle.drawPart(c);
-}
+    double x = 0;
+    double y = 0;
+    double angle = 0;
+    double endAngle = 0;
+
+    angle = startAngle;
+
+    if(spanAngle > 2 * GIS_PI)
+    {
+        spanAngle = 2 * GIS_PI;
+    }
+
+    endAngle = startAngle + spanAngle;
+
+    while(angle < endAngle)
+    {
+        x = r * cos(angle);
+        y = r * sin(angle);
+        angle += GIS_CIRCLE_ANGLE_PER_LINE;
+        points.push_back(GisPoint(x, y));
+    }
+} 
 
