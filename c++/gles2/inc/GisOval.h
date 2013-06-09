@@ -9,7 +9,7 @@ public:
     GisOval(GisPoint pOrig, double a, double b, GisColor c);
     void draw(void); 
     
-    void makePoints(std::vector<GisPoint> &points, GisPoint pOrig, 
+    static void makePoints(std::vector<GisPoint> &points, GisPoint pOrig, 
             double a, double b, double startAngle, double spanAngle);
     
 private:
