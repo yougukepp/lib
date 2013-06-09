@@ -10,6 +10,8 @@ class GisLines
 public:
     GisLines(const std::vector<GisPoint> &points, GisColor c);
     virtual void draw(void);
+    void SetGLPosBuf(void);
+    void SetGLColorBuf(void);
     virtual ~GisLines(void);
 
 protected: 
@@ -23,9 +25,15 @@ protected:
     void CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName);
 
 private:
+    static const int m_cPosPerVertex = 4;
+    static const int m_cColorPerVertex = 4;
+
     GisColor m_c;
-    GisProgram *m_pProgram;
     std::vector<GisPoint> m_points;
+
+    GisProgram *m_pProgram;
+    float *m_pPosBuf;
+    float *m_pColorBuf;
 };
 
 #endif

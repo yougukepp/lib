@@ -29,6 +29,7 @@ public:
     float GetR(void);
     float GetG(void);
     float GetB(void);
+    float GetA(void);
 
 protected:
 
@@ -36,6 +37,7 @@ private:
     float m_r;
     float m_g;
     float m_b;
+    float m_a;
 };
 
 /*-------------------------- 接口声明区 -------------------------*/

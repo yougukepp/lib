@@ -3,7 +3,10 @@
 GisLines::GisLines(void)
 {
     GisColor c;
-    m_c = c;
+    SetColor(c);
+    std::vector<GisPoint> points;
+    points.clear();
+    AddPoints(points);
 
     CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
 }
@@ -18,6 +21,7 @@ GisLines::GisLines(const std::vector<GisPoint> &points, GisColor c)
 void GisLines::SetColor(GisColor c)
 {
     m_c = c;
+    SetGLColorBuf();
 }
 
 void GisLines::CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName)
@@ -35,7 +39,9 @@ void GisLines::AddPoints(const std::vector<GisPoint> &points)
     for(int i=0; i<iMax; i++)
     {
         m_points.push_back(points[i]);
-    }
+    } 
+    
+    SetGLPosBuf();
 }
 
 void GisLines::setVertexShader(const char *pFileName)
@@ -60,59 +66,69 @@ void GisLines::draw(void)
 
 void GisLines::draw(GLenum drawType)
 {
-    const int cCoordsPerVertex = 2;        
+    int posHandle = 0;
+    int pointsNums = 0;
+    
+    pointsNums = m_points.size();
 
+    m_pProgram->Use();
+    m_pProgram->BindUniform4fv("vColor", m_pColorBuf);
+
+    posHandle = m_pProgram->GetAttribLocation("vPosition");
+    glEnableVertexAttribArray(posHandle);        
+    glVertexAttribPointer(posHandle, m_cPosPerVertex,
+            GL_FLOAT, false,
+            0, m_pPosBuf);
+    glDrawArrays(drawType, 0, pointsNums);
+
+    glDisableVertexAttribArray(posHandle);
+} 
+
+void GisLines::SetGLPosBuf(void)
+{
     int i = 0;
     int j = 0;
     int iMax = 0;
-    int posHandle = 0;
-    float *pVertexBuf = NULL;
-    float *pColorBuf = NULL;
 
     iMax = m_points.size();
-    pVertexBuf = (float *)malloc(2 * iMax * sizeof(float));
-    pColorBuf = (float *)malloc(4 * sizeof(float));
-
-    j = 0;
+    /*TODO: 使用remalloc 替换*/
+    m_pPosBuf = (float *)malloc(m_cPosPerVertex * iMax * sizeof(float));
+    assert(NULL != m_pPosBuf);
 
 #ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
     printf("GisLines:\n");
 #endif
     for(i=0;i<iMax;i++)
     {
-        pVertexBuf[j++] = m_points[i].GetX();
-        pVertexBuf[j++] = m_points[i].GetY(); 
+        m_pPosBuf[j++] = m_points[i].GetX();
+        m_pPosBuf[j++] = m_points[i].GetY(); 
+        m_pPosBuf[j++] = m_points[i].GetZ(); 
+        m_pPosBuf[j++] = m_points[i].GetA(); 
 #ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
-        printf("point %d:");
+        printf("point %d:", i);
         m_points[i].print(NULL);
         fflush(stdout);
 #endif
     }
 
-    pColorBuf[0] = m_c.GetR();
-    pColorBuf[1] = m_c.GetG();
-    pColorBuf[2] = m_c.GetB();
-    pColorBuf[3] = 1.0f;
+}
 
-    m_pProgram->Use();
-    m_pProgram->BindUniform4fv("vColor", pColorBuf);
+void GisLines::SetGLColorBuf(void)
+{
+    m_pColorBuf = (float *)malloc(m_cColorPerVertex * sizeof(float));
+    assert(NULL != m_pColorBuf);
 
-    posHandle = m_pProgram->GetAttribLocation("vPosition");
-    glEnableVertexAttribArray(posHandle);        
-    glVertexAttribPointer(posHandle, cCoordsPerVertex,
-            GL_FLOAT, false,
-            0, pVertexBuf);
-    glDrawArrays(drawType, 0, iMax);
-
-    glDisableVertexAttribArray(posHandle);
-} 
+    m_pColorBuf[0] = m_c.GetR();
+    m_pColorBuf[1] = m_c.GetG();
+    m_pColorBuf[2] = m_c.GetB();
+    m_pColorBuf[3] = m_c.GetA();
+}
 
 GisLines::~GisLines(void)
 {
     /*TODO: 实现着色器程序释放 */
     //m_pProgram->Release();
-    /*TODO: 调查释放内存时机 */
-    //free(pVertexBuf);
-    //free(pColorBuf);
+    free(m_pPosBuf);
+    free(m_pColorBuf);
 }
 
