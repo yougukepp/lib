@@ -14,6 +14,7 @@ public:
     
     void Use(void); 
     void BindUniform4fv(const char *uniformName, float *color);
+    void BindUniformMatrix4fv(const char *uniformName, float *pValue);
     int GetAttribLocation(const char *AttribName);
 
 protected:

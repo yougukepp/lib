@@ -24,6 +24,7 @@ protected:
     void setFragmentShader(const char *pFileName); 
     void Link(void); 
     void CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName);
+    void InitMatrix(void);
 
 private:
     static const int m_cPosPerVertex = 4;
@@ -35,7 +36,7 @@ private:
     GisProgram *m_pProgram;
     float *m_pPosBuf;
     float *m_pColorBuf;
-    float m_matrix[4][4];
+    float *m_arMatrix;
 };
 
 #endif

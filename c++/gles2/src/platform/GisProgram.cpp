@@ -70,14 +70,23 @@ void GisProgram::Use(void)
     glUseProgram(m_programId);
 } 
 
-void GisProgram::BindUniform4fv(const char *uniformName, float *color)
+void GisProgram::BindUniform4fv(const char *uniformName, float *pValue)
 {
     GLint uniformHandle = 0;
-
     uniformHandle = glGetUniformLocation(m_programId, uniformName);
     assert(-1 != uniformHandle);
-    glUniform4fv(uniformHandle, 1, color);
+    glUniform4fv(uniformHandle, 1, pValue);
 } 
+
+void GisProgram::BindUniformMatrix4fv(const char *uniformName, float *pValue)
+{
+    GLint uniformHandle = 0;
+    uniformHandle = glGetUniformLocation(m_programId, uniformName);
+    assert(-1 != uniformHandle);
+
+    glUniformMatrix4fv(uniformHandle, 1, 0, pValue);
+}
+
 
 int GisProgram::GetAttribLocation(const char *AttribName)
 {

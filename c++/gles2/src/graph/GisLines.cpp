@@ -4,9 +4,12 @@ GisLines::GisLines(void)
 {
     GisColor c;
     SetColor(c);
+
     std::vector<GisPoint> points;
     points.clear();
     AddPoints(points);
+
+    InitMatrix();
 
     CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
 }
@@ -14,7 +17,11 @@ GisLines::GisLines(void)
 GisLines::GisLines(const std::vector<GisPoint> &points, GisColor c)
 { 
     AddPoints(points);
+
     SetColor(c);
+
+    InitMatrix();
+
     CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
 } 
 
@@ -42,6 +49,32 @@ void GisLines::AddPoints(const std::vector<GisPoint> &points)
     } 
     
     SetGLPosBuf();
+}
+
+void GisLines::InitMatrix(void)
+{
+    m_arMatrix = (float *)malloc(m_cPosPerVertex * m_cPosPerVertex * sizeof(float));
+    assert(NULL != m_arMatrix);
+
+    m_arMatrix[0] = 1.0f;
+    m_arMatrix[1] = 0.0f;
+    m_arMatrix[2] = 0.0f;
+    m_arMatrix[3] = 0.0f;
+
+    m_arMatrix[4] = 0.0f;
+    m_arMatrix[5] = 1.0f;
+    m_arMatrix[6] = 0.0f;
+    m_arMatrix[7] = 0.0f;
+
+    m_arMatrix[8] = 0.0f;
+    m_arMatrix[9] = 0.0f;
+    m_arMatrix[10] = 1.0f;
+    m_arMatrix[11] = 0.0f;
+
+    m_arMatrix[12] = 0.0f;
+    m_arMatrix[13] = 0.0f;
+    m_arMatrix[14] = 0.0f;
+    m_arMatrix[15] = 1.0f;
 }
 
 void GisLines::setVertexShader(const char *pFileName)
@@ -77,7 +110,8 @@ void GisLines::draw(GLenum drawType)
     pointsNums = m_points.size();
 
     m_pProgram->Use();
-    m_pProgram->BindUniform4fv("vColor", m_pColorBuf);
+    m_pProgram->BindUniformMatrix4fv("uMatrix", m_arMatrix);
+    m_pProgram->BindUniform4fv("uColor", m_pColorBuf);
 
     posHandle = m_pProgram->GetAttribLocation("vPosition");
     glEnableVertexAttribArray(posHandle);        
@@ -135,5 +169,6 @@ GisLines::~GisLines(void)
     //m_pProgram->Release();
     free(m_pPosBuf);
     free(m_pColorBuf);
+    free(m_arMatrix);
 }
 
