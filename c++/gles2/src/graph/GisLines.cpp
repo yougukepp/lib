@@ -105,7 +105,12 @@ void GisLines::draw(GLenum drawType)
     glDrawArrays(drawType, 0, iMax);
 
     glDisableVertexAttribArray(posHandle);
+} 
 
+GisLines::~GisLines(void)
+{
+    /*TODO: 实现着色器程序释放 */
+    //m_pProgram->Release();
     /*TODO: 调查释放内存时机 */
     //free(pVertexBuf);
     //free(pColorBuf);

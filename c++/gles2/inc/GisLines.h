@@ -10,6 +10,7 @@ class GisLines
 public:
     GisLines(const std::vector<GisPoint> &points, GisColor c);
     virtual void draw(void);
+    virtual ~GisLines(void);
 
 protected: 
     GisLines(void);
