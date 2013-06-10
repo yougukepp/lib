@@ -37,9 +37,7 @@ int main(int argc, char *argv[])
 
 static void Draw(void)
 {
-    static float x = 0;
-    static float y = 0;
-    static float z = 0;
+    int change = 0;
 
     pLine->Draw();
     pPolygon->Draw();
@@ -50,13 +48,51 @@ static void Draw(void)
     pPie->Draw();
     pOval->Draw();
 
-    pPie->Translate(x, y, z);
-    pCircle->Translate(x, 0, 0);
-    x += 0.0001;
-    pArc->Translate(0, y, 0);
-    y += 0.0001;
-    pChord->Translate(0, 0, z);
-    z += 0.0001;
+    change = 2;
+    if(1 == change)
+    {
+        static float x = 1;
+        static float y = 1;
+        static float z = 1;
+
+        pPie->Translate(x, y, z);
+        pCircle->Translate(x, 0, 0);
+        x -= 0.001;
+        pArc->Translate(0, y, 0);
+        y -= 0.001;
+        pChord->Translate(0, 0, z);
+        z -= 0.001;
+
+        if(x <= -1)
+        {
+            x = 1;
+        }
+
+        if(y <= -1)
+        {
+            y = 1;
+        }
+
+        if(z <= -1)
+        {
+            z = 1;
+        }
+    }
+    else if(2 == change)
+    {
+        static float x = 1;
+        static float y = 1;
+        static float z = 1;
+
+        //pPie->Scale(x, y, z);
+        pCircle->Scale(x, 0, 0);
+        //x -= 0.0001;
+        //pArc->Scale(0, y, 0);
+        //y -= 0.0001;
+        //pChord->Scale(0, 0, z);
+        //z -= 0.0001;
+    }
+
 }
 
 static void InitShape(void)

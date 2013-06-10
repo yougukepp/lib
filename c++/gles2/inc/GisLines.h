@@ -13,6 +13,7 @@ public:
     void SetGLPosBuf(void);
     void SetGLColorBuf(void);
     void Translate(float x, float y, float z);
+    void Scale(float x, float y, float z);
     virtual ~GisLines(void);
 
 protected: 
