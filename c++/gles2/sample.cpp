@@ -37,6 +37,10 @@ int main(int argc, char *argv[])
 
 static void draw(void)
 {
+    static float x = 0;
+    static float y = 0;
+    static float z = 0;
+
     pLine->draw();
     pPolygon->draw();
     pRect->draw();
@@ -46,7 +50,13 @@ static void draw(void)
     pPie->draw();
     pOval->draw();
 
-    pCircle->Translate(0.001, 0.001, 0);
+    pPie->Translate(x, y, z);
+    pCircle->Translate(x, 0, 0);
+    x += 0.0001;
+    pArc->Translate(0, y, 0);
+    y += 0.0001;
+    pChord->Translate(0, 0, z);
+    z += 0.0001;
 }
 
 static void InitShape(void)

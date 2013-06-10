@@ -99,13 +99,15 @@ void GisLines::draw(void)
 
 void GisLines::Translate(float x, float y, float z)
 {
-    m_arMatrix[3] -= x;
-    m_arMatrix[7] -= y;
-    m_arMatrix[11] -= z;
+    m_arMatrix[12] = x;
+    m_arMatrix[13] = y;
+    m_arMatrix[14] = z;
 
+    /*
     std::min(m_arMatrix[3], 1.0f);
     std::min(m_arMatrix[7], 1.0f);
     std::min(m_arMatrix[11], 1.0f);
+    */
 }
 
 void GisLines::draw(GLenum drawType)
