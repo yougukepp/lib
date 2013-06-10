@@ -4,14 +4,14 @@ GisPie::GisPie(GisPoint pOrig, double r, double startAngle, double spanAngle, Gi
     :GisLines()
 {
     std::vector<GisPoint> points;
-    GisCircle::makePoints(points, pOrig, r, startAngle, spanAngle);
+    GisCircle::MakePoints(points, pOrig, r, startAngle, spanAngle);
     points.push_back(pOrig);
     AddPoints(points);
     SetColor(c);
 }
 
-void GisPie::draw(void)
+void GisPie::Draw(void)
 {
-    GisLines::draw(GL_LINE_LOOP);
+    GisLines::Draw(GL_LINE_LOOP);
 }
 

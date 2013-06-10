@@ -7,7 +7,7 @@ class GisPolygon : public GisLines
 {
 public:
     GisPolygon(const std::vector<GisPoint> &points, GisColor c);
-    void draw(void);
+    void Draw(void);
 
 protected:
     GisPolygon(void);

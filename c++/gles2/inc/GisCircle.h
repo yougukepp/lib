@@ -7,9 +7,9 @@ class GisCircle: public GisOval
 {
 public:
     GisCircle(GisPoint pOrig, double r, GisColor c);
-    void draw(void); 
+    void Draw(void); 
     
-    static void makePoints(std::vector<GisPoint> &points, GisPoint pOrig, double r,
+    static void MakePoints(std::vector<GisPoint> &points, GisPoint pOrig, double r,
             double startAngle, double spanAngle);
 protected: 
 

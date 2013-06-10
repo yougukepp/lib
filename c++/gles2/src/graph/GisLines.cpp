@@ -34,9 +34,9 @@ void GisLines::SetColor(GisColor c)
 void GisLines::CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName)
 {
     m_pProgram = new GisProgram();
-    setVertexShader(vShaderFileName);
-    setFragmentShader(fShaderFileName);
-    Link();
+    m_pProgram->SetVertexShader(vShaderFileName);
+    m_pProgram->SetFragmentShader(fShaderFileName);
+    m_pProgram->Link();
 }
 
 void GisLines::AddPoints(const std::vector<GisPoint> &points)
@@ -77,24 +77,9 @@ void GisLines::InitMatrix(void)
     m_arMatrix[15] = 1.0f;
 }
 
-void GisLines::setVertexShader(const char *pFileName)
+void GisLines::Draw(void)
 {
-    m_pProgram->setVertexShader(pFileName);
-}
-
-void GisLines::setFragmentShader(const char *pFileName)
-{
-    m_pProgram->setFragmentShader(pFileName);
-}
-
-void GisLines::Link()
-{
-    m_pProgram->Link();
-}
-
-void GisLines::draw(void)
-{
-    draw(GL_LINES);
+    Draw(GL_LINES);
 }
 
 void GisLines::Translate(float x, float y, float z)
@@ -110,7 +95,7 @@ void GisLines::Translate(float x, float y, float z)
     */
 }
 
-void GisLines::draw(GLenum drawType)
+void GisLines::Draw(GLenum drawType)
 {
     int posHandle = 0;
     int pointsNums = 0;

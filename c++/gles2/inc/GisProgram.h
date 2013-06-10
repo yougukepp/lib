@@ -8,8 +8,8 @@ class GisProgram
 public:
     GisProgram(void);
 
-    void setVertexShader(const char *pFileName);
-    void setFragmentShader(const char *pFileName); 
+    void SetVertexShader(const char *pFileName);
+    void SetFragmentShader(const char *pFileName); 
     void Link(void); 
     
     void Use(void); 

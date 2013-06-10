@@ -2,7 +2,7 @@
 
 static void InitShape(void);
 static void DeinitShape(void);
-static void draw(void);
+static void Draw(void);
 
 GisLines *pLine = NULL;
 GisLines *pPolygon = NULL;
@@ -28,27 +28,27 @@ int main(int argc, char *argv[])
 
     InitShape();
 
-    egl.SetDisplayFunc(draw); 
+    egl.SetDisplayFunc(Draw); 
     egl.BeginRender();
 
     DeinitShape();
     return 0;
 }
 
-static void draw(void)
+static void Draw(void)
 {
     static float x = 0;
     static float y = 0;
     static float z = 0;
 
-    pLine->draw();
-    pPolygon->draw();
-    pRect->draw();
-    pCircle->draw();
-    pArc->draw();
-    pChord->draw();
-    pPie->draw();
-    pOval->draw();
+    pLine->Draw();
+    pPolygon->Draw();
+    pRect->Draw();
+    pCircle->Draw();
+    pArc->Draw();
+    pChord->Draw();
+    pPie->Draw();
+    pOval->Draw();
 
     pPie->Translate(x, y, z);
     pCircle->Translate(x, 0, 0);

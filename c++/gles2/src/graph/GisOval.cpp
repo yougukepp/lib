@@ -4,17 +4,17 @@ GisOval::GisOval(GisPoint pOrig, double a, double b, GisColor c)
     :GisLines()
 {
     std::vector<GisPoint> points;
-    makePoints(points, pOrig, a, b, 0, 2 * GIS_PI);
+    MakePoints(points, pOrig, a, b, 0, 2 * GIS_PI);
     AddPoints(points);
     SetColor(c);
 }
 
-void GisOval::draw(void)
+void GisOval::Draw(void)
 {
-    GisLines::draw(GL_LINE_LOOP);
+    GisLines::Draw(GL_LINE_LOOP);
 } 
 
-void GisOval::makePoints(std::vector<GisPoint> &points, GisPoint pOrig, double a, double b,
+void GisOval::MakePoints(std::vector<GisPoint> &points, GisPoint pOrig, double a, double b,
         double startAngle, double spanAngle)
 {
     double x = 0;

@@ -7,9 +7,9 @@ class GisOval : public GisLines
 {
 public: 
     GisOval(GisPoint pOrig, double a, double b, GisColor c);
-    void draw(void); 
+    void Draw(void); 
     
-    static void makePoints(std::vector<GisPoint> &points, GisPoint pOrig, 
+    static void MakePoints(std::vector<GisPoint> &points, GisPoint pOrig, 
             double a, double b, double startAngle, double spanAngle);
     
 private:

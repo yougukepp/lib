@@ -4,13 +4,13 @@ GisChord::GisChord(GisPoint pOrig, double r, double startAngle, double spanAngle
     :GisLines()
 {
     std::vector<GisPoint> points;
-    GisCircle::makePoints(points, pOrig, r, startAngle, spanAngle);
+    GisCircle::MakePoints(points, pOrig, r, startAngle, spanAngle);
     AddPoints(points);
     SetColor(c);
 }
 
-void GisChord::draw(void)
+void GisChord::Draw(void)
 {
-    GisLines::draw(GL_LINE_LOOP);
+    GisLines::Draw(GL_LINE_LOOP);
 }
 

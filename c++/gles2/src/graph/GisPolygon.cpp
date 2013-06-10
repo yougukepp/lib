@@ -13,8 +13,8 @@ GisPolygon::GisPolygon(void)
 /*
  * TODO: 参数检查
  */
-void GisPolygon::draw(void)
+void GisPolygon::Draw(void)
 {
-    GisLines::draw(GL_LINE_LOOP);
+    GisLines::Draw(GL_LINE_LOOP);
 }
 

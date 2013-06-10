@@ -4,13 +4,13 @@ GisArc::GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle, Gi
     :GisLines()
 {
     std::vector<GisPoint> points;
-    GisCircle::makePoints(points, pOrig, r, startAngle, spanAngle);
+    GisCircle::MakePoints(points, pOrig, r, startAngle, spanAngle);
     AddPoints(points);
     SetColor(c);
 }
 
-void GisArc::draw(void)
+void GisArc::Draw(void)
 {
-    GisLines::draw(GL_LINE_STRIP);
+    GisLines::Draw(GL_LINE_STRIP);
 }
 

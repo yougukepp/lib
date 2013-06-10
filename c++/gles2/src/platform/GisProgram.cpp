@@ -6,12 +6,12 @@ GisProgram::GisProgram(void)
     m_pFragmentShader = new GisShader();
 } 
 
-void GisProgram::setVertexShader(const char *pFileName)
+void GisProgram::SetVertexShader(const char *pFileName)
 {
     m_pVertexShader->ReadSrc(pFileName);
 }
 
-void GisProgram::setFragmentShader(const char *pFileName)
+void GisProgram::SetFragmentShader(const char *pFileName)
 {
     m_pFragmentShader->ReadSrc(pFileName);
 }
