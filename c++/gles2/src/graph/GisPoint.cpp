@@ -45,12 +45,10 @@ float GisPoint::GetA(void)
     return m_a;
 }
 
-void GisPoint::print(const char *format)
+void GisPoint::Print(void)
 {
-    if(NULL == format)
-    {
-        format = "x:%f,y:%f,z:%f,a:%f\n";
-    }
+    const char *format = NULL;
+    format = "x:%f,y:%f,z:%f,a:%f\n";
 
     printf(format, GetX(), GetY(), GetZ(), GetA());
     fflush(stdout);

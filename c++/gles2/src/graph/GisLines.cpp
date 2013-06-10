@@ -153,7 +153,7 @@ void GisLines::SetGLPosBuf(void)
         m_pPosBuf[j++] = m_points[i].GetA(); 
 #ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
         printf("point %d:", i);
-        m_points[i].print(NULL);
+        m_points[i].Print();
         fflush(stdout);
 #endif
     }

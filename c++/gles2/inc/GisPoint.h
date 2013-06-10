@@ -14,7 +14,7 @@ public:
     float GetZ(void); 
     float GetA(void); 
     
-    void print(const char *format);
+    void Print(void);
 
 protected:
 
