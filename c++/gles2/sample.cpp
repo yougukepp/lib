@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
 
 static void Draw(void)
 {
-    int change = 0;
 
     pLine->Draw();
     pPolygon->Draw();
@@ -47,51 +46,23 @@ static void Draw(void)
     pChord->Draw();
     pPie->Draw();
     pOval->Draw();
-
-    change = 2;
-    if(1 == change)
-    {
+   
+        float step = 0.005;
         static float x = 1;
-        static float y = 1;
-        static float z = 1;
-
-        pPie->Translate(x, y, z);
-        pCircle->Translate(x, 0, 0);
-        x -= 0.001;
-        pArc->Translate(0, y, 0);
-        y -= 0.001;
-        pChord->Translate(0, 0, z);
-        z -= 0.001;
-
+        x -= step;
         if(x <= -1)
         {
             x = 1;
         }
+        pOval->Translate(x, 0 , 0);
 
-        if(y <= -1)
+        static float s = 1;
+        s -= step;
+        if(s < -1)
         {
-            y = 1;
+            s = 1.0;
         }
-
-        if(z <= -1)
-        {
-            z = 1;
-        }
-    }
-    else if(2 == change)
-    {
-        static float x = 1;
-        static float y = 1;
-        static float z = 1;
-
-        //pPie->Scale(x, y, z);
-        pCircle->Scale(x, 0, 0);
-        //x -= 0.0001;
-        //pArc->Scale(0, y, 0);
-        //y -= 0.0001;
-        //pChord->Scale(0, 0, z);
-        //z -= 0.0001;
-    }
+        pCircle->Scale(fabs(s), fabs(s), 1);
 
 }
 
@@ -122,7 +93,7 @@ static void InitShape(void)
     pLine = new GisLines(points1, c1);
     pPolygon = new GisPolygon(points2, c2);
     pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
-    pCircle = new GisCircle(GisPoint(0, 0), 0.1f, c4);
+    pCircle = new GisCircle(GisPoint(0, 0), 0.9f, c4);
     pPie = new GisPie(GisPoint(0,0), 0.5, 3 * GIS_PI / 8, GIS_PI / 7, c7);
     pChord = new GisChord(GisPoint(0,0), 0.6, GIS_PI / 7, GIS_PI / 6, c6);
     pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 5, GIS_PI / 4, c5);
