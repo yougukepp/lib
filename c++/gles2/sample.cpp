@@ -64,6 +64,13 @@ static void Draw(void)
         }
         pCircle->Scale(fabs(s), fabs(s), 1);
 
+        static float r = 0;
+        r += 2 * GIS_PI * step;
+        pPie->Rotate(r, 2);
+        if(r > 2 * GIS_PI)
+        {
+            r = 0;
+        }
 }
 
 static void InitShape(void)

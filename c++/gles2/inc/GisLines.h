@@ -14,6 +14,7 @@ public:
     void SetGLColorBuf(void);
     void Translate(float x, float y, float z);
     void Scale(float x, float y, float z);
+    void Rotate(float angle, char axis);
     virtual ~GisLines(void);
 
 protected: 

@@ -96,6 +96,42 @@ void GisLines::Scale(float x, float y, float z)
     m_arMatrix[10] = z;
 }
 
+void GisLines::Rotate(float angle, char axis)
+{
+    double sina = 0;
+    double cosa = 0;
+
+    sina = sin(angle);
+    cosa = cos(angle);
+
+    if(0 == axis)                       // 围绕x轴旋转
+    {
+        m_arMatrix[5] = cosa;
+        m_arMatrix[6] = sina;
+        m_arMatrix[9] = -sina;
+        m_arMatrix[10] = cosa;
+    }
+    else if(1 == axis)                  // 围绕y轴旋转
+    {
+        m_arMatrix[0] = cosa;
+        m_arMatrix[2] = -sina;
+        m_arMatrix[8] = sina;
+        m_arMatrix[10] = cosa;
+    }
+    else if(2 == axis)                  // 围绕z轴旋转
+    {
+        m_arMatrix[0] = cosa;
+        m_arMatrix[1] = sina;
+        m_arMatrix[4] = -sina;
+        m_arMatrix[5] = cosa;
+    }
+    else
+    {
+        assert(0);
+    }
+
+}
+
 void GisLines::Draw(GLenum drawType)
 {
     int posHandle = 0;
