@@ -1,10 +1,22 @@
 #include "GisColor.h"
 
+GisColor::GisColor(void)
+{
+    /* 默认使用白色 */
+    m_r = 1.0f;
+    m_g = 1.0f;
+    m_b = 1.0f;
+
+    m_a = 1.0f;
+}
+
 GisColor::GisColor(float r, float g, float b)
 {
     m_r = r;
     m_g = g;
     m_b = b;
+
+    m_a = 1.0f;
 }
 
 float GisColor::GetR(void)
@@ -20,5 +32,10 @@ float GisColor::GetG(void)
 float GisColor::GetB(void)
 {
     return m_b;
+}
+
+float GisColor::GetA(void)
+{
+    return m_a;
 }
 

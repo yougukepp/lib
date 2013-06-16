@@ -6,12 +6,12 @@ GisProgram::GisProgram(void)
     m_pFragmentShader = new GisShader();
 } 
 
-void GisProgram::setVertexShader(const char *pFileName)
+void GisProgram::SetVertexShader(const char *pFileName)
 {
     m_pVertexShader->ReadSrc(pFileName);
 }
 
-void GisProgram::setFragmentShader(const char *pFileName)
+void GisProgram::SetFragmentShader(const char *pFileName)
 {
     m_pFragmentShader->ReadSrc(pFileName);
 }
@@ -70,14 +70,23 @@ void GisProgram::Use(void)
     glUseProgram(m_programId);
 } 
 
-void GisProgram::BindUniform4fv(const char *uniformName, float *color)
+void GisProgram::BindUniform4fv(const char *uniformName, float *pValue)
 {
-    GLint colorHandle = 0;
-
-    colorHandle = glGetUniformLocation(m_programId, "vColor");
-    assert(-1 != colorHandle);
-    glUniform4fv(colorHandle, 1, color);
+    GLint uniformHandle = 0;
+    uniformHandle = glGetUniformLocation(m_programId, uniformName);
+    assert(-1 != uniformHandle);
+    glUniform4fv(uniformHandle, 1, pValue);
 } 
+
+void GisProgram::BindUniformMatrix4fv(const char *uniformName, float *pValue)
+{
+    GLint uniformHandle = 0;
+    uniformHandle = glGetUniformLocation(m_programId, uniformName);
+    assert(-1 != uniformHandle);
+
+    glUniformMatrix4fv(uniformHandle, 1, 0, pValue);
+}
+
 
 int GisProgram::GetAttribLocation(const char *AttribName)
 {

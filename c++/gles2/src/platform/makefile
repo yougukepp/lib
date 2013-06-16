@@ -1,6 +1,6 @@
 include 	../../buildvars
 
-OBJS = GisEgl.o
+OBJS = GisEgl.o GisProgram.o GisShader.o
 
 all:$(OBJS)
 

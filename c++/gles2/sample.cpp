@@ -2,21 +2,25 @@
 
 static void InitShape(void);
 static void DeinitShape(void);
-static void draw(void);
+static void Draw(void);
 
 GisLines *pLine = NULL;
-GisPolygon *pPolygon = NULL;
-GisRect *pRect = NULL;
-GisCircle *pCircle = NULL;
-GisArc *pArc = NULL;
+GisLines *pPolygon = NULL;
+GisLines *pRect = NULL;
+GisLines *pCircle = NULL;
+GisLines *pArc = NULL;
+GisLines *pChord = NULL;
+GisLines *pPie = NULL;
+GisLines *pOval = NULL;
 
-GisCircle *pCircle1 = NULL;
-GisCircle *pCircle2 = NULL;
-GisCircle *pCircle3 = NULL;
-GisCircle *pCircle4 = NULL;
-GisCircle *pCircle5 = NULL;
-GisCircle *pCircle6 = NULL;
-GisCircle *pCircle7 = NULL;
+GisColor c1(1.0f, 0.0f, 0.0f);
+GisColor c2(0.0f, 1.0f, 0.0f);
+GisColor c3(0.0f, 0.0f, 1.0f);
+GisColor c4(0.0f, 1.0f, 1.0f);
+GisColor c5(1.0f, 0.0f, 1.0f);
+GisColor c6(1.0f, 1.0f, 0.0f);
+GisColor c7(1.0f, 1.0f, 1.0f);
+GisColor c8(0.5f, 0.0f, 0.0f);
 
 int main(int argc, char *argv[])
 {
@@ -24,33 +28,49 @@ int main(int argc, char *argv[])
 
     InitShape();
 
-    egl.SetDisplayFunc(draw); 
+    egl.SetDisplayFunc(Draw); 
     egl.BeginRender();
 
     DeinitShape();
     return 0;
 }
 
-static void draw(void)
+static void Draw(void)
 {
-    GisColor c1(1.0f, 0.0f, 0.0f);
-    GisColor c2(0.0f, 1.0f, 0.0f);
-    GisColor c3(0.0f, 0.0f, 1.0f);
-    GisColor c4(1.0f, 1.0f, 0.0f);
-    GisColor c5(0.0f, 1.0f, 1.0f);
 
-    pLine->draw(c1);
-    pPolygon->draw(c2);
-    pRect->draw(c3);
-    pArc->draw(c5);
-    pCircle->draw(c4);
-    pCircle1->draw(c4);
-    pCircle2->draw(c4);
-    pCircle3->draw(c4);
-    pCircle4->draw(c4);
-    pCircle5->draw(c4);
-    pCircle6->draw(c4);
-    pCircle7->draw(c4);
+    pLine->Draw();
+    pPolygon->Draw();
+    pRect->Draw();
+    pCircle->Draw();
+    pArc->Draw();
+    pChord->Draw();
+    pPie->Draw();
+    pOval->Draw();
+   
+        float step = 0.005;
+        static float x = 1;
+        x -= step;
+        if(x <= -1)
+        {
+            x = 1;
+        }
+        pOval->Translate(x, 0 , 0);
+
+        static float s = 1;
+        s -= step;
+        if(s < -1)
+        {
+            s = 1.0;
+        }
+        pCircle->Scale(fabs(s), fabs(s), 1);
+
+        static float r = 0;
+        r += 2 * GIS_PI * step;
+        pPie->Rotate(r, 2);
+        if(r > 2 * GIS_PI)
+        {
+            r = 0;
+        }
 }
 
 static void InitShape(void)
@@ -77,34 +97,25 @@ static void InitShape(void)
 
     std::vector<GisPoint> points4;
 
-    pLine = new GisLines(points1);
-    pPolygon = new GisPolygon(points2);
-    pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f);
-    pCircle = new GisCircle(GisPoint(0, 0), 0.8f);
-    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 4, GIS_PI / 2);
-
-    pCircle1 = new GisCircle(GisPoint(0, 0), 0.7f);
-    pCircle2 = new GisCircle(GisPoint(0, 0), 0.6f);
-    pCircle3 = new GisCircle(GisPoint(0, 0), 0.5f);
-    pCircle4 = new GisCircle(GisPoint(0, 0), 0.4f);
-    pCircle5 = new GisCircle(GisPoint(0, 0), 0.3f);
-    pCircle6 = new GisCircle(GisPoint(0, 0), 0.2f);
-    pCircle7 = new GisCircle(GisPoint(0, 0), 0.1f);
+    pLine = new GisLines(points1, c1);
+    pPolygon = new GisPolygon(points2, c2);
+    pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
+    pCircle = new GisCircle(GisPoint(0, 0), 0.9f, c4);
+    pPie = new GisPie(GisPoint(0,0), 0.5, 3 * GIS_PI / 8, GIS_PI / 7, c7);
+    pChord = new GisChord(GisPoint(0,0), 0.6, GIS_PI / 7, GIS_PI / 6, c6);
+    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 5, GIS_PI / 4, c5);
+    pOval = new GisOval(GisPoint(0,0), 0.2, 0.6, c8);
 }
 
 static void DeinitShape(void)
 {
-    delete pCircle;
-    delete pRect;
-    delete pPolygon;
     delete pLine;
-
-    delete pCircle1;
-    delete pCircle2;
-    delete pCircle3;
-    delete pCircle4;
-    delete pCircle5;
-    delete pCircle6;
-    delete pCircle7;
+    delete pPolygon;
+    delete pRect;
+    delete pCircle;
+    delete pArc;
+    delete pChord;
+    delete pPie;
+    delete pOval;
 }
 

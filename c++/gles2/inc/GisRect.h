@@ -6,7 +6,7 @@
 class GisRect : public GisPolygon
 {
 public:
-    GisRect(float x, float y, float w, float h);
+    GisRect(float x, float y, float w, float h, GisColor c);
 
     GisPoint GetOrigin(void);
     float GetWidth(void);

@@ -1,18 +1,17 @@
 #ifndef __GIS_ARC_H__
 #define __GIS_ARC_H__
 
+#include "GisLines.h"
 #include "GisCircle.h"
 
-class GisArc
+class GisArc: public GisLines
 {
 public:
-    GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle); 
-    void draw(GisColor c);
+    GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle, GisColor c); 
+    void Draw(void); 
 
 private:
-    GisCircle m_circle;
-    double m_startAngle;
-    double m_spanAngle;
+
 };
 
 #endif

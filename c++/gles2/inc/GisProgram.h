@@ -8,12 +8,13 @@ class GisProgram
 public:
     GisProgram(void);
 
-    void setVertexShader(const char *pFileName);
-    void setFragmentShader(const char *pFileName); 
+    void SetVertexShader(const char *pFileName);
+    void SetFragmentShader(const char *pFileName); 
     void Link(void); 
     
     void Use(void); 
     void BindUniform4fv(const char *uniformName, float *color);
+    void BindUniformMatrix4fv(const char *uniformName, float *pValue);
     int GetAttribLocation(const char *AttribName);
 
 protected:

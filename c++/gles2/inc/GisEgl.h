@@ -26,6 +26,4 @@ private:
     GisCallBackFunc m_draw;
 };
 
-static void printFps(void);
-
 #endif
