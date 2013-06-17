@@ -1,17 +1,15 @@
 include ../buildvars
+OBJS = gcd.o sampling.o
 
 all:lib
 
-lib:gcd.o sampling.o
+lib:$(OBJS)
 	cp *.o ../lib
 
-gcd.o:gcd.c
-	$(CC) gcd.c -o gcd.o
-
-
-sampling.o:sampling.c
-	$(CC) sampling.c -o sampling.o
+$(OBJS): %.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
 	${RM} *.o
 	${RM} *.so
+

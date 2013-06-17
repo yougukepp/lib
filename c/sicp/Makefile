@@ -1,15 +1,15 @@
 include ../buildvars
 
+OBJS = factorial.o fibonacci.o
+
 all:lib
 
-lib:factorial.o fibonacci.o
+lib:$(OBJS)
 	cp *.o ../lib
 
-factorial.o:factorial.c
-	$(CC) factorial.c -o factorial.o
-
-fibonacci.o:fibonacci.c
-	$(CC) fibonacci.c -o fibonacci.o
+$(OBJS): %.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
 	${RM} *.o
+
