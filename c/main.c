@@ -39,8 +39,8 @@ static void fibonacciTest(void);
 /*************************** 函数实现区 **************************/
 int main(int argc, char *argv[])
 {
-    //gcdTest();
-    //samplingTest();
+    gcdTest();
+    samplingTest();
     factorialTest();
     fibonacciTest();
 
