@@ -1,5 +1,5 @@
 include ../buildvars
-OBJS = print.o getRangeRand.o
+OBJS = print.o getRangeRand.o randomPi.o
 
 all:lib
 

@@ -31,7 +31,7 @@ static void gcdTest(void);
 static void samplingTest(void);
 static void factorialTest(void);
 static void fibonacciTest(void);
-
+static void randomPiTest(void);
 
 /*************************** 变量实现区 **************************/
 
@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
     samplingTest();
     factorialTest();
     fibonacciTest();
+    randomPiTest();
 
     return 0;
 }
@@ -93,3 +94,12 @@ static void fibonacciTest(void)
     printf("\n\n");
 }
 
+static void randomPiTest(void)
+{
+    int n = 0;
+    for(n=1;n<10000001;n*=10)
+    {
+        printf("pi close to:%.8f(%d)\n", randomPi(n), n);
+    }
+    printf("\n\n");
+}

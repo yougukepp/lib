@@ -46,6 +46,16 @@
 double getRangeRand(double min, double max);
 
 /*
+ * 功能:        使用概率算法求圆周率
+ *
+ * 参数 n:      投点次数,当n<=0时使用默认投点次数(10000)
+ *
+ * 返回值:      圆周率
+ *
+ */
+double randomPi(int n);
+
+/*
  * 功能:        在控制台输出pBuf中的值
  *
  * 参数 pBuf:   输出数组首地址
