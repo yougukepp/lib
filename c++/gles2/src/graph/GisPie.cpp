@@ -8,10 +8,15 @@ GisPie::GisPie(GisPoint pOrig, double r, double startAngle, double spanAngle, Gi
     points.push_back(pOrig);
     AddPoints(points);
     SetColor(c);
+} 
+
+GisPie::~GisPie(void)
+{
+    ;
 }
 
 void GisPie::Draw(void)
 {
-    GisLines::Draw(GL_LINE_LOOP);
+    GisPrimitives::Draw(GL_LINE_LOOP);
 }
 

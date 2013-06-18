@@ -9,8 +9,13 @@ GisChord::GisChord(GisPoint pOrig, double r, double startAngle, double spanAngle
     SetColor(c);
 }
 
+GisChord::~GisChord(void)
+{
+    ;
+}
+
 void GisChord::Draw(void)
 {
-    GisLines::Draw(GL_LINE_LOOP);
+    GisPrimitives::Draw(GL_LINE_LOOP);
 }
 

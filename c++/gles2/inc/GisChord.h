@@ -8,6 +8,7 @@ class GisChord : public GisLines
 {
 public:
     GisChord(GisPoint pOrig, double r, double startAngle, double spanAngle, GisColor c); 
+    virtual ~GisChord(void);
     void Draw(void); 
     
 private:

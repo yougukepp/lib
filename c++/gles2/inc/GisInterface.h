@@ -15,6 +15,7 @@
 #define         __GIS_INTERFACE_H__
 /***************************** 头文件 ****************************/
 #include        "GisPoint.h"
+#include        "GisPrimitives.h"
 #include        "GisLines.h"
 #include        "GisPolygon.h"
 #include        "GisRect.h"

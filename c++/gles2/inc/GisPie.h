@@ -8,6 +8,7 @@ class GisPie : public GisLines
 {
 public:
     GisPie(GisPoint pOrig, double r, double startAngle, double spanAngle, GisColor c); 
+    virtual ~GisPie(void);
     void Draw(void); 
     
 private:

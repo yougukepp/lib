@@ -5,9 +5,14 @@ GisCircle::GisCircle(GisPoint pOrig, double r, GisColor c)
 {
 } 
 
+GisCircle::~GisCircle(void)
+{
+    ;
+}
+
 void GisCircle::Draw(void)
 {
-    GisLines::Draw(GL_LINE_LOOP);
+    GisPrimitives::Draw(GL_LINE_LOOP);
 }
 
 void GisCircle::MakePoints(std::vector<GisPoint> &points, GisPoint pOrig, double r,

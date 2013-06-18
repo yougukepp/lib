@@ -10,11 +10,13 @@ GisPolygon::GisPolygon(void)
 {
 }
 
-/*
- * TODO: 参数检查
- */
+GisPolygon::~GisPolygon(void)
+{
+    ;
+}
+
 void GisPolygon::Draw(void)
 {
-    GisLines::Draw(GL_LINE_LOOP);
+    GisPrimitives::Draw(GL_LINE_LOOP);
 }
 

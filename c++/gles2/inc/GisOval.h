@@ -7,6 +7,7 @@ class GisOval : public GisLines
 {
 public: 
     GisOval(GisPoint pOrig, double a, double b, GisColor c);
+    virtual ~GisOval(void);
     void Draw(void); 
     
     static void MakePoints(std::vector<GisPoint> &points, GisPoint pOrig, 

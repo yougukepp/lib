@@ -8,6 +8,7 @@ class GisArc: public GisLines
 {
 public:
     GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle, GisColor c); 
+    virtual ~GisArc(void);
     void Draw(void); 
 
 private:

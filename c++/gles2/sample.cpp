@@ -4,7 +4,7 @@ static void InitShape(void);
 static void DeinitShape(void);
 static void Draw(void);
 
-GisLines *pLine = NULL;
+GisPrimitives *pLine = NULL;
 GisLines *pPolygon = NULL;
 GisLines *pRect = NULL;
 GisLines *pCircle = NULL;

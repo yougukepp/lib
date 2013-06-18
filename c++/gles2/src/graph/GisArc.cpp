@@ -9,8 +9,13 @@ GisArc::GisArc(GisPoint pOrig, double r, double startAngle, double spanAngle, Gi
     SetColor(c);
 }
 
+GisArc::~GisArc(void)
+{
+    ;
+}
+
 void GisArc::Draw(void)
 {
-    GisLines::Draw(GL_LINE_STRIP);
+    GisPrimitives::Draw(GL_LINE_STRIP);
 }
 
