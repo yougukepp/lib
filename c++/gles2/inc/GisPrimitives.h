@@ -10,8 +10,6 @@ class GisPrimitives
 public:
     GisPrimitives(const std::vector<GisPoint> &points, GisColor c);
     virtual void Draw(void) = 0;
-    void SetGLPosBuf(void);
-    void SetGLColorBuf(void);
     void Translate(float x, float y, float z);
     void Scale(float x, float y, float z);
     void Rotate(float angle, char axis);
@@ -22,12 +20,15 @@ protected:
     void Draw(GLenum drawType);
     void AddPoints(const std::vector<GisPoint> &points);
     void SetColor(GisColor c);
-    void CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName);
-    void InitMatrix(void);
 
 private:
     void DrawTriangles(GLenum drawType);
     void DrawLines(GLenum drawType);
+    void SetGLPosBuf(void);
+    void SetGLColorBuf(void);
+    void CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName);
+    void InitMatrix(void);
+
     static const int m_cPosPerVertex = 4;
     static const int m_cColorPerVertex = 4;
 
