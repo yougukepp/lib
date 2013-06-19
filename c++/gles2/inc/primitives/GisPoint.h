@@ -1,7 +1,7 @@
 #ifndef __GIS_POINT_H__
 #define __GIS_POINT_H__
 
-#include "GisHeader.h"
+#include "GisInnerInterface.h"
 
 class GisPoint
 {

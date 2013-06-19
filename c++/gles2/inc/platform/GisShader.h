@@ -2,7 +2,7 @@
 #define __GIS_SHADER_H__
 
 #include "GisConfig.h"
-#include "GisHeader.h"
+#include "GisInnerInterface.h"
 
 class GisShader
 {

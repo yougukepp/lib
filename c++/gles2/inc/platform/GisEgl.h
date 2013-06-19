@@ -1,7 +1,7 @@
 #ifndef __GIS_EGL_H__
 #define __GIS_EGL_H__
 
-#include "GisHeader.h"
+#include "GisInnerInterface.h"
 
 class GisEgl
 {
