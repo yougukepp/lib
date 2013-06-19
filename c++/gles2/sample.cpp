@@ -4,7 +4,7 @@ static void InitShape(void);
 static void DeinitShape(void);
 static void Draw(void);
 
-QgIDrawable *gPtrSpritePoint = NULL;
+QgSpritePoint *gPtrSpritePoint = NULL;
 
 int main(int argc, char *argv[])
 {
@@ -26,10 +26,9 @@ static void Draw(void)
 
 static void InitShape(void)
 { 
+    QgPoint p1(0.5f, 0.5f);
     QgColor c1(1.0f, 0.0f, 0.0f);
-    QgPoint p1(0.0f, 0.0f);
-
-    gPtrSpritePoint = new QgSpritePoint(p1, c1, 10);
+    gPtrSpritePoint = new QgSpritePoint(p1, c1, 10); 
 }
 
 static void DeinitShape(void)

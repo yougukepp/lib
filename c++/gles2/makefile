@@ -12,7 +12,7 @@ LIB_HY		= $(LIB_HY_DIR)/*.a
 
 OBJS		= sample.o
 
-all:$(LIB_GIS) $(OBJS)
+all:d $(LIB_GIS) $(OBJS)
 	$(LD) -o $(APPNAME) sample.o $(LIB_GIS) $(LIB_HY) $(LFLAGS) $(LFLAGS) 
 	./test
        

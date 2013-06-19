@@ -117,7 +117,7 @@ void QgEgl::BeginRender(void)
     glViewport(0, 0, GetWidth(), GetHeight());
     glClear(GL_COLOR_BUFFER_BIT); 
     
-#ifdef __DEBUG_GIS_PRINT_FPS__
+#ifdef __DEBUG_QG_PRINT_FPS__
     HyTimer timer = HyTimer();
     timer.SetInterval(1000);                                    // 1 Second
     timer.SetCallBackFunc(printFps, &frameId);
@@ -135,7 +135,7 @@ void QgEgl::BeginRender(void)
         frameId++;
     }
 
-#ifdef __DEBUG_GIS_PRINT_FPS__
+#ifdef __DEBUG_QG_PRINT_FPS__
     timer.Stop();
 #endif
 

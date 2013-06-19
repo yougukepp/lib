@@ -13,7 +13,7 @@ QgSpritePoint::QgSpritePoint(QgPoint &point, QgColor c, float size)
 
 void QgSpritePoint::Draw(void)
 {
-    ;
+    QgPrimitive::Draw(GL_POINTS);
 }
 
 QgSpritePoint::~QgSpritePoint(void)

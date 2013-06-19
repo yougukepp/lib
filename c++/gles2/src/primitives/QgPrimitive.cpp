@@ -127,6 +127,7 @@ void QgPrimitive::Rotate(float angle, char axis)
 
 }
 
+/*
 void QgPrimitive::DrawTriangles(GLenum drawType)
 {
     assert((GL_TRIANGLES == drawType)
@@ -142,6 +143,12 @@ void QgPrimitive::DrawLines(GLenum drawType)
          ||(GL_LINE_LOOP == drawType));
     Draw(drawType);
 }
+
+void QgPrimitive::DrawPoints()
+{
+    Draw(GL_POINTS);
+}
+*/
 
 void QgPrimitive::Draw(GLenum drawType)
 {
@@ -212,4 +219,3 @@ QgPrimitive::~QgPrimitive(void)
     free(m_pColorBuf);
     free(m_arMatrix);
 }
-

@@ -6,10 +6,10 @@
 #include "QgPrimitive.h"
 #include "QgIDrawable.h"
 
-class QgSpritePoint : public QgPrimitive
+class QgSpritePoint : public QgPrimitive, public QgIDrawable
 {
 public:
-    QgSpritePoint(QgPoint &points, QgColor c, float size);
+    QgSpritePoint(QgPoint &points, QgColor c, float size); 
     void Draw(void);
     ~QgSpritePoint(void);
 

@@ -1,7 +1,6 @@
 #ifndef __QG_PRIMITIVE_H__
 #define __QG_PRIMITIVE_H__
 
-#include "QgIDrawable.h"
 #include "QgPoint.h"
 #include "QgColor.h"
 #include "QgProgram.h"
@@ -13,8 +12,7 @@ public:
     void Translate(float x, float y, float z);
     void Scale(float x, float y, float z);
     void Rotate(float angle, char axis);
-    virtual void Draw(void);
-    virtual ~QgPrimitive(void);
+    ~QgPrimitive(void);
 
 protected: 
     QgPrimitive(void);
@@ -23,8 +21,6 @@ protected:
     void SetColor(QgColor c);
 
 private:
-    void DrawTriangles(GLenum drawType);
-    void DrawLines(GLenum drawType);
     void SetGLPosBuf(void);
     void SetGLColorBuf(void);
     void CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName);
