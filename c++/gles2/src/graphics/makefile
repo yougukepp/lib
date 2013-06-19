@@ -1,6 +1,6 @@
 include 	../../buildvars
 
-OBJS = GisPolygon.o GisRect.o GisCircle.o GisArc.o GisChord.o GisPie.o GisOval.o
+#OBJS = GisPolygon.o GisRect.o GisCircle.o GisArc.o GisChord.o GisPie.o GisOval.o
 
 all:$(OBJS)
 

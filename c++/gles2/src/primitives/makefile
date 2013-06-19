@@ -1,6 +1,6 @@
 include 	../../buildvars
 
-OBJS = GisLines.o GisPoint.o GisColor.o GisPrimitives.o GisTriangles.o
+OBJS = QgColor.o QgPrimitive.o QgPoint.o QgLine.o QgTriangle.o
 
 all:$(OBJS)
 

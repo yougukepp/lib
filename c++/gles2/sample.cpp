@@ -1,30 +1,34 @@
-#include "GisInterface.h"
+#include "QgInterface.h"
 
 static void InitShape(void);
 static void DeinitShape(void);
 static void Draw(void);
 
-GisPrimitives *pLine = NULL;
-GisLines *pPolygon = NULL;
-GisLines *pRect = NULL;
-GisLines *pCircle = NULL;
-GisLines *pArc = NULL;
-GisLines *pChord = NULL;
-GisLines *pPie = NULL;
-GisLines *pOval = NULL;
+QgPrimitive *pPoint = NULL;
+QgPrimitive *pLine = NULL;
+QgPrimitive *pTriangle = NULL;
 
-GisColor c1(1.0f, 0.0f, 0.0f);
-GisColor c2(0.0f, 1.0f, 0.0f);
-GisColor c3(0.0f, 0.0f, 1.0f);
-GisColor c4(0.0f, 1.0f, 1.0f);
-GisColor c5(1.0f, 0.0f, 1.0f);
-GisColor c6(1.0f, 1.0f, 0.0f);
-GisColor c7(1.0f, 1.0f, 1.0f);
-GisColor c8(0.5f, 0.0f, 0.0f);
+/*
+QgLines *pPolygon = NULL;
+QgLines *pRect = NULL;
+QgLines *pCircle = NULL;
+QgLines *pArc = NULL;
+QgLines *pChord = NULL;
+QgLines *pPie = NULL;
+QgLines *pOval = NULL;
+*/
+
+/*
+QgColor c4(0.0f, 1.0f, 1.0f);
+QgColor c5(1.0f, 0.0f, 1.0f);
+QgColor c6(1.0f, 1.0f, 0.0f);
+QgColor c7(1.0f, 1.0f, 1.0f);
+QgColor c8(0.5f, 0.0f, 0.0f);
+*/
 
 int main(int argc, char *argv[])
 {
-    GisEgl egl = GisEgl();
+    QgEgl egl = QgEgl();
 
     InitShape();
 
@@ -37,7 +41,11 @@ int main(int argc, char *argv[])
 
 static void Draw(void)
 {
+    pPoint->Draw();
+    pLine->Draw();
+    pTriangle->Draw();
 
+    /*
     pLine->Draw();
     pPolygon->Draw();
     pRect->Draw();
@@ -71,44 +79,66 @@ static void Draw(void)
         {
             r = 0;
         }
+        */
 }
 
 static void InitShape(void)
-{
-    GisPoint p1(-0.9f, -0.9f);
-    GisPoint p2(0.9f, 0.9f);
-    GisPoint p3(0.9f, -0.9f);
-    GisPoint p4(-0.9f, 0.9f);
-    std::vector<GisPoint> points1;
+{ 
+    QgColor c1(0.0f, 1.0f, 0.0f);
+    QgColor c2(0.0f, 0.0f, 1.0f);
+
+    //pPoint = new QgPoint(0.0f, 0.0f);
+
+    QgPoint p1(-0.9f, -0.9f);
+    QgPoint p2(0.9f, 0.9f);
+    pLine = new QgLine(p1, p2, c1);
+
+    QgPoint p3(0.0f, 0.9f);
+    QgPoint p5(-0.9f, -0.9f);
+    QgPoint p4(0.9f, -0.9f);
+    pTriangle = new QgTriangle(p3, p4, p5, c2);
+
+    /*
+    QgPoint p1(-0.9f, -0.9f);
+    QgPoint p2(0.9f, 0.9f);
+    QgPoint p3(0.9f, -0.9f);
+    QgPoint p4(-0.9f, 0.9f);
+    std::vector<QgPoint> points1;
     points1.push_back(p1);
     points1.push_back(p2);
     points1.push_back(p3);
     points1.push_back(p4);
 
-    GisPoint p5(0.0f, 0.9f);
-    GisPoint p6(-0.9f, 0.0f);
-    GisPoint p7(0.0f, -0.9f);
-    GisPoint p8(0.9f, 0.0f);
-    std::vector<GisPoint> points2;
+    QgPoint p5(0.0f, 0.9f);
+    QgPoint p6(-0.9f, 0.0f);
+    QgPoint p7(0.0f, -0.9f);
+    QgPoint p8(0.9f, 0.0f);
+    std::vector<QgPoint> points2;
     points2.push_back(p5);
     points2.push_back(p6);
     points2.push_back(p7);
     points2.push_back(p8);
 
-    std::vector<GisPoint> points4;
+    std::vector<QgPoint> points4;
 
-    pLine = new GisLines(points1, c1);
-    pPolygon = new GisPolygon(points2, c2);
-    pRect = new GisRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
-    pCircle = new GisCircle(GisPoint(0, 0), 0.9f, c4);
-    pPie = new GisPie(GisPoint(0,0), 0.5, 3 * GIS_PI / 8, GIS_PI / 7, c7);
-    pChord = new GisChord(GisPoint(0,0), 0.6, GIS_PI / 7, GIS_PI / 6, c6);
-    pArc = new GisArc(GisPoint(0,0), 0.7, GIS_PI / 5, GIS_PI / 4, c5);
-    pOval = new GisOval(GisPoint(0,0), 0.2, 0.6, c8);
+    pLine = new QgLines(points1, c1);
+    pPolygon = new QgPolygon(points2, c2);
+    pRect = new QgRect(-0.9f, 0.9f, 1.8f, 1.8f, c3);
+    pCircle = new QgCircle(QgPoint(0, 0), 0.9f, c4);
+    pPie = new QgPie(QgPoint(0,0), 0.5, 3 * GIS_PI / 8, GIS_PI / 7, c7);
+    pChord = new QgChord(QgPoint(0,0), 0.6, GIS_PI / 7, GIS_PI / 6, c6);
+    pArc = new QgArc(QgPoint(0,0), 0.7, GIS_PI / 5, GIS_PI / 4, c5);
+    pOval = new QgOval(QgPoint(0,0), 0.2, 0.6, c8);
+    */
 }
 
 static void DeinitShape(void)
 {
+    delete pPoint;
+    delete pLine;
+    delete pTriangle;
+
+    /*
     delete pLine;
     delete pPolygon;
     delete pRect;
@@ -117,5 +147,6 @@ static void DeinitShape(void)
     delete pChord;
     delete pPie;
     delete pOval;
+    */
 }
 

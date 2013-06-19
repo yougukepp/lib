@@ -22,10 +22,11 @@ $(OBJS): %.o: %.cpp
 mk_lib_dir:
 	if [ ! -d $(LIB_DIR) ]; then mkdir $(LIB_DIR); fi
 
-$(LIB_GIS):mk_lib_dir lib_hy lib_platform lib_primitives lib_graphics
+#$(LIB_GIS):mk_lib_dir lib_hy lib_platform lib_primitives lib_graphics
+$(LIB_GIS):mk_lib_dir lib_hy lib_platform lib_primitives
 	$(CP) $(LIB_PLATFORM_DIR)/*.o $(LIB_DIR)
 	$(CP) $(LIB_PRIMITIVES_DIR)/*.o $(LIB_DIR)
-	$(CP) $(LIB_GRAPHICS_DIR)/*.o $(LIB_DIR)
+	#$(CP) $(LIB_GRAPHICS_DIR)/*.o $(LIB_DIR)
 	$(AR) $(LIB_GIS) $(LIB_DIR)*.o
 
 lib_hy:
