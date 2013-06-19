@@ -1,6 +1,7 @@
-#ifndef __QG_PRIMITIVES__
-#define __QG_PRIMITIVES__
+#ifndef __QG_PRIMITIVE_H__
+#define __QG_PRIMITIVE_H__
 
+#include "QgIDrawable.h"
 #include "QgPoint.h"
 #include "QgColor.h"
 #include "QgProgram.h"
@@ -9,10 +10,10 @@ class QgPrimitive
 {
 public:
     QgPrimitive(const std::vector<QgPoint> &points, QgColor c);
-    virtual void Draw(void) = 0;
     void Translate(float x, float y, float z);
     void Scale(float x, float y, float z);
     void Rotate(float angle, char axis);
+    virtual void Draw(void);
     virtual ~QgPrimitive(void);
 
 protected: 

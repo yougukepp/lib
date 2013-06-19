@@ -20,9 +20,11 @@
 
 #include        "QgPoint.h"
 #include        "QgPrimitive.h"
-#include        "QgLine.h"
+#include        "QgSpritePoint.h"
 
 /*
+#include        "QgLine.h"
+#include        "QgTriangle.h"
 #include        "QgPolygon.h"
 #include        "QgRect.h"
 #include        "QgCircle.h"
