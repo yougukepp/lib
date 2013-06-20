@@ -31,8 +31,11 @@ int main(int argc, char *argv[])
 
 static void Draw(void)
 { 
+    static float sAngle = 0;
+    sAngle += 0.05;
     gPtrSpritePoints->Scale(0.25,0.5,0);
     gPtrSpritePoints->Translate(-0.75, 0.5, 0.0);
+    gPtrSpritePoints->Rotate(sAngle, 2);
     gPtrSpritePoints->Draw();
 
     gPtrLines->Scale(0.25,0.5,0);
@@ -63,10 +66,10 @@ static void Draw(void)
 static void InitShape(void)
 { 
     /* 点POINTS */
-    QgPoint pSp1(-gScale, gScale);
-    QgPoint pSp2(-gScale, -gScale);
-    QgPoint pSp3(gScale, -gScale);
-    QgPoint pSp4(gScale, gScale);
+    QgPoint pSp1(-gScale/5, gScale/5);
+    QgPoint pSp2(-gScale/5, -gScale/5);
+    QgPoint pSp3(gScale/5, -gScale/5);
+    QgPoint pSp4(gScale/5, gScale/5);
     QgColor cSp(1.0f, 0.0f, 0.0f);
     std::vector<QgPoint> pointsSp;
     pointsSp.push_back(pSp1);
