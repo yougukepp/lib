@@ -25,6 +25,8 @@
 #define         QG_CIRCLE_LINE_NUM             (100)
 #define         QG_CIRCLE_ANGLE_PER_LINE       (2 * QG_PI / QG_CIRCLE_LINE_NUM)
 
+#define         QG_RUNNING_FRAME_NUMS           (20000)
+
 /* 调试开关 */
 //#define __DEBUG_QG_TRACE_DRAWED_POINTS__
 #define __DEBUG_QG_PRINT_FPS__

@@ -12,8 +12,3 @@ void QgSpritePoints::Draw(void)
     DrawPrimitive(GL_POINTS);
 }
 
-QgSpritePoints::~QgSpritePoints(void)
-{
-    ;
-}
-

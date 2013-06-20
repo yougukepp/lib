@@ -11,7 +11,6 @@ class QgSpritePoints : public QgPrimitive, public QgIDrawable
 public:
     QgSpritePoints(std::vector<QgPoint> &points, QgColor c, float size); 
     void Draw(void);
-    ~QgSpritePoints(void);
 
 protected: 
 

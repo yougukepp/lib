@@ -101,7 +101,7 @@ static void printFps(void *pFrameId)
     framePlayed = *pFId - lastId;
 
     /* printf("\b\b\b\b\b\b\b\b"); */
-    printf("bps:% 3d\n", framePlayed);
+    printf("bps:% 3d% 3d\n", framePlayed, *pFId);
     fflush(stdout);
 
     lastId =*pFId;
@@ -133,6 +133,10 @@ void QgEgl::BeginRender(void)
         SwapBuffers(); 
 
         frameId++;
+        if(QG_RUNNING_FRAME_NUMS <= frameId)
+        {
+            break;
+        }
     }
 
 #ifdef __DEBUG_QG_PRINT_FPS__

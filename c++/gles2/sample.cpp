@@ -13,6 +13,8 @@ QgLineStrip *gPtrLineStrip = NULL;
 QgLineLoop *gPtrLineLoop = NULL;
 
 QgTriangles *gPtrTriangles = NULL;
+QgTriangleStrip *gPtrTriangleStrip = NULL;
+QgTriangleFan *gPtrTriangleFan = NULL;
 
 int main(int argc, char *argv[])
 {
@@ -46,8 +48,16 @@ static void Draw(void)
     gPtrLineLoop->Draw();
 
     gPtrTriangles->Scale(0.25,0.5,0);
-    gPtrTriangles->Translate(0.75, -0.5, 0.0);
+    gPtrTriangles->Translate(-0.75, -0.5, 0.0);
     gPtrTriangles->Draw();
+
+    gPtrTriangleStrip->Scale(0.25,0.5,0);
+    gPtrTriangleStrip->Translate(-0.25, -0.5, 0.0);
+    gPtrTriangleStrip->Draw();
+
+    gPtrTriangleFan->Scale(0.25,0.5,0);
+    gPtrTriangleFan->Translate(0.25, -0.5, 0.0);
+    gPtrTriangleFan->Draw();
 }
 
 static void InitShape(void)
@@ -104,22 +114,48 @@ static void InitShape(void)
     pointsLL.push_back(pLL4);
     gPtrLineLoop = new QgLineLoop(pointsLL, cLL, 1);
 
-    /* 三角形 */
-    QgPoint pT1(-gScale, gScale*gScale);
-    QgPoint pT2(-gScale, -gScale);
-    QgPoint pT3(gScale*gScale, -gScale);
-    QgPoint pT4(gScale, -gScale*gScale);
-    QgPoint pT5(gScale, gScale);
-    QgPoint pT6(-gScale*gScale, gScale);
-    QgColor cT(0.0f, 0.0f, 1.0f);
-    std::vector<QgPoint> pointsT;
-    pointsT.push_back(pT1);
-    pointsT.push_back(pT2);
-    pointsT.push_back(pT3);
-    pointsT.push_back(pT4);
-    pointsT.push_back(pT5);
-    pointsT.push_back(pT6);
-    gPtrTriangles = new QgTriangles(pointsT, cT);
+    /* 三角形TRIANGLES */
+    QgPoint pTS1(-gScale, gScale*gScale);
+    QgPoint pTS2(-gScale, -gScale);
+    QgPoint pTS3(gScale*gScale, -gScale);
+    QgPoint pTS4(gScale, -gScale*gScale);
+    QgPoint pTS5(gScale, gScale);
+    QgPoint pTS6(-gScale*gScale, gScale);
+    QgColor cTS(0.0f, 0.0f, 1.0f);
+    std::vector<QgPoint> pointsTS;
+    pointsTS.push_back(pTS1);
+    pointsTS.push_back(pTS2);
+    pointsTS.push_back(pTS3);
+    pointsTS.push_back(pTS4);
+    pointsTS.push_back(pTS5);
+    pointsTS.push_back(pTS6);
+    gPtrTriangles = new QgTriangles(pointsTS, cTS);
+
+    /* 三角形TRIANGLE_STRIP */
+    QgPoint pTST1(-gScale, 0);
+    QgPoint pTST2(-gScale, gScale);
+    QgPoint pTST3(0, 0);
+    QgPoint pTST4(gScale*gScale, gScale*gScale);
+    QgColor cTST(0.0f, 0.0f, 1.0f);
+    std::vector<QgPoint> pointsTST;
+    pointsTST.push_back(pTST1);
+    pointsTST.push_back(pTST2);
+    pointsTST.push_back(pTST3);
+    pointsTST.push_back(pTST4);
+    gPtrTriangleStrip = new QgTriangleStrip(pointsTST, cTST);
+
+    /* 三角形TRIANGLE_FAN */
+    QgPoint pTF1(0, 0);
+    QgPoint pTF2(-gScale, gScale * gScale);
+    QgPoint pTF3(0, gScale);
+    QgPoint pTF4(gScale, gScale * gScale);
+    QgColor cTF(0.0f, 0.0f, 1.0f);
+    std::vector<QgPoint> pointsTF;
+    pointsTF.push_back(pTF1);
+    pointsTF.push_back(pTF2);
+    pointsTF.push_back(pTF3);
+    pointsTF.push_back(pTF4);
+    gPtrTriangleFan = new QgTriangleFan(pointsTF, cTF);
 }
 
 static void DeinitShape(void)
@@ -131,5 +167,7 @@ static void DeinitShape(void)
     delete gPtrLineLoop;
 
     delete gPtrTriangles;
+    delete gPtrTriangleStrip;
+    delete gPtrTriangleFan;
 }
 

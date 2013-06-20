@@ -3,18 +3,16 @@
 
 #include "QgPoint.h"
 #include "QgColor.h"
-#include "QgProgram.h"
+#include "QgIDrawable.h"
 #include "QgPrimitive.h"
 
-class QgTriangles : public QgPrimitive
+class QgTriangles : public QgPrimitive, public QgIDrawable
 {
 public:
     QgTriangles(const std::vector<QgPoint> &points, QgColor c);
-    virtual void Draw(void);
-    virtual ~QgTriangles(void);
+    void Draw(void);
 
 protected: 
-    QgTriangles(void);
 
 private:
 };

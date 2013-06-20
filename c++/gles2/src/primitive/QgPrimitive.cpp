@@ -234,4 +234,5 @@ QgPrimitive::~QgPrimitive(void)
     free(m_pPosBuf);
     free(m_pColorBuf);
     free(m_arMatrix);
+
 }

@@ -21,11 +21,14 @@
 #include        "QgColor.h"
 #include        "QgPoint.h"
 #include        "QgPrimitive.h"
+
 #include        "QgSpritePoints.h"
 #include        "QgLines.h"
 #include        "QgLineStrip.h"
 #include        "QgLineLoop.h"
 #include        "QgTriangles.h"
+#include        "QgTriangleStrip.h"
+#include        "QgTriangleFan.h"
 
 /*
 #include        "QgPolygon.h"

@@ -12,7 +12,7 @@ public:
     void Translate(float x, float y, float z);
     void Scale(float x, float y, float z);
     void Rotate(float angle, char axis);
-    ~QgPrimitive(void);
+    ~QgPrimitive(void);                         /* TODO:如何避免内存泄漏 */
 
 protected: 
     QgPrimitive(void);
