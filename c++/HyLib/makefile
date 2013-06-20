@@ -1,6 +1,6 @@
 include buildvars
 
-HyLib = HyLib.a
+HyLib = libHy.a
 OBJS = HyTimer.o
 
 all: $(OBJS)
@@ -11,3 +11,4 @@ $(OBJS): %.o: %.cpp
 
 clean:
 	$(RM) *.o
+	$(RM) *.a
