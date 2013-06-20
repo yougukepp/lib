@@ -70,11 +70,21 @@ void QgProgram::Use(void)
     glUseProgram(m_programId);
 } 
 
+void QgProgram::BindUniform1fv(const char *uniformName, float *pValue)
+{
+    GLint uniformHandle = 0;
+    uniformHandle = glGetUniformLocation(m_programId, uniformName);
+    assert(-1 != uniformHandle);
+
+    glUniform1fv(uniformHandle, 1, pValue);
+}
+
 void QgProgram::BindUniform4fv(const char *uniformName, float *pValue)
 {
     GLint uniformHandle = 0;
     uniformHandle = glGetUniformLocation(m_programId, uniformName);
     assert(-1 != uniformHandle);
+
     glUniform4fv(uniformHandle, 1, pValue);
 } 
 

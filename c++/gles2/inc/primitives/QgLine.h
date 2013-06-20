@@ -10,8 +10,8 @@ class QgLine : public QgPrimitive
 {
 public:
     QgLine(const std::vector<QgPoint> &points, QgColor c);
-    virtual void Draw(void);
-    virtual ~QgLine(void);
+    void Draw(void);
+    ~QgLine(void);
 
 protected: 
     QgLine(void);

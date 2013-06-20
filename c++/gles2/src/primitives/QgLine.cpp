@@ -12,7 +12,7 @@ QgLine::QgLine(void)
 
 void QgLine::Draw(void)
 {
-    QgPrimitive::Draw(GL_LINES);
+    QgPrimitive::DrawPrimitive(GL_LINES);
 }
 
 QgLine::~QgLine(void)

@@ -29,6 +29,16 @@ void QgPrimitive::SetColor(QgColor c)
 {
     m_c = c;
     SetGLColorBuf();
+} 
+
+void QgPrimitive::setPointSize(float size)
+{
+    m_pointSize = size;
+}
+
+void QgPrimitive::setLineWidth(float width)
+{
+    m_lineWidth = width;
 }
 
 void QgPrimitive::CreatAndLinkProgram(const char *vShaderFileName,  const char *fShaderFileName)
@@ -160,6 +170,9 @@ void QgPrimitive::DrawPrimitive(GLenum drawType)
     m_pProgram->Use();
     m_pProgram->BindUniformMatrix4fv("uMatrix", m_arMatrix);
     m_pProgram->BindUniform4fv("uColor", m_pColorBuf);
+
+    m_pProgram->BindUniform1fv("uPointSize", &m_pointSize);
+    glLineWidth(m_lineWidth);
 
     posHandle = m_pProgram->GetAttribLocation("vPosition");
     glEnableVertexAttribArray(posHandle);        

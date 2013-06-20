@@ -18,12 +18,13 @@
 #include        "QgProgram.h"
 #include        "QgShader.h"
 
+#include        "QgColor.h"
 #include        "QgPoint.h"
 #include        "QgPrimitive.h"
 #include        "QgSpritePoint.h"
+#include        "QgLine.h"
 
 /*
-#include        "QgLine.h"
 #include        "QgTriangle.h"
 #include        "QgPolygon.h"
 #include        "QgRect.h"

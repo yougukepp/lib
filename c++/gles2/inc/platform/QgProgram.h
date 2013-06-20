@@ -13,7 +13,8 @@ public:
     void Link(void); 
     
     void Use(void); 
-    void BindUniform4fv(const char *uniformName, float *color);
+    void BindUniform1fv(const char *uniformName, float *pValue);
+    void BindUniform4fv(const char *uniformName, float *pValue);
     void BindUniformMatrix4fv(const char *uniformName, float *pValue);
     int GetAttribLocation(const char *AttribName);
 

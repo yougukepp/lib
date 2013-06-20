@@ -8,7 +8,7 @@ QgSpritePoint::QgSpritePoint(QgPoint &point, QgColor c, float size)
 
     AddPoints(points);
     SetColor(c);
-    m_size = size;
+    setPointSize(size);
 }
 
 /*TODO: 某些硬件单点无法绘制 */

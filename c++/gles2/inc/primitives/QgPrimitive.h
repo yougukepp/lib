@@ -18,7 +18,9 @@ protected:
     QgPrimitive(void);
     void DrawPrimitive(GLenum drawType);
     void AddPoints(const std::vector<QgPoint> &points);
-    void SetColor(QgColor c);
+    void SetColor(QgColor c); 
+    void setPointSize(float size);
+    void setLineWidth(float width);
 
 private:
     void SetGLPosBuf(void);
@@ -30,6 +32,8 @@ private:
     static const int m_cColorPerVertex = 4;
 
     QgColor m_c;
+    float m_pointSize;
+    float m_lineWidth;
     std::vector<QgPoint> m_points;
 
     QgProgram *m_pProgram;
