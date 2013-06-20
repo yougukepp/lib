@@ -1,22 +1,22 @@
-#include "QgLine.h" 
+#include "QgLines.h" 
 
-QgLine::QgLine(const std::vector<QgPoint> &points, QgColor c, float width)
+QgLines::QgLines(const std::vector<QgPoint> &points, QgColor c, float width)
     : QgPrimitive(points, c)
 { 
     setLineWidth(width);
 } 
 
-QgLine::QgLine(void)
+QgLines::QgLines(void)
     : QgPrimitive()
 {
 }
 
-void QgLine::Draw(void)
+void QgLines::Draw(void)
 {
     QgPrimitive::DrawPrimitive(GL_LINES);
 }
 
-QgLine::~QgLine(void)
+QgLines::~QgLines(void)
 {
     /* 会自动调用基类QgPrimitives析构函数 */
 }

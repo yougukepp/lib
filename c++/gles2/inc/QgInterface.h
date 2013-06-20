@@ -21,9 +21,9 @@
 #include        "QgColor.h"
 #include        "QgPoint.h"
 #include        "QgPrimitive.h"
-#include        "QgSpritePoint.h"
-#include        "QgLine.h"
-#include        "QgTriangle.h"
+#include        "QgSpritePoints.h"
+#include        "QgLines.h"
+#include        "QgTriangles.h"
 
 /*
 #include        "QgPolygon.h"

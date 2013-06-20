@@ -6,15 +6,15 @@
 #include "QgProgram.h"
 #include "QgPrimitive.h"
 
-class QgLine : public QgPrimitive
+class QgLines : public QgPrimitive
 {
 public:
-    QgLine(const std::vector<QgPoint> &points, QgColor c, float width);
+    QgLines(const std::vector<QgPoint> &points, QgColor c, float width);
     void Draw(void);
-    ~QgLine(void);
+    ~QgLines(void);
 
 protected: 
-    QgLine(void);
+    QgLines(void);
 
 private:
 };
