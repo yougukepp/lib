@@ -24,6 +24,7 @@
 #include        "QgSpritePoints.h"
 #include        "QgLines.h"
 #include        "QgLineStrip.h"
+#include        "QgLineLoop.h"
 #include        "QgTriangles.h"
 
 /*

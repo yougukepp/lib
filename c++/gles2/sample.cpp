@@ -4,9 +4,14 @@ static void InitShape(void);
 static void DeinitShape(void);
 static void Draw(void);
 
+static float gScale = 0.8f;
+
 QgSpritePoints *gPtrSpritePoints = NULL;
+
 QgLines *gPtrLines = NULL;
 QgLineStrip *gPtrLineStrip = NULL;
+QgLineLoop *gPtrLineLoop = NULL;
+
 QgTriangles *gPtrTriangles = NULL;
 
 int main(int argc, char *argv[])
@@ -36,18 +41,22 @@ static void Draw(void)
     gPtrLineStrip->Translate(0.25, 0.5, 0.0);
     gPtrLineStrip->Draw();
 
+    gPtrLineLoop->Scale(0.25,0.5,0);
+    gPtrLineLoop->Translate(0.75, 0.5, 0.0);
+    gPtrLineLoop->Draw();
+
     gPtrTriangles->Scale(0.25,0.5,0);
-    gPtrTriangles->Translate(0.75, 0.5, 0.0);
+    gPtrTriangles->Translate(0.75, -0.5, 0.0);
     gPtrTriangles->Draw();
 }
 
 static void InitShape(void)
 { 
     /* 点POINTS */
-    QgPoint pSp1(0.8f, 0.0f);
-    QgPoint pSp2(0.0f, 0.8f);
-    QgPoint pSp3(-0.8f, 0.0f);
-    QgPoint pSp4(0.0f, -0.8f);
+    QgPoint pSp1(-gScale, gScale);
+    QgPoint pSp2(-gScale, -gScale);
+    QgPoint pSp3(gScale, -gScale);
+    QgPoint pSp4(gScale, gScale);
     QgColor cSp(1.0f, 0.0f, 0.0f);
     std::vector<QgPoint> pointsSp;
     pointsSp.push_back(pSp1);
@@ -57,23 +66,23 @@ static void InitShape(void)
     gPtrSpritePoints = new QgSpritePoints(pointsSp, cSp, 5); 
 
     /* 线LINES */
-    QgPoint pL1(-0.9f, 0.9f);
-    QgPoint pL2(-0.9f, -0.9f);
-    QgPoint pL3(0.9f, -0.9f);
-    QgPoint pL4(0.9f, 0.9f);
+    QgPoint pL1(-gScale, gScale);
+    QgPoint pL2(-gScale, -gScale);
+    QgPoint pL3(gScale, -gScale);
+    QgPoint pL4(gScale, gScale);
     QgColor cL(0.0f, 1.0f, 0.0f);
     std::vector<QgPoint> pointsL;
     pointsL.push_back(pL1);
     pointsL.push_back(pL2);
     pointsL.push_back(pL3);
     pointsL.push_back(pL4);
-    gPtrLines = new QgLines(pointsL, cL, 5);
+    gPtrLines = new QgLines(pointsL, cL, 3);
 
     /* 线LINE_STRIP */
-    QgPoint pLS1(-0.9f, 0.9f);
-    QgPoint pLS2(-0.9f, -0.9f);
-    QgPoint pLS3(0.9f, -0.9f);
-    QgPoint pLS4(0.9f, 0.9f);
+    QgPoint pLS1(-gScale, gScale);
+    QgPoint pLS2(-gScale, -gScale);
+    QgPoint pLS3(gScale, -gScale);
+    QgPoint pLS4(gScale, gScale);
     QgColor cLS(0.0f, 1.0f, 0.0f);
     std::vector<QgPoint> pointsLS;
     pointsLS.push_back(pLS1);
@@ -82,13 +91,26 @@ static void InitShape(void)
     pointsLS.push_back(pLS4);
     gPtrLineStrip = new QgLineStrip(pointsLS, cLS, 2);
 
+    /* 线LINE_LOOP */
+    QgPoint pLL1(-gScale, gScale);
+    QgPoint pLL2(-gScale, -gScale);
+    QgPoint pLL3(gScale, -gScale);
+    QgPoint pLL4(gScale, gScale);
+    QgColor cLL(0.0f, 1.0f, 0.0f);
+    std::vector<QgPoint> pointsLL;
+    pointsLL.push_back(pLL1);
+    pointsLL.push_back(pLL2);
+    pointsLL.push_back(pLL3);
+    pointsLL.push_back(pLL4);
+    gPtrLineLoop = new QgLineLoop(pointsLL, cLL, 1);
+
     /* 三角形 */
-    QgPoint pT1(-0.7f, 0.2f);
-    QgPoint pT2(-0.7f, -0.7f);
-    QgPoint pT3(0.2f, -0.7f);
-    QgPoint pT4(0.7f, -0.2f);
-    QgPoint pT5(0.7f, 0.7f);
-    QgPoint pT6(-0.2f, 0.7f);
+    QgPoint pT1(-gScale, gScale*gScale);
+    QgPoint pT2(-gScale, -gScale);
+    QgPoint pT3(gScale*gScale, -gScale);
+    QgPoint pT4(gScale, -gScale*gScale);
+    QgPoint pT5(gScale, gScale);
+    QgPoint pT6(-gScale*gScale, gScale);
     QgColor cT(0.0f, 0.0f, 1.0f);
     std::vector<QgPoint> pointsT;
     pointsT.push_back(pT1);
@@ -103,8 +125,11 @@ static void InitShape(void)
 static void DeinitShape(void)
 {
     delete gPtrSpritePoints;
+
     delete gPtrLines;
     delete gPtrLineStrip;
+    delete gPtrLineLoop;
+
     delete gPtrTriangles;
 }
 
