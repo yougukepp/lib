@@ -1,6 +1,6 @@
 include 	../../buildvars
 
-OBJS = 
+OBJS = QgPolygon.o
 
 
 all:$(OBJS)

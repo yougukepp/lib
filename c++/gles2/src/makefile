@@ -33,6 +33,6 @@ clean:
 	$(RM) *.a
 	$(MAKE) -C $(PLATFORM_DIR) clean
 	$(MAKE) -C $(PRIMITIVE_DIR) clean
-	#$(MAKE) -C $(PLANE_DIR) clean
+	$(MAKE) -C $(PLANE_DIR) clean
 	#$(MAKE) -C $(SOLID_DIR) clean
 

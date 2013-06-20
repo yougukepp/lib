@@ -5,16 +5,6 @@ QgPolygon::QgPolygon(const std::vector<QgPoint> &points, QgColor c)
 {
 } 
 
-QgPolygon::QgPolygon(void)
-    :QgLines()
-{
-}
-
-QgPolygon::~QgPolygon(void)
-{
-    ;
-}
-
 void QgPolygon::Draw(void)
 {
     QgPrimitive::Draw(GL_LINE_LOOP);

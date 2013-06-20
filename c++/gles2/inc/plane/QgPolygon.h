@@ -1,19 +1,19 @@
-#ifndef __QG_POLYGOA_H__
-#define __QG_POLYGOA_H__
+#ifndef __QG_POLYGON_H__
+#define __QG_POLYGON_H__
 
-#include "QgLine.h"
+#include "QgLineLoop.h"
+#include "QgTriangleStrip.h"
 
-class QgPolygon : public QgLine
+class QgPolygon
 {
 public:
     QgPolygon(const std::vector<QgPoint> &points, QgColor c);
     void Draw(void);
-    virtual ~QgPolygon(void);
 
 protected:
-    QgPolygon(void);
 
 private:
+
 };
 
 #endif
