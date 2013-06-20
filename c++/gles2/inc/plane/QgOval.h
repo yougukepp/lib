@@ -3,7 +3,7 @@
 
 #include "QgLine.h"
 
-class QgGisOval : public QgLine
+class QgOval : public QgLine
 {
 public: 
     QgOval(QgPoint pOrig, double a, double b, QgColor c);

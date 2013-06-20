@@ -1,6 +1,6 @@
 include 	../../buildvars
 
-OBJS = QgColor.o QgPoint.o QgPrimitive.o QgSpritePoints.o QgLines.o QgTriangles.o
+OBJS = QgColor.o QgPoint.o QgPrimitive.o QgSpritePoints.o QgLines.o QgLineStrip.o QgTriangles.o
 
 all:$(OBJS)
 

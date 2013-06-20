@@ -4,7 +4,7 @@ QgOval::QgOval(QgPoint pOrig, double a, double b, QgColor c)
     :QgLines()
 {
     std::vector<QgPoint> points;
-    MakePoints(points, pOrig, a, b, 0, 2 * GIS_PI);
+    MakePoints(points, pOrig, a, b, 0, 2 * QG_PI);
     AddPoints(points);
     SetColor(c);
 } 
@@ -29,9 +29,9 @@ void QgOval::MakePoints(std::vector<QgPoint> &points, QgPoint pOrig, double a, d
 
     angle = startAngle;
 
-    if(spanAngle > 2 * GIS_PI)
+    if(spanAngle > 2 * QG_PI)
     {
-        spanAngle = 2 * GIS_PI;
+        spanAngle = 2 * QG_PI;
     }
 
     endAngle = startAngle + spanAngle;
@@ -40,7 +40,7 @@ void QgOval::MakePoints(std::vector<QgPoint> &points, QgPoint pOrig, double a, d
     {
         x = a * cos(angle);
         y = b * sin(angle);
-        angle += GIS_CIRCLE_ANGLE_PER_LINE;
+        angle += QG_CIRCLE_ANGLE_PER_LINE;
         points.push_back(QgPoint(x, y));
     }
 }

@@ -4,7 +4,7 @@
 #include "QgLine.h"
 #include "QgArc.h"
 
-class QgChord : public GisLines
+class QgChord : public QgLines
 {
 public:
     QgChord(QgPoint pOrig, double r, double startAngle, double spanAngle, QgColor c); 

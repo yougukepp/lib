@@ -23,6 +23,7 @@
 #include        "QgPrimitive.h"
 #include        "QgSpritePoints.h"
 #include        "QgLines.h"
+#include        "QgLineStrip.h"
 #include        "QgTriangles.h"
 
 /*

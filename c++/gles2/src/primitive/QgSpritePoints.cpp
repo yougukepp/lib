@@ -3,7 +3,7 @@
 QgSpritePoints::QgSpritePoints(std::vector<QgPoint> &points, QgColor c, float size)
     : QgPrimitive(points, c)
 {
-    setPointSize(size);
+    SetPointSize(size);
 }
 
 /*TODO: 某些硬件单点无法绘制 */

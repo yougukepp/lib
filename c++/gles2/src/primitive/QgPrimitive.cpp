@@ -5,6 +5,9 @@ QgPrimitive::QgPrimitive(void)
     QgColor c;
     SetColor(c);
 
+    SetPointSize(1);
+    SetLineWidth(1);
+
     std::vector<QgPoint> points;
     points.clear();
     AddPoints(points);
@@ -31,12 +34,12 @@ void QgPrimitive::SetColor(QgColor c)
     SetGLColorBuf();
 } 
 
-void QgPrimitive::setPointSize(float size)
+void QgPrimitive::SetPointSize(float size)
 {
     m_pointSize = size;
 }
 
-void QgPrimitive::setLineWidth(float width)
+void QgPrimitive::SetLineWidth(float width)
 {
     m_lineWidth = width;
 }
@@ -195,7 +198,7 @@ void QgPrimitive::SetGLPosBuf(void)
     m_pPosBuf = (float *)malloc(m_cPosPerVertex * iMax * sizeof(float));
     assert(NULL != m_pPosBuf);
 
-#ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
+#ifdef __DEBUG_QG_TRACE_DRAWED_POINTS__
     printf("QgLines:\n");
 #endif
     for(i=0;i<iMax;i++)
@@ -204,7 +207,7 @@ void QgPrimitive::SetGLPosBuf(void)
         m_pPosBuf[j++] = m_points[i].GetY(); 
         m_pPosBuf[j++] = m_points[i].GetZ(); 
         m_pPosBuf[j++] = m_points[i].GetA(); 
-#ifdef __DEBUG_GIS_TRACE_DRAWED_POINTS__
+#ifdef __DEBUG_QG_TRACE_DRAWED_POINTS__
         printf("point %d:", i);
         m_points[i].Print();
         fflush(stdout);

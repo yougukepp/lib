@@ -3,7 +3,7 @@
 QgLines::QgLines(const std::vector<QgPoint> &points, QgColor c, float width)
     : QgPrimitive(points, c)
 { 
-    setLineWidth(width);
+    SetLineWidth(width);
 } 
 
 QgLines::QgLines(void)

@@ -19,8 +19,8 @@ protected:
     void DrawPrimitive(GLenum drawType);
     void AddPoints(const std::vector<QgPoint> &points);
     void SetColor(QgColor c); 
-    void setPointSize(float size);
-    void setLineWidth(float width);
+    void SetPointSize(float size);
+    void SetLineWidth(float width);
 
 private:
     void SetGLPosBuf(void);

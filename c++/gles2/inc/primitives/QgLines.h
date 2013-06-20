@@ -1,9 +1,8 @@
-#ifndef __GIS_LINES__
-#define __GIS_LINES__
+#ifndef __QG_LINES_H__
+#define __QG_LINES_H__
 
 #include "QgPoint.h"
 #include "QgColor.h"
-#include "QgProgram.h"
 #include "QgPrimitive.h"
 
 class QgLines : public QgPrimitive

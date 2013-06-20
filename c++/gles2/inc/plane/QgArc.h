@@ -4,10 +4,10 @@
 #include "QgLine.h"
 #include "QgCircle.h"
 
-class QgArc: public GisLine
+class QgArc: public QgLine
 {
 public:
-    QgArc(GisPoint pOrig, double r, double startAngle, double spanAngle, GisColor c); 
+    QgArc(QgPoint pOrig, double r, double startAngle, double spanAngle, QgColor c); 
     virtual ~QgArc(void);
     void Draw(void); 
 

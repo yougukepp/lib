@@ -3,7 +3,7 @@
 
 #include "QgOval.h"
 
-class QgCircle: public GisOval
+class QgCircle: public QgOval
 {
 public:
     QgCircle(QgPoint pOrig, double r, QgColor c);
