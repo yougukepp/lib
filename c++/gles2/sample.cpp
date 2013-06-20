@@ -59,8 +59,8 @@ static void InitShape(void)
     /* 线LINES */
     QgPoint pL1(-0.9f, 0.9f);
     QgPoint pL2(-0.9f, -0.9f);
-    QgPoint pL3(0.9f, 0.9f);
-    QgPoint pL4(0.9f, -0.9f);
+    QgPoint pL3(0.9f, -0.9f);
+    QgPoint pL4(0.9f, 0.9f);
     QgColor cL(0.0f, 1.0f, 0.0f);
     std::vector<QgPoint> pointsL;
     pointsL.push_back(pL1);
@@ -72,8 +72,8 @@ static void InitShape(void)
     /* 线LINE_STRIP */
     QgPoint pLS1(-0.9f, 0.9f);
     QgPoint pLS2(-0.9f, -0.9f);
-    QgPoint pLS3(0.9f, 0.9f);
-    QgPoint pLS4(0.9f, -0.9f);
+    QgPoint pLS3(0.9f, -0.9f);
+    QgPoint pLS4(0.9f, 0.9f);
     QgColor cLS(0.0f, 1.0f, 0.0f);
     std::vector<QgPoint> pointsLS;
     pointsLS.push_back(pLS1);
