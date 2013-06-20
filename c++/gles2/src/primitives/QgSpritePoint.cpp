@@ -11,9 +11,10 @@ QgSpritePoint::QgSpritePoint(QgPoint &point, QgColor c, float size)
     m_size = size;
 }
 
+/*TODO: 某些硬件单点无法绘制 */
 void QgSpritePoint::Draw(void)
 {
-    QgPrimitive::Draw(GL_POINTS);
+    DrawPrimitive(GL_POINTS);
 }
 
 QgSpritePoint::~QgSpritePoint(void)

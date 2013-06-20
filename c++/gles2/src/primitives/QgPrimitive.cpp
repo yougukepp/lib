@@ -150,7 +150,7 @@ void QgPrimitive::DrawPoints()
 }
 */
 
-void QgPrimitive::Draw(GLenum drawType)
+void QgPrimitive::DrawPrimitive(GLenum drawType)
 {
     int posHandle = 0;
     int pointsNums = 0;

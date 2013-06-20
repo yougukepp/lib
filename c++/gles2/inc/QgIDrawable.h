@@ -4,10 +4,11 @@
 class QgIDrawable
 {
 public:
+    virtual void Draw(void) = 0;
+
+protected:
     QgIDrawable(void){;}
     virtual ~QgIDrawable(void){;}
-
-    virtual void Draw(void) = 0;
 };
 
 #endif

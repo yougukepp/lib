@@ -16,7 +16,7 @@ public:
 
 protected: 
     QgPrimitive(void);
-    void Draw(GLenum drawType);
+    void DrawPrimitive(GLenum drawType);
     void AddPoints(const std::vector<QgPoint> &points);
     void SetColor(QgColor c);
 
