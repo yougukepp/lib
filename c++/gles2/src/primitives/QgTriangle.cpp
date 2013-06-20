@@ -12,7 +12,7 @@ QgTriangle::QgTriangle(void)
 
 void QgTriangle::Draw(void)
 {
-    QgPrimitive::Draw(GL_LINES);
+    QgPrimitive::DrawPrimitive(GL_TRIANGLES);
 }
 
 QgTriangle::~QgTriangle(void)
