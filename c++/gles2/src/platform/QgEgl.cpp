@@ -61,7 +61,7 @@ QgEgl::QgEgl(void)
 
     printf("XCreateSimpleWindow \n");
     window = XCreateSimpleWindow(display, rootwindow, 0, 0,
-            500, 500, 0, 0, WhitePixel (display, screen));
+            700, 700, 0, 0, WhitePixel (display, screen));
 
     XMapWindow(display, window);
 
