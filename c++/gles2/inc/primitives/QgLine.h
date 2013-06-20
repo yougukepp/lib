@@ -9,7 +9,7 @@
 class QgLine : public QgPrimitive
 {
 public:
-    QgLine(const std::vector<QgPoint> &points, QgColor c);
+    QgLine(const std::vector<QgPoint> &points, QgColor c, float width);
     void Draw(void);
     ~QgLine(void);
 

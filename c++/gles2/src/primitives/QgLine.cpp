@@ -1,8 +1,9 @@
 #include "QgLine.h" 
 
-QgLine::QgLine(const std::vector<QgPoint> &points, QgColor c)
+QgLine::QgLine(const std::vector<QgPoint> &points, QgColor c, float width)
     : QgPrimitive(points, c)
 { 
+    setLineWidth(width);
 } 
 
 QgLine::QgLine(void)

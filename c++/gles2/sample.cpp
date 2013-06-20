@@ -43,7 +43,7 @@ static void InitShape(void)
     std::vector<QgPoint> pointsL;
     pointsL.push_back(pL1);
     pointsL.push_back(pL2);
-    gPtrLine = new QgLine(pointsL, cL);
+    gPtrLine = new QgLine(pointsL, cL, 5);
 
     /* 三角形 */
     /*
