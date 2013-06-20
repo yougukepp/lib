@@ -1,10 +1,9 @@
 #version   100
-precision highp float;
+precision mediump float;
 
-varying   vec4 g_vVSColor;
-
+uniform vec4 uColor;
 void main()
 {
-    gl_FragColor = g_vVSColor * 0.7;
+    gl_FragColor = uColor;
 }
 

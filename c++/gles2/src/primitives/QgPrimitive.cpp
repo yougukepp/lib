@@ -11,7 +11,7 @@ QgPrimitive::QgPrimitive(void)
 
     InitMatrix();
 
-    CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
+    CreatAndLinkProgram("./glsl/vertex.glsl", "./glsl/fragment.glsl");
 }
 
 QgPrimitive::QgPrimitive(const std::vector<QgPoint> &points, QgColor c)
@@ -22,7 +22,7 @@ QgPrimitive::QgPrimitive(const std::vector<QgPoint> &points, QgColor c)
 
     InitMatrix();
 
-    CreatAndLinkProgram("./glsl/LinesVertex.glsl", "./glsl/LinesFragment.glsl");
+    CreatAndLinkProgram("./glsl/vertex.glsl", "./glsl/fragment.glsl");
 } 
 
 void QgPrimitive::SetColor(QgColor c)
