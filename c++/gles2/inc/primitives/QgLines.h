@@ -1,14 +1,14 @@
 #ifndef __QG_LINES_H__
 #define __QG_LINES_H__
 
-#include "QgPoint.h"
+#include "QgVertex.h"
 #include "QgColor.h"
 #include "QgBaseLine.h"
 
 class QgLines : public QgBaseLine
 {
 public:
-    QgLines(const std::vector<QgPoint> &points, QgColor c, float width);
+    QgLines(const std::vector<QgVertex> &points, QgColor c, float width);
     void Draw(void);
 
 protected: 

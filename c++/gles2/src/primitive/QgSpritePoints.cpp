@@ -1,6 +1,6 @@
 #include "QgSpritePoints.h"
 
-QgSpritePoints::QgSpritePoints(std::vector<QgPoint> &points, QgColor c, float size)
+QgSpritePoints::QgSpritePoints(std::vector<QgVertex> &points, QgColor c, float size)
     : QgPrimitive(points, c)
 {
     SetPointSize(size);

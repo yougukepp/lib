@@ -1,6 +1,6 @@
 #include "QgTriangleStrip.h" 
 
-QgTriangleStrip::QgTriangleStrip(const std::vector<QgPoint> &points, QgColor c)
+QgTriangleStrip::QgTriangleStrip(const std::vector<QgVertex> &points, QgColor c)
     : QgPrimitive(points, c)
 { 
 } 

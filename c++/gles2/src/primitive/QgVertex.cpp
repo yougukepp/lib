@@ -1,6 +1,6 @@
-#include "QgPoint.h"
+#include "QgVertex.h"
 
-QgPoint::QgPoint(void)
+QgVertex::QgVertex(void)
 {
     /* 使用OpenGL 归一化坐标 */
     m_x = 0.0f;
@@ -9,7 +9,7 @@ QgPoint::QgPoint(void)
     m_a = 1.0f;
 }
 
-QgPoint::QgPoint(float x, float y)
+QgVertex::QgVertex(float x, float y)
 {
     m_x = x;
     m_y = y;
@@ -17,7 +17,7 @@ QgPoint::QgPoint(float x, float y)
     m_a = 1.0f;
 }
 
-QgPoint::QgPoint(float x, float y, float z)
+QgVertex::QgVertex(float x, float y, float z)
 {
     m_x = x;
     m_y = y;
@@ -25,27 +25,27 @@ QgPoint::QgPoint(float x, float y, float z)
     m_a = 1.0f;
 }
 
-float QgPoint::GetX(void)
+float QgVertex::GetX(void)
 {
     return m_x;
 }
 
-float QgPoint::GetY(void)
+float QgVertex::GetY(void)
 {
     return m_y;
 }
 
-float QgPoint::GetZ(void)
+float QgVertex::GetZ(void)
 {
     return m_z;
 }
 
-float QgPoint::GetA(void)
+float QgVertex::GetA(void)
 {
     return m_a;
 }
 
-void QgPoint::Print(void)
+void QgVertex::Print(void)
 {
     const char *format = NULL;
     format = "x:%f,y:%f,z:%f,a:%f\n";

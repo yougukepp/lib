@@ -1,6 +1,6 @@
 #include "QgTriangleFan.h" 
 
-QgTriangleFan::QgTriangleFan(const std::vector<QgPoint> &points, QgColor c)
+QgTriangleFan::QgTriangleFan(const std::vector<QgVertex> &points, QgColor c)
     : QgPrimitive(points, c)
 { 
 } 

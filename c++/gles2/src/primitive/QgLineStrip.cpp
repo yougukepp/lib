@@ -1,6 +1,6 @@
 #include "QgLineStrip.h" 
 
-QgLineStrip::QgLineStrip(const std::vector<QgPoint> &points, QgColor c, float width)
+QgLineStrip::QgLineStrip(const std::vector<QgVertex> &points, QgColor c, float width)
     : QgBaseLine(points, c, width)
 { 
 } 

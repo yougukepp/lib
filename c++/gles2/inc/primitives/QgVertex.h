@@ -1,14 +1,14 @@
-#ifndef __QG_POINT_H__
-#define __QG_POINT_H__
+#ifndef __QG_VERTEX_H__
+#define __QG_VERTEX_H__
 
 #include "QgInnerInterface.h"
 
-class QgPoint
+class QgVertex
 {
 public:
-    QgPoint(void);
-    QgPoint(float x, float y);
-    QgPoint(float x, float y, float z);
+    QgVertex(void);
+    QgVertex(float x, float y);
+    QgVertex(float x, float y, float z);
     float GetX(void);
     float GetY(void); 
     float GetZ(void); 

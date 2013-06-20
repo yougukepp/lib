@@ -1,6 +1,6 @@
 #include "QgLines.h" 
 
-QgLines::QgLines(const std::vector<QgPoint> &points, QgColor c, float width)
+QgLines::QgLines(const std::vector<QgVertex> &points, QgColor c, float width)
     : QgBaseLine(points, c, width)
 { 
 } 

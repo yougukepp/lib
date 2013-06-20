@@ -66,12 +66,12 @@ static void Draw(void)
 static void InitShape(void)
 { 
     /* 点POINTS */
-    QgPoint pSp1(-gScale/5, gScale/5);
-    QgPoint pSp2(-gScale/5, -gScale/5);
-    QgPoint pSp3(gScale/5, -gScale/5);
-    QgPoint pSp4(gScale/5, gScale/5);
+    QgVertex pSp1(-gScale/5, gScale/5);
+    QgVertex pSp2(-gScale/5, -gScale/5);
+    QgVertex pSp3(gScale/5, -gScale/5);
+    QgVertex pSp4(gScale/5, gScale/5);
     QgColor cSp(1.0f, 0.0f, 0.0f);
-    std::vector<QgPoint> pointsSp;
+    std::vector<QgVertex> pointsSp;
     pointsSp.push_back(pSp1);
     pointsSp.push_back(pSp2);
     pointsSp.push_back(pSp3);
@@ -79,12 +79,12 @@ static void InitShape(void)
     gPtrSpritePoints = new QgSpritePoints(pointsSp, cSp, 5); 
 
     /* 线LINES */
-    QgPoint pL1(-gScale, gScale);
-    QgPoint pL2(-gScale, -gScale);
-    QgPoint pL3(gScale, -gScale);
-    QgPoint pL4(gScale, gScale);
+    QgVertex pL1(-gScale, gScale);
+    QgVertex pL2(-gScale, -gScale);
+    QgVertex pL3(gScale, -gScale);
+    QgVertex pL4(gScale, gScale);
     QgColor cL(0.0f, 1.0f, 0.0f);
-    std::vector<QgPoint> pointsL;
+    std::vector<QgVertex> pointsL;
     pointsL.push_back(pL1);
     pointsL.push_back(pL2);
     pointsL.push_back(pL3);
@@ -92,12 +92,12 @@ static void InitShape(void)
     gPtrLines = new QgLines(pointsL, cL, 3);
 
     /* 线LINE_STRIP */
-    QgPoint pLS1(-gScale, gScale);
-    QgPoint pLS2(-gScale, -gScale);
-    QgPoint pLS3(gScale, -gScale);
-    QgPoint pLS4(gScale, gScale);
+    QgVertex pLS1(-gScale, gScale);
+    QgVertex pLS2(-gScale, -gScale);
+    QgVertex pLS3(gScale, -gScale);
+    QgVertex pLS4(gScale, gScale);
     QgColor cLS(0.0f, 1.0f, 0.0f);
-    std::vector<QgPoint> pointsLS;
+    std::vector<QgVertex> pointsLS;
     pointsLS.push_back(pLS1);
     pointsLS.push_back(pLS2);
     pointsLS.push_back(pLS3);
@@ -105,12 +105,12 @@ static void InitShape(void)
     gPtrLineStrip = new QgLineStrip(pointsLS, cLS, 2);
 
     /* 线LINE_LOOP */
-    QgPoint pLL1(-gScale, gScale);
-    QgPoint pLL2(-gScale, -gScale);
-    QgPoint pLL3(gScale, -gScale);
-    QgPoint pLL4(gScale, gScale);
+    QgVertex pLL1(-gScale, gScale);
+    QgVertex pLL2(-gScale, -gScale);
+    QgVertex pLL3(gScale, -gScale);
+    QgVertex pLL4(gScale, gScale);
     QgColor cLL(0.0f, 1.0f, 0.0f);
-    std::vector<QgPoint> pointsLL;
+    std::vector<QgVertex> pointsLL;
     pointsLL.push_back(pLL1);
     pointsLL.push_back(pLL2);
     pointsLL.push_back(pLL3);
@@ -118,14 +118,14 @@ static void InitShape(void)
     gPtrLineLoop = new QgLineLoop(pointsLL, cLL, 1);
 
     /* 三角形TRIANGLES */
-    QgPoint pTS1(-gScale, gScale*gScale);
-    QgPoint pTS2(-gScale, -gScale);
-    QgPoint pTS3(gScale*gScale, -gScale);
-    QgPoint pTS4(gScale, -gScale*gScale);
-    QgPoint pTS5(gScale, gScale);
-    QgPoint pTS6(-gScale*gScale, gScale);
+    QgVertex pTS1(-gScale, gScale*gScale);
+    QgVertex pTS2(-gScale, -gScale);
+    QgVertex pTS3(gScale*gScale, -gScale);
+    QgVertex pTS4(gScale, -gScale*gScale);
+    QgVertex pTS5(gScale, gScale);
+    QgVertex pTS6(-gScale*gScale, gScale);
     QgColor cTS(0.0f, 0.0f, 1.0f);
-    std::vector<QgPoint> pointsTS;
+    std::vector<QgVertex> pointsTS;
     pointsTS.push_back(pTS1);
     pointsTS.push_back(pTS2);
     pointsTS.push_back(pTS3);
@@ -135,12 +135,12 @@ static void InitShape(void)
     gPtrTriangles = new QgTriangles(pointsTS, cTS);
 
     /* 三角形TRIANGLE_STRIP */
-    QgPoint pTST1(-gScale, 0);
-    QgPoint pTST2(-gScale, gScale);
-    QgPoint pTST3(0, 0);
-    QgPoint pTST4(gScale*gScale, gScale*gScale);
+    QgVertex pTST1(-gScale, 0);
+    QgVertex pTST2(-gScale, gScale);
+    QgVertex pTST3(0, 0);
+    QgVertex pTST4(gScale*gScale, gScale*gScale);
     QgColor cTST(0.0f, 0.0f, 1.0f);
-    std::vector<QgPoint> pointsTST;
+    std::vector<QgVertex> pointsTST;
     pointsTST.push_back(pTST1);
     pointsTST.push_back(pTST2);
     pointsTST.push_back(pTST3);
@@ -148,12 +148,12 @@ static void InitShape(void)
     gPtrTriangleStrip = new QgTriangleStrip(pointsTST, cTST);
 
     /* 三角形TRIANGLE_FAN */
-    QgPoint pTF1(0, 0);
-    QgPoint pTF2(-gScale, gScale * gScale);
-    QgPoint pTF3(0, gScale);
-    QgPoint pTF4(gScale, gScale * gScale);
+    QgVertex pTF1(0, 0);
+    QgVertex pTF2(-gScale, gScale * gScale);
+    QgVertex pTF3(0, gScale);
+    QgVertex pTF4(gScale, gScale * gScale);
     QgColor cTF(0.0f, 0.0f, 1.0f);
-    std::vector<QgPoint> pointsTF;
+    std::vector<QgVertex> pointsTF;
     pointsTF.push_back(pTF1);
     pointsTF.push_back(pTF2);
     pointsTF.push_back(pTF3);

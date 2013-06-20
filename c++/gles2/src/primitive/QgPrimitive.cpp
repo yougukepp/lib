@@ -8,7 +8,7 @@ QgPrimitive::QgPrimitive(void)
     SetPointSize(1);
     SetLineWidth(1);
 
-    std::vector<QgPoint> points;
+    std::vector<QgVertex> points;
     points.clear();
     AddPoints(points);
 
@@ -17,7 +17,7 @@ QgPrimitive::QgPrimitive(void)
     CreatAndLinkProgram("./glsl/vertex.glsl", "./glsl/fragment.glsl");
 }
 
-QgPrimitive::QgPrimitive(const std::vector<QgPoint> &points, QgColor c)
+QgPrimitive::QgPrimitive(const std::vector<QgVertex> &points, QgColor c)
 { 
     AddPoints(points);
 
@@ -52,7 +52,7 @@ void QgPrimitive::CreatAndLinkProgram(const char *vShaderFileName,  const char *
     m_pProgram->Link();
 }
 
-void QgPrimitive::AddPoints(const std::vector<QgPoint> &points)
+void QgPrimitive::AddPoints(const std::vector<QgVertex> &points)
 {
     int iMax = 0;
     iMax = points.size();

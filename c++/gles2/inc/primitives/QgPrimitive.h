@@ -1,14 +1,14 @@
 #ifndef __QG_PRIMITIVE_H__
 #define __QG_PRIMITIVE_H__
 
-#include "QgPoint.h"
-#include "QgColor.h"
-#include "QgProgram.h"
+#include "QgInnerInterface.h"
 
+class QgProgram;
+class QgVertex;
 class QgPrimitive
 {
 public:
-    QgPrimitive(const std::vector<QgPoint> &points, QgColor c);
+    QgPrimitive(const std::vector<QgVertex> &points, QgColor c);
     void Translate(float x, float y, float z);
     void Scale(float x, float y, float z);
     void Rotate(float angle, char axis);
@@ -17,7 +17,7 @@ public:
 protected: 
     QgPrimitive(void);
     void DrawPrimitive(GLenum drawType);
-    void AddPoints(const std::vector<QgPoint> &points);
+    void AddPoints(const std::vector<QgVertex> &points);
     void SetColor(QgColor c); 
     void SetPointSize(float size);
     void SetLineWidth(float width);
@@ -34,7 +34,7 @@ private:
     QgColor m_c;
     float m_pointSize;
     float m_lineWidth;
-    std::vector<QgPoint> m_points;
+    std::vector<QgVertex> m_points;
 
     QgProgram *m_pProgram;
     float *m_pPosBuf;

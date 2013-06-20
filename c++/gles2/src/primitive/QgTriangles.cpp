@@ -1,6 +1,6 @@
 #include "QgTriangles.h" 
 
-QgTriangles::QgTriangles(const std::vector<QgPoint> &points, QgColor c)
+QgTriangles::QgTriangles(const std::vector<QgVertex> &points, QgColor c)
     : QgPrimitive(points, c)
 { 
 } 

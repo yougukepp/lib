@@ -1,15 +1,12 @@
 #ifndef __QG_BASE_LINE_H__
 #define __QG_BASE_LINE_H__
 
-#include "QgPoint.h"
-#include "QgColor.h"
-#include "QgIDrawable.h"
-#include "QgPrimitive.h"
+#include "QgInnerInterface.h"
 
 class QgBaseLine : public QgPrimitive, public QgIDrawable
 {
 protected: 
-    QgBaseLine(const std::vector<QgPoint> &points, QgColor c, float width);
+    QgBaseLine(const std::vector<QgVertex> &points, QgColor c, float width);
 private:
 };
 

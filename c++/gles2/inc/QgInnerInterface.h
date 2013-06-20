@@ -32,6 +32,13 @@
 #include "QgDataType.h"
 #include "HyInterface.h"
 
+#include "QgProgram.h"
+#include "QgShader.h"
+
+#include "QgColor.h"
+#include "QgVertex.h"
+#include "QgPrimitive.h"
+#include "QgIDrawable.h"
 
 /***************************** 宏定义 ****************************/
 

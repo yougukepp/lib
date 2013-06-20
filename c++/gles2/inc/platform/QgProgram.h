@@ -3,6 +3,7 @@
 
 #include "QgShader.h"
 
+class QgShader;
 class QgProgram
 {
 public:

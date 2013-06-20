@@ -1,6 +1,6 @@
 #include "QgLineLoop.h" 
 
-QgLineLoop::QgLineLoop(const std::vector<QgPoint> &points, QgColor c, float width)
+QgLineLoop::QgLineLoop(const std::vector<QgVertex> &points, QgColor c, float width)
     : QgBaseLine(points, c, width)
 { 
 } 

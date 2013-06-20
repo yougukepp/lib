@@ -15,12 +15,6 @@
 #define         __QG_INTERFACE_H__
 /***************************** 头文件 ****************************/
 #include        "QgEgl.h"
-#include        "QgProgram.h"
-#include        "QgShader.h"
-
-#include        "QgColor.h"
-#include        "QgPoint.h"
-#include        "QgPrimitive.h"
 
 #include        "QgSpritePoints.h"
 #include        "QgLines.h"
