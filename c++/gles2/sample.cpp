@@ -20,14 +20,16 @@ int main(int argc, char *argv[])
 }
 
 static void Draw(void)
-{
+{ 
     gPtrSpritePoint->Draw();
 }
 
 static void InitShape(void)
 { 
-    QgPoint p1(0.5f, 0.5f);
-    QgColor c1(1.0f, 0.0f, 0.0f);
+    QgColor c1(1.0f, 1.0f, 1.0f);
+    QgPoint p1(0.25f, 0.25f);
+    /*TODO: 该店某些硬件无法绘制 */
+    /* QgPoint p1(0.5f, 0.5f); */
     gPtrSpritePoint = new QgSpritePoint(p1, c1, 10); 
 }
 
