@@ -40,6 +40,7 @@ sudo apt-get install libglui-dev
 
 # Tex
 sudo apt-get install texlive-full texlive-doc-zh
+sudo apt-get install asymptote asymptote-doc
 
 sudo apt-get update
 sudo apt-get upgrade
