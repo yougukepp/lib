@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 module hyCntTb;
-    parameter C_WIDTH = 8;
+    parameter C_WIDTH = 32;
     parameter CLK_PERIOD = 10;  
     parameter SIM_PERIOD = CLK_PERIOD * 10000;
 
@@ -40,7 +40,7 @@ module hyCntTb;
     // 复位
     initial
     begin  
-        #12 cnt_in = 8'h05;  
+        #12 cnt_in = 32'h000000A5;  
     end
 
     // 仿真结束
