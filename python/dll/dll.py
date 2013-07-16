@@ -3,8 +3,8 @@
 
 import ctypes
 
-#lib_handle = ctypes.CDLL('./pp.so')
-lib_handle = ctypes.CDLL('./pp.dll')
+lib_handle = ctypes.CDLL('./pp.so')
+#lib_handle = ctypes.CDLL('./pp.dll')
 t= lib_handle.test
 
 t.argtypes = [ctypes.c_void_p, ctypes.c_int]

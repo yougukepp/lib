@@ -1,3 +1,4 @@
-Linux:gcc main.c -shared -fPIC -o pp.dll
-cygwin:i686-pc-mingw32-gcc main.c -shared -fPIC -o pp.dll
+#Linux:gcc main.c -shared -fPIC -o pp.so
+#cygwin:i686-pc-mingw32-gcc main.c -shared -fPIC -o pp.dll
+gcc main.c -shared -fPIC -o pp.so
 
