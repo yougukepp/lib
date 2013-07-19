@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-gCanvasWidth = 800
-gCanvasHeight = 800
+gCanvasWidth = 500
+gCanvasHeight = 500
 
 def HyGaLibScreen2Ga(x, y):
     rstX = x
