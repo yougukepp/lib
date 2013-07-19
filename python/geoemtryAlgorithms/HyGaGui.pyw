@@ -4,19 +4,21 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
+from HyGaLib import *
 from HyGaPoint import *
+from HyGaPoints import *
 from HyGaConvexHull import HyGaConvexHull
 
-gCanvasWidth = 800
-gCanvasHeight = 800
+def Screen2Ga(point):
+    (rstX, rstY) = HyGaLibScreen2Ga(point.x(), point.y())
+    return HyGaPoint(rstX, rstY)
 
 class HyGaCanvas(QWidget): 
 
-    msMove = pyqtSignal(QPoint, name='msMove') 
+    msMove = pyqtSignal(HyGaPoint, name='msMove') 
 
-    mConvexHullInput = []
-    mConvexHullOutput = []
-    mConvexHullOK = False;
+    mInputPoints = HyGaPoints()
+    mConvexHull = HyGaConvexHull()
 
     def __init__(self, parent=None): 
         QWidget.__init__(self, parent)
@@ -25,50 +27,29 @@ class HyGaCanvas(QWidget):
         
     def paintEvent(self, event):
         painter = QPainter(self) 
-
+        
         # 清屏
         painter.fillRect(0, 0, self.width(), self.height(), QColor(0, 0, 0))
 
-        # 画点
-        for p in self.mConvexHullInput: 
-            # s = "p" + str(i)
-            # painter.drawText(pPhy, s)
-            p.draw(painter)
-
         # 画凸包
-        if True == self.mConvexHullOK:
-            size = len(self.mConvexHullOutput)
+        self.mConvexHull.draw(painter)
 
-            if size < 3:
-                print("凸包点数小于3")
-                exit()
-
-            pen = QPen(QColor(255, 0, 0))
-            pen.setWidth(1)
-            painter.setPen(pen)
-            for i in range(1, size): 
-                painter.drawLine(self.mConvexHullOutput[i-1].ScreenPos(),
-                        self.mConvexHullOutput[i].ScreenPos())
-                print(i - 1, i)
-            painter.drawLine(self.mConvexHullOutput[size-1].ScreenPos(),
-                    self.mConvexHullOutput[0].ScreenPos())
-            print(size-1, 0)
+        # 画点
+        self.mInputPoints.draw(painter)
 
         painter.end()
 
     def DrawConvexHull(self): 
-        HyGaConvexHull(self.mConvexHullInput, self.mConvexHullOutput)
-        self.mConvexHullOK = True;
+        self.mConvexHull = HyGaConvexHull(self.mInputPoints)
         self.repaint()
 
     def mouseMoveEvent(self, event):
-        self.msMove.emit(event.pos())
+        p = Screen2Ga(event.pos())
+        self.msMove.emit(p)
 
     def mousePressEvent(self, event):
-        x = event.pos().x()
-        y = event.pos().y()
-        p = HyGaPoint(x, y)
-        self.mConvexHullInput.append(p)
+        p = Screen2Ga(event.pos())
+        self.mInputPoints.append(p)
         self.repaint()
 
 class HyGaStatusBar(QStatusBar):
@@ -85,7 +66,7 @@ class HyGaStatusBar(QStatusBar):
         self.mLabelTestName.setText(labelText)
 
     def Move(self, pos):
-        labelText = "当前位置:(" + str(pos.x()) + "," + str(pos.y()) + ")"
+        labelText = "当前位置:(" + str(pos.X()) + "," + str(pos.Y()) + ")"
         self.mLabelPos.setText(labelText)
 
 class HyGaCtrlWidget(QWidget): 
