@@ -5,6 +5,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
 from HyGaPoints import *
+from HyGaIsTurnRight import *
 
 class HyGaConvexHull():
     mInputPoints = HyGaPoints()
@@ -12,64 +13,45 @@ class HyGaConvexHull():
 
     def __init__(self, points = HyGaPoints()):
         self.mInputPoints = points
-        #self.ComputeConvexHull()
+        self.ComputeConvexHull()
 
     def draw(self, painter):
+        if None == self.mConvexHullPoints:
+            return
+
         size = self.mConvexHullPoints.size()
+
         if size < 3:
             return
         else:
             pen = QPen(QColor(255, 0, 0))
             pen.setWidth(1)
             painter.setPen(pen)
-            for i in range(1, size): 
+            for i in range(1, size):
                 painter.drawLine(self.mConvexHullPoints[i-1].ScreenPos(),
                         self.mConvexHullPoints[i].ScreenPos())
-                #print(i - 1, i)
             painter.drawLine(self.mConvexHullPoints[size-1].ScreenPos(),
                     self.mConvexHullPoints[0].ScreenPos())
-            #print(size-1, 0)
-        
-    def __SortedByAngle__(self):
-        # TODO
-        sortedPoints = self.mInputPoints
-        return sortedPoints 
-    
+
     def ComputeConvexHull(self):
-        #p0 = HyGaPoint(10, 10)
-        #p1 = HyGaPoint(10, 20)
-        #p2 = HyGaPoint(20, 20)
-        #p3 = HyGaPoint(20, 10) 
-        
-        #convexHull.append(p0)
-        #convexHull.append(p1)
-        #convexHull.append(p2)
-        #convexHull.append(p3) 
-        
-        if self.mInputPoints.size() < 3:
+        size = self.mInputPoints.size()
+        if size < 3:
             return
-            
-        sortedPoints = self.__SortedByAngle__() 
-        
-        self.mConvexHullPoints = sortedPoints
 
-        """
-        if True == self.mConvexHullOK:
-            size = len(self.mConvexHullOutput)
+        self.mInputPoints.SortedByXAndY()
 
-            if size < 3:
-                print("求出的凸包点数小于3")
-                exit()
+        iPoints = self.mInputPoints
+        oPoints = self.mConvexHullPoints
 
-            pen = QPen(QColor(255, 0, 0))
-            pen.setWidth(1)
-            painter.setPen(pen)
-            for i in range(1, size): 
-                painter.drawLine(self.mConvexHullOutput[i-1].ScreenPos(),
-                        self.mConvexHullOutput[i].ScreenPos())
-                print(i - 1, i)
-            painter.drawLine(self.mConvexHullOutput[size-1].ScreenPos(),
-                    self.mConvexHullOutput[0].ScreenPos())
-            print(size-1, 0)
-        """
+        oPoints.append(iPoints[0])
+        oPoints.append(iPoints[1])
+
+        for i in range(2, size):
+            oPoints.append(iPoints[i])
+            #print(str(i) + ":")
+            #oPoints.print()
+            while oPoints.size() >= 3 and (not HyGaIsTurnRight(oPoints[-3], oPoints[-2], oPoints[-1])):
+                #print("oPoints size:" + str(oPoints.size()))
+                del oPoints[-2]
+        #oPoints.print()
 

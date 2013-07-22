@@ -8,6 +8,7 @@ from HyGaLib import *
 from HyGaPoint import *
 from HyGaPoints import *
 from HyGaConvexHull import HyGaConvexHull
+from HyGaVector import *
 
 def Screen2Ga(point):
     (rstX, rstY) = HyGaLibScreen2Ga(point.x(), point.y())

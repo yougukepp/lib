@@ -6,10 +6,6 @@ from HyGaLib import *
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-def Ga2Screen(point):
-    (rstX, rstY) = HyGaLibGa2Screen(point.X(), point.Y())
-    return QPoint(rstX, rstY)
-
 class HyGaPoint():
     x = 0;
     y = 0;
@@ -22,11 +18,18 @@ class HyGaPoint():
         self.z = z;
         self.w = w;
 
+    def print(self):
+        print("(" + str(self.X()) + "," + str(self.Y()) + ")", end = "")
+
     def draw(self, painter):
         pen = QPen(QColor(0, 255, 0))
         pen.setWidth(1)
         painter.setPen(pen)
-        painter.drawPoint(Ga2Screen(self))
+        painter.drawPoint(self.ScreenPos())
+
+    def ScreenPos(self):
+        (rstX, rstY) = HyGaLibGa2Screen(self.X(), self.Y())
+        return QPoint(rstX, rstY)
 
     def X(self):
         return self.x;
