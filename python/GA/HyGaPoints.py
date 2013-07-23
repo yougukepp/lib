@@ -9,24 +9,27 @@ class HyGaPoints():
     def __init__(self):
         self.mPoints = []
 
-    def print(self):
+    def Print(self):
         index = 0
         for p in self.mPoints:
             print(index, p.X(), p.Y())
             index += 1
 
-    def draw(self, painter):
+    def Draw(self, painter):
         for p in self.mPoints:
             p.draw(painter)
 
-    def append(self, point):
+    def Append(self, point):
         self.mPoints.append(point)
 
-    def size(self):
+    def Size(self):
         if [] == self.mPoints:
             return 0
         else:
             return len(self.mPoints)
+
+    def Clear(self):
+        self.mPoints.clear()
 
     # 禁用 索引 赋值 (a[i] = v)
     """
@@ -39,11 +42,11 @@ class HyGaPoints():
         if key < 0:
             #print("key:" + str(key) + ",size:" + str(self.size()))
             #print("index:" + str(key + self.size()))
-            return self.mPoints[key + self.size()]
-        if key < self.size():
+            return self.mPoints[key + self.Size()]
+        if key < self.Size():
             return self.mPoints[key]
         else:
-            print("HyGaPoints 索引越界:size(" + str(self.size()) + ")<=index(" + str(key) + ")" )
+            print("HyGaPoints 索引越界:size(" + str(self.Size()) + ")<=index(" + str(key) + ")" )
 
     # 可以删除 一个点
     def __delitem__(self, key):
@@ -52,7 +55,7 @@ class HyGaPoints():
     def SortedByXAndY(self):
         rst = []
 
-        while 0 != self.size():
+        while 0 != self.Size():
             index = self.FindMinXAndY()
             rst.append(self[index])
             del self[index]

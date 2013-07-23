@@ -26,6 +26,14 @@ class HyGaPoint():
         pen.setWidth(1)
         painter.setPen(pen)
         painter.drawPoint(self.ScreenPos())
+        # pen = QPen(QColor(255, 255, 255))
+        # painter.setPen(pen)
+        # painter.drawText(self.ScreenPos(), labelStr)
+
+    def drawLabel(self, painter, labelStr):
+        pen = QPen(QColor(255, 255, 255))
+        painter.setPen(pen)
+        painter.drawText(self.ScreenPos(), labelStr)
 
     def ScreenPos(self):
         (rstX, rstY) = HyGaLibGa2Screen(self.X(), self.Y())

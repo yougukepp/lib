@@ -36,7 +36,7 @@ class HyGaCanvas(QWidget):
         self.mConvexHull.draw(painter)
 
         # 画点
-        self.mInputPoints.draw(painter)
+        self.mInputPoints.Draw(painter)
 
         painter.end()
 
@@ -50,7 +50,7 @@ class HyGaCanvas(QWidget):
 
     def mousePressEvent(self, event):
         p = Screen2Ga(event.pos())
-        self.mInputPoints.append(p)
+        self.mInputPoints.Append(p)
         self.repaint()
 
 class HyGaStatusBar(QStatusBar):
