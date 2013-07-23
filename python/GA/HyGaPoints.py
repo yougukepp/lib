@@ -29,7 +29,7 @@ class HyGaPoints():
             return len(self.mPoints)
 
     def Clear(self):
-        self.mPoints.clear()
+        self.mPoints = []
 
     # 禁用 索引 赋值 (a[i] = v)
     """
