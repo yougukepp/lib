@@ -13,5 +13,7 @@ if __name__ == "__main__":
     win = HyGaMainWindow()
     win.show()
 
+    print(sys.path)
+
     sys.exit(app.exec_())
 
