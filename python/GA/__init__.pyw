@@ -13,8 +13,6 @@ if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
 
-    print(len([]))
-
     win = HyGaMainWindow()
     win.show()
 

@@ -14,15 +14,15 @@ class HyGaConvexHull():
     def __init__(self, points = HyGaPoints()):
         # 避免多次加入同一个点 导致错误
         for p in points:
-            print("测试" + str(p.X()) + "," + str(p.Y()), end="")
+            #print("测试" + str(p.X()) + "," + str(p.Y()), end="")
             if self.mInputPoints.CotainThisPoint(p):
-                print("未通过")
+                #print("未通过")
                 print("已经加入过 (" + str(p.X())+ "," + str(p.Y()) + ")" + ", 故此次不加入");
             else:
-                print("通过")
+                #print("通过")
                 self.mInputPoints.Append(p)
 
-        self.mInputPoints.Print()
+        #self.mInputPoints.Print()
         self.ComputeConvexHull()
 
     def draw(self, painter):

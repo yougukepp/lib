@@ -24,10 +24,13 @@ class HyGaPoints():
         self.mPoints.append(point)
 
     def Size(self):
+        return len(self.mPoints)
+        """
         if [] == self.mPoints:
             return 0
         else:
             return len(self.mPoints)
+        """
 
     def Clear(self):
         self.mPoints = []
