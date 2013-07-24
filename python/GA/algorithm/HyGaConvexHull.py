@@ -4,8 +4,8 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from HyGaPoints import *
-from HyGaTurn import *
+from dataType.HyGaPoints import HyGaPoints
+from algorithm.HyGaTurn import HyGaIsTurnLeft
 
 class HyGaConvexHull():
     mInputPoints = HyGaPoints()

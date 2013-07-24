@@ -4,9 +4,9 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from HyGaStatusBar import *
-from HyGaCtrlWidget import *
-from HyGaCanvas import *
+from gui.HyGaStatusBar import HyGaStatusBar
+from gui.HyGaCtrlWidget import HyGaCtrlWidget
+from gui.HyGaCanvas import HyGaCanvas
 
 class HyGaMainWindow(QMainWindow):
   def __init__(self, parent=None):

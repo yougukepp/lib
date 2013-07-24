@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from HyGaLib import *
-
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+
+from lib.HyGaLib import HyGaLibGa2Screen
 
 class HyGaPoint():
     x = 0;

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from HyGaLib import *
+from lib.HyGaLib import gCanvasWidth
 
 class HyGaPoints():
     mPoints = []

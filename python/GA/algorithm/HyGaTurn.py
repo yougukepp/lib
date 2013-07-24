@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from HyGaVector import *
+from dataType.HyGaVector import HyGaVector
 
 def HyGaIsCollineation(p0, p1, p2):
     rst = False

@@ -4,11 +4,10 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-#from HyGaLib import *
-from HyGaPoint import *
-from HyGaPoints import *
-from HyGaConvexHull import *
-#from HyGaVector import *
+from lib.HyGaLib import gCanvasWidth, gCanvasHeight, HyGaLibScreen2Ga
+from dataType.HyGaPoint import HyGaPoint
+from dataType.HyGaPoints import HyGaPoints
+from algorithm.HyGaConvexHull import HyGaConvexHull
 
 def Screen2Ga(point):
     (rstX, rstY) = HyGaLibScreen2Ga(point.x(), point.y())
