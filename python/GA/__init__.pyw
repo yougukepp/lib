@@ -13,6 +13,7 @@ if __name__ == "__main__":
 
     # 自测 每个 py单元测试
     import os
+    moduleList = []
     initList = []
     for root, dirs, files in os.walk("."):
         #print("in:" + str(root))
@@ -22,15 +23,25 @@ if __name__ == "__main__":
             #print(root)
             continue
         for f in files:
-            if "__init__.py" != f and "TODO" != f:
+            if "__init__.py" == f:
                 initList.append(os.path.join(root, f))
-    print(initList)
-    for cmd in initList:
+                continue
+            if "TODO" != f and "__init__.pyw" != f:
+                moduleList.append(os.path.join(root, f))
+                continue
+    print(moduleList)
+    for cmd in moduleList:
         pass
         #print("正在测试:" + cmd)
         #os.execv(cmd, [""])
 
-    # 演示Demo
+    # 子包集成测试
+    print(initList)
+    for cmd in initList:
+        pass
+        #print("正在测试:" + cmd)
+
+    # 整个包 演示Demo
     import sys
     app = QApplication(sys.argv)
 
