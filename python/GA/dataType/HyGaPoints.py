@@ -5,6 +5,7 @@ from lib.HyGaLib import gCanvasWidth
 
 class HyGaPoints():
     mPoints = []
+    mIndex = 0
 
     def __init__(self):
         self.mPoints = []
@@ -30,6 +31,28 @@ class HyGaPoints():
 
     def Clear(self):
         self.mPoints = []
+
+    def CotainThisPoint(self, point):
+        for p in self.mPoints:
+            if p == point:
+                return True
+        return False
+
+    # 迭代未调通
+    """
+    def __next__(self):
+        if self.mIndex >= self.Size():
+            self.mIndex = 0
+            raise StopIteration
+
+        rst = self[self.mIndex]
+        self.mIndex += 1
+        return rst
+
+    def __iter__(self):
+        return self
+    """
+
 
     # 禁用 索引 赋值 (a[i] = v)
     """

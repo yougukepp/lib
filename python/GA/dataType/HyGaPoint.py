@@ -18,7 +18,19 @@ class HyGaPoint():
         self.z = z;
         self.w = w;
 
-    def print(self):
+    # 重载相等运算符 (p1 == p2)
+    def __eq__(self, other):
+
+        if not isinstance(other, HyGaPoint):
+            print("使用非HyGaPoint对象 HyGaPoint比较无意义")
+            exit()
+
+        if self.X() == other.X() and self.Y() == other.Y():
+            return True
+        else:
+            return False
+
+    def Print(self):
         print("(" + str(self.X()) + "," + str(self.Y()) + ")", end = "")
 
     def draw(self, painter):
