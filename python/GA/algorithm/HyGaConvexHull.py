@@ -13,9 +13,7 @@ class HyGaConvexHull():
 
     def __init__(self, points = HyGaPoints()):
         # 避免多次加入同一个点 导致错误
-        size = points.Size()
-        for i in range(0, size):
-            p = points[i]
+        for p in points:
             print("测试" + str(p.X()) + "," + str(p.Y()), end="")
             if self.mInputPoints.CotainThisPoint(p):
                 print("未通过")
