@@ -4,7 +4,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class HyGaStatusBar(QStatusBar):
+class StatusBar(QStatusBar):
     def __init__(self, parent=None):
         QStatusBar.__init__(self, parent)
 
@@ -21,4 +21,11 @@ class HyGaStatusBar(QStatusBar):
         labelText = "当前位置:(" + str(pos.X()) + "," + str(pos.Y()) + ")"
         self.mLabelPos.setText(labelText)
 
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
 
+    win = StatusBar()
+    win.show()
+
+    sys.exit(app.exec_())

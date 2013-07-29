@@ -4,11 +4,11 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from gui.HyGaStatusBar import HyGaStatusBar
-from gui.HyGaCtrlWidget import HyGaCtrlWidget
-from gui.HyGaCanvas import HyGaCanvas
+from StatusBar import StatusBar
+from CtrlWidget import CtrlWidget
+from Canvas import Canvas
 
-class HyGaMainWindow(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.setWindowTitle("计算几何 测试")
@@ -41,15 +41,15 @@ class HyGaMainWindow(QMainWindow):
         self.addToolBar(Qt.TopToolBarArea, fileToolBar)
 
         # 中心画布
-        self.mCanvas = HyGaCanvas()
+        self.mCanvas = Canvas()
         self.setCentralWidget(self.mCanvas)
 
         # 状态栏
-        self.mStatusBar = HyGaStatusBar()
+        self.mStatusBar = StatusBar()
         self.setStatusBar(self.mStatusBar)
 
         # 控制(dock)框
-        self.mCtrlWidget = HyGaCtrlWidget()
+        self.mCtrlWidget = CtrlWidget()
         ctrlDock = QDockWidget("控制")
         self.addDockWidget(Qt.RightDockWidgetArea, ctrlDock)
         ctrlDock.setWidget(self.mCtrlWidget)
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
 
-    win = HyGaMainWindow()
+    win = MainWindow()
     win.show()
 
     sys.exit(app.exec_())

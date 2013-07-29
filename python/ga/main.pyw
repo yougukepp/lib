@@ -4,7 +4,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from gui.HyGaMainWindow import HyGaMainWindow
+from MainWindow import MainWindow
 from dataType.HyGaVector import HyGaVector
 from algorithm.HyGaTurn import HyGaIsCollineation, HyGaIsTurnLeft, HyGaIsTurnRight
 from algorithm.HyGaConvexHull import HyGaConvexHull
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
 
-    win = HyGaMainWindow()
+    win = MainWindow()
     win.show()
 
     sys.exit(app.exec_())

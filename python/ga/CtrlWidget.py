@@ -4,16 +4,16 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class HyGaCtrlWidget(QWidget): 
+class CtrlWidget(QWidget):
 
     mTestTable = ["凸包", "其他"]
 
-    #msRun = Qt.pyqtSingal(void, name = "msRun") 
-    msRun = pyqtSignal(['QString'], name = "msRun") 
-    msCurrentChanged = pyqtSignal(['QString'], name = "msCurrentChanged") 
+    #msRun = Qt.pyqtSingal(void, name = "msRun")
+    msRun = pyqtSignal(['QString'], name = "msRun")
+    msCurrentChanged = pyqtSignal(['QString'], name = "msCurrentChanged")
 
-    def __init__(self, parent=None): 
-        QWidget.__init__(self, parent) 
+    def __init__(self, parent=None):
+        QWidget.__init__(self, parent)
         #self.setFixedWidth(200)
 
         self.mTabWidget = QTabWidget()
@@ -45,3 +45,12 @@ class HyGaCtrlWidget(QWidget):
 
     def CurrentChanged(self, index):
         self.msCurrentChanged.emit(self.mTestTable[index])
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+
+    win = CtrlWidget()
+    win.show()
+
+    sys.exit(app.exec_())

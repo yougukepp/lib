@@ -1,4 +1,4 @@
-#!usrbinenv python3
+#!/usr/bin/env python3
 # -- coding utf-8 --
 
 from PyQt4.QtGui import *
@@ -13,7 +13,7 @@ def Screen2Ga(point):
     (rstX, rstY) = HyGaLibScreen2Ga(point.x(), point.y())
     return HyGaPoint(rstX, rstY)
 
-class HyGaCanvas(QWidget):
+class Canvas(QWidget):
 
     msMove = pyqtSignal(HyGaPoint, name='msMove')
 
@@ -51,3 +51,13 @@ class HyGaCanvas(QWidget):
         p = Screen2Ga(event.pos())
         self.mInputPoints.Append(p)
         self.repaint()
+
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+
+    win = Canvas()
+    win.show()
+
+    sys.exit(app.exec_())
