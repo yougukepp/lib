@@ -14,37 +14,16 @@ class CtrlWidget(QWidget):
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
-        #self.setFixedWidth(200)
 
-        self.mTabWidget = QTabWidget()
         self.mButtonRun = QPushButton("开始运行")
-
-        # 凸包控制页
-        self.mPageConvexHull = QWidget()
-        self.mPageConvexHullLayout = QVBoxLayout()
-        self.mPageConvexHullLabel = QLabel("凸包控制")
-        self.mPageConvexHullLayout.addWidget(self.mPageConvexHullLabel)
-        self.mPageConvexHull.setLayout(self.mPageConvexHullLayout)
-        self.mTabWidget.addTab(self.mPageConvexHull, self.mTestTable[0])
-
-        # 扩展页
-        self.mPageTodo = QWidget()
-        self.mPageTodoLayout = QVBoxLayout()
-        self.mPageTodoLabel = QLabel("其他算法控制")
-        self.mPageTodoLayout.addWidget(self.mPageTodoLabel)
-        self.mPageTodo.setLayout(self.mPageTodoLayout)
-        self.mTabWidget.addTab(self.mPageTodo, self.mTestTable[1])
+        self.mLabel = QLabel("占位符")
 
         # 总体布局
         self.mLayout = QVBoxLayout()
-        self.mLayout.addWidget(self.mTabWidget)
+        self.mLayout.addWidget(self.mLabel)
         self.mLayout.addWidget(self.mButtonRun)
         self.setLayout(self.mLayout)
 
-        self.mTabWidget.currentChanged.connect(self.CurrentChanged)
-
-    def CurrentChanged(self, index):
-        self.msCurrentChanged.emit(self.mTestTable[index])
 
 if __name__ == "__main__":
     import sys

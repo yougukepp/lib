@@ -4,54 +4,45 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from lib.HyGaLib import gCanvasWidth, gCanvasHeight, HyGaLibScreen2Ga
+from ConvexHullCanvas import ConvexHullCanvas
 from dataType.HyGaPoint import HyGaPoint
-from dataType.HyGaPoints import HyGaPoints
-from algorithm.HyGaConvexHull import HyGaConvexHull
-
-def Screen2Ga(point):
-    (rstX, rstY) = HyGaLibScreen2Ga(point.x(), point.y())
-    return HyGaPoint(rstX, rstY)
 
 class Canvas(QWidget):
 
-    msMove = pyqtSignal(HyGaPoint, name='msMove')
+    mTestTable = ["凸包", "线段求交", "扩展"]
 
-    mInputPoints = HyGaPoints()
-    mConvexHull = HyGaConvexHull()
+    msMove = pyqtSignal(HyGaPoint, name='msMove')
+    msCurrentChanged = pyqtSignal(['QString'], name = "msCurrentChanged")
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
-        self.setFixedSize(gCanvasWidth, gCanvasHeight)
-        self.setMouseTracking(True)
 
-    def paintEvent(self, event):
-        painter = QPainter(self)
+        self.mTabWidget = QTabWidget()
+        # 凸包控制页
+        self.mCanvasConvexHull = ConvexHullCanvas()
+        self.mTabWidget.addTab(self.mCanvasConvexHull, self.mTestTable[0])
 
-        # 清屏
-        painter.fillRect(0, 0, self.width(), self.height(), QColor(0, 0, 0))
+        # 线段求交
+        self.mPageTodo = QWidget()
+        self.mTabWidget.addTab(self.mPageTodo, self.mTestTable[1])
 
-        # 画凸包
-        self.mConvexHull.draw(painter)
+        # 扩展页
+        self.mPageTodo = QWidget()
+        self.mTabWidget.addTab(self.mPageTodo, self.mTestTable[2])
 
-        # 画点
-        self.mInputPoints.Draw(painter)
+        # 总体布局
+        self.mLayout = QVBoxLayout()
+        self.mLayout.addWidget(self.mTabWidget)
+        self.setLayout(self.mLayout)
 
-        painter.end()
+        self.mCanvasConvexHull.msMove.connect(self.msMove)
+        self.mTabWidget.currentChanged.connect(self.CurrentChanged)
+
+    def CurrentChanged(self, index):
+        self.msCurrentChanged.emit(self.mTestTable[index])
 
     def DrawConvexHull(self):
-        self.mConvexHull = HyGaConvexHull(self.mInputPoints)
-        self.repaint()
-
-    def mouseMoveEvent(self, event):
-        p = Screen2Ga(event.pos())
-        self.msMove.emit(p)
-
-    def mousePressEvent(self, event):
-        p = Screen2Ga(event.pos())
-        self.mInputPoints.Append(p)
-        self.repaint()
-
+        self.mCanvasConvexHull.DrawConvexHull()
 
 if __name__ == "__main__":
     import sys

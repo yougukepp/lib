@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
         ctrlDock.setFeatures(QDockWidget.NoDockWidgetFeatures)
 
         # 绑定信号和槽
-        self.mCtrlWidget.msCurrentChanged.connect(self.mStatusBar.CurrentChanged)
+        self.mCanvas.msCurrentChanged.connect(self.mStatusBar.CurrentChanged)
         self.mCanvas.msMove.connect(self.mStatusBar.Move)
         self.mCtrlWidget.mButtonRun.clicked.connect(self.mCanvas.DrawConvexHull)
 
