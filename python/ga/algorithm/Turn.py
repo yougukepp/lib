@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from dataType.HyGaVector import HyGaVector
+from dataType.Vector import Vector
 
-def HyGaIsCollineation(p0, p1, p2):
+def IsCollineation(p0, p1, p2):
     rst = False
 
-    p02 = HyGaVector(p0, p2)
-    p01 = HyGaVector(p0, p1)
+    p02 = Vector(p0, p2)
+    p01 = Vector(p0, p1)
 
     d = p01.X() * p02.Y() - p02.X() * p01.Y()
 
@@ -16,11 +16,11 @@ def HyGaIsCollineation(p0, p1, p2):
 
     return rst
 
-def HyGaIsTurnLeft(p0, p1, p2):
+def IsTurnLeft(p0, p1, p2):
     rst = False
 
-    p02 = HyGaVector(p0, p2)
-    p01 = HyGaVector(p0, p1)
+    p02 = Vector(p0, p2)
+    p01 = Vector(p0, p1)
 
     d = p01.X() * p02.Y() - p02.X() * p01.Y()
 
@@ -31,11 +31,11 @@ def HyGaIsTurnLeft(p0, p1, p2):
 
     return rst
 
-def HyGaIsTurnRight(p0, p1, p2):
-    if HyGaIsCollineation(p0, p1, p2):
+def IsTurnRight(p0, p1, p2):
+    if IsCollineation(p0, p1, p2):
         return False
 
-    if HyGaIsTurnLeft(p0, p1, p2):
+    if IsTurnLeft(p0, p1, p2):
         return False
 
     return True

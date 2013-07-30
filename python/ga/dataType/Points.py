@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-class HyGaPoints():
+class Points():
     mPoints = []
     mIndex = 0     # 迭代使用
 
@@ -59,7 +59,7 @@ class HyGaPoints():
         if key < self.Size():
             return self.mPoints[key]
         else:
-            print("HyGaPoints 索引越界:size(" + str(self.Size()) + ")<=index(" + str(key) + ")" )
+            print("Points 索引越界:size(" + str(self.Size()) + ")<=index(" + str(key) + ")" )
 
     def __delitem__(self, key):
         """

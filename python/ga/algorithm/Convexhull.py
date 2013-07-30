@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from dataType.HyGaPoints import HyGaPoints
-from algorithm.HyGaTurn import HyGaIsTurnLeft
+from dataType.Points import Points
+from algorithm.Turn import IsTurnLeft
 
-class HyGaConvexhull():
-    mInputPoints = HyGaPoints()
-    mConvexhullPoints = HyGaPoints()
+class Convexhull():
+    mInputPoints = Points()
+    mConvexhullPoints = Points()
 
-    def __init__(self, points = HyGaPoints()):
+    def __init__(self, points = Points()):
         for p in points:
             """
             避免多次加入同一个点 导致错误
@@ -39,7 +39,7 @@ class HyGaConvexhull():
         if key < self.Size():
             return self.mConvexhullPoints[key]
         else:
-            print("HyGaPoints 索引越界:size(" + str(self.Size()) + ")<=index(" + str(key) + ")" )
+            print("Points 索引越界:size(" + str(self.Size()) + ")<=index(" + str(key) + ")" )
 
     def ComputeConvexhull(self):
         self.mConvexhullPoints.Clear()
@@ -59,7 +59,7 @@ class HyGaConvexhull():
 
         for i in range(2, size):
             oPointsUp.append(iPoints[i])
-            while len(oPointsUp) >= 3 and HyGaIsTurnLeft(oPointsUp[-3], oPointsUp[-2], oPointsUp[-1]):
+            while len(oPointsUp) >= 3 and IsTurnLeft(oPointsUp[-3], oPointsUp[-2], oPointsUp[-1]):
                 del oPointsUp[-2]
 
         for p in oPointsUp:
@@ -72,7 +72,7 @@ class HyGaConvexhull():
         for i in range(2, size):
             index = size - 1 - i   # 逆序遍历
             oPointsDown.append(iPoints[index])
-            while len(oPointsDown) >= 3 and HyGaIsTurnLeft(oPointsDown[-3], oPointsDown[-2], oPointsDown[-1]):
+            while len(oPointsDown) >= 3 and IsTurnLeft(oPointsDown[-3], oPointsDown[-2], oPointsDown[-1]):
                 del oPointsDown[-2]
 
         del oPointsDown[0] # 删除与上凸包重合的X值最大的点

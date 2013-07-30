@@ -9,13 +9,13 @@ from PyQt4.QtGui import QVBoxLayout
 from PyQt4.QtCore import pyqtSignal
 
 from ConvexhullCanvas import ConvexhullCanvas
-from dataType.HyGaPoint import HyGaPoint
+from dataType.Point import Point
 
 class Canvas(QWidget):
 
     mTestTable = ["凸包", "线段求交", "扩展"]
 
-    msMove = pyqtSignal(HyGaPoint, name='msMove')
+    msMove = pyqtSignal(Point, name='msMove')
     msCurrentChanged = pyqtSignal(['QString'], name = "msCurrentChanged")
 
     def __init__(self, parent=None):

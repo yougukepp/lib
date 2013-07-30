@@ -9,9 +9,9 @@ from PyQt4.QtGui import QPen
 from PyQt4.QtCore import QPoint
 from PyQt4.QtCore import pyqtSignal
 
-from dataType.HyGaPoint import HyGaPoint
-from dataType.HyGaPoints import HyGaPoints
-from algorithm.HyGaConvexhull import HyGaConvexhull
+from dataType.Point import Point
+from dataType.Points import Points
+from algorithm.Convexhull import Convexhull
 
 gCanvasWidth = 500
 gCanvasHeight = 500
@@ -19,7 +19,7 @@ gCanvasHeight = 500
 def Screen2Ga(point):
     rstX = point.x()
     rstY = gCanvasHeight - point.y() - 1
-    return HyGaPoint(rstX, rstY)
+    return Point(rstX, rstY)
 
 def Ga2Screen(point):
     rstX = point.X()
@@ -28,10 +28,10 @@ def Ga2Screen(point):
 
 class ConvexhullCanvas(QWidget):
 
-    msMove = pyqtSignal(HyGaPoint, name='msMove')
+    msMove = pyqtSignal(Point, name='msMove')
 
-    mInputPoints = HyGaPoints()
-    mConvexhull = HyGaConvexhull()
+    mInputPoints = Points()
+    mConvexhull = Convexhull()
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -84,7 +84,7 @@ class ConvexhullCanvas(QWidget):
             self.DrawLabel(painter, Ga2Screen(convexhull[i-1]), str(i))
 
     def MakeConvexhull(self):
-        self.mConvexhull = HyGaConvexhull(self.mInputPoints)
+        self.mConvexhull = Convexhull(self.mInputPoints)
         self.repaint()
 
     def mouseMoveEvent(self, event):

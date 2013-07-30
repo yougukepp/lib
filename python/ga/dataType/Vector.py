@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-class HyGaVector():
+class Vector():
     x = 0
     y = 0
 

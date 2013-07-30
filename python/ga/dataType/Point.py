@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-class HyGaPoint():
+class Point():
     x = 0;
     y = 0;
     z = 0;
@@ -16,8 +16,8 @@ class HyGaPoint():
     # 重载相等运算符 (p1 == p2)
     def __eq__(self, other):
 
-        if not isinstance(other, HyGaPoint):
-            print("使用非HyGaPoint对象 HyGaPoint比较无意义")
+        if not isinstance(other, Point):
+            print("使用非Point对象 Point比较无意义")
             exit()
 
         if self.X() == other.X() and self.Y() == other.Y():
@@ -40,4 +40,3 @@ class HyGaPoint():
 
     def W(self):
         return self.W;
-
