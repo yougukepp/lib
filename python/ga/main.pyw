@@ -11,6 +11,7 @@ if __name__ == "__main__":
 
     # 整个包 演示Demo
     import sys
+    #print(sys.path)
     app = QApplication(sys.argv)
 
     win = MainWindow()
