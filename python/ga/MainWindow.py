@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt4.QtCore import Qt
+from PyQt4.QtGui import QApplication
+from PyQt4.QtGui import QMainWindow
+from PyQt4.QtGui import QAction
+from PyQt4.QtGui import QKeySequence
+from PyQt4.QtGui import QDockWidget
 
 from StatusBar import StatusBar
 from CtrlWidget import CtrlWidget
@@ -40,25 +44,33 @@ class MainWindow(QMainWindow):
         fileToolBar.setAllowedAreas(Qt.TopToolBarArea | Qt.BottomToolBarArea)
         self.addToolBar(Qt.TopToolBarArea, fileToolBar)
 
-        # 中心画布
+        """
+        中心画布
+        """
         self.mCanvas = Canvas()
         self.setCentralWidget(self.mCanvas)
 
-        # 状态栏
+        """
+        状态栏
+        """
         self.mStatusBar = StatusBar()
         self.setStatusBar(self.mStatusBar)
 
-        # 控制(dock)框
+        """
+        控制(dock)框
+        """
         self.mCtrlWidget = CtrlWidget()
         ctrlDock = QDockWidget("控制")
         self.addDockWidget(Qt.RightDockWidgetArea, ctrlDock)
         ctrlDock.setWidget(self.mCtrlWidget)
         ctrlDock.setFeatures(QDockWidget.NoDockWidgetFeatures)
 
-        # 绑定信号和槽
+        """
+        绑定信号和槽
+        """
         self.mCanvas.msCurrentChanged.connect(self.mStatusBar.CurrentChanged)
         self.mCanvas.msMove.connect(self.mStatusBar.Move)
-        self.mCtrlWidget.mButtonRun.clicked.connect(self.mCanvas.DrawConvexHull)
+        self.mCtrlWidget.mButtonRun.clicked.connect(self.mCanvas.DrawConvexhull)
 
     def newProject(self):
         pass

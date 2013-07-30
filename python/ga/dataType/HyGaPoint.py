@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-
-from lib.HyGaLib import HyGaLibGa2Screen
-
 class HyGaPoint():
     x = 0;
     y = 0;
@@ -33,20 +28,6 @@ class HyGaPoint():
     def Print(self):
         print("(" + str(self.X()) + "," + str(self.Y()) + ")", end = "")
 
-    def draw(self, painter):
-        pen = QPen(QColor(0, 255, 0))
-        pen.setWidth(1)
-        painter.setPen(pen)
-        painter.drawPoint(self.ScreenPos())
-
-    def drawLabel(self, painter, labelStr):
-        pen = QPen(QColor(255, 255, 255))
-        painter.setPen(pen)
-        painter.drawText(self.ScreenPos(), labelStr)
-
-    def ScreenPos(self):
-        (rstX, rstY) = HyGaLibGa2Screen(self.X(), self.Y())
-        return QPoint(rstX, rstY)
 
     def X(self):
         return self.x;

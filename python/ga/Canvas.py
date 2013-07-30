@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 # -- coding utf-8 --
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt4.QtGui import QApplication
+from PyQt4.QtGui import QWidget
+from PyQt4.QtGui import QTabWidget
+from PyQt4.QtGui import QVBoxLayout
 
-from ConvexHullCanvas import ConvexHullCanvas
+from PyQt4.QtCore import pyqtSignal
+
+from ConvexhullCanvas import ConvexhullCanvas
 from dataType.HyGaPoint import HyGaPoint
 
 class Canvas(QWidget):
@@ -18,15 +22,15 @@ class Canvas(QWidget):
         QWidget.__init__(self, parent)
 
         self.mTabWidget = QTabWidget()
-        # 凸包控制页
-        self.mCanvasConvexHull = ConvexHullCanvas()
-        self.mTabWidget.addTab(self.mCanvasConvexHull, self.mTestTable[0])
+        # 凸包页
+        self.mCanvasConvexhull = ConvexhullCanvas()
+        self.mTabWidget.addTab(self.mCanvasConvexhull, self.mTestTable[0])
 
-        # 线段求交
+        # 线段求交页面
         self.mPageTodo = QWidget()
         self.mTabWidget.addTab(self.mPageTodo, self.mTestTable[1])
 
-        # 扩展页
+        # 扩展占位页
         self.mPageTodo = QWidget()
         self.mTabWidget.addTab(self.mPageTodo, self.mTestTable[2])
 
@@ -35,14 +39,14 @@ class Canvas(QWidget):
         self.mLayout.addWidget(self.mTabWidget)
         self.setLayout(self.mLayout)
 
-        self.mCanvasConvexHull.msMove.connect(self.msMove)
+        self.mCanvasConvexhull.msMove.connect(self.msMove)
         self.mTabWidget.currentChanged.connect(self.CurrentChanged)
 
     def CurrentChanged(self, index):
         self.msCurrentChanged.emit(self.mTestTable[index])
 
-    def DrawConvexHull(self):
-        self.mCanvasConvexHull.DrawConvexHull()
+    def DrawConvexhull(self):
+        self.mCanvasConvexhull.MakeConvexhull()
 
 if __name__ == "__main__":
     import sys

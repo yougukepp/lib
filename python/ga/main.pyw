@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt4.QtGui import QApplication
 
 from MainWindow import MainWindow
-from dataType.HyGaVector import HyGaVector
-from algorithm.HyGaTurn import HyGaIsCollineation, HyGaIsTurnLeft, HyGaIsTurnRight
-from algorithm.HyGaConvexHull import HyGaConvexHull
 
 if __name__ == "__main__":
 

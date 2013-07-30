@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt4.QtGui import QApplication
+from PyQt4.QtGui import QWidget
+from PyQt4.QtGui import QPushButton
+from PyQt4.QtGui import QLabel
+from PyQt4.QtGui import QVBoxLayout
+
+from PyQt4.QtCore import pyqtSignal
 
 class CtrlWidget(QWidget):
 
     mTestTable = ["凸包", "其他"]
 
-    #msRun = Qt.pyqtSingal(void, name = "msRun")
     msRun = pyqtSignal(['QString'], name = "msRun")
     msCurrentChanged = pyqtSignal(['QString'], name = "msCurrentChanged")
 
