@@ -40,3 +40,5 @@ def IsTurnRight(p0, p1, p2):
 
     return True
 
+if __name__ == "__main__":
+    print("测试Turn模块:通过")

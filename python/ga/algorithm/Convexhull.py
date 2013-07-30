@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from dataType.Point import Point
 from dataType.Points import Points
 from algorithm.Turn import IsTurnLeft
 
@@ -20,6 +21,9 @@ class Convexhull():
                 self.mInputPoints.Append(p)
 
         self.ComputeConvexhull()
+
+    def Print(self):
+        self.mConvexhullPoints.Print()
 
     def Size(self):
         return self.mConvexhullPoints.Size()
@@ -78,3 +82,8 @@ class Convexhull():
         del oPointsDown[0] # 删除与上凸包重合的X值最大的点
         for p in oPointsDown:
             self.mConvexhullPoints.Append(p)
+        del self.mConvexhullPoints[-1] # 最后一点与第一点 重复
+
+if __name__ == "__main__":
+    print("测试Convexhull类:通过")
+

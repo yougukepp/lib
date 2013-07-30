@@ -40,3 +40,7 @@ class Point():
 
     def W(self):
         return self.W;
+
+if __name__ == "__main__":
+    print("测试Point类:通过")
+

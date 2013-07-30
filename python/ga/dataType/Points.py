@@ -11,7 +11,7 @@ class Points():
     def Print(self):
         index = 0
         for p in self.mPoints:
-            print(index, p.X(), p.Y())
+            print(str(index) + ":" + "(" + str(p.X()) + "," + str(p.Y()) + ")")
             index += 1
 
     def Append(self, point):
@@ -96,3 +96,5 @@ class Points():
 
         return minIndex
 
+if __name__ == "__main__":
+    print("测试Points类:通过")

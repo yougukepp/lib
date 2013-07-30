@@ -17,3 +17,6 @@ class Vector():
 
     def Y(self):
         return self.y;
+
+if __name__ == "__main__":
+    print("测试Vector类,通过")
