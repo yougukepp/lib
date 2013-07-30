@@ -82,8 +82,6 @@ class ConvexhullCanvas(QWidget):
         for i in range(1, size):
             self.DrawLine(painter, Ga2Screen(convexhull[i-1]), Ga2Screen(convexhull[i]))
             self.DrawLabel(painter, Ga2Screen(convexhull[i-1]), str(i))
-        self.DrawLine(painter, Ga2Screen(convexhull[size-1]), Ga2Screen(convexhull[0]))
-        self.DrawLabel(painter, Ga2Screen(convexhull[size-1]), str(size - 1))
 
     def MakeConvexhull(self):
         self.mConvexhull = HyGaConvexhull(self.mInputPoints)

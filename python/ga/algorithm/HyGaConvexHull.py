@@ -14,7 +14,8 @@ class HyGaConvexhull():
             避免多次加入同一个点 导致错误
             """
             if self.mInputPoints.CotainThisPoint(p):
-                print("已经加入过 (" + str(p.X())+ "," + str(p.Y()) + ")" + ", 故此次不加入");
+                #print("已经加入过 (" + str(p.X())+ "," + str(p.Y()) + ")" + ", 故此次不加入");
+                pass
             else:
                 self.mInputPoints.Append(p)
 
