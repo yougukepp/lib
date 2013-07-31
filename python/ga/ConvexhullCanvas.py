@@ -45,7 +45,7 @@ class ConvexhullCanvas(BaseCanvas):
         self.DrawLine(painter, Ga2Screen(convexhull[size-1]), Ga2Screen(convexhull[0]))
         self.DrawLabel(painter, Ga2Screen(convexhull[size-1]), str(size))
 
-    def MakeConvexhull(self):
+    def Make(self):
         self.mConvexhull = Convexhull(self.mInputPoints)
         self.repaint()
 

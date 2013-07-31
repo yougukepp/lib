@@ -47,7 +47,7 @@ class MainCanvas(QWidget):
         self.msCurrentChanged.emit(self.mTestTable[index])
 
     def DrawConvexhull(self):
-        self.mConvexhullCanvas.MakeConvexhull()
+        self.mConvexhullCanvas.Make()
 
     def DrawLineIntersection(self):
         self.mLineIntersectionCanvas.Make()
