@@ -13,6 +13,8 @@ from CtrlWidget import CtrlWidget
 from MainCanvas import MainCanvas
 
 class MainWindow(QMainWindow):
+    mCurrentStatus = "凸包"
+
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         self.setWindowTitle("计算几何 测试")
@@ -68,9 +70,9 @@ class MainWindow(QMainWindow):
         """
         绑定信号和槽
         """
-        self.mCanvas.msCurrentChanged.connect(self.mStatusBar.CurrentChanged)
+        self.mCanvas.msCurrentChanged.connect(self.CurrentChanged)
         self.mCanvas.msMove.connect(self.mStatusBar.Move)
-        self.mCtrlWidget.msRun.connect(self.mCanvas.DrawConvexhull)
+        self.mCtrlWidget.msRun.connect(self.Run)
 
     def newProject(self):
         pass
@@ -78,6 +80,18 @@ class MainWindow(QMainWindow):
     def openProject(self):
         pass
 
+    def CurrentChanged(self, status):
+        self.mCurrentStatus = status
+        self.mStatusBar.CurrentChanged(status)
+
+    def Run(self):
+        status = self.mCurrentStatus
+        if "凸包" == status:
+            self.mCanvas.DrawConvexhull()
+        elif "线段求交" == status:
+            self.mCanvas.DrawLineIntersection()
+        else:
+            print("未实现")
 
 if __name__ == "__main__":
     import sys

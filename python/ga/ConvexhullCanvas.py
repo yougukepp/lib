@@ -12,7 +12,7 @@ from PyQt4.QtCore import pyqtSignal
 from dataType.Point import Point
 from dataType.Points import Points
 from algorithm.Convexhull import Convexhull
-from BaseCanvas import BaseCanvas, Screen2Ga, Ga2Screen
+from BaseCanvas import BaseCanvas, Ga2Screen
 
 class ConvexhullCanvas(BaseCanvas):
     mConvexhull = Convexhull()
