@@ -41,7 +41,10 @@ class MainCanvas(QWidget):
         self.setLayout(self.mLayout)
 
         self.mConvexhullCanvas.msMove.connect(self.msMove)
+        self.mLineIntersectionCanvas.msMove.connect(self.msMove)
         self.mTabWidget.currentChanged.connect(self.CurrentChanged)
+
+        self.mTabWidget.setCurrentIndex(1)
 
     def CurrentChanged(self, index):
         self.msCurrentChanged.emit(self.mTestTable[index])
