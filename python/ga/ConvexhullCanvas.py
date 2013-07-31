@@ -12,31 +12,13 @@ from PyQt4.QtCore import pyqtSignal
 from dataType.Point import Point
 from dataType.Points import Points
 from algorithm.Convexhull import Convexhull
+from BaseCanvas import BaseCanvas, Screen2Ga, Ga2Screen
 
-gCanvasWidth = 500
-gCanvasHeight = 500
-
-def Screen2Ga(point):
-    rstX = point.x()
-    rstY = gCanvasHeight - point.y() - 1
-    return Point(rstX, rstY)
-
-def Ga2Screen(point):
-    rstX = point.X()
-    rstY = gCanvasHeight - point.Y() - 1
-    return QPoint(rstX, rstY)
-
-class ConvexhullCanvas(QWidget):
-
-    msMove = pyqtSignal(Point, name='msMove')
-
-    mInputPoints = Points()
+class ConvexhullCanvas(BaseCanvas):
     mConvexhull = Convexhull()
 
     def __init__(self, parent=None):
-        QWidget.__init__(self, parent)
-        self.setFixedSize(gCanvasWidth, gCanvasHeight)
-        self.setMouseTracking(True)
+        BaseCanvas.__init__(self, parent)
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -48,31 +30,9 @@ class ConvexhullCanvas(QWidget):
         self.DrawConvexhull(painter, self.mConvexhull)
 
         # 画点
-        self.DrawPoints(painter, self.mInputPoints)
+        self.DrawPoints(painter, self.GetInputPoints())
 
         painter.end()
-
-    def DrawPoint(self, painter, point):
-        pen = QPen(QColor(0, 255, 0))
-        pen.setWidth(1)
-        painter.setPen(pen)
-        painter.drawPoint(point)
-
-    def DrawLine(self, painter, pStart, pEnd):
-        pen = QPen(QColor(255, 0, 0))
-        pen.setWidth(1)
-        painter.setPen(pen)
-        painter.drawLine(pStart, pEnd)
-
-    def DrawLabel(self, painter, point, label):
-        pen = QPen(QColor(255, 255, 255))
-        pen.setWidth(1)
-        painter.setPen(pen)
-        painter.drawText(point, label)
-
-    def DrawPoints(self, painter, points):
-        for p in points:
-            self.DrawPoint(painter, Ga2Screen(p))
 
     def DrawConvexhull(self, painter, convexhull):
         if not convexhull.IsValid():
@@ -88,16 +48,6 @@ class ConvexhullCanvas(QWidget):
     def MakeConvexhull(self):
         self.mConvexhull = Convexhull(self.mInputPoints)
         self.repaint()
-
-    def mouseMoveEvent(self, event):
-        p = Screen2Ga(event.pos())
-        self.msMove.emit(p)
-
-    def mousePressEvent(self, event):
-        p = Screen2Ga(event.pos())
-        self.mInputPoints.Append(p)
-        self.repaint()
-
 
 if __name__ == "__main__":
     import sys

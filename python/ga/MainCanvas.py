@@ -11,7 +11,7 @@ from PyQt4.QtCore import pyqtSignal
 from ConvexhullCanvas import ConvexhullCanvas
 from dataType.Point import Point
 
-class Canvas(QWidget):
+class MainCanvas(QWidget):
 
     mTestTable = ["凸包", "线段求交", "扩展"]
 
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
 
-    win = Canvas()
+    win = MainCanvas()
     win.show()
 
     sys.exit(app.exec_())

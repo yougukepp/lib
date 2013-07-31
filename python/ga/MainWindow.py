@@ -10,7 +10,7 @@ from PyQt4.QtGui import QDockWidget
 
 from StatusBar import StatusBar
 from CtrlWidget import CtrlWidget
-from Canvas import Canvas
+from MainCanvas import MainCanvas
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         """
         中心画布
         """
-        self.mCanvas = Canvas()
+        self.mCanvas = MainCanvas()
         self.setCentralWidget(self.mCanvas)
 
         """
