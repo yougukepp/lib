@@ -8,7 +8,7 @@ from dataType.Points import Points
 from BaseCanvas import BaseCanvas, Ga2Screen
 
 class LineIntersectionCanvas(BaseCanvas):
-    mIntersectionPoints = Points()
+    mIntersectionPoints = {}
 
     def __init__(self, parent=None):
         BaseCanvas.__init__(self, parent)
