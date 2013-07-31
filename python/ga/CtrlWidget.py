@@ -13,7 +13,7 @@ class CtrlWidget(QWidget):
 
     mTestTable = ["凸包", "其他"]
 
-    msRun = pyqtSignal(['QString'], name = "msRun")
+    msRun = pyqtSignal(name = "msRun")
     msCurrentChanged = pyqtSignal(['QString'], name = "msCurrentChanged")
 
     def __init__(self, parent=None):
@@ -27,6 +27,8 @@ class CtrlWidget(QWidget):
         self.mLayout.addWidget(self.mLabel)
         self.mLayout.addWidget(self.mButtonRun)
         self.setLayout(self.mLayout)
+
+        self.mButtonRun.clicked.connect(self.msRun)
 
 
 if __name__ == "__main__":

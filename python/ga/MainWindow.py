@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
         """
         self.mCanvas.msCurrentChanged.connect(self.mStatusBar.CurrentChanged)
         self.mCanvas.msMove.connect(self.mStatusBar.Move)
-        self.mCtrlWidget.mButtonRun.clicked.connect(self.mCanvas.DrawConvexhull)
+        self.mCtrlWidget.msRun.connect(self.mCanvas.DrawConvexhull)
 
     def newProject(self):
         pass
