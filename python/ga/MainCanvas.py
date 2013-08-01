@@ -44,7 +44,7 @@ class MainCanvas(QWidget):
         self.mLineIntersectionCanvas.msMove.connect(self.msMove)
         self.mTabWidget.currentChanged.connect(self.CurrentChanged)
 
-        self.mTabWidget.setCurrentIndex(1)
+        self.mTabWidget.setCurrentIndex(0)
 
     def CurrentChanged(self, index):
         self.msCurrentChanged.emit(self.mTestTable[index])

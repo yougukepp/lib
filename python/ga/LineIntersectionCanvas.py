@@ -44,7 +44,7 @@ class LineIntersectionCanvas(BaseCanvas):
         self.DrawPoint(painter, Ga2Screen(points[-1]))
 
     def Make(self):
-        print("LineIntersectionCanvas::Make")
+        print("需要平衡二分查找树,过于复杂,暂未实现。")
 
 if __name__ == "__main__":
     import sys
