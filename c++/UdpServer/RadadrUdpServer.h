@@ -26,15 +26,12 @@
 #include <time.h>
 #include <iostream>
 #include <netdb.h>
-
 #include <termios.h>
 #include <sys/ioctl.h>
 #include <sys/file.h>
-
 #include <pthread.h>
 
 typedef unsigned char DT_BYTE;
-
 class CRadadrUdpServer;
 
 typedef struct
@@ -42,6 +39,12 @@ typedef struct
 	CRadadrUdpServer*  	obj;
 	int                     obj_id;
 }TAG_RADAR_THREAD_OBJ;
+
+typedef struct
+{
+    DT_BYTE buf[4096];
+    int len;
+}TAG_RADAR_UDP_PKG;
 
 class CRadadrUdpServer
 {
@@ -52,28 +55,30 @@ public:
 	void start(int obj_id);
 	void parseBuf(DT_BYTE *buf, int len);
 
+        void lock(void);
+        void unlock(void);
+
 protected:
 	bool initSocket(void);
 	void deinitSocket(void);
 	bool bindToPort(int port);
 	bool setSysUdpBuf(int size);
+
 protected:
-    bool initMutex(void);
-    void deinitMutex(void);
-    void lock(void);
-    void unlock(void);
+        bool initMutex(void);
+        void deinitMutex(void);
 public:
-   pthread_t 			m_TRecv;
-   pthread_t 			m_TDeal;
+        pthread_t               m_TRecv;
+        pthread_t 	        m_TDeal;
 
-   int 				m_RecvBufSize;
-   DT_BYTE*			m_RecvBuf;
-   int 				m_SockFd;
-   pthread_mutex_t 	m_Mutex;
-   bool				m_bMutex;
+        int 		        m_SockFd;
 
+        pthread_mutex_t         m_Mutex;
+        bool		        m_bMutex;
+
+        std::vector<TAG_RADAR_UDP_PKG> m_Buf;
 private:
-   TAG_RADAR_THREAD_OBJ m_self;
+        TAG_RADAR_THREAD_OBJ    m_self;
 };
 
 #endif /* RADADRUDPSERVER_H_ */

@@ -9,8 +9,7 @@ CRadadrUdpServer::CRadadrUdpServer(int port)
 {
     m_bMutex = initMutex();
     m_SockFd = -1;
-    m_RecvBufSize = 4096;
-    m_RecvBuf = new unsigned char[m_RecvBufSize];
+    m_Buf.clear();
     if (initSocket())								/* 初始化套接字 */
     {
         printf("init UDP server ok!\n");
@@ -36,7 +35,7 @@ CRadadrUdpServer::~CRadadrUdpServer()
 {
     deinitSocket();
     deinitMutex();
-    delete []m_RecvBuf;
+    m_Buf.clear();
 }
 
 bool CRadadrUdpServer::initMutex(void)
@@ -135,9 +134,11 @@ void CRadadrUdpServer::parseBuf(DT_BYTE *buf, int len)
 
 void* threadRecvLoop(void *argv)
 {
+    char buf[2048];
     long all_num = 0;
     TAG_RADAR_THREAD_OBJ* to = (TAG_RADAR_THREAD_OBJ*)argv;
     CRadadrUdpServer *obj = to->obj;
+
     if (obj->m_SockFd < 0)
         return NULL;
 
@@ -150,17 +151,34 @@ void* threadRecvLoop(void *argv)
     while(true)
     {
         int recvNum = recvfrom(obj->m_SockFd,
-                obj->m_RecvBuf,
-                obj->m_RecvBufSize, 
+                buf,
+                2048,
                 0/* MSG_DONTWAIT*/,
                 (struct sockaddr *)&clientAddr,
                 (socklen_t *)&len);
 
-        if (-1 == recvNum)
+        if (recvNum < 0)
         {
             /* 出错 */
             continue;
         }
+
+        int i = 0;
+        int len = 0;
+        TAG_RADAR_UDP_PKG pkg;
+        len = recvNum;
+        for(i=0;i<len;i++)
+        {
+            pkg.buf[i] = buf[i];
+        }
+        pkg.len = len;
+
+
+        /* TODO:lock*/
+        obj->lock();
+        (obj->m_Buf).push_back(pkg);
+        obj->unlock();
+
         gTotalBytes += recvNum;
     }
 
@@ -169,6 +187,11 @@ void* threadRecvLoop(void *argv)
 
 void* threadDealLoop(void *argv)
 {
+    TAG_RADAR_THREAD_OBJ* to = (TAG_RADAR_THREAD_OBJ*)argv;
+    CRadadrUdpServer *obj = to->obj;
+
+    int i = 0;
+    int iMax = 0;
     int rst = 0;
     double passed_seconds = 0;
     long usec = 0;
@@ -195,7 +218,15 @@ void* threadDealLoop(void *argv)
             assert(0 == rst); 
         }
 
-        /* obj->parseBuf(obj->m_RecvBuf, recvNum); */
+        /* 解析 */
+        for(i=0;i<iMax;i++)
+        {
+            obj->parseBuf((obj->m_Buf)[i].buf, (obj->m_Buf)[i].len);
+        }
+
+        obj->lock();
+        (obj->m_Buf).clear();
+        obj->unlock();
     }
 }
 
