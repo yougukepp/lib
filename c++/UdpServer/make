@@ -1,0 +1,6 @@
+rm -rvf *.o
+rm -rvf test
+rm -rvf echo.dat
+
+#arm-none-linux-gnueabi-g++ main.cpp  RadadrUdpServer.cpp -lpthread -o test
+g++ main.cpp  RadadrUdpServer.cpp -lpthread -o test
