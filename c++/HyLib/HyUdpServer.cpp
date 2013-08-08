@@ -1,8 +1,8 @@
-#include "HyUdpServer.h"
+ï»¿#include "HyUdpServer.h"
 
-/* ½ÓÊÕÏß³Ì */
+/* æŽ¥æ”¶çº¿ç¨‹ */
 void* threadRecvLoop(void *argv);
-/* ´¦ÀíÏß³Ì */
+/* å¤„ç†çº¿ç¨‹ */
 void* threadDealLoop(void *argv);
 static long gTotalBytes;
 
@@ -12,23 +12,23 @@ HyUdpServer::HyUdpServer(HyU32 port)
     m_buf.clear();
     InitMutex();
 
-    if (HY_SUCCESSED == InitSocket())                           /* ³õÊ¼»¯Ì×½Ó×Ö */
+    if (HY_SUCCESSED == InitSocket())                           /* åˆå§‹åŒ–å¥—æŽ¥å­— */
     {
-        printf("³õÊ¼»¯UDP·þÎñÆ÷OK!\n");
-        if (HY_SUCCESSED == BindToPort(port))                   /* °ó¶¨¼àÌý¶Ë¿Ú */
+        printf("åˆå§‹åŒ–UDPæœåŠ¡å™¨OK!\n");
+        if (HY_SUCCESSED == BindToPort(port))                   /* ç»‘å®šç›‘å¬ç«¯å£ */
         {
-            SetSysUdpBuf(10 * 1024 * 1024);                     /* ÉèÖÃ¸ÃSocket ÏµÍ³ BUF´óÐ¡ 10M */
-            printf("UDP·þÎñÆ÷°ó¶¨ÖÁ¶Ë¿Ú:%d.\n", port);
+            SetSysUdpBuf(10 * 1024 * 1024);                     /* è®¾ç½®è¯¥Socket ç³»ç»Ÿ BUFå¤§å° 10M */
+            printf("UDPæœåŠ¡å™¨ç»‘å®šè‡³ç«¯å£:%d.\n", port);
         }
         else
         {
             DeinitSocket();
-            printf("UDP·þÎñÆ÷°ó¶¨ÖÁ¶Ë¿Ú:%dÊ§°Ü.\n", port);
+            printf("UDPæœåŠ¡å™¨ç»‘å®šè‡³ç«¯å£:%då¤±è´¥.\n", port);
         }
     }
     else
     {
-        printf("³õÊ¼»¯UDP·þÎñÆ÷Ê§°Ü!\n");
+        printf("åˆå§‹åŒ–UDPæœåŠ¡å™¨å¤±è´¥!\n");
     }
     fflush(stdout);
 }
@@ -63,7 +63,7 @@ void HyUdpServer::DeinitMutex(void)
 void HyUdpServer::Lock(void)
 {
     HyU32 rst = 0;
-    rst = pthread_mutex_lock(&m_mutex);         /* ×èÈû */
+    rst = pthread_mutex_lock(&m_mutex);         /* é˜»å¡ž */
     assert(0 == rst);
 }
 
@@ -76,7 +76,7 @@ void HyUdpServer::UnLock(void)
 
 HyU32 HyUdpServer::InitSocket(void)
 {
-    /* ½¨Á¢udp socket */
+    /* å»ºç«‹udp socket */
     m_sockFd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if(-1 != m_sockFd)
     {
@@ -100,15 +100,15 @@ HyU32 HyUdpServer::BindToPort(int port)
 {
     HyU32 rst = 0;
     struct sockaddr_in servAddr;
-    /* ÉèÖÃaddress */
+    /* è®¾ç½®address */
     bzero(&servAddr, sizeof(struct sockaddr_in));
     servAddr.sin_family = AF_INET;
     servAddr.sin_port = htons(port);
 
-    /* INADDR_ANY±íÊ¾²»¹ÜÊÇÄÄ¸öÍø¿¨½ÓÊÕµ½Êý¾Ý£¬Ö»ÒªÄ¿µÄ¶Ë¿ÚÊÇSERV_PORT£¬¾Í»á±»¸ÃÓ¦ÓÃ³ÌÐò½ÓÊÕµ½ */
+    /* INADDR_ANYè¡¨ç¤ºä¸ç®¡æ˜¯å“ªä¸ªç½‘å¡æŽ¥æ”¶åˆ°æ•°æ®ï¼Œåªè¦ç›®çš„ç«¯å£æ˜¯SERV_PORTï¼Œå°±ä¼šè¢«è¯¥åº”ç”¨ç¨‹åºæŽ¥æ”¶åˆ° */
     servAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-    /* °ó¶¨socket */
+    /* ç»‘å®šsocket */
     rst = bind(m_sockFd, (struct sockaddr *)&servAddr, sizeof(servAddr));
     if(0 != rst)
     {
@@ -225,7 +225,7 @@ void* threadDealLoop(void *argv)
             assert(0 == rst); 
         }
 
-        /* ½âÎö */
+        /* è§£æž */
         assert(NULL != obj->m_pFunc);
 
         iMax = (obj->m_buf).size();
