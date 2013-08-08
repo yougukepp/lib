@@ -9,6 +9,7 @@ static long gTotalBytes;
 HyUdpServer::HyUdpServer(HyU32 port)
 {
     m_sockFd = -1;
+    m_running = false;
     m_buf.clear();
     InitMutex();
 
@@ -144,12 +145,15 @@ void HyUdpServer::Start(HyU32 obj_id)
 
     pthread_create(&m_tRecv, NULL, threadRecvLoop, (void*)(&m_self));
     pthread_create(&m_tDeal, NULL, threadDealLoop, (void*)(&m_self));
+    m_running = true;
 } 
 
 /* TODO */
-void Stop(HyU32 obj_id)
+void HyUdpServer::Stop(HyU32 obj_id)
 {
-    ;
+    m_running = false;
+    pthread_join(m_tRecv, NULL);
+    pthread_join(m_tDeal, NULL);
 }
 
 void* threadRecvLoop(void *argv)
@@ -168,7 +172,7 @@ void* threadRecvLoop(void *argv)
     fflush(stdout);
 #endif
 
-    while(true)
+    while(obj->m_running)
     {
         HyU8 recvNum = recvfrom(obj->m_sockFd,
                 buf,
@@ -219,7 +223,7 @@ void* threadDealLoop(void *argv)
 
     HyU32 secCount = 0;
 
-    while(true)
+    while(obj->m_running)
     {
 
         rst = gettimeofday(&now, NULL);

@@ -29,16 +29,16 @@ public:
 
     void Start(HyU32 obj_id);
     void Stop(HyU32 obj_id);
+    void SetDealFunc(HyUdpServerDealCallBackFunc pFunc);
 
 public:                         /* 仅供静态函数使用 */
     int  m_sockFd;
+    bool m_running;
     std::vector<TAG_HY_UDP_PKG> m_buf;
     HyUdpServerDealCallBackFunc m_pFunc;
 
     void Lock(void);
     void UnLock(void);
-
-    void SetDealFunc(HyUdpServerDealCallBackFunc pFunc);
 
 protected:
 
