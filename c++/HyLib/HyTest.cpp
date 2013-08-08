@@ -12,7 +12,7 @@ static HyU32 gUdpDealled = HY_FALSE;
 int main(int argc, char *argv[])
 {
     printf("开始测试.\n");
-    printf("TestHyTimer:%s.\n", (HY_SUCCESSED == TestHyTimer()) ? ("成功") : ("失败"));
+    //printf("TestHyTimer:%s.\n", (HY_SUCCESSED == TestHyTimer()) ? ("成功") : ("失败"));
     printf("TestUdp:%s.\n", (HY_SUCCESSED == TestUdp()) ? ("成功") : ("失败"));
     printf("结束测试.\n");
 
@@ -59,7 +59,8 @@ HyU32 TestHyTimer(void)
 
 static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
 { 
-    printf("1\n");
+    printf("UdpServerDeal\n");
+
     if(gUdpBufSize != len)
     {
         printf("丢包\n");

@@ -23,6 +23,8 @@
 #define         HY_INFINITE_SIMAL               (1e-6)
 
 #define         HY_UDP_SERVER_RECV_PKG_MAX_LEN  (2048)
+
+//#define         __DEBUG_HY_UDP_SERVER__
 /**************************** 类型定义 ***************************/
 
 
