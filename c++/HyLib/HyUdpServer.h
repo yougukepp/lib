@@ -53,6 +53,7 @@ protected:
 private:
     pthread_t                   m_tRecv;
     pthread_t                   m_tDeal;
+
     pthread_mutex_t             m_mutex;
 private:
     TAG_HY_THREAD_OBJ           m_self;

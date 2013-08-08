@@ -191,7 +191,6 @@ void* threadRecvLoop(void *argv)
 
         obj->Lock();
         (obj->m_buf).push_back(pkg);
-        printf("PP Here 1:%d\n", obj->m_buf.size());
         obj->UnLock();
 
         gTotalBytes += recvNum;
@@ -242,14 +241,13 @@ void* threadDealLoop(void *argv)
         }
 
         /* 解析 */ 
+        obj->Lock();
         assert(NULL != obj->m_pFunc);
         iMax = (obj->m_buf).size();
         for(i=0;i<iMax;i++)
         {
             obj->m_pFunc((obj->m_buf)[i].buf, (obj->m_buf)[i].len);
         }
-
-        obj->Lock();
         (obj->m_buf).clear();
         obj->UnLock();
     }
