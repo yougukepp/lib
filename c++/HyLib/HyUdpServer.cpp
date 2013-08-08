@@ -143,9 +143,9 @@ void HyUdpServer::Start(HyU32 obj_id)
     m_self.obj = this;
     m_self.obj_id = obj_id;
 
+    m_running = true;
     pthread_create(&m_tRecv, NULL, threadRecvLoop, (void*)(&m_self));
     pthread_create(&m_tDeal, NULL, threadDealLoop, (void*)(&m_self));
-    m_running = true;
 } 
 
 /* TODO */
