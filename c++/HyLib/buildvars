@@ -6,7 +6,7 @@ INC_DIR			= $(ROOT_DIR)
 CC			= c++
 LD			= $(CC)
 CFLAGS			= -Wall -pedantic -I$(INC_DIR)
-LFLAGS			= -Wl,-Bdynamic
+LFLAGS			= -Wl,-Bdynamic -lpthread
 
 RM			= rm -rf
 MAKE			= make

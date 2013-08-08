@@ -15,7 +15,7 @@ CRadadrUdpServer::CRadadrUdpServer(int port)
         printf("init UDP server ok!\n");
         if (bindToPort(port))                                                   /* 绑定监听端口 */
         {
-            setSysUdpBuf(10 * 1024 * 1024);                                     /* 设置该Socket 系统 BUF大小 */
+            setSysUdpBuf(10 * 1024 * 1024);                                     /* 设置该Socket 系统 BUF大小 10M */
             printf("init UDP server bind port %d ok!\n", port);
             start(1);
         }
@@ -110,26 +110,7 @@ void CRadadrUdpServer::start(int obj_id)
 
 void CRadadrUdpServer::parseBuf(DT_BYTE *buf, int len)
 {
-    int i = 0;
-    int iMax = 0;
-    FILE *p_file = NULL;
-
-    p_file = fopen("echo.dat", "a+");
-    if(NULL == p_file)
-    {
-        fprintf(stderr, "open %s failed.\n", "echo.dat");
-        return;
-    }
-
-    iMax = len;
-    for(i=0;i<iMax;i++)
-    {
-        fprintf(p_file, "%02x ", buf[i]);
-    }
-    fprintf(p_file, "\n");
-    fflush(p_file);
-
-    fclose(p_file);
+    ;
 }
 
 void* threadRecvLoop(void *argv)
@@ -201,8 +182,11 @@ void* threadDealLoop(void *argv)
     printf("begin threadDealLoop.\n");
     fflush(stdout);
 
+    int secCount = 0;
+
     while(true)
     {
+
         rst = gettimeofday(&now, NULL);
         assert(0 == rst); 
 
@@ -210,15 +194,17 @@ void* threadDealLoop(void *argv)
         usec = now.tv_usec - last.tv_usec; 
         passed_seconds = 1.0 * passed_seconds + usec * 0.000001; 
 
-        if(passed_seconds >= 1.0)
+        if(passed_seconds >= 2.0)
         {
-            printf("total %ld BYTE \n", gTotalBytes);
+            secCount++;
+            printf("total %ld BYTE %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
             fflush(stdout);
             rst = gettimeofday(&last, NULL);
             assert(0 == rst); 
         }
 
         /* 解析 */
+        iMax = (obj->m_Buf).size();
         for(i=0;i<iMax;i++)
         {
             obj->parseBuf((obj->m_Buf)[i].buf, (obj->m_Buf)[i].len);

@@ -1,5 +1,5 @@
-#ifndef RADADRUDPSERVER_H_
-#define RADADRUDPSERVER_H_
+#ifndef __HY_UDP_SERVER_H__
+#define __HY_UDP_SERVER_H__
 
 #include <assert.h>
 #include <errno.h>
