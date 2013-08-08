@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "HyInterface.h"
 
 static HyU32 TestHyTimer(void);
@@ -12,8 +11,10 @@ int main(int argc, char *argv[])
 
     printf("开始测试.\n");
 
+    /*
     rst = TestHyTimer();
     printf("TestHyTimer: %s.\n", (HY_SUCCESSED == rst) ? ("成功") : ("失败"));
+    */
 
     rst = TestUdp();
     printf("TestUdp: %s.\n", (HY_SUCCESSED == rst) ? ("成功") : ("失败"));
@@ -60,7 +61,12 @@ HyU32 TestHyTimer(void)
 }
 
 HyU32 TestUdp(void)
-{
+{ 
+    HyU32 port = 5802;
+    HyUdpServer *pServer = new HyUdpServer(port);
+
+    pServer->Start(1);
+
     return HY_SUCCESSED;
 }
 

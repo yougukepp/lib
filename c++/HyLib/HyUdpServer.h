@@ -1,84 +1,63 @@
 #ifndef __HY_UDP_SERVER_H__
 #define __HY_UDP_SERVER_H__
 
-#include <assert.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <signal.h>
-#include <sys/socket.h>
-#include <sys/epoll.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <pthread.h>
-#include <sys/resource.h>
-#include <stdio.h>
-#include <malloc.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <vector>
-#include <memory.h>
-#include <float.h>
-#include <time.h>
-#include <iostream>
-#include <netdb.h>
-#include <termios.h>
-#include <sys/ioctl.h>
-#include <sys/file.h>
-#include <pthread.h>
+#include "HyConfig.h"
+#include "HyHeader.h"
 
-typedef unsigned char DT_BYTE;
-class CRadadrUdpServer;
+class HyUdpServer;
 
+/* TODO: 封装为类 */
 typedef struct
 {
-	CRadadrUdpServer*  	obj;
-	int                     obj_id;
-}TAG_RADAR_THREAD_OBJ;
+    HyU8 buf[HY_UDP_SERVER_RECV_PKG_MAX_LEN];
+    HyU32 len;
+}TAG_HY_UDP_PKG;
 
+/* TODO:封装为类 */
 typedef struct
 {
-    DT_BYTE buf[4096];
-    int len;
-}TAG_RADAR_UDP_PKG;
+    HyUdpServer*        obj;
+    HyU32               obj_id;
+}TAG_HY_THREAD_OBJ;
 
-class CRadadrUdpServer
+/* TODO:加入停止功能 */
+class HyUdpServer
 {
 public:
-	CRadadrUdpServer(int port);
-	virtual ~CRadadrUdpServer();
-public:
-	void start(int obj_id);
-	void parseBuf(DT_BYTE *buf, int len);
+    HyUdpServer(HyU32 port);
+    virtual ~HyUdpServer();
 
-        void lock(void);
-        void unlock(void);
+    void Start(HyU32 obj_id);
+    void Stop(HyU32 obj_id);
+
+public:                         /* 仅供静态函数使用 */
+    int  m_sockFd;
+    std::vector<TAG_HY_UDP_PKG> m_buf;
+    HyUdpServerDealCallBackFunc m_pFunc;
+
+    void Lock(void);
+    void UnLock(void);
+
+    void SetDealFunc(HyUdpServerDealCallBackFunc pFunc);
 
 protected:
-	bool initSocket(void);
-	void deinitSocket(void);
-	bool bindToPort(int port);
-	bool setSysUdpBuf(int size);
 
-protected:
-        bool initMutex(void);
-        void deinitMutex(void);
-public:
-        pthread_t               m_TRecv;
-        pthread_t 	        m_TDeal;
+    HyU32 InitSocket(void);
+    void DeinitSocket(void);
+    HyU32 BindToPort(int port);
+    void SetSysUdpBuf(HyU32 size);
+    
+    void InitMutex(void);
+    void DeinitMutex(void);
 
-        int 		        m_SockFd;
-
-        pthread_mutex_t         m_Mutex;
-        bool		        m_bMutex;
-
-        std::vector<TAG_RADAR_UDP_PKG> m_Buf;
 private:
-        TAG_RADAR_THREAD_OBJ    m_self;
+    pthread_t                   m_tRecv;
+    pthread_t                   m_tDeal;
+
+
+    pthread_mutex_t             m_mutex;
+private:
+    TAG_HY_THREAD_OBJ           m_self;
 };
 
-#endif /* RADADRUDPSERVER_H_ */
+#endif

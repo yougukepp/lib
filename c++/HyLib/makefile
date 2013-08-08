@@ -1,11 +1,11 @@
 include buildvars
 
 HyLib = libHy.a
-OBJS = HyTimer.o
+OBJS = HyTimer.o HyUdpServer.o
 
 HyTest = test
 
-all: $(HyLib) $(HyTest)
+all: clean $(HyLib) $(HyTest)
 
 $(HyLib): $(OBJS)
 	$(AR) $(HyLib) $(OBJS)

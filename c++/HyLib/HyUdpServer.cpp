@@ -1,86 +1,107 @@
-#include "RadadrUdpServer.h"
+#include "HyUdpServer.h"
 
-/*仅处理回波信息接收*/
+/* 接收线程 */
 void* threadRecvLoop(void *argv);
+/* 处理线程 */
 void* threadDealLoop(void *argv);
 static long gTotalBytes;
 
-CRadadrUdpServer::CRadadrUdpServer(int port)
+HyUdpServer::HyUdpServer(HyU32 port)
 {
-    m_bMutex = initMutex();
-    m_SockFd = -1;
-    m_Buf.clear();
-    if (initSocket())								/* 初始化套接字 */
+    m_sockFd = -1;
+    m_buf.clear();
+    InitMutex();
+
+    if (HY_SUCCESSED == InitSocket())                           /* 初始化套接字 */
     {
-        printf("init UDP server ok!\n");
-        if (bindToPort(port))                                                   /* 绑定监听端口 */
+        printf("初始化UDP服务器OK!\n");
+        if (HY_SUCCESSED == BindToPort(port))                   /* 绑定监听端口 */
         {
-            setSysUdpBuf(10 * 1024 * 1024);                                     /* 设置该Socket 系统 BUF大小 10M */
-            printf("init UDP server bind port %d ok!\n", port);
-            start(1);
+            SetSysUdpBuf(10 * 1024 * 1024);                     /* 设置该Socket 系统 BUF大小 10M */
+            printf("UDP服务器绑定至端口:%d.\n", port);
         }
         else
         {
-            deinitSocket();
-            printf("init UDP server bind port %d error!\n", port);
+            DeinitSocket();
+            printf("UDP服务器绑定至端口:%d失败.\n", port);
         }
     }
     else
     {
-        printf("init UDP server error!\n");
+        printf("初始化UDP服务器失败!\n");
+    }
+    fflush(stdout);
+}
+
+HyUdpServer::~HyUdpServer()
+{
+    DeinitSocket();
+    m_buf.clear();
+    DeinitMutex();
+} 
+
+void HyUdpServer::SetDealFunc(HyUdpServerDealCallBackFunc pFunc)
+{
+    assert(NULL != pFunc);
+    m_pFunc = pFunc;
+}
+
+void HyUdpServer::InitMutex(void)
+{
+    HyU32 rst = 0;
+    rst = pthread_mutex_init(&m_mutex, NULL);
+    assert(0 == rst);
+}
+
+void HyUdpServer::DeinitMutex(void)
+{
+    HyU32 rst = 0;
+    rst = pthread_mutex_destroy(&m_mutex);
+    assert(0 == rst);
+}
+
+void HyUdpServer::Lock(void)
+{
+    HyU32 rst = 0;
+    rst = pthread_mutex_lock(&m_mutex);         /* 阻塞 */
+    assert(0 == rst);
+}
+
+void HyUdpServer::UnLock(void)
+{
+    HyU32 rst = 0;
+    rst = pthread_mutex_unlock(&m_mutex);
+    assert(0 == rst);
+}
+
+HyU32 HyUdpServer::InitSocket(void)
+{
+    /* 建立udp socket */
+    m_sockFd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    if(-1 != m_sockFd)
+    {
+        return HY_SUCCESSED;
+    }
+    else
+    {
+        return HY_FAILED;
     }
 }
 
-CRadadrUdpServer::~CRadadrUdpServer()
+void HyUdpServer::DeinitSocket(void)
 {
-    deinitSocket();
-    deinitMutex();
-    m_Buf.clear();
+    HyU32 rst = 0;
+    assert(-1 != m_sockFd);
+    rst = close(m_sockFd);
+    assert(0 == rst);
 }
 
-bool CRadadrUdpServer::initMutex(void)
+HyU32 HyUdpServer::BindToPort(int port)
 {
-    return pthread_mutex_init(&m_Mutex, NULL) == 0;
-}
-
-void CRadadrUdpServer::deinitMutex(void)
-{
-    if (m_bMutex)
-        pthread_mutex_destroy(&m_Mutex);
-    m_bMutex = false;
-}
-
-void CRadadrUdpServer::lock(void)
-{
-    if (m_bMutex)
-        pthread_mutex_lock(&m_Mutex);
-}
-
-void CRadadrUdpServer::unlock(void)
-{
-    if (m_bMutex)
-        pthread_mutex_unlock(&m_Mutex);
-}
-
-bool CRadadrUdpServer::initSocket(void)
-{
-    /* 建立udp socket */
-    m_SockFd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    return m_SockFd >= 0;
-}
-
-void CRadadrUdpServer::deinitSocket(void)
-{
-    if (m_SockFd >= 0)
-        close(m_SockFd);
-    m_SockFd = -1;
-}
-
-bool CRadadrUdpServer::bindToPort(int port)
-{
+    HyU32 rst = 0;
     struct sockaddr_in servAddr;
     /* 设置address */
-    memset(&servAddr, 0, sizeof(struct sockaddr_in));
+    bzero(&servAddr, sizeof(struct sockaddr_in));
     servAddr.sin_family = AF_INET;
     servAddr.sin_port = htons(port);
 
@@ -88,65 +109,66 @@ bool CRadadrUdpServer::bindToPort(int port)
     servAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
     /* 绑定socket */
-    if(bind(m_SockFd, (struct sockaddr *)&servAddr, sizeof(servAddr)) < 0)
-        return false;
-    return true;
+    rst = bind(m_sockFd, (struct sockaddr *)&servAddr, sizeof(servAddr));
+    if(0 != rst)
+    {
+        return HY_FAILED;
+    }
+    else
+    {
+        return HY_SUCCESSED;
+    }
 }
 
-bool CRadadrUdpServer::setSysUdpBuf(int size)
+void HyUdpServer::SetSysUdpBuf(HyU32 size)
 {
-    int rst = setsockopt(m_SockFd, SOL_SOCKET, SO_RCVBUF, (const char*)&size, sizeof(int));
-    return rst == 0;
+    HyU32 rst = 0;
+    rst = setsockopt(m_sockFd, SOL_SOCKET, SO_RCVBUF, (const char*)&size, sizeof(int));
+    assert(0 == rst);
 }
 
-void CRadadrUdpServer::start(int obj_id)
+void HyUdpServer::Start(HyU32 obj_id)
 {
     m_self.obj = this;
     m_self.obj_id = obj_id;
 
-    pthread_create(&m_TRecv, NULL, threadRecvLoop, (void*)(&m_self));
-    pthread_create(&m_TDeal, NULL, threadDealLoop, (void*)(&m_self));
-}
+    pthread_create(&m_tRecv, NULL, threadRecvLoop, (void*)(&m_self));
+    pthread_create(&m_tDeal, NULL, threadDealLoop, (void*)(&m_self));
+} 
 
-void CRadadrUdpServer::parseBuf(DT_BYTE *buf, int len)
+/* TODO */
+void Stop(HyU32 obj_id)
 {
     ;
 }
 
 void* threadRecvLoop(void *argv)
 {
-    char buf[2048];
-    long all_num = 0;
-    TAG_RADAR_THREAD_OBJ* to = (TAG_RADAR_THREAD_OBJ*)argv;
-    CRadadrUdpServer *obj = to->obj;
+    HyU8 buf[2048];
+    TAG_HY_THREAD_OBJ* to = (TAG_HY_THREAD_OBJ*)argv;
+    HyUdpServer *obj = to->obj;
 
-    if (obj->m_SockFd < 0)
-        return NULL;
+    //assert((obj->m_sockFd) >= 0);
 
     struct sockaddr_in clientAddr;
-    int len = 0;
-
+    HyU32 len = 0;
     printf("begin threadRecvLoop.\n");
     fflush(stdout);
 
     while(true)
     {
-        int recvNum = recvfrom(obj->m_SockFd,
+        HyU8 recvNum = recvfrom(obj->m_sockFd,
                 buf,
-                2048,
+                HY_UDP_SERVER_RECV_PKG_MAX_LEN,
                 0/* MSG_DONTWAIT*/,
                 (struct sockaddr *)&clientAddr,
                 (socklen_t *)&len);
 
-        if (recvNum < 0)
-        {
-            /* 出错 */
-            continue;
-        }
+        assert(recvNum > 0);
 
-        int i = 0;
-        int len = 0;
-        TAG_RADAR_UDP_PKG pkg;
+        HyU32 i = 0;
+        HyU32 len = 0;
+        TAG_HY_UDP_PKG pkg;
         len = recvNum;
         for(i=0;i<len;i++)
         {
@@ -156,9 +178,9 @@ void* threadRecvLoop(void *argv)
 
 
         /* TODO:lock*/
-        obj->lock();
-        (obj->m_Buf).push_back(pkg);
-        obj->unlock();
+        obj->Lock();
+        (obj->m_buf).push_back(pkg);
+        obj->UnLock();
 
         gTotalBytes += recvNum;
     }
@@ -168,21 +190,21 @@ void* threadRecvLoop(void *argv)
 
 void* threadDealLoop(void *argv)
 {
-    TAG_RADAR_THREAD_OBJ* to = (TAG_RADAR_THREAD_OBJ*)argv;
-    CRadadrUdpServer *obj = to->obj;
+    TAG_HY_THREAD_OBJ* to = (TAG_HY_THREAD_OBJ*)argv;
+    HyUdpServer* obj = to->obj;
 
-    int i = 0;
-    int iMax = 0;
-    int rst = 0;
-    double passed_seconds = 0;
-    long usec = 0;
+    HyU32 i = 0;
+    HyU32 iMax = 0;
+    HyU32 rst = 0;
+    HyFloat passed_seconds = 0;
+    HyU64 usec = 0;
     struct timeval last;
     struct timeval now; 
 
     printf("begin threadDealLoop.\n");
     fflush(stdout);
 
-    int secCount = 0;
+    HyU32 secCount = 0;
 
     while(true)
     {
@@ -204,15 +226,17 @@ void* threadDealLoop(void *argv)
         }
 
         /* 解析 */
-        iMax = (obj->m_Buf).size();
+        assert(NULL != obj->m_pFunc);
+
+        iMax = (obj->m_buf).size();
         for(i=0;i<iMax;i++)
         {
-            obj->parseBuf((obj->m_Buf)[i].buf, (obj->m_Buf)[i].len);
+            obj->m_pFunc((obj->m_buf)[i].buf, (obj->m_buf)[i].len);
         }
 
-        obj->lock();
-        (obj->m_Buf).clear();
-        obj->unlock();
+        obj->Lock();
+        (obj->m_buf).clear();
+        obj->UnLock();
     }
 }
 

@@ -17,9 +17,14 @@
 #define HY_FAILED (-1)
 #endif
 
+typedef unsigned char HyU8;
 typedef unsigned int HyU32;
+typedef double HyFloat;
+typedef long HyU64;
 
 typedef void (*HyCallBackFunc)(void);
-typedef void (*HyCallBackFuncWithPara)(void *pPara);
+typedef void (*HyCallBackFuncWithPara)(void *pPara); 
+
+typedef void (*HyUdpServerDealCallBackFunc)(HyU8 *pBuf, HyU32 len);
 
 #endif
