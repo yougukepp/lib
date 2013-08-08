@@ -17,6 +17,7 @@
 #define HY_FAILED (-1)
 #endif
 
+typedef char HyC;
 typedef unsigned char HyU8;
 typedef unsigned int HyU32;
 typedef double HyFloat;

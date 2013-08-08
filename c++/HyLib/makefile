@@ -1,7 +1,7 @@
 include buildvars
 
 HyLib = libHy.a
-OBJS = HyTimer.o HyUdpServer.o
+OBJS = HyTimer.o HyUdpServer.o HyUdpClient.o
 
 HyTest = test
 

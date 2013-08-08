@@ -14,23 +14,33 @@ HyUdpServer::HyUdpServer(HyU32 port)
 
     if (HY_SUCCESSED == InitSocket())                           /* 初始化套接字 */
     {
+#ifdef __DEBUG_HY_UDP_SERVER__
         printf("初始化UDP服务器OK!\n");
+#endif
         if (HY_SUCCESSED == BindToPort(port))                   /* 绑定监听端口 */
         {
             SetSysUdpBuf(10 * 1024 * 1024);                     /* 设置该Socket 系统 BUF大小 10M */
+#ifdef __DEBUG_HY_UDP_SERVER__
             printf("UDP服务器绑定至端口:%d.\n", port);
+#endif
         }
         else
         {
             DeinitSocket();
+#ifdef __DEBUG_HY_UDP_SERVER__
             printf("UDP服务器绑定至端口:%d失败.\n", port);
+#endif
         }
     }
     else
     {
+#ifdef __DEBUG_HY_UDP_SERVER__
         printf("初始化UDP服务器失败!\n");
+#endif
     }
+#ifdef __DEBUG_HY_UDP_SERVER__
     fflush(stdout);
+#endif
 }
 
 HyUdpServer::~HyUdpServer()
@@ -48,28 +58,28 @@ void HyUdpServer::SetDealFunc(HyUdpServerDealCallBackFunc pFunc)
 
 void HyUdpServer::InitMutex(void)
 {
-    HyU32 rst = 0;
+    int rst = 0;
     rst = pthread_mutex_init(&m_mutex, NULL);
     assert(0 == rst);
 }
 
 void HyUdpServer::DeinitMutex(void)
 {
-    HyU32 rst = 0;
+    int rst = 0;
     rst = pthread_mutex_destroy(&m_mutex);
     assert(0 == rst);
 }
 
 void HyUdpServer::Lock(void)
 {
-    HyU32 rst = 0;
+    int rst = 0;
     rst = pthread_mutex_lock(&m_mutex);         /* 阻塞 */
     assert(0 == rst);
 }
 
 void HyUdpServer::UnLock(void)
 {
-    HyU32 rst = 0;
+    int rst = 0;
     rst = pthread_mutex_unlock(&m_mutex);
     assert(0 == rst);
 }
@@ -90,7 +100,7 @@ HyU32 HyUdpServer::InitSocket(void)
 
 void HyUdpServer::DeinitSocket(void)
 {
-    HyU32 rst = 0;
+    int rst = 0;
     assert(-1 != m_sockFd);
     rst = close(m_sockFd);
     assert(0 == rst);
@@ -98,7 +108,7 @@ void HyUdpServer::DeinitSocket(void)
 
 HyU32 HyUdpServer::BindToPort(int port)
 {
-    HyU32 rst = 0;
+    int rst = 0;
     struct sockaddr_in servAddr;
     /* 设置address */
     bzero(&servAddr, sizeof(struct sockaddr_in));
@@ -122,7 +132,7 @@ HyU32 HyUdpServer::BindToPort(int port)
 
 void HyUdpServer::SetSysUdpBuf(HyU32 size)
 {
-    HyU32 rst = 0;
+    int rst = 0;
     rst = setsockopt(m_sockFd, SOL_SOCKET, SO_RCVBUF, (const char*)&size, sizeof(int));
     assert(0 == rst);
 }
@@ -151,9 +161,12 @@ void* threadRecvLoop(void *argv)
     //assert((obj->m_sockFd) >= 0);
 
     struct sockaddr_in clientAddr;
-    HyU32 len = 0;
+    int len = 0;
+
+#ifdef __DEBUG_HY_UDP_SERVER__
     printf("begin threadRecvLoop.\n");
     fflush(stdout);
+#endif
 
     while(true)
     {
@@ -167,17 +180,16 @@ void* threadRecvLoop(void *argv)
         assert(recvNum > 0);
 
         HyU32 i = 0;
-        HyU32 len = 0;
+        HyU32 length = 0;
         TAG_HY_UDP_PKG pkg;
-        len = recvNum;
-        for(i=0;i<len;i++)
+        length = recvNum;
+        for(i=0;i<length;i++)
         {
             pkg.buf[i] = buf[i];
         }
-        pkg.len = len;
+        pkg.len = length;
 
 
-        /* TODO:lock*/
         obj->Lock();
         (obj->m_buf).push_back(pkg);
         obj->UnLock();
@@ -195,14 +207,16 @@ void* threadDealLoop(void *argv)
 
     HyU32 i = 0;
     HyU32 iMax = 0;
-    HyU32 rst = 0;
+    int rst = 0;
     HyFloat passed_seconds = 0;
     HyU64 usec = 0;
     struct timeval last;
     struct timeval now; 
 
+#ifdef __DEBUG_HY_UDP_SERVER__
     printf("begin threadDealLoop.\n");
     fflush(stdout);
+#endif
 
     HyU32 secCount = 0;
 
@@ -219,8 +233,10 @@ void* threadDealLoop(void *argv)
         if(passed_seconds >= 2.0)
         {
             secCount++;
+#ifdef __DEBUG_HY_UDP_SERVER__
             printf("total %ld BYTE %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
             fflush(stdout);
+#endif
             rst = gettimeofday(&last, NULL);
             assert(0 == rst); 
         }

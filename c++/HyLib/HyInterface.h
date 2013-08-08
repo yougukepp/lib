@@ -3,5 +3,6 @@
 
 #include "HyTimer.h"
 #include "HyUdpServer.h"
+#include "HyUdpClient.h"
 
 #endif
