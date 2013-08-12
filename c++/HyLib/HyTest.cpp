@@ -59,15 +59,6 @@ HyU32 TestHyTimer(void)
 
 static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
 { 
-    printf("待解析的数据:\n");
-    for(HyU32 i=0; i<len; i++) 
-    {
-        printf("0x%02x,", pBuf[i]);
-    }
-    printf("\n");
-    fflush(stdout);
-    return;
-
     if(gUdpBufSize != len)
     {
         printf("丢包, gUdpBufSize=%d, len=%d\n", gUdpBufSize, len);

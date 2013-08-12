@@ -166,20 +166,22 @@ void* threadRecvLoop(void *argv)
 
     struct sockaddr_in clientAddr;
     int len = 0;
+    len = sizeof(clientAddr);
 
 #ifdef __DEBUG_HY_UDP_SERVER__
-    printf("begin threadRecvLoop.\n");
+    printf("Udp接收线程启动...\n");
     fflush(stdout);
 #endif
 
     while(obj->m_running)
     {
-        HyU8 recvNum = recvfrom(obj->m_sockFd,
+        Hy32 recvNum = recvfrom(obj->m_sockFd,
                 buf,
                 HY_UDP_SERVER_RECV_PKG_MAX_LEN,
                 MSG_DONTWAIT, /* 0 */
                 (struct sockaddr *)&clientAddr,
                 (socklen_t *)&len);
+
         if(-1 == recvNum) /* 本次未收到数据 */
         {
             if((EAGAIN == errno)
@@ -191,8 +193,13 @@ void* threadRecvLoop(void *argv)
                 continue;
             }
         }
-
         assert(recvNum > 0);
+
+#ifdef __DEBUG_HY_UDP_SERVER__
+        int port = ntohs(clientAddr.sin_port);
+        const char *addr = inet_ntoa(clientAddr.sin_addr);
+        printf("收到:%d 字节 从%s:%d.\n", recvNum, addr, port);
+#endif
 
         HyU32 i = 0;
         HyU32 length = 0;
@@ -228,7 +235,7 @@ void* threadDealLoop(void *argv)
     struct timeval now; 
 
 #ifdef __DEBUG_HY_UDP_SERVER__
-    printf("begin threadDealLoop.\n");
+    printf("处理线程启动...\n");
     fflush(stdout);
 #endif
 
@@ -248,7 +255,7 @@ void* threadDealLoop(void *argv)
         {
             secCount++;
 #ifdef __DEBUG_HY_UDP_SERVER__
-            printf("total %ld BYTE %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
+            printf("总计 %ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
             fflush(stdout);
 #endif
             rst = gettimeofday(&last, NULL);
@@ -257,20 +264,20 @@ void* threadDealLoop(void *argv)
 
         /* 解析 */ 
         obj->Lock();
-        bool flag = false;
         assert(NULL != obj->m_pFunc);
         iMax = (obj->m_buf).size();
         for(i=0;i<iMax;i++)
         {
             obj->m_pFunc((obj->m_buf)[i].buf, (obj->m_buf)[i].len);
-            flag = true;
         }
         (obj->m_buf).clear();
-        if(true == flag)
-        {
-            exit(0);
-        }
         obj->UnLock();
     }
+
+#ifdef __DEBUG_HY_UDP_SERVER__
+    printf("总计 %ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
+    fflush(stdout);
+#endif
+
 }
 

@@ -18,6 +18,7 @@
 #endif
 
 typedef char HyC;
+typedef int Hy32;
 typedef unsigned char HyU8;
 typedef unsigned int HyU32;
 typedef double HyFloat;
