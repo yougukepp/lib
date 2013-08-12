@@ -152,13 +152,13 @@ void HyUdpServer::Start(HyU32 obj_id)
 void HyUdpServer::Stop(HyU32 obj_id)
 {
     m_running = false;
-    pthread_join(m_tRecv, NULL);
     pthread_join(m_tDeal, NULL);
+    pthread_join(m_tRecv, NULL);
 }
 
 void* threadRecvLoop(void *argv)
 {
-    HyU8 buf[2048];
+    HyU8 buf[100 * 1024];
     TAG_HY_THREAD_OBJ* to = (TAG_HY_THREAD_OBJ*)argv;
     HyUdpServer *obj = to->obj;
 
@@ -177,9 +177,20 @@ void* threadRecvLoop(void *argv)
         HyU8 recvNum = recvfrom(obj->m_sockFd,
                 buf,
                 HY_UDP_SERVER_RECV_PKG_MAX_LEN,
-                0/* MSG_DONTWAIT*/,
+                MSG_DONTWAIT, /* 0 */
                 (struct sockaddr *)&clientAddr,
                 (socklen_t *)&len);
+        if(-1 == recvNum) /* 本次未收到数据 */
+        {
+            if((EAGAIN == errno)
+            || (EWOULDBLOCK == errno))
+            {
+                /* TODO: 阻塞延迟1ms 提升性能
+                 * buf 为100k <==> 1ms
+                 * ====> 100M/s */
+                continue;
+            }
+        }
 
         assert(recvNum > 0);
 
@@ -246,13 +257,19 @@ void* threadDealLoop(void *argv)
 
         /* 解析 */ 
         obj->Lock();
+        bool flag = false;
         assert(NULL != obj->m_pFunc);
         iMax = (obj->m_buf).size();
         for(i=0;i<iMax;i++)
         {
             obj->m_pFunc((obj->m_buf)[i].buf, (obj->m_buf)[i].len);
+            flag = true;
         }
         (obj->m_buf).clear();
+        if(true == flag)
+        {
+            exit(0);
+        }
         obj->UnLock();
     }
 }

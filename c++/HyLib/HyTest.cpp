@@ -59,13 +59,22 @@ HyU32 TestHyTimer(void)
 
 static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
 { 
+    printf("待解析的数据:\n");
+    for(HyU32 i=0; i<len; i++) 
+    {
+        printf("0x%02x,", pBuf[i]);
+    }
+    printf("\n");
+    fflush(stdout);
+    return;
+
     if(gUdpBufSize != len)
     {
-        printf("丢包\n");
+        printf("丢包, gUdpBufSize=%d, len=%d\n", gUdpBufSize, len);
         return;
     }
 
-    for(HyU32 i=0; i<gUdpBufSize; i++)
+    for(HyU32 i=0; i<len; i++)
     {
         if((HyU8)(0x000000FF & i) != pBuf[i])
         {
@@ -106,6 +115,8 @@ HyU32 TestUdp(void)
     {
         sleep(1);
     }
+
+    pServer->Stop(1);
 
     return HY_SUCCESSED;
 }
