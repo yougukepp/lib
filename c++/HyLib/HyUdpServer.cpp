@@ -279,5 +279,6 @@ void* threadDealLoop(void *argv)
     fflush(stdout);
 #endif
 
+    return NULL;
 }
 
