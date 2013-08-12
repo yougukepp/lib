@@ -7,7 +7,6 @@ static void UdpServerDeal(HyU8 *pBuf, HyU32 len);
 static HyU32 TestUdp(void);
 
 const HyU32 gUdpBufSize = 200;
-static HyU32 gUdpDealled = HY_FALSE;
 
 int main(int argc, char *argv[])
 {
@@ -75,7 +74,6 @@ static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
     } 
     
     fflush(stdout);
-    gUdpDealled = HY_TRUE;
 }
 
 HyU32 TestUdp(void)
@@ -100,12 +98,17 @@ HyU32 TestUdp(void)
     }
 
     HyUdpClient *pClient = new HyUdpClient(ip, port);
-    pClient->Send(pBuf, gUdpBufSize);
+    pClient->Send(pBuf, gUdpBufSize); 
+    sleep(1);
 
-    while(HY_TRUE != gUdpDealled)
-    {
-        sleep(1);
-    }
+    pClient->Send(pBuf, gUdpBufSize); 
+    sleep(1);
+
+    pClient->Send(pBuf, gUdpBufSize); 
+    sleep(1);
+
+    pClient->Send(pBuf, gUdpBufSize); 
+    sleep(1);
 
     pServer->Stop(1);
 

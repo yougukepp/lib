@@ -198,7 +198,7 @@ void* threadRecvLoop(void *argv)
 #ifdef __DEBUG_HY_UDP_SERVER__
         int port = ntohs(clientAddr.sin_port);
         const char *addr = inet_ntoa(clientAddr.sin_addr);
-        printf("收到:%d 字节 从%s:%d.\n", recvNum, addr, port);
+        printf("发送方信息%s:%d,字节数:%d.\n", addr, port, recvNum);
 #endif
 
         HyU32 i = 0;
@@ -255,7 +255,7 @@ void* threadDealLoop(void *argv)
         {
             secCount++;
 #ifdef __DEBUG_HY_UDP_SERVER__
-            printf("总计 %ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
+            //printf("%ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
             fflush(stdout);
 #endif
             rst = gettimeofday(&last, NULL);
@@ -275,7 +275,7 @@ void* threadDealLoop(void *argv)
     }
 
 #ifdef __DEBUG_HY_UDP_SERVER__
-    printf("总计 %ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
+    printf("\n总计:\n     %ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
     fflush(stdout);
 #endif
 
