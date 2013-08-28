@@ -48,7 +48,7 @@ class HoleCanvas(QWidget):
         self.doubleBuffer = QPixmap()
 
         self.setAttribute(Qt.WA_TranslucentBackground, True) 
-        #self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.FramelessWindowHint)
 
         timerDraw = QTimer(self)
         timerUpdate = QTimer(self)
