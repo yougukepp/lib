@@ -159,8 +159,10 @@ syntax enable
 " filetype plugin indent off     未改变  关闭    关闭
 filetype plugin indent on
 
-" 以4为单位缩进(c,h,sh,cpp,python,glsl,vim,java文件有效)
+" 以4为单位缩进(c,h,sh,cpp,python,glsl,vim,java,asy文件有效)
 autocmd FileType c,h,sh,cpp,python,glsl,vim,java,asy set shiftwidth=4 | set expandtab
+setlocal et sta sw=4 sts=4
+set cindent
 
 " 语法高亮
 " glsl color
