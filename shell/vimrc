@@ -160,16 +160,21 @@ syntax enable
 filetype plugin indent on
 
 " 以4为单位缩进(c,h,sh,cpp,python,glsl,vim,java文件有效)
-autocmd FileType c,h,sh,cpp,python,glsl,vim,java set shiftwidth=4 | set expandtab
+autocmd FileType c,h,sh,cpp,python,glsl,vim,java,asy set shiftwidth=4 | set expandtab
 
+" 语法高亮
 " glsl color
 au BufNewFile,BufRead *.glsl set syntax=glsl 
+
+" asy color
+au BufNewFile,BufRead *.asy set syntax=asy
 
 " 打开C(H)文件时自动加入骨架文件
 autocmd BufNewFile *.[c]  0read ~/.vim/skeletons/c.c
 autocmd BufNewFile *.[h]  0read ~/.vim/skeletons/h.h
 autocmd BufNewFile *.py  0read ~/.vim/skeletons/py.py
 autocmd BufNewFile *.cpp  0read ~/.vim/skeletons/cpp.cpp
+autocmd BufNewFile *.asy 0read ~/.vim/skeletons/asy.asy
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 色彩方案
