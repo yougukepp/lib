@@ -3,7 +3,7 @@ obj=X11
 ROOT_DIR		= /home/pp/workspace/lib/c++/HyLib/
 INC_DIR			= $(ROOT_DIR)
 
-CC			= c++
+CC			= c++ -Wall -pedantic -pg
 LD			= $(CC)
 CFLAGS			= -Wall -pedantic -I$(INC_DIR)
 LFLAGS			= -Wl,-Bdynamic -lpthread
