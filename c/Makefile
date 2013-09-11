@@ -1,16 +1,16 @@
 include buildvars
 
 all:clean test
-	./test
+	./test -lHyC
 
-test:lib.so
-	gcc -I${INC} lib.so main.c -o test
+test:libHyC.a
+	$(LD) main.c -o test libHyC.a
 
-lib.so:
+libHyC.a:
 	${MAKE} -C taocp
 	${MAKE} -C sicp
 	${MAKE} -C myself
-	${LD} lib/* -o lib.so
+	$(AR) libHyC.a ./lib/*
 
 printVars:
 	@echo ${ROOT_DIR}
@@ -20,9 +20,10 @@ printVars:
 
 clean:
 	${RM} *.stackdump
-	${RM} *.exe
+	${RM} test*
 	${RM} *.o
 	${RM} *.so
+	${RM} *.a
 	${RM} ./lib/*
 	${MAKE} -C taocp clean
 	${MAKE} -C sicp clean
