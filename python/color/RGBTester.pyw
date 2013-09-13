@@ -26,9 +26,9 @@ class RGBTesterWidget(QWidget):
         self.mLabelR = QLabel("R")
         self.mLabelG = QLabel("G")
         self.mLabelB = QLabel("B")
-        self.mLineEditR = QLineEdit("R")
-        self.mLineEditG = QLineEdit("G")
-        self.mLineEditB = QLineEdit("B")
+        self.mLineEditR = QLineEdit("0")
+        self.mLineEditG = QLineEdit("0")
+        self.mLineEditB = QLineEdit("0")
         self.mLineEditR.setMaximumWidth(30)
         self.mLineEditG.setMaximumWidth(30)
         self.mLineEditB.setMaximumWidth(30)
@@ -47,13 +47,32 @@ class RGBTesterWidget(QWidget):
         timer.start(1);
 
     def paintEvent(self, event): 
-        r = self.mLineEditR.text()
-        g = self.mLineEditG.text()
-        b = self.mLineEditB.text()
+        rStr = self.mLineEditR.text()
+        gStr = self.mLineEditG.text()
+        bStr = self.mLineEditB.text()
 
         brush = None
-        if r.isdigit() and g.isdigit() and b.isdigit():
-            brush = QBrush(QColor(int(r), int(g), int(b)));
+        if rStr.isdigit() and gStr.isdigit() and bStr.isdigit():
+            r = int(rStr)
+            g = int(gStr)
+            b = int(bStr)
+
+            if r > 255:
+                r = 255
+            if r < 0:
+                r = 0
+
+            if g > 255:
+                g = 255
+            if g < 0:
+                g = 0
+
+            if b > 255:
+                b = 255
+            if b < 0:
+                b = 0
+
+            brush = QBrush(QColor(r, g, b));
         else:
             brush = QBrush(QColor(0, 0, 0));
 
