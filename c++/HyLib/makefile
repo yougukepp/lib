@@ -21,3 +21,4 @@ clean:
 	$(RM) *.o
 	$(RM) *.a
 	$(RM) $(HyTest)
+	$(RM) *.out
