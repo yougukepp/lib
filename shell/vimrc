@@ -175,6 +175,7 @@ au BufNewFile,BufRead *.asy set syntax=asy
 autocmd BufNewFile *.[c]  0read ~/.vim/skeletons/c.c
 autocmd BufNewFile *.[h]  0read ~/.vim/skeletons/h.h
 autocmd BufNewFile *.py  0read ~/.vim/skeletons/py.py
+autocmd BufNewFile *.pyw  0read ~/.vim/skeletons/pyw.pyw
 autocmd BufNewFile *.cpp  0read ~/.vim/skeletons/cpp.cpp
 autocmd BufNewFile *.asy 0read ~/.vim/skeletons/asy.asy
 

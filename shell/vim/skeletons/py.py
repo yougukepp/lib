@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 def HelloToWife():
-    print("老婆大人，你好!")
+    print("Python的世界是美好的!")
 
 if __name__ == '__main__':
     HelloToWife()
+
 
