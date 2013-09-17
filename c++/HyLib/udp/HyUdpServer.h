@@ -20,7 +20,6 @@ typedef struct
     HyU32               obj_id;
 }TAG_HY_THREAD_OBJ;
 
-/* TODO:加入停止功能 */
 class HyUdpServer
 {
 public:
