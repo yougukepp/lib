@@ -18,13 +18,11 @@ public:
     /* for debug */
     void print(void); 
     
-    /*
     enum HyUdpPackageTypeEnum
     {
         Send,
         Recv
     };
-    */
 
 public:
 
