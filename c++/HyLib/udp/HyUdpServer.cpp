@@ -148,7 +148,6 @@ void HyUdpServer::Start(HyU32 obj_id)
     pthread_create(&m_tDeal, NULL, threadDealLoop, (void*)(&m_self));
 } 
 
-/* TODO */
 void HyUdpServer::Stop(HyU32 obj_id)
 {
     m_running = false;

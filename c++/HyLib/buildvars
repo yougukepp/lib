@@ -1,14 +1,18 @@
 obj=X11
 
-ROOT_DIR		= /home/pp/workspace/lib/c++/HyLib/
-INC_DIR			= $(ROOT_DIR)
+ROOT_DIR		= /home/pp/workspace/lib/c++/HyLib
+LIB_DIR                 = $(ROOT_DIR)/lib
+TIME_DIR                = $(ROOT_DIR)/time
+UDP_DIR                 = $(ROOT_DIR)/udp
+CFG_DIR			= $(ROOT_DIR)/config
 
 CC			= c++ -Wall -pedantic -pg
 LD			= $(CC)
-CFLAGS			= -Wall -pedantic -I$(INC_DIR)
+CFLAGS			= -Wall -pedantic -I$(CFG_DIR) -I$(TIME_DIR) -I$(UDP_DIR)
 LFLAGS			= -Wl,-Bdynamic -lpthread
 
 RM			= rm -rf
 MAKE			= make
 CP			= cp -rf
 AR			= ar -rcs
+

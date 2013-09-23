@@ -13,7 +13,7 @@ module hyCntTb;
     wire int;
 
 
-    // 实例化
+    /* 实例化 */
     hyCnt #(C_WIDTH)inst(
 	    .clk(clk),
 	    .rst_n(rst_n),
@@ -22,7 +22,7 @@ module hyCntTb;
 	    .int(int)
     );
     
-    // 时钟
+    /* 时钟 */
     initial
     begin  
         clk = 0;  
@@ -30,26 +30,26 @@ module hyCntTb;
 	    #(CLK_PERIOD/2) clk = ~clk;  
     end 
 
-    // 复位
+    /* 复位 */
     initial
     begin  
         #0 rst_n = 0;  
 	#20 rst_n = 1;
     end
 
-    // 复位
+    /* 赋值 */
     initial
     begin  
         #12 cnt_in = 32'h000000A5;  
     end
 
-    // 仿真结束
+    /* 仿真结束 */
     initial
     begin
 	    #SIM_PERIOD $finish;
     end
     
-    // 监控
+    /* 监控 */
     initial
         $monitor("At time %t: clk(%b), rst_n(%b), cnt_in(%x), cnt_out(%x), int(%b)",
                   $time, clk, rst_n, cnt_in, cnt_out, int);
