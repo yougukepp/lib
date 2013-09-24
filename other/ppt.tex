@@ -1,26 +1,26 @@
-\documentclass[12pt,a4paper]{beamer}
-%\documentclass[12pt,a4paper]{report}
-%\documentclass{book}
-%\documentclass{article}
-\usetheme{Warsaw}
-
+\documentclass[xcolor=dvipsnames]{beamer}
+%\usecolortheme[named=Brown]{structure}
+\useoutertheme{infolines}
+\usetheme[height=7mm]{Rochester} 
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{items}[ball]
 \usepackage{xeCJK}
 \usepackage{makeidx}
 \usepackage{multirow}
 \usepackage{color}
 \usepackage{graphicx}
-%文泉驿 字体
-%\setCJKmainfont{WenQuanYi Micro Hei}
-%楷体
 \setCJKmainfont{AR PL UKai CN}
+
+% 将日期变为中文格式
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
 
 \begin{document}
 
-\title{幻灯片标题}
-\author{演讲者姓名}
-\institute{机构名}
-\date{日期}
+\title{xelatex幻灯片模板}
+\author{彭鹏}
+\institute{中原电子}
 
+\date{\today}
 \begin{frame}
     \titlepage
 \end{frame}
@@ -33,6 +33,86 @@
 \begin{frame}
     \frametitle{第二张标题}
     第二张幻灯片
+\end{frame}
+
+\begin{frame}
+    \frametitle{演示暂停}
+    \frametitle{第二张标题}
+    我們先說明...  
+    \pause 
+    然後可以發現...  
+    \pause 
+    就是這樣分段! 
+\end{frame}
+
+\begin{frame}
+    \frametitle{演示列表式暂停}
+    \begin{itemize}
+        \item 
+            第一項 
+            \pause
+        \item 
+            第二項 
+            \pause 
+        \item 
+            第三項 
+    \end{itemize} 
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{演示列表式暂停(简单)}
+    \begin{itemize}[<+->]
+        \item
+            第一項
+        \item
+            第二項
+        \item
+            第三項
+    \end{itemize} 
+    %第二张中强调
+    \alert<2>{第二張}才重要
+\end{frame}
+
+\begin{frame}
+    \frametitle{演示重点}
+    \begin{block}{小重點} 
+        重點就是重點。 
+    \end{block}
+
+    \begin{alertblock}{大重點}
+        特別重要的東西。 
+    \end{alertblock} 
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{演示代码}
+    代码如下:
+    \begin{verbatim} 
+    for i in range(10): 
+        print(i)
+    \end{verbatim}
+    带颜色的代码如下:
+    \begin{semiverbatim} 
+    for \alert{i} in range(10): 
+        print(\alert{i})
+    \end{semiverbatim} 
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{演示多栏}
+    \begin{columns} 
+        \begin{column}{5cm} 
+            % 一個5cm的欄
+            這是欄一。 
+        \end{column}
+
+        \begin{column}{5cm} 
+            % 另一個5cm的欄 
+            這是欄二。 
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \end{document}
