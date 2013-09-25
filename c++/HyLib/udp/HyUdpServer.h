@@ -3,15 +3,10 @@
 
 #include "HyConfig.h"
 #include "HyHeader.h"
+#include "HyUdpPackage.h"
 
+class HyUdpPackage;
 class HyUdpServer;
-
-/* TODO: 封装为类 */
-typedef struct
-{
-    HyU8 buf[HY_UDP_SERVER_RECV_PKG_MAX_LEN];
-    HyU32 len;
-}TAG_HY_UDP_PKG;
 
 /* TODO:封装为类 */
 typedef struct
@@ -33,7 +28,7 @@ public:
 public:                         /* 仅供静态函数使用 */
     int  m_sockFd;
     bool m_running;
-    std::vector<TAG_HY_UDP_PKG> m_buf;
+    std::vector<HyUdpPackage> m_buf;
     HyUdpServerDealCallBackFunc m_pFunc;
 
     void Lock(void);

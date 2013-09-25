@@ -1,5 +1,9 @@
 ﻿#include "HyUdpClient.h"
 
+/*
+ * TODO: 初始化时 空参数列表
+ *       发送时传递 HyUdpPackage
+ * */
 HyUdpClient::HyUdpClient(const HyC *ip, HyU32 port)
 {
     if(HY_SUCCESSED == InitSocket())

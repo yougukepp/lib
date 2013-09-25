@@ -58,9 +58,19 @@ HyU32 TestHyTimer(void)
 
 static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
 { 
+#if 0
+    printf("%s\n", __func__);
+    for(HyU32 i=0; i<len; i++)
+    {
+        printf("0x%02x,", pBuf[i]);
+    }
+    fflush(stdout);
+#endif
+
     if(gUdpBufSize != len)
     {
         printf("丢包, gUdpBufSize=%d, len=%d\n", gUdpBufSize, len);
+        fflush(stdout);
         return;
     }
 
@@ -69,11 +79,10 @@ static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
         if((HyU8)(0x000000FF & i) != pBuf[i])
         {
             printf("第%d字节传错, 预期:0x%02x, 实际:0x%02x\n", i, (HyU8)(0x000000FF & i), pBuf[i]);
+            fflush(stdout);
             return;
         }
     } 
-    
-    fflush(stdout);
 }
 
 HyU32 TestUdp(void)

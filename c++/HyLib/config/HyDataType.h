@@ -20,6 +20,7 @@
 typedef char HyC;
 typedef int Hy32;
 typedef unsigned char HyU8;
+typedef unsigned short HyU16;
 typedef unsigned int HyU32;
 typedef double HyFloat;
 typedef long HyU64;

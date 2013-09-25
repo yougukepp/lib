@@ -194,25 +194,17 @@ void* threadRecvLoop(void *argv)
         }
         assert(recvNum > 0);
 
-#ifdef __DEBUG_HY_UDP_SERVER__
-        int port = ntohs(clientAddr.sin_port);
-        const char *addr = inet_ntoa(clientAddr.sin_addr);
-        printf("发送方信息%s:%d,字节数:%d.\n", addr, port, recvNum);
-#endif
+        HyU16 port = ntohs(clientAddr.sin_port);
+        const HyU8 *addr = (const HyU8 *)inet_ntoa(clientAddr.sin_addr);
 
-        HyU32 i = 0;
-        HyU32 length = 0;
-        TAG_HY_UDP_PKG pkg;
-        length = recvNum;
-        for(i=0;i<length;i++)
-        {
-            pkg.buf[i] = buf[i];
-        }
-        pkg.len = length;
+        HyUdpPackage pkg(HyUdpPackageRecv,
+                buf, recvNum,
+                addr, port);
 
         obj->Lock();
         (obj->m_buf).push_back(pkg);
         obj->UnLock();
+
 
         gTotalBytes += recvNum;
     }
@@ -254,7 +246,7 @@ void* threadDealLoop(void *argv)
         {
             secCount++;
 #ifdef __DEBUG_HY_UDP_SERVER__
-            //printf("%ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
+            printf("%ld 字节 %f Bytes/s\n", gTotalBytes, 1.0 * gTotalBytes / secCount);
             fflush(stdout);
 #endif
             rst = gettimeofday(&last, NULL);
@@ -267,7 +259,10 @@ void* threadDealLoop(void *argv)
         iMax = (obj->m_buf).size();
         for(i=0;i<iMax;i++)
         {
-            obj->m_pFunc((obj->m_buf)[i].buf, (obj->m_buf)[i].len);
+            HyU8 *pBuf = (obj->m_buf)[i].GetBuf();
+            size_t bufSize = (obj->m_buf)[i].GetBufSize();
+
+            obj->m_pFunc(pBuf, bufSize);
         }
         (obj->m_buf).clear();
         obj->UnLock();
