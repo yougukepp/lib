@@ -16,15 +16,153 @@
 
 \begin{document}
 
-\title{xelatex幻灯片模板}
+\title{Python初探}
 \author{彭鹏}
-\institute{中原电子}
+\institute{汉仪通信}
 
 \date{\today}
 \begin{frame}
     \titlepage
 \end{frame}
 
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[pausesections]
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{大纲}
+    \begin{itemize}[<+->]
+        \item
+            Python介绍
+        \item
+            Python基本使用
+        \item
+            Python实例
+        \item
+            参考资料
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python介绍--历史}
+    Python是自由软件的丰硕成果之一
+    \begin{itemize}[<+->]
+        \item 
+            \alert{创始人}是Guido van Rossum
+        \item
+            \alert{时间地点}是1989圣诞期间与阿姆斯特丹
+        \item
+            \alert{名字来源}与创始人是大蟒蛇飞行马戏团爱好者
+        \item
+            \alert{发展渊源}从ABC发展而来主要受Modula-3的影响结合了Unix shell和C的习惯
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python介绍--特点与用途}
+    Python是一种面向对象、直译式语言 
+    
+    Python PK C/C++
+    \begin{itemize}[<+->]
+        \item 
+            \alert{优点}有简单易学、跨平台、标准库全面内建强大的数据结构(列表、字典)自动管理内存、易于扩展、解释执行 免费、开源
+        \item
+            \alert{缺点}有相对于C/C++运行速度慢
+        \item
+            \alert{用途}除性能要求严苛的应用(例如实时kernel)外的所有用途，如：原型开发、科学计算、日常管理、GUI、游戏开发等。
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python介绍--安装}
+    Python是每个平台都使用平台原声的安装方式，这里以Linux及Windows平台举例
+    \begin{itemize}[<+->]
+        \item
+            Ubuntu(Linux)
+            
+            sudo apt-get intall python3 
+        \item
+            Windowx
+
+            64位机：http://www.python.org/ftp/python/3.3.2/python-3.3.2.amd64.msi
+            32位机：http://www.python.org/ftp/python/3.3.2/python-3.3.2.msi
+            下载完成后，Next到Finish即可
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python介绍--学习方法}
+    Python开发\alert{八荣八耻}
+    \pause 
+
+    以动手实践为荣，以只看不练为耻。
+    \pause 
+
+    以打印日志为荣，以单步跟踪为耻。
+    \pause 
+
+    以空白分隔为荣，以制表分隔为耻。
+    \pause 
+
+    以单元测试为荣，以手工测试为耻。
+    \pause 
+
+    以代码重用为荣，以复制粘贴为耻。
+    \pause 
+
+    以多态应用为荣，以分支判断为耻。
+    \pause 
+
+    以Pythonic为荣，以冗余拖沓为耻。
+    \pause 
+
+    以总结思考为荣，以不求甚解为耻。
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python基本使用--启动}
+    Python有命令行、脚本两种启动方式
+    \begin{itemize}[<+->]
+        \item 命令行:
+            
+            Linux:   在终端中键入 python
+            Windows: 在dos提示符中键入 python
+        \item 脚本:
+
+            将Python代码存入脚本文件，然后在命令行模式中使用脚本文件名作为参数启动python如: python hello.py
+    \end{itemize} 
+    \only<2->{当然啦，GUI系统中双击也是可以滴……}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python基本使用—变量、表达式、语句}
+    \begin{itemize}[<+->]
+        \item 变量赋值: 
+            \begin{semiverbatim} 
+            % 如何两边对其
+            a = 1           a是一个整形,值为1
+
+            b = "test"      b是一个字符串,值为"test"
+
+            a,b = 1,"test"  \alert{多元赋值},与前两句等效
+            \end{semiverbatim} 
+        \item 表达式和运算符(+、-、*、/、\%、**等):
+            c = 3 + 2       加法
+            d = 3 ** 2      平方
+            e = 3 \% 2      取余数
+            f = "I Love" + "Python." 字符串连接，d的值为:I Love Python.
+            python数值运算没有限制(仅有硬件内存限制位宽、CPU限制性能):
+            g = 1234 ** 4321
+        \item 语句:
+            message = "Hello World"   赋值
+            print(message)            输出
+            源码:e1.py
+    \end{itemize} 
+\end{frame}
+
+% 以下帧是模板
 \begin{frame}
     \frametitle{第一张标题}
     第一张幻灯片
@@ -58,7 +196,6 @@
             第三項 
     \end{itemize} 
 \end{frame}
-
 
 \begin{frame}
     \frametitle{演示列表式暂停(简单)}
