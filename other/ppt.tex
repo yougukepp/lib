@@ -13,6 +13,18 @@
 
 % 将日期变为中文格式
 \renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
+% 将一行分为左右两侧 类似于两边对其
+\newcommand{\twoColumn}[2]{
+\begin{columns}
+    \begin{column}{4cm}
+        {#1}
+    \end{column}
+    \begin{column}{6cm}
+        {#2}
+    \end{column}
+\end{columns}
+}
+
 
 \begin{document}
 
@@ -94,71 +106,68 @@
 
 \begin{frame}
     \frametitle{Python介绍--学习方法}
-    Python开发\alert{八荣八耻}
-    \pause 
-
-    以动手实践为荣，以只看不练为耻。
-    \pause 
-
-    以打印日志为荣，以单步跟踪为耻。
-    \pause 
-
-    以空白分隔为荣，以制表分隔为耻。
-    \pause 
-
-    以单元测试为荣，以手工测试为耻。
-    \pause 
-
-    以代码重用为荣，以复制粘贴为耻。
-    \pause 
-
-    以多态应用为荣，以分支判断为耻。
-    \pause 
-
-    以Pythonic为荣，以冗余拖沓为耻。
-    \pause 
-
-    以总结思考为荣，以不求甚解为耻。
+    Python开发\alert{八荣八耻}\\
+    \begin{center}
+        \pause
+        以动手实践为荣，以只看不练为耻。\\
+        \pause
+        以打印日志为荣，以单步跟踪为耻。\\
+        \pause
+        以空白分隔为荣，以制表分隔为耻。\\
+        \pause
+        以单元测试为荣，以手工测试为耻。\\
+        \pause
+        以代码重用为荣，以复制粘贴为耻。\\
+        \pause
+        以多态应用为荣，以分支判断为耻。\\
+        \pause
+        以Pythonic为荣，以冗余拖沓为耻。\\
+        \pause 
+        以总结思考为荣，以不求甚解为耻。\\
+    \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Python基本使用--启动}
-    Python有命令行、脚本两种启动方式
+    Python有多种启动方式
     \begin{itemize}[<+->]
-        \item 命令行:
-            
+        \item 命令行:\\
             Linux:   在终端中键入 python
             Windows: 在dos提示符中键入 python
-        \item 脚本:
-
+        \item 脚本:\\
             将Python代码存入脚本文件，然后在命令行模式中使用脚本文件名作为参数启动python如: python hello.py
+        \item 当然啦，GUI系统中双击也是可以滴\ldots
     \end{itemize} 
-    \only<2->{当然啦，GUI系统中双击也是可以滴……}
 \end{frame}
 
 \begin{frame}
     \frametitle{Python基本使用—变量、表达式、语句}
-    \begin{itemize}[<+->]
+    \begin{itemize}
         \item 变量赋值: 
-            \begin{semiverbatim} 
-            % 如何两边对其
-            a = 1           a是一个整形,值为1
-
-            b = "test"      b是一个字符串,值为"test"
-
-            a,b = 1,"test"  \alert{多元赋值},与前两句等效
-            \end{semiverbatim} 
+            \pause
+            \twoColumn{a = 1}{a为整形,值1.}
+            \pause
+            \twoColumn{b = "test"}{b字符串,值"test".}
+            \pause
+            \twoColumn{a, b = 1,"test"}{\alert{多元赋值},可以用来交换变量的值}
+            \pause
         \item 表达式和运算符(+、-、*、/、\%、**等):
-            c = 3 + 2       加法
-            d = 3 ** 2      平方
-            e = 3 \% 2      取余数
-            f = "I Love" + "Python." 字符串连接，d的值为:I Love Python.
-            python数值运算没有限制(仅有硬件内存限制位宽、CPU限制性能):
-            g = 1234 ** 4321
+            \pause
+            \twoColumn{c = 3 + 2}{加法}
+            \pause
+            \twoColumn{e = 3 \% 2}{取余数}
+            \pause
+            \twoColumn{f = "Pyt" + "hon"}{字符串连接,d值为:Python.}
+            \pause
+            \twoColumn{d = 3 ** 4321}{\alert{求幂},python数值运算仅由硬件内存限制运算位宽,CPU限制性能.}
+            \pause
         \item 语句:
-            message = "Hello World"   赋值
-            print(message)            输出
-            源码:e1.py
+            \pause
+            \twoColumn{message = "Hello!"}{赋值}
+            \pause
+            \twoColumn{print(message)}{打印输出}
+            \pause
+        \item 源码: e1.py
     \end{itemize} 
 \end{frame}
 
@@ -244,7 +253,6 @@
             % 一個5cm的欄
             這是欄一。 
         \end{column}
-
         \begin{column}{5cm} 
             % 另一個5cm的欄 
             這是欄二。 
