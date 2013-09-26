@@ -3,7 +3,8 @@
 static HyU32 TestHyTimer(void);
 static void timerCallBackFunc(void *pPara);
 
-static void UdpServerDeal(HyU8 *pBuf, HyU32 len);
+static void UdpServerDeal(HyUdpPackage &pkg);
+
 static HyU32 TestUdp(void);
 
 const HyU32 gUdpBufSize = 200;
@@ -26,6 +27,9 @@ static void timerCallBackFunc(void *pPara)
     p = (HyU32 *)pPara;
     /* TODO: 使用timer时需要写时锁 */
     *p = (*p) + 1;
+
+    printf("完成周期操作%s:%d.\n", __func__, *p);
+    fflush(stdout);
 }
 
 HyU32 TestHyTimer(void)
@@ -38,14 +42,14 @@ HyU32 TestHyTimer(void)
     pTimerCallBackFunc = timerCallBackFunc;
     HyU32 tickCount = 0;
     pTimerCallBackFuncPara = &tickCount;
-    HyU32 sleepTime = 1;                                /* s */
+    HyU32 sleepTime = 2000;                             /* us */
     HyU32 intervalTime = 1;                             /* ms */
 
     pTimer->SetInterval(intervalTime);
     pTimer->SetCallBackFunc(pTimerCallBackFunc, pTimerCallBackFuncPara);
     pTimer->Start();
 
-    sleep(sleepTime);
+    usleep(sleepTime);
     if(0 != tickCount)
     {
         rst = HY_SUCCESSED;
@@ -56,20 +60,24 @@ HyU32 TestHyTimer(void)
     return rst;
 }
 
-static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
+static void UdpServerDeal(HyUdpPackage &pkg)
 { 
-#if 0
-    printf("%s\n", __func__);
-    for(HyU32 i=0; i<len; i++)
-    {
-        printf("0x%02x,", pBuf[i]);
-    }
+    HyC ipBuf[20];
+    HyU16 port = 0;
+    HyU8 *pBuf = NULL;
+    size_t len = 0;
+
+    pkg.GetIp(ipBuf, 20);
+    pkg.GetPort(port);
+    pBuf = pkg.GetBuf();
+    len = pkg.GetBufSize();
+
+    printf("开始处理接收%s:%d(0x%04x)发送的%ld字节.\n", ipBuf, port, port, len);
     fflush(stdout);
-#endif
 
     if(gUdpBufSize != len)
     {
-        printf("丢包, gUdpBufSize=%d, len=%d\n", gUdpBufSize, len);
+        printf("丢包, gUdpBufSize=%d, pkg.GetBufSize()=%ld\n", gUdpBufSize, len);
         fflush(stdout);
         return;
     }
@@ -87,6 +95,7 @@ static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
 
 HyU32 TestUdp(void)
 { 
+    HyU32 sleepTime = 2000;                             /* us */
     HyU16 port = 0;
     HyUdpServerDealCallBackFunc pDealFunc = NULL;
 
@@ -113,16 +122,10 @@ HyU32 TestUdp(void)
             ip, port);
 
     pClient->Send(pkg); 
-    sleep(1);
+    usleep(sleepTime);
 
     pClient->Send(pkg); 
-    sleep(1);
-
-    pClient->Send(pkg); 
-    sleep(1);
-
-    pClient->Send(pkg); 
-    sleep(1);
+    usleep(sleepTime);
 
     pServer->Stop(1);
 

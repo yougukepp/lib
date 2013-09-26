@@ -263,13 +263,7 @@ void* threadDealLoop(void *argv)
         iMax = (obj->m_buf).size();
         for(i=0;i<iMax;i++)
         {
-            /*
-             * TODO: 处理时页按照  HyUdpPackage处理
-             */
-            HyU8 *pBuf = (obj->m_buf)[i].GetBuf();
-            size_t bufSize = (obj->m_buf)[i].GetBufSize();
-
-            obj->m_pFunc(pBuf, bufSize);
+            obj->m_pFunc((obj->m_buf)[i]);
         }
         (obj->m_buf).clear();
         obj->UnLock();

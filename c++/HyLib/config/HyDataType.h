@@ -28,6 +28,7 @@ typedef long HyU64;
 typedef void (*HyCallBackFunc)(void);
 typedef void (*HyCallBackFuncWithPara)(void *pPara); 
 
-typedef void (*HyUdpServerDealCallBackFunc)(HyU8 *pBuf, HyU32 len);
+class HyUdpPackage;
+typedef void (*HyUdpServerDealCallBackFunc)(HyUdpPackage &pkg);
 
 #endif

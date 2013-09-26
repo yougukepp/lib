@@ -42,9 +42,20 @@ void HyUdpPackage::GetAddrPtr(struct sockaddr_in *pAddr)
     pAddr->sin_family = AF_INET;
     pAddr->sin_addr.s_addr = inet_addr(m_addr);
     pAddr->sin_port = htons(m_port);
+} 
+
+void HyUdpPackage::GetIp(HyC *pIp, Hy32 len)
+{
+    strncpy(pIp, m_addr, len);
+}
+
+void HyUdpPackage::GetPort(HyU16 &port)
+{
+    port = m_port;
 }
 
 HyUdpPackage::~HyUdpPackage(void)
 {
+    m_data.clear();
 }
 

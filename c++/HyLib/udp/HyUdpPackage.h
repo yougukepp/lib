@@ -19,7 +19,10 @@ public:
     HyU8 *GetBuf(void);
     size_t GetBufSize(void);
 
+    /* 尽可能将指针换为引用 */
     void GetAddrPtr(struct sockaddr_in *pAddr);
+    void GetIp(HyC *pIp, Hy32 len);
+    void GetPort(HyU16 &port);
 
     /* for debug */
     void DebugOut(void);
