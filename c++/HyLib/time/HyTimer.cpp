@@ -6,6 +6,13 @@ HyTimer::HyTimer(void)
 {
     m_interval = 0;
     m_callBackFunc = NULL;
+} 
+
+HyTimer::~HyTimer(void)
+{
+    Stop();
+    m_callBackFunc = NULL;
+    m_interval = 0;
 }
 
 void HyTimer::SetInterval(int ms)

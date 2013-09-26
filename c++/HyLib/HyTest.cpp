@@ -57,6 +57,13 @@ HyU32 TestHyTimer(void)
 
     pTimer->Stop();
 
+    sleepTime = 5 * 1000 * 1000;                        /* 休眠5s */
+    usleep(sleepTime);
+    pTimer->Start();
+    sleepTime = 2000;
+    usleep(sleepTime);
+    delete pTimer;
+
     return rst;
 }
 

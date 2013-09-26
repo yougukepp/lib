@@ -8,6 +8,7 @@ class HyTimer
 {
 public:
     HyTimer(void);
+    virtual ~HyTimer(void);
     void SetInterval(int ms);
     void SetCallBackFunc(HyCallBackFuncWithPara callBackFunc, void *pPara);
     void Start(void);
