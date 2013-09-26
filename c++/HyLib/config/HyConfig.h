@@ -24,8 +24,8 @@
 
 #define         HY_UDP_SERVER_RECV_PKG_MAX_LEN  (2048)
 
-//#define         __DEBUG_HY_UDP_SERVER__
-//#define         __DEBUG_HY_UDP_PACKAGE__
+#define         __DEBUG_HY_UDP_SERVER__
+#define         __DEBUG_HY_UDP_CLIENT__
 /**************************** 类型定义 ***************************/
 
 

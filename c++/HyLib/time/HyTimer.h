@@ -1,6 +1,7 @@
 #ifndef __HY_TIMER_H__
 #define __HY_TIMER_H__
 
+#include "HyConfig.h"
 #include "HyHeader.h"
 
 class HyTimer

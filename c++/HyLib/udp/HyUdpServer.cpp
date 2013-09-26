@@ -16,7 +16,7 @@ HyUdpServer::HyUdpServer(HyU32 port)
     if (HY_SUCCESSED == InitSocket())                           /* 初始化套接字 */
     {
 #ifdef __DEBUG_HY_UDP_SERVER__
-        printf("初始化UDP服务器OK!\n");
+        printf("初始化UDP服务器OK.\n");
 #endif
         if (HY_SUCCESSED == BindToPort(port))                   /* 绑定监听端口 */
         {
@@ -186,25 +186,29 @@ void* threadRecvLoop(void *argv)
             if((EAGAIN == errno)
             || (EWOULDBLOCK == errno))
             {
-                /* TODO: 阻塞延迟1ms 提升性能
+                /* 阻塞延迟1ms 提升性能
                  * buf 为100k <==> 1ms
-                 * ====> 100M/s */
+                 * ====> 最大吞吐率 100M/s */
+                usleep(1000);
                 continue;
             }
         }
         assert(recvNum > 0);
 
         HyU16 port = ntohs(clientAddr.sin_port);
-        const HyU8 *addr = (const HyU8 *)inet_ntoa(clientAddr.sin_addr);
+        const HyC *addr = (const HyC *)inet_ntoa(clientAddr.sin_addr);
 
         HyUdpPackage pkg(HyUdpPackageRecv,
                 buf, recvNum,
                 addr, port);
 
+#ifdef __DEBUG_HY_UDP_SERVER__
+        pkg.DebugOut();
+#endif
+
         obj->Lock();
         (obj->m_buf).push_back(pkg);
         obj->UnLock();
-
 
         gTotalBytes += recvNum;
     }
@@ -259,6 +263,9 @@ void* threadDealLoop(void *argv)
         iMax = (obj->m_buf).size();
         for(i=0;i<iMax;i++)
         {
+            /*
+             * TODO: 处理时页按照  HyUdpPackage处理
+             */
             HyU8 *pBuf = (obj->m_buf)[i].GetBuf();
             size_t bufSize = (obj->m_buf)[i].GetBufSize();
 

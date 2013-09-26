@@ -13,19 +13,16 @@ enum HyUdpPackageTypeEnum
 class HyUdpPackage
 {
 public:
-    HyUdpPackage(enum HyUdpPackageTypeEnum type, HyU8 *buf, HyU32 bufSize, const HyU8 *ip, HyU16 port);
+    HyUdpPackage(enum HyUdpPackageTypeEnum type, HyU8 *buf, HyU32 bufSize, const HyC *ip, HyU16 port);
     virtual ~HyUdpPackage(void);
 
     HyU8 *GetBuf(void);
     size_t GetBufSize(void);
 
-    /*
-    struct sockaddr_in *GetAddrPtr(void);
-    socklen_t GetAddrLen(void);
-    */
+    void GetAddrPtr(struct sockaddr_in *pAddr);
 
     /* for debug */
-    void print(void); 
+    void DebugOut(void);
     
 public:
 
@@ -37,7 +34,7 @@ private:
     HyUdpPackage();
 
     enum HyUdpPackageTypeEnum m_type;
-    const HyU8 *m_addr;
+    const HyC *m_addr;
     HyU16 m_port;
     std::vector<HyU8> m_data;
 };

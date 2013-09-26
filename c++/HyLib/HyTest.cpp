@@ -24,7 +24,7 @@ static void timerCallBackFunc(void *pPara)
 {
     HyU32 *p = NULL;
     p = (HyU32 *)pPara;
-    /* TODO: 需要写时锁? */
+    /* TODO: 使用timer时需要写时锁 */
     *p = (*p) + 1;
 }
 
@@ -87,7 +87,7 @@ static void UdpServerDeal(HyU8 *pBuf, HyU32 len)
 
 HyU32 TestUdp(void)
 { 
-    HyU32 port = 0;
+    HyU16 port = 0;
     HyUdpServerDealCallBackFunc pDealFunc = NULL;
 
     port = 5802;
@@ -106,17 +106,22 @@ HyU32 TestUdp(void)
         pBuf[i] = (HyU8)(0x000000FF & i);
     }
 
-    HyUdpClient *pClient = new HyUdpClient(ip, port);
-    pClient->Send(pBuf, gUdpBufSize); 
+    HyUdpClient *pClient = new HyUdpClient(); 
+    
+    HyUdpPackage pkg(HyUdpPackageSend,
+            pBuf, gUdpBufSize,
+            ip, port);
+
+    pClient->Send(pkg); 
     sleep(1);
 
-    pClient->Send(pBuf, gUdpBufSize); 
+    pClient->Send(pkg); 
     sleep(1);
 
-    pClient->Send(pBuf, gUdpBufSize); 
+    pClient->Send(pkg); 
     sleep(1);
 
-    pClient->Send(pBuf, gUdpBufSize); 
+    pClient->Send(pkg); 
     sleep(1);
 
     pServer->Stop(1);
