@@ -7,6 +7,7 @@ HyTime = hyTime
 HyUdp = hyUdp
 
 all: clean $(HyLib) $(HyTest)
+	./$(HyTest)
 
 $(HyTest): $(HyLib) HyTest.cpp
 	$(CC) -c $(CFLAGS) HyTest.cpp -o HyTest.o

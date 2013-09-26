@@ -8,21 +8,14 @@
 class HyUdpPackage;
 class HyUdpServer;
 
-/* TODO:封装为类 */
-typedef struct
-{
-    HyUdpServer*        obj;
-    HyU32               obj_id;
-}TAG_HY_THREAD_OBJ;
-
 class HyUdpServer
 {
 public:
     HyUdpServer(HyU32 port);
     virtual ~HyUdpServer();
 
-    void Start(HyU32 obj_id);
-    void Stop(HyU32 obj_id);
+    void Start(void);
+    void Stop(void);
     void SetDealFunc(HyUdpServerDealCallBackFunc pFunc);
 
 public:                         /* 仅供静态函数使用 */
@@ -49,8 +42,6 @@ private:
     pthread_t                   m_tDeal;
 
     pthread_mutex_t             m_mutex;
-private:
-    TAG_HY_THREAD_OBJ           m_self;
 };
 
 #endif

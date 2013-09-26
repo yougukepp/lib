@@ -138,17 +138,14 @@ void HyUdpServer::SetSysUdpBuf(HyU32 size)
     assert(0 == rst);
 }
 
-void HyUdpServer::Start(HyU32 obj_id)
+void HyUdpServer::Start(void)
 {
-    m_self.obj = this;
-    m_self.obj_id = obj_id;
-
     m_running = true;
-    pthread_create(&m_tRecv, NULL, threadRecvLoop, (void*)(&m_self));
-    pthread_create(&m_tDeal, NULL, threadDealLoop, (void*)(&m_self));
+    pthread_create(&m_tRecv, NULL, threadRecvLoop, (void*)(this));
+    pthread_create(&m_tDeal, NULL, threadDealLoop, (void*)(this));
 } 
 
-void HyUdpServer::Stop(HyU32 obj_id)
+void HyUdpServer::Stop(void)
 {
     m_running = false;
     pthread_join(m_tDeal, NULL);
@@ -157,11 +154,10 @@ void HyUdpServer::Stop(HyU32 obj_id)
 
 void* threadRecvLoop(void *argv)
 {
-    HyU8 buf[100 * 1024];
-    TAG_HY_THREAD_OBJ* to = (TAG_HY_THREAD_OBJ*)argv;
-    HyUdpServer *obj = to->obj;
+    assert(NULL != argv);
 
-    //assert((obj->m_sockFd) >= 0);
+    HyU8 buf[100 * 1024];
+    HyUdpServer *obj = (HyUdpServer*)argv;
 
     struct sockaddr_in clientAddr;
     int len = 0;
@@ -218,8 +214,7 @@ void* threadRecvLoop(void *argv)
 
 void* threadDealLoop(void *argv)
 {
-    TAG_HY_THREAD_OBJ* to = (TAG_HY_THREAD_OBJ*)argv;
-    HyUdpServer* obj = to->obj;
+    HyUdpServer* obj = (HyUdpServer *)argv;
 
     HyU32 i = 0;
     HyU32 iMax = 0;

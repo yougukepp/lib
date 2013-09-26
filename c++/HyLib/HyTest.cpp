@@ -25,7 +25,7 @@ static void timerCallBackFunc(void *pPara)
 {
     HyU32 *p = NULL;
     p = (HyU32 *)pPara;
-    /* TODO: 使用timer时需要写时锁 */
+    /* TODO: 使用timer时需要写时锁(该函数在独立线程运行) */
     *p = (*p) + 1;
 
     printf("完成周期操作%s:%d.\n", __func__, *p);
@@ -104,7 +104,7 @@ HyU32 TestUdp(void)
 
     HyUdpServer *pServer = new HyUdpServer(port);
     pServer->SetDealFunc(pDealFunc);
-    pServer->Start(1);
+    pServer->Start();
 
     const HyC *ip = NULL;
     HyU8 pBuf[gUdpBufSize];
@@ -127,7 +127,7 @@ HyU32 TestUdp(void)
     pClient->Send(pkg); 
     usleep(sleepTime);
 
-    pServer->Stop(1);
+    pServer->Stop();
 
     return HY_SUCCESSED;
 }
