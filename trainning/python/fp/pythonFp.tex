@@ -69,24 +69,28 @@
 \setcounter{secnumdepth}{5}
 
 \title{Python函数式编程指南}
-\author{AstralWind(彭鹏\footnote{yougukepp@gmail.com}整理)}
+\author{AstralWind\footnote{\url{http://www.cnblogs.com/huxi/archive/2011/07/15/2107536.html}}(彭鹏\footnote{yougukepp@gmail.com}整理)}
 
 \begin{document}
 \maketitle
 \tableofcontents
 
 \begin{abstract}
-网上找到了Python函数式编程的优秀博文一篇，为了避免遗失及熟悉xelatex排版，所以全文整理,我只负责整理，版权归作者所有。
+网上找到了Python函数式编程的优秀博文一篇，为了避免遗失及熟悉xelatex排版，所以全文整理，我只负责整理，版权归作者所有。
 \end{abstract}
 
 \chapter{概述}
 这大概算是Python最难啃的一块骨头吧。在我Python生涯的这一年里，我遇到了一些Pythoner，他们毫无例外地完全不会使用函数式编程（有些人喜欢称为Pythonic），比如，从来不会传递函数，不知道lambda是什么意思，知道列表展开但从来不知道用在哪里，对Python不提供经典for循环感到无所适从，言谈之中表现出对函数式风格的一种抗拒甚至厌恶。 
 
-我尝试剖析这个问题，最终总结了这么两个原因：1、不想改变，认为现有的知识可以完成任务；2、对小众语言的歧视，Python目前在国内市场份额仍然很小很小，熟悉Python风格用处不大。 
+我尝试剖析这个问题，最终总结了这么两个原因：
+\begin{enumerate}
+    \item 不想改变，认为现有的知识可以完成任务；
+    \item 对小众语言的歧视，Python目前在国内市场份额仍然很小很小，熟悉Python风格用处不大。 
+\end{enumerate}
 
 然而我认为，学习使用一种截然不同的风格可以颠覆整个编程的思想。我会慢慢总结一个系列共4篇文字，篇幅都不大，轻松就能看完，希望对喜欢Python的人们有所帮助，因为我个人确实从中受益匪浅。 
 
-还是那句老话，尊重作者的劳动，转载请注明原作者和原地址：）原文链接：\url{http://www.cnblogs.com/huxi/archive/2011/07/15/2107536.html}
+还是那句老话，尊重作者的劳动，转载请注明原作者和原地址。
 \section{什么是函数式编程？} 
 函数式编程使用一系列的函数解决问题。函数仅接受输入并产生输出，不包含任何能影响产生输出的内部状态。任何情况下，使用相同的参数调用函数始终能产生同样的结果。
 
