@@ -4,7 +4,7 @@ INC=${ROOT_DIR}/inc
 CC=gcc -c -Wall -O2 -pedantic -std=c99 -I${INC}
 AR= ar -rcs
 LD=gcc -Wall -O2 -pedantic -std=c99 -I${INC}
-RM=rm -f
+RM=rm -rf
 MAKE=make
 CP=cp -rvf
 

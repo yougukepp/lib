@@ -7,6 +7,7 @@ test:libHyC.a
 	$(LD) main.c -o test libHyC.a
 
 libHyC.a:
+	mkdir ./lib
 	${MAKE} -C taocp
 	${MAKE} -C sicp
 	${MAKE} -C myself
@@ -24,7 +25,7 @@ clean:
 	${RM} *.o
 	${RM} *.so
 	${RM} *.a
-	${RM} ./lib/*
+	${RM} ./lib
 	${MAKE} -C taocp clean
 	${MAKE} -C sicp clean
 	${MAKE} -C myself clean
