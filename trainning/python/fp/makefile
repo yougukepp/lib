@@ -1,7 +1,7 @@
 all:clean
-	xelatex document.tex
-	xelatex document.tex 
-	evince document.pdf
+	xelatex pythonFp.tex
+	xelatex pythonFp.tex 
+	evince pythonFp.pdf
 clean:
-	rm -rf document.aux document.idx document.log document.pdf document.toc document.out document.snm document.nav document.vrb
+	rm -rf pythonFp.aux pythonFp.idx pythonFp.log pythonFp.pdf pythonFp.toc pythonFp.out pythonFp.snm pythonFp.nav pythonFp.vrb
 
