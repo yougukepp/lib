@@ -19,6 +19,9 @@
 \renewcommand{\lstlistingname}{Code Listing}
 \definecolor{gray}{gray}{0.5}
 \definecolor{green}{rgb}{0,0.5,0}
+\definecolor{red}{rgb}{0.5,0,0}
+\definecolor{blue}{rgb}{0,0,0.5}
+\definecolor{yellow}{rgb}{0.5,0.5,0}
 
 \lstnewenvironment{python}[1][]{
     \lstset{
@@ -28,10 +31,8 @@
         showstringspaces=false,
         alsoletter={1234567890},
         otherkeywords={\ , \}, \{},
-        keywordstyle=\color{blue},
-        emph={access,and,break,class,continue,def,del,elif ,else,%
-            except,exec,finally,for,from,global,if,import,in,i s,%
-        lambda,not,or,pass,print,raise,return,try,while},
+        keywordstyle=\color{yellow},
+        emph={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},
         emphstyle=\color{orange}\bfseries,
         emph={[2]True, False, None, self},
         emphstyle=[2]\color{green},
