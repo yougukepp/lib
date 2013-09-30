@@ -38,5 +38,6 @@ void HyUdpClient::Send(HyUdpPackage &pkg)
     pkg.DebugOut();
 #endif
 
+    close(sockFd);
 }
 
