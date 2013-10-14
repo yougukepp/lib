@@ -4,8 +4,10 @@
 from PyQt4.QtGui import QApplication
 from PyQt4.QtGui import QPainter
 from PyQt4.QtGui import QColor
-from dataType.Points import Points
+from dataType.Lines import Lines
 from BaseCanvas import BaseCanvas, Ga2Screen
+
+from algorithm.LineIntersection import LineIntersection
 
 class LineIntersectionCanvas(BaseCanvas):
     mIntersectionPoints = {}
@@ -44,7 +46,15 @@ class LineIntersectionCanvas(BaseCanvas):
         self.DrawPoint(painter, Ga2Screen(points[-1]))
 
     def Make(self):
-        print("需要平衡二分查找树,过于复杂,暂未实现。")
+        points = self.GetInputPoints()
+        if 0 != points.Size() % 2:
+            print("两点确定线段，但输入有孤立的点")
+            return
+
+        lines = Lines(points)
+        IntersectionDict = {}
+        LineIntersection(lines, IntersectionDict)
+        self.repaint()
 
 if __name__ == "__main__":
     import sys

@@ -7,7 +7,7 @@ class Line():
     mStartPoint = Point()
     mEndPoint = Point()
 
-    def __init__(self, start = Point(), end = Point):
+    def __init__(self, start = Point(), end = Point()):
         mStartPoint = start
         mEndPoint = end
 
