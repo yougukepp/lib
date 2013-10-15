@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from Point import Point
+from dataType.Point import Point
 
 class Line():
-    mStartPoint = Point()
-    mEndPoint = Point()
-
     def __init__(self, start = Point(), end = Point()):
-        mStartPoint = start
-        mEndPoint = end
+        self.mStartPoint = start
+        self.mEndPoint = end
 
-    def StartPoint():
-        return mStartPoint
+    def StartPoint(self):
+        return self.mStartPoint
 
-    def EndPoint():
-        return mEndPoint
+    def EndPoint(self):
+        return self.mEndPoint
+
+    def Print(self):
+        self.mStartPoint.Print()
+        print("===>", end = "")
+        self.mEndPoint.Print()
 
 if __name__ == "__main__":
     print("测试Line类:通过")

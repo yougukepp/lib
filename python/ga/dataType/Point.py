@@ -26,8 +26,7 @@ class Point():
             return False
 
     def Print(self):
-        print("(" + str(self.X()) + "," + str(self.Y()) + ")", end = "")
-
+        print("(%3d,%3d)" % (self.X(), self.Y()), end = "")
 
     def X(self):
         return self.x;

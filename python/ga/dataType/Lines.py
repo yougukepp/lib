@@ -3,18 +3,10 @@
 
 class Lines():
     mLines = []
+    mIndex = 0     # 迭代使用
 
-    def __init__(self, points = []):
-        if [] == points:
-            self.mLines = []
-        else: 
-            assert(0 != points.Size() % 2, "线段集初始化的点数必须为偶数")
-
-            i = 0
-            while i < points.Size():
-                line = Line(points[i], points[i+1])
-                i += 2
-                self.mLines.append(line)
+    def __init__(self):
+        self.mLines = []
 
     def Print(self):
         index = 0
@@ -31,6 +23,20 @@ class Lines():
 
     def Clear(self):
         self.mLines = []
+
+    # 迭代内建函数
+    def __next__(self):
+        if self.mIndex >= self.Size():
+            self.mIndex = 0
+            raise StopIteration
+
+        rst = self.mLines[self.mIndex]
+        self.mIndex += 1
+        return rst
+
+    # 迭代内建函数
+    def __iter__(self):
+        return self
 
 if __name__ == "__main__":
     print("测试Lines类:通过")

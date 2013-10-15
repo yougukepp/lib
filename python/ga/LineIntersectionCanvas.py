@@ -4,6 +4,7 @@
 from PyQt4.QtGui import QApplication
 from PyQt4.QtGui import QPainter
 from PyQt4.QtGui import QColor
+from dataType.Line import Line
 from dataType.Lines import Lines
 from BaseCanvas import BaseCanvas, Ga2Screen
 
@@ -51,8 +52,16 @@ class LineIntersectionCanvas(BaseCanvas):
             print("两点确定线段，但输入有孤立的点")
             return
 
-        lines = Lines(points)
+        lines = Lines()
         IntersectionDict = {}
+        # 构造 线段集
+        i = 0
+        iMax = points.Size()
+        while i < iMax:
+            line = Line(points[i], points[i+1])
+            lines.Append(line)
+            i += 2
+
         LineIntersection(lines, IntersectionDict)
         self.repaint()
 
