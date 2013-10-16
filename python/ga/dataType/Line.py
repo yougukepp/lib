@@ -9,8 +9,32 @@ class Line():
         self.mStartPoint = start
         self.mEndPoint = end
 
-    def GetEquation(line):
-        pass
+    def GetEquation(self):
+        assert self.mStartPoint != self.mEndPoint, "起点和终点不能相同"
+
+        print("Line.GetEquation准备实现")
+        if self.mStartPoint.__X__() == self.mEndPoint.__X__():
+            """
+            平行于 y 轴
+            方程为 x - X = 0
+            """
+            return (1, 0, self.mStartPoint.__X__())
+        elif self.mStartPoint.__Y__() == self.mEndPoint.__Y__():
+            """
+            平行于 X 轴
+            方程为 y - Y = 0
+            """
+            return (0, 1, self.mStartPoint.__Y__())
+        else:
+            """
+            使用两点式 求直线方程
+
+            TODO:
+            (y - y1) / (x - x1) = (y2 - y1) / (x2 - x1)
+            """
+            print("两点式")
+            return(0, 0, 0)
+        print("OK")
 
     def Print(self):
         self.mStartPoint.Print()

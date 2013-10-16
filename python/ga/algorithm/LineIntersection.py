@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from dataType.Vector import Vector
+from dataType.Line import Line
 
 
 def GetInterSectPoint(line1, line2):
+    (a1,b1,c1) = line1.GetEquation()
+    (a2,b2,c2) = line2.GetEquation()
+
     return None
 
 def LineIntersection(lineList, IntersectionDict): 
