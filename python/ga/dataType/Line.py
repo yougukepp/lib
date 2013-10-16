@@ -12,7 +12,6 @@ class Line():
     def GetEquation(self):
         assert self.mStartPoint != self.mEndPoint, "起点和终点不能相同"
 
-        print("Line.GetEquation准备实现")
         if self.mStartPoint.__X__() == self.mEndPoint.__X__():
             """
             平行于 y 轴
@@ -29,12 +28,13 @@ class Line():
             """
             使用两点式 求直线方程
 
-            TODO:
-            (y - y1) / (x - x1) = (y2 - y1) / (x2 - x1)
+            两点式: (y - y1) / (x - x1) = (y2 - y1) / (x2 - x1)
+            斜截式: y = kx + c
+
             """
-            print("两点式")
-            return(0, 0, 0)
-        print("OK")
+            k = (self.mEndPoint.__Y__() - self.mStartPoint.__Y__()) / (self.mEndPoint.__X__() - self.mStartPoint.__X__())
+            c = self.mStartPoint.__Y__() - k * self.mStartPoint.__X__()
+            return(k, -1, c)
 
     def Print(self):
         self.mStartPoint.Print()
@@ -43,3 +43,4 @@ class Line():
 
 if __name__ == "__main__":
     print("测试Line类:通过")
+
