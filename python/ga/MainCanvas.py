@@ -15,6 +15,7 @@ from dataType.Point import Point
 class MainCanvas(QWidget):
 
     mTestTable = ["凸包", "线段求交", "扩展"]
+    mCanvass = {}
 
     msMove = pyqtSignal(Point, name='msMove')
     msCurrentChanged = pyqtSignal(['QString'], name = "msCurrentChanged")
@@ -25,15 +26,18 @@ class MainCanvas(QWidget):
         self.mTabWidget = QTabWidget()
         # 凸包页
         self.mConvexhullCanvas = ConvexhullCanvas()
-        self.mTabWidget.addTab(self.mConvexhullCanvas, self.mTestTable[0])
+        self.mCanvass["凸包"] = self.mConvexhullCanvas
+        self.mTabWidget.addTab(self.mCanvass["凸包"], "凸包")
 
         # 线段求交页面
         self.mLineIntersectionCanvas= LineIntersectionCanvas()
-        self.mTabWidget.addTab(self.mLineIntersectionCanvas, self.mTestTable[1])
+        self.mCanvass["线段求交"] = self.mLineIntersectionCanvas
+        self.mTabWidget.addTab(self.mCanvass["线段求交"], "线段求交")
 
         # 扩展占位页
         self.mPageTodo = QWidget()
-        self.mTabWidget.addTab(self.mPageTodo, self.mTestTable[2])
+        self.mCanvass["扩展"] = self.mPageTodo
+        self.mTabWidget.addTab(self.mCanvass["扩展"], "扩展")
 
         # 总体布局
         self.mLayout = QVBoxLayout()
@@ -47,7 +51,9 @@ class MainCanvas(QWidget):
         self.mTabWidget.setCurrentIndex(0)
 
     def CurrentChanged(self, index):
-        self.msCurrentChanged.emit(self.mTestTable[index])
+        name = self.mTestTable[index]
+        self.mCanvass[name].Clear()
+        self.msCurrentChanged.emit(name)
 
     def DrawConvexhull(self):
         self.mConvexhullCanvas.Make()

@@ -65,6 +65,10 @@ class LineIntersectionCanvas(BaseCanvas):
         LineIntersection(lines, IntersectionDict)
         self.repaint()
 
+    def Clear(self):
+        BaseCanvas.Clear(self)
+        self.mIntersectionPoints = {}
+
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)

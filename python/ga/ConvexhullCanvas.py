@@ -49,6 +49,10 @@ class ConvexhullCanvas(BaseCanvas):
         self.mConvexhull = Convexhull(self.mInputPoints)
         self.repaint()
 
+    def Clear(self):
+        BaseCanvas.Clear(self)
+        self.mConvexhull.Clear()
+
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)

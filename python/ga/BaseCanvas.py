@@ -58,6 +58,9 @@ class BaseCanvas(QWidget):
         self.mInputPoints.Append(p)
         self.repaint()
 
+    def Clear(self):
+        self.mInputPoints.Clear()
+
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)

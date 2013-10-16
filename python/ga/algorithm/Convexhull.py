@@ -90,6 +90,10 @@ class Convexhull():
             self.mConvexhullPoints.Append(p)
         del self.mConvexhullPoints[-1] # 最后一点与第一点 重复
 
+    def Clear(self):
+        self.mInputPoints.Clear()
+        self.mConvexhullPoints.Clear()
+
 if __name__ == "__main__":
     print("测试Convexhull类:通过")
 
