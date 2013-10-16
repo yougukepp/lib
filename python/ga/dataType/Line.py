@@ -4,15 +4,13 @@
 from dataType.Point import Point
 
 class Line():
-    def __init__(self, start = Point(), end = Point()):
+    def __init__(self, start, end):
+        assert start != end, "起点和终点不能相同"
         self.mStartPoint = start
         self.mEndPoint = end
 
-    def StartPoint(self):
-        return self.mStartPoint
-
-    def EndPoint(self):
-        return self.mEndPoint
+    def GetEquation(line):
+        pass
 
     def Print(self):
         self.mStartPoint.Print()
@@ -21,5 +19,3 @@ class Line():
 
 if __name__ == "__main__":
     print("测试Line类:通过")
-
-

@@ -19,7 +19,7 @@ class StatusBar(QStatusBar):
         self.mLabelTestName.setText(labelText)
 
     def Move(self, pos):
-        labelText = "当前位置:(" + str(pos.X()) + "," + str(pos.Y()) + ")"
+        labelText = "当前位置:" + pos.Get2PosStr()
         self.mLabelPos.setText(labelText)
 
 if __name__ == "__main__":

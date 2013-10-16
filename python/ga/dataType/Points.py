@@ -88,9 +88,9 @@ class Points():
         index = 0
 
         for p in self.mPoints:
-            if (p.X() < xMin) or ((p.X() == xMin) and (p.Y() < yCurrent)):
-                xMin = p.X()
-                yCurrent = p.Y()
+            if (p.__X__() < xMin) or ((p.__X__() == xMin) and (p.__Y__() < yCurrent)):
+                xMin = p.__X__()
+                yCurrent = p.__Y__()
                 minIndex = index
             index += 1
 

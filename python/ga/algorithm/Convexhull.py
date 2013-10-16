@@ -3,7 +3,13 @@
 
 from dataType.Point import Point
 from dataType.Points import Points
-from algorithm.Turn import IsTurnLeft
+from dataType.Vector import Vector
+
+def IsTurnLeft(p0, p1 , p2):
+    v1 = Vector(p0, p1)
+    v2 = Vector(p0, p2)
+
+    return v1.IsTurnLeft(v2)
 
 class Convexhull():
     mInputPoints = Points()

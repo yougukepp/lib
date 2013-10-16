@@ -12,7 +12,7 @@ from PyQt4.QtCore import pyqtSignal
 from dataType.Point import Point
 from dataType.Points import Points
 from algorithm.Convexhull import Convexhull
-from BaseCanvas import BaseCanvas, Ga2Screen
+from BaseCanvas import BaseCanvas
 
 class ConvexhullCanvas(BaseCanvas):
     mConvexhull = Convexhull()
@@ -40,10 +40,10 @@ class ConvexhullCanvas(BaseCanvas):
 
         size = convexhull.Size()
         for i in range(1, size):
-            self.DrawLine(painter, Ga2Screen(convexhull[i-1]), Ga2Screen(convexhull[i]))
-            self.DrawLabel(painter, Ga2Screen(convexhull[i-1]), str(i))
-        self.DrawLine(painter, Ga2Screen(convexhull[size-1]), Ga2Screen(convexhull[0]))
-        self.DrawLabel(painter, Ga2Screen(convexhull[size-1]), str(size))
+            self.DrawLine(painter, convexhull[i-1].GetScreenPoint(), convexhull[i].GetScreenPoint())
+            self.DrawLabel(painter, convexhull[i-1].GetScreenPoint(), str(i))
+        self.DrawLine(painter, convexhull[size-1].GetScreenPoint(), convexhull[0].GetScreenPoint())
+        self.DrawLabel(painter, convexhull[size-1].GetScreenPoint(), str(size))
 
     def Make(self):
         self.mConvexhull = Convexhull(self.mInputPoints)

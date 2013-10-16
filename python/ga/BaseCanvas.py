@@ -6,24 +6,12 @@ from PyQt4.QtGui import QWidget
 from PyQt4.QtGui import QPainter
 from PyQt4.QtGui import QColor
 from PyQt4.QtGui import QPen
-from PyQt4.QtCore import QPoint
 from PyQt4.QtCore import pyqtSignal
 
 from dataType.Point import Point
 from dataType.Points import Points
 
-gCanvasWidth = 500
-gCanvasHeight = 500
-
-def Screen2Ga(point):
-    rstX = point.x()
-    rstY = gCanvasHeight - point.y() - 1
-    return Point(rstX, rstY)
-
-def Ga2Screen(point):
-    rstX = point.X()
-    rstY = gCanvasHeight - point.Y() - 1
-    return QPoint(rstX, rstY)
+from config.config import gCanvasWidth, gCanvasHeight
 
 class BaseCanvas(QWidget):
 
@@ -59,14 +47,14 @@ class BaseCanvas(QWidget):
 
     def DrawPoints(self, painter, points):
         for p in points:
-            self.DrawPoint(painter, Ga2Screen(p))
+            self.DrawPoint(painter, p.GetScreenPoint())
 
     def mouseMoveEvent(self, event):
-        p = Screen2Ga(event.pos())
+        p = Point(event.pos().x(), event.pos().y())
         self.msMove.emit(p)
 
     def mousePressEvent(self, event):
-        p = Screen2Ga(event.pos())
+        p = Point(event.pos().x(), event.pos().y())
         self.mInputPoints.Append(p)
         self.repaint()
 

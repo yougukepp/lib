@@ -6,7 +6,7 @@ from PyQt4.QtGui import QPainter
 from PyQt4.QtGui import QColor
 from dataType.Line import Line
 from dataType.Lines import Lines
-from BaseCanvas import BaseCanvas, Ga2Screen
+from BaseCanvas import BaseCanvas
 
 from algorithm.LineIntersection import LineIntersection
 
@@ -37,14 +37,14 @@ class LineIntersectionCanvas(BaseCanvas):
 
         for i in range(0, size):
             index = 2 * i
-            self.DrawLine(painter, Ga2Screen(points[index]), Ga2Screen(points[index+1]))
-            self.DrawLabel(painter, Ga2Screen(points[index]), str(i))
+            self.DrawLine(painter, points[index].GetScreenPoint(), points[index+1].GetScreenPoint())
+            self.DrawLabel(painter, points[index].GetScreenPoint(), str(i))
 
     def DrawUnpairsPoint(self, painter, points):
         if 0 == points.Size() % 2:
             return
 
-        self.DrawPoint(painter, Ga2Screen(points[-1]))
+        self.DrawPoint(painter, points[-1].GetScreenPoint())
 
     def Make(self):
         points = self.GetInputPoints()
