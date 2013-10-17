@@ -37,6 +37,9 @@ class Point():
     def Print(self):
         print("(%3d,%3d)" % (self.__X__(), self.__Y__()), end = "")
 
+    def Get2Pos(self):
+        return (self.__X__(), self.__Y__())
+
     def Get2PosStr(self):
         pos =  "(%d, %d)" % (self.__X__(), self.__Y__())
         return pos
