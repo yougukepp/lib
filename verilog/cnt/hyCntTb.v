@@ -50,9 +50,10 @@ module hyCntTb;
     end
     
     /* 监控 */
-    initial
+    /*initial
         $monitor("At time %t: clk(%b), rst_n(%b), cnt_in(%x), cnt_out(%x), int(%b)",
                   $time, clk, rst_n, cnt_in, cnt_out, int);
+              */
 
     initial
         begin            
