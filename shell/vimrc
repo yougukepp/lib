@@ -218,7 +218,7 @@ endif
 set fileencoding=utf-8
 
 " 文件读取时的编码
-set fileencodings=ucs-bom,utf-8,chinese
+set fileencodings=ucs-bom,utf-8,gb18030,gbk,gb2312,big5
 
 " vim终端编码
 if has("linux")
