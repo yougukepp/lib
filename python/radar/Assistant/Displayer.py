@@ -10,9 +10,11 @@ from PyQt4.QtGui import QLineEdit
 from PyQt4.QtGui import QWidget
 from PyQt4.QtGui import QLabel
 
-from RadarEchoWidget import RadarEchoWidget
+import sys                              
+sys.path.append("..")
+from Core.Widget.EchoWidget import EchoWidget
 
-class RadarDebugDisplayWidget(QWidget):
+class Displayer(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
 
@@ -22,7 +24,7 @@ class RadarDebugDisplayWidget(QWidget):
         self.mLayoutInfo = QVBoxLayout()
 
         self.mLayout = QHBoxLayout()
-        self.mEchoWidget = RadarEchoWidget()
+        self.mEchoWidget = EchoWidget()
         self.mLineEditEchoFileName = QLineEdit("echo.echo")
         self.mPushButtonRead = QPushButton("读取")
         self.mLabelDisplayIp = QLabel("显控 IP:")

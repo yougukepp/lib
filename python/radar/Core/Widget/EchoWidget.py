@@ -5,15 +5,18 @@ from PyQt4.QtGui import QApplication
 from PyQt4.QtGui import QPainter
 from PyQt4.QtGui import QBrush
 from PyQt4.QtGui import QColor
-from PyQt4.QtGui import QWidget
+from PyQt4.QtGui import QWidget 
 
-from RadarEchoSet import RadarEchoSet
+import sys,os
+gRootDir = os.path.join(os.getcwd(), "..", "..")
+sys.path.append(gRootDir)
+from Core.Data.EchoSet import EchoSet
 
-class RadarEchoWidget(QWidget):
+class EchoWidget(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.setFixedSize(600, 600)
-        self.mEchoSet = RadarEchoSet()
+        self.mEchoSet = EchoSet()
 
     def paintEvent(self, event): 
         brush = QBrush(QColor(0, 0, 0));
@@ -27,12 +30,10 @@ class RadarEchoWidget(QWidget):
         self.mEchoSet.Draw(painter)
 
 if __name__ == "__main__":
-    import sys
     app = QApplication(sys.argv)
 
-    win = RadarEchoWidget()
+    win = EchoWidget()
     win.show()
 
     sys.exit(app.exec_())
-
 

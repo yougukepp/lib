@@ -2,15 +2,16 @@
 # -- coding utf-8 --
 
 from PyQt4.QtGui import QApplication
+from PyQt4.QtGui import QWidget
 from PyQt4.QtGui import QPen
 from PyQt4.QtGui import QColor
+from PyQt4.QtGui import QPainter
 
 from PyQt4.QtCore import QPoint
-from PyQt4.QtCore import QObject
 
-class RadarEchoSet(QObject):
+class EchoSet(QWidget):
     def __init__(self, parent=None):
-        QObject.__init__(self, parent)
+        QWidget.__init__(self, parent)
         self.mCenter = QPoint(0, 0)
 
     def SetCenter(self, center):
@@ -26,6 +27,10 @@ class RadarEchoSet(QObject):
         self.__DrawRangeCicle(p)
         self.__DrawShipHeadLine(p)
         self.__DrawSysInfo(p)
+
+    def paintEvent(self, paintEvent):
+        p = QPainter(self)
+        self.Draw(p)
         
     # 绘制量程范围
     def __DrawRangeCicle(self, p):
@@ -55,7 +60,8 @@ if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
 
-    win = RadarEchoSet()
+    win = EchoSet()
+    win.show()
 
     sys.exit(app.exec_())
 
