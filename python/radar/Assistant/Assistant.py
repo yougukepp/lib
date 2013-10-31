@@ -5,16 +5,11 @@ from PyQt4.QtGui import QApplication
 from PyQt4.QtGui import QTabWidget
 from PyQt4.QtGui import QLabel
 
-import sys,os
-gRootDir = os.path.join(os.getcwd(), "..")
-sys.path.append(gRootDir)
-from Assistant.Displayer import Displayer
-
 class Assistant(QTabWidget):
     def __init__(self, parent=None):
         QTabWidget.__init__(self, parent)
 
-        self.mDisplayer = Displayer();
+        self.mDisplayer = QLabel("显控 控件");
         self.mRadioWidget = QLabel("频综 控件");
         self.mServoWidget = QLabel("伺服 控件");
 
