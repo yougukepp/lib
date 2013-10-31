@@ -10,7 +10,7 @@ import sys,os
 gRootDir = os.path.join(os.getcwd(), "..")
 sys.path.append(gRootDir)
 from Core.Widget.EchoWidget import EchoWidget
-from SimCtrlWidget import SimCtrlWidget
+from Simulator.CtrlWidget import CtrlWidget
 
 class Simulator(QWidget):
     def __init__(self, parent=None):
@@ -19,7 +19,7 @@ class Simulator(QWidget):
         self.mLayout = QHBoxLayout()
 
         self.mEchoWidget = EchoWidget();
-        self.mSimCtrlWidget = SimCtrlWidget();
+        self.mSimCtrlWidget = CtrlWidget();
 
         self.mLayout.addWidget(self.mEchoWidget)
         self.mLayout.addWidget(self.mSimCtrlWidget)

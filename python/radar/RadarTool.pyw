@@ -16,7 +16,7 @@ class RadarTool(QTabWidget):
         self.mAssistant = Assistant()
         self.mEchoEditer = QLabel("回波编辑 控件")
 
-        self.addTab(self.mSimulator, "仿真")
+        self.addTab(self.mSimulator, "模拟器")
         self.addTab(self.mAssistant, "调试助手")
         self.addTab(self.mEchoEditer, "回波编辑")
 
