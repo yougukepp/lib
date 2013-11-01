@@ -17,6 +17,7 @@ class LabelWithLineEditWidget(QWidget):
         self.mLabel.setFixedWidth(150)
         self.mLineEdit = QLineEdit(lineStr)
         self.mLineEdit.setFixedWidth(80)
+        self.mLineEdit.setReadOnly(True)
 
         self.mLayout.addWidget(self.mLabel)
         self.mLayout.addWidget(self.mLineEdit)

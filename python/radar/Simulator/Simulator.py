@@ -19,11 +19,13 @@ class Simulator(QWidget):
         self.mLayout = QHBoxLayout()
 
         self.mEchoWidget = EchoWidget();
-        self.mSimCtrlWidget = CtrlWidget();
+        self.mCtrlWidget = CtrlWidget();
 
         self.mLayout.addWidget(self.mEchoWidget)
-        self.mLayout.addWidget(self.mSimCtrlWidget)
+        self.mLayout.addWidget(self.mCtrlWidget)
         self.setLayout(self.mLayout)
+
+        self.mCtrlWidget.msPlayAFrame.connect(self.mEchoWidget.PlayAFrame)
 
 if __name__ == "__main__":
     import sys

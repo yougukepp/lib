@@ -13,6 +13,8 @@ sys.path.append(gRootDir)
 from Core.Data.EchoSet import EchoSet
 
 class EchoWidget(QWidget):
+    mFrameIndex = 0                    # 用于记录当前放映的帧编号
+
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.setFixedSize(600, 600)
@@ -28,6 +30,17 @@ class EchoWidget(QWidget):
 
         # 回波绘制
         self.mEchoSet.Draw(painter)
+
+    def PlayAFrame(self, echoFileName):
+        echoFile = open(echoFileName, "r")
+        print("EchoWidget,准备编写回波放映")
+
+        """
+        for line in echoFile:
+            print(line)
+        """
+
+        echoFile.close()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
