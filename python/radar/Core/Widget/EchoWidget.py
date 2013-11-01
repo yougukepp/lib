@@ -32,13 +32,11 @@ class EchoWidget(QWidget):
         self.mEchoSet.Draw(painter)
 
     def PlayAFrame(self, echoFileName):
-        echoFile = open(echoFileName, "r")
+        echoFile = open(echoFileName, "r", encoding = "utf8")
         print("EchoWidget,准备编写回波放映")
 
-        """
         for line in echoFile:
             print(line)
-        """
 
         echoFile.close()
 

@@ -52,7 +52,7 @@ class CtrlWidget(QWidget):
         self.mPlayAFrameButton.clicked.connect(self.PlayAFrameButtonSlot)
 
     def GetALabelWithLineEditWidgets(self):
-        cfgFile = open(gCfgName, "r")
+        cfgFile = open(gCfgName, "r", encoding = "utf8")
         self.mWidgets = []
 
         for line in cfgFile:
@@ -81,7 +81,8 @@ class CtrlWidget(QWidget):
     def GetEchoFileName(self):
         rst = None
 
-        cfgFile = open(gCfgName, "r")
+        cfgFile = open(gCfgName, "r", encoding = "utf8")
+
         for line in cfgFile:
             p = re.compile(gParrern)
             m = p.match(line)
