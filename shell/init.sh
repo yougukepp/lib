@@ -9,7 +9,7 @@ sudo apt-get install git gnupg curl libx11-dev libxi-dev libc6-dev libncurses5-d
 #sudo apt-get ia32-libs
 
 # 博客
-sudo apt-get install jekyll python-pygments
+sudo apt-get install jekyll python-pygments ruby-rdiscount 
 
 # verilog
 sudo apt-get install iverilog gtkwave
