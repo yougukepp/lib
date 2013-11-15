@@ -10,7 +10,7 @@ from PyQt4.QtGui import QPainter
 from PyQt4.QtGui import QColor
 from PyQt4.QtGui import QGraphicsView
 
-from PyQt4.uic import loadUiType
+from PyQt4.uic import loadUiType,loadUi
 
 UIClass = loadUiType("RGBColorTest.ui")
 
@@ -20,21 +20,26 @@ class RGBTester(QDialog):
         self.mUi = UIClass[0]()
         self.mUi.setupUi(self)
 
-        self.mSpinBoxRed = self.findChild(QSpinBox, "spinBoxRed")
-        self.mSpinBoxGreen = self.findChild(QSpinBox, "spinBoxGreen")
-        self.mSpinBoxBlue = self.findChild(QSpinBox, "spinBoxBlue")
-
+        self.mSpinBoxRed = self.mUi.spinBoxRed
+        self.mSpinBoxGreen = self.mUi.spinBoxGreen
+        self.mSpinBoxBlue = self.mUi.spinBoxBlue
 
     def paintEvent(self, event):
-        r = self.mSpinBoxRed.value()
-        g = self.mSpinBoxGreen.value()
-        b = self.mSpinBoxBlue.value()
+        r = self.mUi.spinBoxRed.value()
+        g = self.mUi.spinBoxGreen.value()
+        b = self.mUi.spinBoxBlue.value()
 
         c = QColor(r, g, b)
         painter = QPainter(self)
         brush = QBrush(c)
         painter.setBrush(brush)
-        painter.drawRect(120, 20, 160, 160)
+
+        w = 100
+        h = 100
+        x = 0
+        y = (self.height() - h) / 2
+
+        painter.drawRect(x, y, w, h)
 
 if __name__ == "__main__":
     import sys
