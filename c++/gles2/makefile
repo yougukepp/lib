@@ -5,7 +5,7 @@ LIB_DIR	        = ./lib/
 LIB_QG_DIR      = ./src
 LIB_QG		= $(LIB_QG_DIR)/libQg.a
 LIB_HY_DIR      = ../HyLib
-LIB_HY		= $(LIB_HY_DIR)/libHy.a
+LIB_HY		= $(LIB_HY_DIR)/lib/libHy.a
 
 OBJS		= sample.o
 

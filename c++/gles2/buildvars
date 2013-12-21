@@ -1,15 +1,17 @@
 ROOT_DIR		= /home/pp/workspace/lib/c++/gles2/
-HY_DIR			= $(ROOT_DIR)../HyLib/
+HY_DIR			= $(ROOT_DIR)../HyLib
 INC_DIR			= $(ROOT_DIR)inc
 PLATFORM_INC_DIR	= $(INC_DIR)/platform
 PRIMITIVES_INC_DIR	= $(INC_DIR)/primitives
 PLANE_INC_DIR		= $(INC_DIR)/plane
-HY_INC_DIR		= $(HY_DIR)
+HY_INC_DIR		= $(HY_DIR)/config
+HY_TIME_DIR		= $(HY_DIR)/time
+HY_UDP_DIR              = $(HY_DIR)/udp
 
 CC			= c++
 LD			= $(CC)
 AR			= ar
-CFLAGS   		= -Wall -pedantic -I$(INC_DIR) -I$(PLATFORM_INC_DIR) -I$(PRIMITIVES_INC_DIR) -I$(PLANE_INC_DIR) -I$(HY_INC_DIR)
+CFLAGS   		= -Wall -pedantic -I$(INC_DIR) -I$(PLATFORM_INC_DIR) -I$(PRIMITIVES_INC_DIR) -I$(PLANE_INC_DIR) -I$(HY_INC_DIR) -I$(HY_TIME_DIR) -I$(HY_UDP_DIR)
 LFLAGS   		= -Wl,-Bdynamic -L/usr/lib/i386-linux-gnu/mesa-egl/ -lm -lX11 -lEGL -lGLESv2 
 
 RM			= rm -rf
