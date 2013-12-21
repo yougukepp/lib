@@ -34,21 +34,15 @@ sudo apt-get install openjdk-7-jdk
 sudo apt-get install python3-pyqt4
 
 # OpenGL
-sudo apt-get install libegl1-mesa-dev
-sudo apt-get install libgles2-mesa-dev
-sudo apt-get install libopenvg1-mesa-dev
-sudo apt-get install libgles2-mesa-dev
-sudo apt-get install freeglut3-dev python-opengl
-sudo apt-get install libglew-dev
-sudo apt-get install libglui-dev
+sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev python-opengl libglew-dev libglui-dev
 
 # Game
 #sudo apt-get install wesnoth
 
 # Tex
-sudo apt-get install texlive-full texlive-doc-zh
-sudo apt-get install asymptote asymptote-doc
+sudo apt-get install asymptote texlive-full # asymptote-doc texlive-doc-zh
 
+# update
 sudo apt-get update
 sudo apt-get upgrade
 
