@@ -27,8 +27,12 @@ alias ll='ls $LS_OPTIONS -lA'
 alias l='ls $LS_OPTIONS -l'
 alias la='ls $LS_OPTIONS -al'
 
-alias gcc='gcc -Wall -pedantic -std=gnu99'
-alias c++='c++ -Wall -pedantic -pg'
+#alias gcc='gcc -Wall -pedantic -std=gnu99'
+#alias c++='c++ -Wall -pedantic -pg'
 
 export EDITOR=vim
+
+export PATH=/opt/ppcc/tools/bin:${PATH}
+
+rm -rvf ~/Desktop
 
