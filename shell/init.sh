@@ -42,8 +42,8 @@ sudo apt-get install python3-pyqt4
 # Tex
 sudo apt-get install asymptote texlive-full # asymptote-doc texlive-doc-zh
 
-# ssh & samba
-sudo apt-get install openssh-server ssh samba
+# ssh & samba & nfs
+sudo apt-get install openssh-server ssh samba nfs-common nfs-kernel-server portmap
 
 # update
 sudo apt-get update
