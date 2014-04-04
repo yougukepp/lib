@@ -27,6 +27,8 @@ alias ll='ls $LS_OPTIONS -lA'
 alias l='ls $LS_OPTIONS -l'
 alias la='ls $LS_OPTIONS -al'
 
+alias minicom='sudo minicom -c on -C minicom.log'
+
 #alias gcc='gcc -Wall -pedantic -std=gnu99'
 #alias c++='c++ -Wall -pedantic -pg'
 
