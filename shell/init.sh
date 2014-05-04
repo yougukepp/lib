@@ -14,6 +14,9 @@ sudo apt-get install git gnupg curl libx11-dev libxi-dev libc6-dev libncurses5-d
 # verilog
 sudo apt-get install iverilog gtkwave
 
+# octave 
+#sudo apt-get install octave
+
 #broken
 #sudo apt-get install scim scim-tables-zh
 
