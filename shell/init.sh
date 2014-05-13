@@ -24,7 +24,7 @@ sudo apt-get install iverilog gtkwave
 sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-zh manpages-dev manpages-posix-dev manpages-posix libx11-doc # man2html
 
 # java
-#sudo apt-get install openjdk-7-jdk
+# sudo apt-get install openjdk-7-jdk
 
 # scheme
 #sudo apt-get install scm
@@ -46,8 +46,11 @@ sudo apt-get install python3-pyqt4
 sudo apt-get install asymptote texlive-full # asymptote-doc texlive-doc-zh
 sudo apt-get install doxygen
 
+# gnuradio
+sudo apt-get install gnuradio
+
 # ssh & samba & nfs
-sudo apt-get install openssh-server ssh samba nfs-common nfs-kernel-server portmap
+# sudo apt-get install openssh-server ssh samba nfs-common nfs-kernel-server portmap
 
 # update
 sudo apt-get update
