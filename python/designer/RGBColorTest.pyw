@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtGui import QApplication
-from PyQt4.QtGui import QWidget
-from PyQt4.QtGui import QDialog
-from PyQt4.QtGui import QSpinBox
-from PyQt4.QtGui import QBrush
-from PyQt4.QtGui import QPainter
-from PyQt4.QtGui import QColor
-from PyQt4.QtGui import QGraphicsView
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QPainter
+from PyQt5.QtGui import QBrush
 
-from PyQt4.uic import loadUiType,loadUi
+from PyQt5.uic import loadUiType,loadUi
 
-UIClass = loadUiType("RGBColorTest.ui")
+UIClass = loadUiType("RGBTester.ui")
 
 class RGBTester(QDialog):
     def __init__(self, parent=None):
@@ -49,4 +46,3 @@ if __name__ == "__main__":
     win.show()
 
     sys.exit(app.exec_())
-
