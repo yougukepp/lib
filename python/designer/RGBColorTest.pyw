@@ -9,7 +9,7 @@ from PyQt5.QtGui import QBrush
 
 from PyQt5.uic import loadUiType,loadUi
 
-UIClass = loadUiType("RGBTester.ui")
+UIClass = loadUiType("RGBColorTest.ui")
 
 class RGBTester(QDialog):
     def __init__(self, parent=None):
