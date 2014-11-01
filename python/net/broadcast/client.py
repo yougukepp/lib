@@ -8,7 +8,8 @@ recvHost ='<broadcast>'
 recvPort = 8001
 recvAddr = (recvHost, recvPort)
 
-sendData = b'\00\01\02'
+#sendData = b'\00\01\02'
+sendData = b'1234'
 
 udpSendSocket = socket(AF_INET, SOCK_DGRAM)
 udpSendSocket.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
