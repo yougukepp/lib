@@ -12,7 +12,7 @@ sudo apt-get install git gnupg curl libx11-dev libxi-dev libc6-dev libncurses5-d
 #sudo apt-get install jekyll python-pygments ruby-rdiscount 
 
 # verilog
-sudo apt-get install iverilog gtkwave
+#sudo apt-get install iverilog gtkwave
 
 # octave 
 #sudo apt-get install octave
@@ -21,7 +21,7 @@ sudo apt-get install iverilog gtkwave
 #sudo apt-get install scim scim-tables-zh
 
 # document
-sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-zh manpages-dev manpages-posix-dev manpages-posix libx11-doc # man2html
+sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-zh manpages-dev manpages-posix-dev manpages-posix libx11-doc man2html
 
 # java
 # sudo apt-get install openjdk-7-jdk
@@ -37,7 +37,7 @@ sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-
 sudo apt-get install python3-pyqt4
 
 # OpenGL
-sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev python-opengl libglew-dev libglui-dev
+#sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev python-opengl libglew-dev libglui-dev
 
 # Game
 #sudo apt-get install wesnoth
@@ -62,5 +62,5 @@ sudo apt-get autoclean
 # ntp time 
 #sudo ntpdate 210.72.145.44      # 国家授时中心
 sudo ntpdate 202.120.2.101      # 上海交大
-sudo hwclock --systohc
+sudo hwclock -w --localtime
 
