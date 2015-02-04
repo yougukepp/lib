@@ -170,6 +170,8 @@ endif
 
 syn keyword	cType		int long short char void GLint GLvoid GLfloat GLuint GLchar
 syn keyword	cType		signed unsigned float double
+" fiberhome typedef
+syn keyword	cType		uint8 uint16 uint32 uint64 int8 int16 int32 int64
 
 if !exists("c_no_ansi") || exists("c_ansi_typedefs")
   syn keyword   cType		size_t ssize_t off_t wchar_t ptrdiff_t sig_atomic_t fpos_t
@@ -239,7 +241,7 @@ if !exists("c_no_ansi") || exists("c_ansi_constants") || exists("c_gnu")
   syn keyword cConstant DBL_MIN_10_EXP DBL_MAX_10_EXP
   syn keyword cConstant LDBL_MIN LDBL_MAX LDBL_MIN_EXP LDBL_MAX_EXP
   syn keyword cConstant LDBL_MIN_10_EXP LDBL_MAX_10_EXP
-  syn keyword cConstant HUGE_VAL CLOCKS_PER_SEC NULL
+  syn keyword cConstant HUGE_VAL CLOCKS_PER_SEC NULL NUL
   syn keyword cConstant LC_ALL LC_COLLATE LC_CTYPE LC_MONETARY
   syn keyword cConstant LC_NUMERIC LC_TIME
   syn keyword cConstant SIG_DFL SIG_ERR SIG_IGN
