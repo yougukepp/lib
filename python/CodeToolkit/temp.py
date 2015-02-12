@@ -4,24 +4,37 @@
 import re
 
 g_regex_code = re.compile(
-    r"""^       # 行首
-    (\s*)       # 缩进
-    (\w*)       # 代码
-    (\s*)       # 空白
-    (//|/\*)?   # 注释头是该行开始
-    (.*)$       # 注释内容
-    """,
+    r"""^
+    (.*?)       # 可能的代码
+    (//|/\*)    # 注释头
+    (.*)$       # 注释""",  
     re.X)
 
+def ckt_is_blank_string(code_string):
+    pass
 
 if __name__ == '__main__':
-    match = g_regex_code.search("#include <stdio.h>\n")
-    #match = g_regex_code.search("   //1231")
-    #match = g_regex_code.search("   //  1231")
-    #match = g_regex_code.search("   /*1231")
-    #match = g_regex_code.search("  adf //1231")
-    if match:
-        print(match.group())
-        print(match.groups())
+    i = 0
+    f = open("main.c")
 
+    for line in f: 
+        i += 1
+        match = g_regex_code.search(line)
+        if match:
+            print(str(i) + ":" + line, end = '')
+
+            code_string = match.group(1)
+            if ckt_is_blank_string(code_string):
+                pass
+            else:
+                pass
+
+            print("代码  :" + match.group(1))
+            print("注释头:" + match.group(2))
+            print("注释  :" + match.group(3))
+        else:
+            print(str(i) + ":" + line, end = '')
+            print("代码  :" + line, end = '')
+
+    f.close()
 
