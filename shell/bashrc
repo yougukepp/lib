@@ -32,7 +32,7 @@ alias gcc='gcc -Wall -pedantic -fno-common -std=c99'
 #alias gcc='gcc -Wall -pedantic -std=gnu99'
 #alias c++='c++ -Wall -pedantic -pg'
 
-alias minicom='minicom -c on'
+alias minicom='sudo minicom -c on'
 
 # 为 man pages 设置颜色
 man() {
