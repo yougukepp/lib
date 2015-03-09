@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtGui import QApplication
-from PyQt4.QtGui import QStatusBar
-from PyQt4.QtGui import QLabel
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QStatusBar
+from PyQt5.QtWidgets import QLabel
 
 class StatusBar(QStatusBar):
     def __init__(self, parent=None):

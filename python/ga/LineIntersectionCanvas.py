@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -- coding utf-8 --
 
-from PyQt4.QtGui import QApplication
-from PyQt4.QtGui import QPainter
-from PyQt4.QtGui import QColor
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QPainter
+from PyQt5.QtGui import QColor
 from dataType.Line import Line
 from dataType.Lines import Lines
 from BaseCanvas import BaseCanvas

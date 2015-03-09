@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -- coding utf-8 --
 
-from PyQt4.QtGui import QApplication
-from PyQt4.QtGui import QWidget
-from PyQt4.QtGui import QPainter
-from PyQt4.QtGui import QColor
-from PyQt4.QtGui import QPen
-from PyQt4.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtGui import QPainter
+from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QPen
+from PyQt5.QtCore import pyqtSignal
 
 from dataType.Point import Point
 from dataType.Points import Points

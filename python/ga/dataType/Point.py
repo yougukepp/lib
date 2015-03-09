@@ -3,7 +3,7 @@
 
 # 内部格式 使用数学坐标
 
-from PyQt4.QtCore import QPoint
+from PyQt5.QtCore import QPoint
 
 from config.config import gCanvasHeight
 

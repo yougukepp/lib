@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -- coding utf-8 --
 
-from PyQt4.QtGui import QApplication
-from PyQt4.QtGui import QWidget
-from PyQt4.QtGui import QTabWidget
-from PyQt4.QtGui import QVBoxLayout
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QTabWidget
+from PyQt5.QtWidgets import QVBoxLayout
 
-from PyQt4.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal
 
 from ConvexhullCanvas import ConvexhullCanvas
 from LineIntersectionCanvas import LineIntersectionCanvas

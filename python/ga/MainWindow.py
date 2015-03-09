@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QApplication
-from PyQt4.QtGui import QMainWindow
-from PyQt4.QtGui import QAction
-from PyQt4.QtGui import QKeySequence
-from PyQt4.QtGui import QDockWidget
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QAction
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QDockWidget
 
 from StatusBar import StatusBar
 from CtrlWidget import CtrlWidget

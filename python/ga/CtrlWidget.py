@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtGui import QApplication
-from PyQt4.QtGui import QWidget
-from PyQt4.QtGui import QPushButton
-from PyQt4.QtGui import QLabel
-from PyQt4.QtGui import QVBoxLayout
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QVBoxLayout
 
-from PyQt4.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal
 
 class CtrlWidget(QWidget):
 
