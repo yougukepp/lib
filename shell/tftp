@@ -1,0 +1,17 @@
+#移入/etc/xinetd.d/
+#注释/etc/inetd.conf tftp相关
+
+service tftp
+{
+    socket_type     = dgram 
+    protocol        = udp
+    wait            = yes
+    user            = root
+    server          = /usr/sbin/in.tftpd
+    server_args     = -s /tftp #tftp目录
+    disable         = no
+    per_source      = 11
+    cps             = 1002
+    flags           = IPv4
+}  
+
