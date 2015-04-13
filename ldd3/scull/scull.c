@@ -15,6 +15,8 @@
 /************************************ 头文件 ***********************************/
 #include <linux/init.h>
 #include <linux/module.h>
+#include <linux/slab.h>
+#include <asm/uaccess.h>
 
 #include "scull.h"
 
@@ -22,18 +24,11 @@
 /*----------------------------------- 声明区 ----------------------------------*/
 
 /********************************** 变量声明区 *********************************/
-/* 主设备号使用模块参数 */
-static unsigned int s_scull_major = SCULL_MAJOR;
-module_param(s_scull_major, uint, S_IRUGO);
-
-/* 版本号 */
-static dev_t s_dev_num;
-
 /* 设备结构体 */
 static struct scull_dev dev;
 
 /********************************** 函数声明区 *********************************/ 
-static void scull_setup_cdev(struct scull_dev *dev);
+static void scull_setup_cdev(struct scull_dev *dev, unsigned int scull_major);
 
 
 /********************************** 变量实现区 *********************************/
@@ -59,15 +54,60 @@ int scull_release(struct inode *inode, struct file *filp)
 ssize_t scull_read(struct file *filp, char __user *buff,
         size_t count, loff_t *offp)
 {
+    unsigned long copy_count = 0;
+
+    if(count > SCULL_MEM_SIZE)
+    {
+        printk(KERN_ALERT "scull read should small than 0x%x, but give me 0x%x.\n", 
+                SCULL_MEM_SIZE, (unsigned int)count);
+        return -EFAULT;
+    }
+
+    copy_count = copy_to_user(buff, dev.data, count);
+    if(0 != copy_count)
+    {
+        return -EFAULT;
+    }
+
     printk(KERN_ALERT "scull read ok.\n");
-    return 0;
+    return count;
 }
 
 ssize_t scull_write(struct file *filp, const char __user *buff,
         size_t count, loff_t *offp)
 {
+    char *k_buf = NULL;
+    unsigned long copy_count = 0;
+
+    if(count > SCULL_MEM_SIZE)
+    {
+        printk(KERN_ALERT "scull read should small than 0x%x, but give me 0x%x.\n", 
+                SCULL_MEM_SIZE, (unsigned int)count);
+        return -EFAULT;
+    }
+
+    /* 申请内存 */
+    k_buf = kmalloc(count, GFP_KERNEL);
+    if(NULL == k_buf)
+    { 
+        printk(KERN_ALERT "%s,%d:kmalloc failed.\n", __FILE__, __LINE__);
+        return -ENOMEM;
+    }
+
+    /* 拷贝用户数据 */
+    copy_count = copy_from_user(k_buf, buff, count);
+    if(0 != copy_count)
+    {
+        return -EFAULT;
+    }
+
+    /* 存入scull_dev */
+    memcpy(dev.data, k_buf, count);
+
+    kfree(k_buf);
+
     printk(KERN_ALERT "scull write ok.\n");
-    return 0;
+    return count;
 }
 
 
@@ -88,22 +128,26 @@ ssize_t scull_write(struct file *filp, const char __user *buff,
  ******************************************************************************/
 static int scull_init(void)
 {
-    int result = 0;
+    int i = 0;
+    int result = 0; 
+    unsigned int scull_major = 0;
+    unsigned char *go = NULL;
 
-    /* 分配 设备号 */
-    if(s_scull_major)
-    { 
-        printk(KERN_ALERT "static malloc dev_t no support.\n");
-        return 0;
-    }
-    else /* 动态分配 */
+    /* 分配内存 */
+    dev.data = (unsigned char *)kmalloc(SCULL_MEM_SIZE, GFP_KERNEL);
+
+    go = dev.data;
+    for(i = 0; i < SCULL_MEM_SIZE; i++)
     {
-        result = alloc_chrdev_region(&s_dev_num, 0, 1, SCULL_NAME);
-        s_scull_major = MAJOR(s_dev_num);
+        go[i] = '\0';
     }
+
+    /* 动态分配 */
+    result = alloc_chrdev_region(&dev.dev_num, 0, 1, SCULL_NAME);
+    scull_major = MAJOR(dev.dev_num);
 
     /* 注册字符设备 */
-    scull_setup_cdev(&dev);
+    scull_setup_cdev(&dev, scull_major);
 
     printk(KERN_ALERT "scull init ok.\n");
     return 0;
@@ -127,15 +171,18 @@ static int scull_init(void)
 static void scull_exit(void)
 { 
     cdev_del(&dev.cdev);
-    unregister_chrdev_region(s_dev_num, 1);
+    unregister_chrdev_region(dev.dev_num, 1);
+
+    /* 释放内存 */
+    kfree(dev.data);
 
     printk(KERN_ALERT "scull exit ok.\n");
 }
 
-static void scull_setup_cdev(struct scull_dev *dev)
+static void scull_setup_cdev(struct scull_dev *dev, unsigned int scull_major)
 {
     int err = 0;
-    dev_t devno = MKDEV(s_scull_major, 0);
+    dev_t devno = MKDEV(scull_major, 0);
 
     cdev_init(&dev->cdev, &scull_fops);
     dev->cdev.owner = THIS_MODULE;

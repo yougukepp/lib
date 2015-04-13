@@ -19,15 +19,21 @@
 #include <linux/cdev.h>
 
 /************************************ 宏定义 ***********************************/
-/* 默认0 表示动态分配住设备号 */
-#define SCULL_MAJOR                     (0)
+#define SCULL_K                         (1024)
+#define SCULL_M                         (SCULL_K * SCULL_K)
+
+/* 内存大小 */
+#define SCULL_MEM_SIZE                  (SCULL_M)
 
 /* 设备名 */
 #define SCULL_NAME                      ("scull")
 
 /*********************************** 类型定义 **********************************/
 struct scull_dev {
-    int data;
+    unsigned char *data; /* 内存地址 */
+    unsigned int size; /* 内存大小 */
+    dev_t dev_num; /* 设备号 */
+
     struct cdev cdev; /* 字符设备 */
 };
 
