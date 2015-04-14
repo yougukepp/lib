@@ -25,7 +25,7 @@
 
 /********************************** 变量声明区 *********************************/
 /* 设备结构体 */
-static struct scull_dev dev;
+static struct scull_dev s_dev;
 
 /********************************** 函数声明区 *********************************/ 
 static void scull_setup_cdev(struct scull_dev *dev, unsigned int scull_major);
@@ -54,6 +54,7 @@ int scull_release(struct inode *inode, struct file *filp)
 ssize_t scull_read(struct file *filp, char __user *buff,
         size_t count, loff_t *offp)
 {
+    unsigned int read_count = 0;
     unsigned long copy_count = 0;
 
     if(count > SCULL_MEM_SIZE)
@@ -63,14 +64,23 @@ ssize_t scull_read(struct file *filp, char __user *buff,
         return -EFAULT;
     }
 
-    copy_count = copy_to_user(buff, dev.data, count);
+    if(s_dev.size < count)
+    {
+        read_count = s_dev.size;
+    }
+    else
+    {
+        read_count = count;
+    }
+
+    copy_count = copy_to_user(buff, s_dev.data, read_count);
     if(0 != copy_count)
     {
         return -EFAULT;
     }
 
     printk(KERN_ALERT "scull read ok.\n");
-    return count;
+    return read_count;
 }
 
 ssize_t scull_write(struct file *filp, const char __user *buff,
@@ -102,7 +112,8 @@ ssize_t scull_write(struct file *filp, const char __user *buff,
     }
 
     /* 存入scull_dev */
-    memcpy(dev.data, k_buf, count);
+    memcpy(s_dev.data, k_buf, count);
+    s_dev.size += count;
 
     kfree(k_buf);
 
@@ -134,20 +145,21 @@ static int scull_init(void)
     unsigned char *go = NULL;
 
     /* 分配内存 */
-    dev.data = (unsigned char *)kmalloc(SCULL_MEM_SIZE, GFP_KERNEL);
+    s_dev.size = 0;
+    s_dev.data = (unsigned char *)kmalloc(SCULL_MEM_SIZE, GFP_KERNEL);
 
-    go = dev.data;
+    go = s_dev.data;
     for(i = 0; i < SCULL_MEM_SIZE; i++)
     {
         go[i] = '\0';
     }
 
     /* 动态分配 */
-    result = alloc_chrdev_region(&dev.dev_num, 0, 1, SCULL_NAME);
-    scull_major = MAJOR(dev.dev_num);
+    result = alloc_chrdev_region(&s_dev.dev_num, 0, 1, SCULL_NAME);
+    scull_major = MAJOR(s_dev.dev_num);
 
     /* 注册字符设备 */
-    scull_setup_cdev(&dev, scull_major);
+    scull_setup_cdev(&s_dev, scull_major);
 
     printk(KERN_ALERT "scull init ok.\n");
     return 0;
@@ -170,11 +182,12 @@ static int scull_init(void)
  ******************************************************************************/
 static void scull_exit(void)
 { 
-    cdev_del(&dev.cdev);
-    unregister_chrdev_region(dev.dev_num, 1);
+    cdev_del(&s_dev.cdev);
+    unregister_chrdev_region(s_dev.dev_num, 1);
 
     /* 释放内存 */
-    kfree(dev.data);
+    kfree(s_dev.data);
+    s_dev.size = 0;
 
     printk(KERN_ALERT "scull exit ok.\n");
 }

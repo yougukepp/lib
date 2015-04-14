@@ -11,5 +11,5 @@ default:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
 
 clean: 
-	rm -rvf scull.ko scull.mod.o scull.o scull.mod.c modules.order Module.symvers .scull.ko.cmd .scull.o.cmd .scull.mod.o.cmd .tmp_versions/
+	rm -rvf scull.ko scull.mod.o scull.o scull.mod.c modules.order Module.symvers .scull.ko.cmd .scull.o.cmd .scull.mod.o.cmd .tmp_versions/ *.txt
 endif 
