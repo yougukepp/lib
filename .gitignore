@@ -25,3 +25,6 @@ python/sicp/tool/__init__.py
 python/sicp/tool/__pycache__/__init__.cpython-32.pyc
 python/sicp/tool/__pycache__/base.cpython-32.pyc
 *.pyc
+
+# gdp统计结果
+python/gdp/data.xlsx
