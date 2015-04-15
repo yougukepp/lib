@@ -64,6 +64,7 @@ ssize_t scull_read(struct file *filp, char __user *buff,
         return -EFAULT;
     }
 
+     /* TODO: 锁 */
     if(s_dev.size < count)
     {
         read_count = s_dev.size;
@@ -111,7 +112,9 @@ ssize_t scull_write(struct file *filp, const char __user *buff,
         return -EFAULT;
     }
 
-    /* 存入scull_dev */
+    /* 存入scull_dev
+     * TODO: 锁
+     * */
     memcpy(s_dev.data, k_buf, count);
     s_dev.size += count;
 
