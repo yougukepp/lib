@@ -34,6 +34,15 @@ def parse_data(data):
         country = content[g_country_key][g_country_v_key]
         value = content[g_value_key]
 
+        if None == date:
+            date = 'None'
+
+        if None == country:
+            country = 'None'
+
+        if None == value:
+            value = 'None'
+
         parsed_data[(date,country)] = value
 
     return parsed_data
@@ -97,21 +106,14 @@ if __name__ == '__main__':
 
     """
     格式
-    {(year,国):(值1, 值2,......}}
+    {'(year,国)':(值1, 值2,......}}
     """
     all_data = {}
     for k in gdp_data:
-        all_data[k] = (gdp_data[k], population_data[k])
-
-
-
-    # 调试信息
-
-    for k in all_data:
-        print(k[0], k[1], all_data[k])
+        all_data[str(k)] = (gdp_data[k], population_data[k])
 
     out = open('data.txt', 'w')
-    json_str = json.dumps(all_data, indent=4)
+    json_str = json.dumps(all_data, ensure_ascii=False, indent=4)
     out.write(json_str)
     out.close()
 
