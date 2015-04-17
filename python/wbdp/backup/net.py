@@ -19,7 +19,7 @@ g_country_key = 'country'
 g_country_v_key = 'value'
 g_value_key = 'value'
 
-g_once_count = 100
+g_once_count = 2000
 
 def parse_data(data):
     """
