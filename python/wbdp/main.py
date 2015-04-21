@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import urllib.request
-import json
+import WBDPViewer
 
 if __name__ == '__main__':
+    viewer = WBDPViewer.WBDPViewer()
+    viewer.show()
+
+    """
     url = 'http://api.worldbank.org/zh/countries/all/indicators/NY.GDP.MKTP.CD?format=json&per_page=5000&page=1'
 
     print(1)
@@ -23,4 +26,5 @@ if __name__ == '__main__':
     out.write(json_str)
     out.close()
     print(7)
+    """
 
