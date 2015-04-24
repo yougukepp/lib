@@ -36,6 +36,9 @@ sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-
 # python & Qt
 sudo apt-get install python3-pyqt4
 
+# python & serial
+sudo apt-get install python-serial
+
 # OpenGL
 #sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev python-opengl libglew-dev libglui-dev
 
