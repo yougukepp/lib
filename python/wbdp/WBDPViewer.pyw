@@ -7,11 +7,13 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
+from WBDPSpider import WBDPSpider
+
 class WBDPViewer(QMainWindow):
     def __init__(self, parent=None):
         super(WBDPViewer, self).__init__(parent) 
         
-        updateDataBaseAct = QAction("&UpdateDB", self)
+        updateDataBaseAct = QAction("&UDB", self)
         updateDataBaseAct.setStatusTip("Update DataBase")
         updateDataBaseAct.triggered.connect(self.UpdateDataBase) 
 
@@ -24,7 +26,10 @@ class WBDPViewer(QMainWindow):
         self.setCentralWidget(tableWidget)
 
     def UpdateDataBase(self):
-        print('update data base')
+        print('begin update')
+        spider = WBDPSpider()
+        spider.update()
+        print('end update')
         
 if __name__ == '__main__':
 
