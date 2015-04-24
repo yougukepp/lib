@@ -20,8 +20,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include "i2c-dev.h"
-#include "fh_bsp_i2c.h"
+#include "fhdrv_i2c.h"
 
 #define BUF_SIZE    (1024)
 
@@ -57,27 +56,31 @@
  ******************************************************************************/
 int main(int argc, char *argv[])
 {
+    int rst = 0;
+    int channel = 0;
     int addr = 0;
     int offset = 0;
     int size = 0;
     char buf[BUF_SIZE];
     bzero(buf, BUF_SIZE);
 
-    if(4 != argc)
+    if(5 != argc)
     {
-        fprintf(stderr, "Usage:%s addr(dec) offset(dec) size(byte)\n", argv[0]);
+        fprintf(stderr, "Usage:%s channel addr(dec) offset(dec) size(byte)\n", argv[0]);
         return 0;
     }
 
-    addr = atoi(argv[1]);
-    offset = atoi(argv[2]);
-    size = atoi(argv[3]);
+    channel = atoi(argv[1]);
+    addr = atoi(argv[2]);
+    offset = atoi(argv[3]);
+    size = atoi(argv[4]);
 
     printf("read from addr:0x%x offset:%d %d bytes:\n", addr, offset, size); 
     
-    if(0 != fh_bsp_i2c_read(addr, offset, buf, size))
+    rst = fhdrv_i2c_read(channel, addr, offset, buf, size);
+    if(0 != rst)
     {
-        fprintf(stderr, "fh_bsp_i2c_read failed.\n");
+        fprintf(stderr, "fh_i2c_read failed:%d\n", rst);
         return 0;
     }
 
