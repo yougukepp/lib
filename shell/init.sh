@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # Base
-sudo apt-get install git git-svn gnupg curl libx11-dev libxi-dev libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ttf-wqy-microhei ttf-wqy-zenhei ntpdate sudo vim vim-tiny mpg123 build-essential autoconf automake gdb gcc binutils linux-headers-$(uname -r) gnuplot flashplugin-nonfree libtool tree rar unrar zip meld mplayer2 gnome-mplayer ttf-arphic-ukai ttf-arphic-uming xfonts-intl-chinese xfonts-wqy ibus-googlepinyin gedit p7zip p7zip-full p7zip-rar pkg-config flex bison sed gawk bc u-boot-tools minicom sysv-rc-conf sylpheed
+sudo apt-get install git sudo vim build-essential autoconf automake gcc binutils libc6 linux-headers-$(uname -r) libtool
+
+sudo apt-get install libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ttf-wqy-microhei ttf-wqy-zenhei ntpdate sudo vim vim-tiny mpg123 gdb gnuplot flashplugin-nonfree tree rar unrar zip meld mplayer2 gnome-mplayer xfonts-intl-chinese xfonts-wqy gedit p7zip p7zip-full p7zip-rar pkg-config flex bison sed gawk bc u-boot-tools minicom sysv-rc-conf sylpheed 
+sudo apt-get install x-window-system-core 
+sudo apt-get install gnome-core
+
 
 # firefox 可以看chm文件
 #chmsee 
@@ -34,7 +39,7 @@ sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-
 #sudo apt-get install sbcl sbcl-doc
 
 # python & Qt
-sudo apt-get install python3-pyqt4
+sudo apt-get install python3-pyqt5
 
 # python & serial
 sudo apt-get install python-serial
@@ -56,14 +61,14 @@ sudo apt-get install python-serial
 # sudo apt-get install openssh-server ssh samba nfs-common nfs-kernel-server portmap
 
 # update
-sudo apt-get update
-sudo apt-get upgrade
+#sudo apt-get update
+#sudo apt-get upgrade
 
-sudo apt-get autoremove
-sudo apt-get autoclean
+#sudo apt-get autoremove
+#sudo apt-get autoclean
 
 # ntp time 
-#sudo ntpdate 210.72.145.44      # 国家授时中心
-sudo ntpdate 202.120.2.101      # 上海交大
-sudo hwclock -w --localtime
+# sudo ntpdate 210.72.145.44      # 国家授时中心
+#sudo ntpdate 202.120.2.101      # 上海交大
+#sudo hwclock -w --localtime
 
