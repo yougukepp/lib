@@ -27,8 +27,6 @@ class WBDPViewer(QMainWindow):
 
     def UpdateDataBase(self):
         print('begin update')
-        spider = WBDPSpider()
-        spider.update()
         print('end update')
         
 if __name__ == '__main__':

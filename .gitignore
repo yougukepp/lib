@@ -27,4 +27,7 @@ python/sicp/tool/__pycache__/base.cpython-32.pyc
 *.pyc
 
 # gdp统计结果
-python/gdp/data.xlsx
+# python/gdp/data.xlsx
+python/wbdp/wbdp.db
+
+
