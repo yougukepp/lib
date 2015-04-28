@@ -15,3 +15,5 @@ service tftp
     flags           = IPv4
 }  
 
+#sudo /etc/init.d/xinetd reload  
+#sudo /etc/init.d/xinetd restart  
