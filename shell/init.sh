@@ -3,7 +3,11 @@
 # Base
 sudo apt-get install git sudo vim build-essential autoconf automake gcc binutils libc6 linux-headers-$(uname -r) libtool
 
-sudo apt-get install libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ttf-wqy-microhei ttf-wqy-zenhei ntpdate sudo vim vim-tiny mpg123 gdb gnuplot flashplugin-nonfree tree rar unrar zip meld mplayer2 gnome-mplayer xfonts-intl-chinese xfonts-wqy gedit p7zip p7zip-full p7zip-rar pkg-config flex bison sed gawk bc u-boot-tools minicom sysv-rc-conf sylpheed zlib1g-dev subversion x-window-system-core gnome-core
+# Extra
+sudo apt-get install libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ntpdate sudo vim vim-tiny mpg123 gdb gnuplot flashplugin-nonfree tree rar unrar zip meld mplayer2 gnome-mplayer xfonts-intl-chinese xfonts-wqy gedit p7zip p7zip-full p7zip-rar pkg-config flex bison sed gawk bc u-boot-tools minicom sysv-rc-conf sylpheed zlib1g-dev subversion x-window-system-core gnome-core
+
+# fonts
+sudo apt-get install fonts-arphic* ttf-wqy* fonts-moe-standard* latex-cjk-chinese*
 
 # 博客
 #sudo apt-get install jekyll python-pygments ruby-rdiscount 
