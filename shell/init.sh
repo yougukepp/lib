@@ -37,7 +37,7 @@ sudo apt-get install python3-pyqt5
 sudo apt-get install python3-serial
 
 # OpenGL
-sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev python-opengl libglew-dev libglui-dev
+sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev python-opengl libglew-dev
 
 # Game
 #sudo apt-get install wesnoth
