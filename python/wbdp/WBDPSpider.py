@@ -5,6 +5,7 @@ import json
 import urllib.request
 
 from WBDPDataer import WBDPDataer
+from WBDPStorager import WBDPStorager
 
 # per_page 使用默认值 50
 
@@ -37,13 +38,10 @@ class WBDPSpider:
     def __init__(self):
         pass
 
-    def GetAllCountriesList(self):
-        return self.GetDataNameList('国家', 'name')
+    def GetAllCountriesDict(self):
+        return self.GetDataNameDict('国家', 'name', ('id', 'iso2Code', 'capitalCity'))
 
-    def GetAllIndicatorsList(self):
-        return self.GetDataNameList('指标', 'id')
-
-    def GetDataNameList(self, dataNameKey, jsonKeyName, jsonValueNameList):
+    def GetDataNameDict(self, dataNameKey, jsonKeyName, jsonValueNameList):
         dataDict = {}
         pageMax = self.GetPageMax(dataNameKey)
         pageMax += 1 # range [min, max) 
@@ -53,17 +51,13 @@ class WBDPSpider:
             url = self.MakeUrl(dataNameKey, page=page)
             data = self.GetData(url) 
             dataer = WBDPDataer(data)
-            item = dataer.Parse2List(jsonKeyName, jsonValueNameList)
-            itemKey = item[key]
-            value
-            dataDict[jsonKeyName]
-
-            dataNameList += lst
+            thisPageItems = dataer.Parse2List(jsonKeyName, jsonValueNameList)
+            dataDict.update(thisPageItems)
             print('%4.2f%%' % (100.0 * page / (pageMax - 1)))
 
-        #print(dataNameList)
+        #print(dataDict)
 
-        return dataNameList
+        return dataDict
 
     def GetPageMax(self, dataNameKey):
         url = self.MakeUrl(dataNameKey)
@@ -102,9 +96,10 @@ class WBDPSpider:
 
 if __name__ == '__main__':
     spider = WBDPSpider()
-    a = spider.GetAllCountriesList()
-    print(a)
+    storager = WBDPStorager()
+    data = spider.GetAllCountriesDict()
 
-    #a = spider.GetAllIndicatorsList()
-    #$print(a)
+    storager.UpdateIndexTable('国家', data)
+    #print(d)
+
 

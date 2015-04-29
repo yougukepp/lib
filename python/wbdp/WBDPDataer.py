@@ -13,17 +13,19 @@ class WBDPDataer:
         head = self.GetHead()
         return head[gPageMaxKey] 
     
-    def Parse2List(self, keyName):
-        rstList = []
+    def Parse2List(self, keyName, valueKeyTuple):
+        rstDict = {}
         content = self.GetContent()
         for item in content:
-            #print(item)
-            #print(keyName)
-            #print(item[keyName])
             if item[keyName]:
-                rstList.append(item[keyName])
+                v = []
+                k = item[keyName]
+                for valueKey in valueKeyTuple:
+                    v.append(item[valueKey])
+                rstDict[k] = v
+                #print(rstDict)
 
-        return rstList
+        return rstDict
 
     def Show(self):
         head = self.GetHead()

@@ -3,9 +3,10 @@
 
 import sqlite3
 import time
-from WBDPSpider import WBDPSpider
 
 gTableNameInDataBase = 1
+
+gCountriesTableName = 'countries_table'
 
 # 表名 year年
 # 举例 year_2013_table
@@ -15,35 +16,39 @@ gStartYear = 1960
 
 gCmdHeadCreateTable = "CREATE TABLE " 
 
-gYearTableFormat= """ (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL,
-                       COUNTRIES_ID       TEXT                NOT NULL,
+gYearTableFormat = """ (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL,
+                       COUNTRIES_NAME     TEXT                NOT NULL,
                        INDICATORS_ID      TEXT                NOT NULL,
                        VALUAE             REAL                NOT NULL);"""
 
-gCountriesTableFormat= """ (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL,
-                            COUNTRIES_ID       TEXT                NOT NULL UNIQUE);"""
+gCountriesTableFormat = """ (COUNTRIES_NAME TEXT PRIMARY KEY NOT NULL UNIQUE);"""
 
-gIndicatorsTableFormat= """ (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL,
-                             INDICATORS_ID      TEXT                NOT NULL UNIQUE);"""
+gCountriesTableFormatLite = """(COUNTRIES_NAME)"""
 
-class WBDPStorage:
-    def __init__(self):
+# not use
+#gIndicatorsTableFormat= """ (ID INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL,
+#                             INDICATORS_ID      TEXT                NOT NULL UNIQUE);"""
+
+class WBDPStorager:
+    def __init__(self): 
+        self.conn = sqlite3.connect(gStorageName)
         #
         # 新建数据库
         # 
-        tableList = []
         tableList = self.GetTableList()
-        print(tableList)
+        """
+        for item in tableList:
+            print(item)
+        """
 
         if 0 == len(tableList): # 未建表 则建表
             print('开始建数据库表')
-            conn = sqlite3.connect(gStorageName)
             # 国家表
-            cmdCreateTable = gCmdHeadCreateTable + 'countries_table' + gCountriesTableFormat
-            conn.execute(cmdCreateTable)
-            # 指标表
-            cmdCreateTable = gCmdHeadCreateTable + 'indicators_table' + gIndicatorsTableFormat
-            conn.execute(cmdCreateTable)
+            cmdCreateTable = gCmdHeadCreateTable + gCountriesTableName + gCountriesTableFormat
+            self.conn.execute(cmdCreateTable) 
+            # 指标表 not use
+            #cmdCreateTable = gCmdHeadCreateTable + 'indicators_table' + gIndicatorsTableFormat
+            #conn.execute(cmdCreateTable)
 
             # 年表
             tableNameList = []
@@ -54,37 +59,46 @@ class WBDPStorage:
             size = int(nowYear) - gStartYear 
             for year in range(gStartYear, int(nowYear)):
                 cmdCreateTable = gCmdHeadCreateTable + 'year_' + str(year) + '_table' + gYearTableFormat
-                conn.execute(cmdCreateTable)
+                self.conn.execute(cmdCreateTable)
                 #print(cmdCreateTable)
                 print('%4.2f%%' % (100.0 * index / size))
                 index += 1
 
-    
     def GetTableList(self):
-        tableList = []
+        return self.ShowTable('sqlite_master')
+    
+    def ShowTable(self, tableName):
+        cmdStr = 'select * from ' + tableName
+        cursor = self.conn.execute(cmdStr) 
+        data = cursor.fetchall() 
 
-        conn = sqlite3.connect(gStorageName)
-        cmdStr = "select * from sqlite_master where type='table'"
-        cursor = conn.execute(cmdStr)
-        data = cursor.fetchall()
-        for d in data:
-            tableList.append(d[gTableNameInDataBase])
-
-        return tableList
+        return data 
 
     def UpdateIndexTable(self, dataName, dataList):
+        tableName = ''
         if '国家' == dataName: 
-            print(dataName)
-        elif '指标' == dataName:
-            print(dataName)
+            tableName = gCountriesTableName
+            tableFormat = gCountriesTableFormatLite
         else:
             print(dataName)
+            print('WBDPStorager.UpdateIndexTable 未实现!')
+            return
 
+        i = 0
+        print('写入' + dataName + '到数据库')
+        size = len(dataList)
+        for v in dataList:
+            values = "'" + v  + "'"
+            cmdStr = 'INSERT INTO ' + tableName + tableFormat + ' VALUES (' + values + ')'
+            print(cmdStr)
+            cursor = self.conn.execute(cmdStr)
+            print('%4.2f%%' % (100.0 * i / (size)))
+            i += 1
+        self.conn.commit()
 
 if __name__ == '__main__':
-    db = WBDPStorage()
+    db = WBDPStorager()
+    data = db.ShowTable('countries_table')
+    print (data)
     print('WBDPStorage 测试!')
-
-
-
 
