@@ -1,10 +1,10 @@
 /******************************************************************************
  *
- * 文件名  ： i2c_tect.c
+ * 文件名  ： gpio_tect.c
  * 负责人  ： 彭鹏(pengpeng@fiberhome.com)
- * 创建日期： 20150408 
+ * 创建日期： 20150429 
  * 版本号  ： v1.0
- * 文件描述： i2c驱动测试代码
+ * 文件描述： gpio驱动测试代码
  * 版权说明： Copyright (c) 2000-2020   烽火通信科技股份有限公司
  * 其    他： 无
  * 修改日志： 无
@@ -20,9 +20,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include "fhdrv_i2c.h"
-
-#define BUF_SIZE    (1024)
+#include "fhdrv_gpio.h"
 
 /*----------------------------------- 声明区 ----------------------------------*/
 
@@ -57,45 +55,78 @@
 int main(int argc, char *argv[])
 {
     int rst = 0;
-    int channel = 0;
-    int addr = 0;
-    int offset = 0;
-    int size = 0;
-    char buf[BUF_SIZE];
-    bzero(buf, BUF_SIZE);
+    int gpio = 0;
+    char r_or_w = 0;
+    unsigned char val = 0;
 
-    if(5 != argc)
+    if(!((4 == argc)
+      || (3 == argc)))
     {
-        fprintf(stderr, "Usage:%s channel addr(dec) offset(dec) size(byte)\n", argv[0]);
+        fprintf(stderr, "Usage:%s gpio r(or w) val.\n", argv[0]);
         return 0;
     }
 
-    channel = atoi(argv[1]);
-    addr = atoi(argv[2]);
-    offset = atoi(argv[3]);
-    size = atoi(argv[4]);
+    gpio = atoi(argv[1]);
+    r_or_w = *argv[2];
 
-    printf("read from channel %d, addr:0x%x, offset:%d, %d bytes:\n", channel, addr, offset, size); 
-    
-    rst = fhdrv_i2c_read(channel, addr, offset, buf, size);
+    /* printf("%d,%c,%d,%d\n", r_or_w, r_or_w, 'r', 'w'); */
+    if('r' == r_or_w) /* read */
+    {
+        printf("read from:");
+    }
+    else if('w' == r_or_w) /* write */
+    {
+        val = (unsigned char)atoi(argv[3]);
+        printf("write to:");
+    }
+    else /* error */
+    {
+        fprintf(stderr, "Usage:%s gpio r(0)w(1) val.\n", argv[0]);
+        return 0;
+    }
+
+    rst = fhdrv_gpio_set_pinmux(gpio, 5); /* set pin to gpio mode */
     if(0 != rst)
     {
-        fprintf(stderr, "fh_i2c_read failed:%d\n", rst);
+        fprintf(stderr, "fhdrv_gpio_set_pinmux error.\n");
         return 0;
     }
 
-    printf("string:");
-    for(int i=0; i<size; i++)
+    if('r' == r_or_w) /* read */
     {
-        printf("%c", buf[i]);
-    } 
-    
-    printf("\nchar:  ");
-    for(int i=0; i<size; i++)
-    {
-        printf("0x%x,", buf[i]);
+        rst = fhdrv_gpio_set_mode(gpio, 0); /* 0 in, 1 out */
+        if(0 != rst)
+        {
+            fprintf(stderr, "fhdrv_gpio_set_mode error.\n");
+            return 0;
+        }
+
+        rst = fhdrv_gpio_read(gpio, &val);
+        if(0 != rst)
+        {
+            fprintf(stderr, "fhdrv_gpio_read error.\n");
+            return 0;
+        }
+
     }
-    printf("\n");
+    else /* write */
+    {
+        rst = fhdrv_gpio_set_mode(gpio, 1); /* 0 in, 1 out */
+        if(0 != rst)
+        {
+            fprintf(stderr, "fhdrv_gpio_set_mode error.\n");
+            return 0;
+        }
+
+        rst = fhdrv_gpio_write(gpio, val);
+        if(0 != rst)
+        {
+            fprintf(stderr, "fhdrv_gpio_write error.\n");
+            return 0;
+        }
+    }
+
+    printf("gpio%d %s\n", gpio, (1 == val)?("High"):("Low")); 
 
     return 0;
 }
