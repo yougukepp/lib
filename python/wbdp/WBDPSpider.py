@@ -38,25 +38,32 @@ class WBDPSpider:
         pass
 
     def GetAllCountriesList(self):
-        countriesList = []
-        pageMax = self.GetPageMax()
+        return self.GetDataNameList('国家', 'name')
+
+    def GetAllIndicatorsList(self):
+        return self.GetDataNameList('指标', 'id')
+
+    def GetDataNameList(self, dataNameKey, jsonKeyName):
+        dataNameList = []
+        pageMax = self.GetPageMax(dataNameKey)
         pageMax += 1 # range [min, max) 
         
-        print('获取国家列表:     ')
+        print('获取' + str(dataNameKey) + '列表:')
         for page in range(1, pageMax):
-            url = self.MakeUrl('国家', page=page)
+            url = self.MakeUrl(dataNameKey, page=page)
             data = self.GetData(url) 
             dataer = WBDPDataer(data)
-            lst = dataer.Parse2List('name')
-            countriesList += lst
+            lst = dataer.Parse2List(jsonKeyName)
+            dataNameList += lst
             print('%4.2f%%' % (100.0 * page / (pageMax - 1)))
 
-        #print(countriesList)
+        #print(dataNameList)
 
-        return countriesList
+        return dataNameList
 
-    def GetPageMax(self):
-        url = self.MakeUrl('国家')
+    def GetPageMax(self, dataNameKey):
+        url = self.MakeUrl(dataNameKey)
+        # print(url)
         data = self.GetData(url)
         dataer = WBDPDataer(data)
         pageMax = dataer.GetPageMax()
@@ -70,29 +77,6 @@ class WBDPSpider:
         data = json.loads(buff_utf8) 
 
         return data
-
-    """
-    def Update(self):
-        self.count = self.GetCount()
-
-        #url = self.MakeUrl('英文', 'json', '指标')
-        #url = self.MakeUrl('中文', 'json', '国家', 2)
-        url = self.MakeUrl('中文', 'json', '国家')
-
-        print(url) 
-        
-        response = urllib.request.urlopen(url)
-        buff = response.read()
-        buff_utf8 = buff.decode('utf8')
-        data = json.loads(buff_utf8) 
-
-        wbdpDataer = WBDPDataer(data)
-        wbdpDataer.print()
-        #return data
-
-    def GetCount(self):
-        pass
-    """
 
     def MakeUrl(self, dataNameKey, formatKey='json', languageKey='中文', page=1):
         url = self.sBaseUrl
@@ -114,5 +98,9 @@ class WBDPSpider:
 
 if __name__ == '__main__':
     spider = WBDPSpider()
-    spider.GetAllCountriesList()
+    a = spider.GetAllCountriesList()
+    print(a)
+
+    #a = spider.GetAllIndicatorsList()
+    #$print(a)
 
