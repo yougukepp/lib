@@ -43,8 +43,8 @@ class WBDPSpider:
     def GetAllIndicatorsList(self):
         return self.GetDataNameList('指标', 'id')
 
-    def GetDataNameList(self, dataNameKey, jsonKeyName):
-        dataNameList = []
+    def GetDataNameList(self, dataNameKey, jsonKeyName, jsonValueNameList):
+        dataDict = {}
         pageMax = self.GetPageMax(dataNameKey)
         pageMax += 1 # range [min, max) 
         
@@ -53,7 +53,11 @@ class WBDPSpider:
             url = self.MakeUrl(dataNameKey, page=page)
             data = self.GetData(url) 
             dataer = WBDPDataer(data)
-            lst = dataer.Parse2List(jsonKeyName)
+            item = dataer.Parse2List(jsonKeyName, jsonValueNameList)
+            itemKey = item[key]
+            value
+            dataDict[jsonKeyName]
+
             dataNameList += lst
             print('%4.2f%%' % (100.0 * page / (pageMax - 1)))
 
