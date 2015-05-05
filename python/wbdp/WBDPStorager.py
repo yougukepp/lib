@@ -4,7 +4,8 @@
 import sqlite3
 import time
 
-gTableNameInDataBase = 1
+gTableTypeInSqliteMaster = 0
+gTableNameInSqliteMaster = 1
 
 gCountriesTableName = 'countries_table'
 
@@ -36,13 +37,9 @@ class WBDPStorager:
         # 新建数据库
         # 
         tableList = self.GetTableList()
-        """
-        for item in tableList:
-            print(item)
-        """
 
         if 0 == len(tableList): # 未建表 则建表
-            print('开始建数据库表')
+            print('开始建数据库表...')
             # 国家表
             cmdCreateTable = gCmdHeadCreateTable + gCountriesTableName + gCountriesTableFormat
             self.conn.execute(cmdCreateTable) 
@@ -61,11 +58,30 @@ class WBDPStorager:
                 cmdCreateTable = gCmdHeadCreateTable + 'year_' + str(year) + '_table' + gYearTableFormat
                 self.conn.execute(cmdCreateTable)
                 #print(cmdCreateTable)
-                print('%4.2f%%' % (100.0 * index / size))
+                #print('%4.2f%%' % (100.0 * index / size))
                 index += 1
 
+    def NeedUpdateIndexTable(self): 
+        """
+        如果新建的国家表
+        就不需要重新生成了
+        """ 
+        if self.ShowTable(gCountriesTableName): # gCountriesTableName 表中有国家 不重复插入
+            return False
+        else:
+            return True
+
     def GetTableList(self):
-        return self.ShowTable('sqlite_master')
+        rst  = []
+        data = self.ShowTable('sqlite_master')
+        for item in data:
+            typeStr = item[gTableTypeInSqliteMaster]
+            nameStr = item[gTableNameInSqliteMaster]
+            if 'table' == typeStr:
+                #rst.append((typeStr, nameStr))
+                rst.append(nameStr)
+
+        return rst
     
     def ShowTable(self, tableName):
         cmdStr = 'select * from ' + tableName
@@ -74,31 +90,35 @@ class WBDPStorager:
 
         return data 
 
-    def UpdateIndexTable(self, dataName, dataList):
+    def UpdateTable(self, dataName, dataList):
         tableName = ''
         if '国家' == dataName: 
             tableName = gCountriesTableName
             tableFormat = gCountriesTableFormatLite
         else:
             print(dataName)
-            print('WBDPStorager.UpdateIndexTable 未实现!')
+            print('WBDPStorager.UpdateTable 未实现!')
             return
 
         i = 0
-        print('写入' + dataName + '到数据库')
+        print('写入' + dataName + '到数据库...')
         size = len(dataList)
         for v in dataList:
             values = "'" + v  + "'"
             cmdStr = 'INSERT INTO ' + tableName + tableFormat + ' VALUES (' + values + ')'
-            print(cmdStr)
+            #print(cmdStr)
             cursor = self.conn.execute(cmdStr)
-            print('%4.2f%%' % (100.0 * i / (size)))
+            #print('%4.2f%%' % (100.0 * i / (size)))
             i += 1
         self.conn.commit()
 
 if __name__ == '__main__':
     db = WBDPStorager()
-    data = db.ShowTable('countries_table')
-    print (data)
+    data = db.ShowTable(gCountriesTableName)
+    print (data) 
+    
+    tableList = db.GetTableList()
+    print(tableList)
+
     print('WBDPStorage 测试!')
 

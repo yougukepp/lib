@@ -16,6 +16,12 @@ class WBDPDataer:
     def Parse2List(self, keyName, valueKeyTuple):
         rstDict = {}
         content = self.GetContent()
+
+        keyList = []
+        for k in keyName:
+            keyList.append(k)
+        print(keyList)
+
         for item in content:
             if item[keyName]:
                 v = []

@@ -24,6 +24,7 @@ class WBDPSpider:
     sDataName = {
             '指标' : 'indicators',
             '国家' : 'countries',
+            'GDP'  : 'countries/all/indicators/NY.GDP.MKTP.CD'
             }
 
     #国家
@@ -38,22 +39,25 @@ class WBDPSpider:
     def __init__(self):
         pass
 
+    def GetAllGDPDict(self):
+        return self.GetDataNameDict('GDP', ('date', ('country','value')), ('value'))
+
     def GetAllCountriesDict(self):
-        return self.GetDataNameDict('国家', 'name', ('id', 'iso2Code', 'capitalCity'))
+        return self.GetDataNameDict('国家', ('name'), ('id', 'iso2Code', 'capitalCity'))
 
     def GetDataNameDict(self, dataNameKey, jsonKeyName, jsonValueNameList):
         dataDict = {}
         pageMax = self.GetPageMax(dataNameKey)
         pageMax += 1 # range [min, max) 
         
-        print('获取' + str(dataNameKey) + '列表:')
+        print('获取' + str(dataNameKey) + '列表...')
         for page in range(1, pageMax):
             url = self.MakeUrl(dataNameKey, page=page)
             data = self.GetData(url) 
             dataer = WBDPDataer(data)
             thisPageItems = dataer.Parse2List(jsonKeyName, jsonValueNameList)
             dataDict.update(thisPageItems)
-            print('%4.2f%%' % (100.0 * page / (pageMax - 1)))
+            #print('%4.2f%%' % (100.0 * page / (pageMax - 1)))
 
         #print(dataDict)
 
@@ -61,7 +65,7 @@ class WBDPSpider:
 
     def GetPageMax(self, dataNameKey):
         url = self.MakeUrl(dataNameKey)
-        # print(url)
+        print(url)
         data = self.GetData(url)
         dataer = WBDPDataer(data)
         pageMax = dataer.GetPageMax()
@@ -97,9 +101,11 @@ class WBDPSpider:
 if __name__ == '__main__':
     spider = WBDPSpider()
     storager = WBDPStorager()
-    data = spider.GetAllCountriesDict()
 
-    storager.UpdateIndexTable('国家', data)
-    #print(d)
+    if storager.NeedUpdateIndexTable(): 
+        data = spider.GetAllCountriesDict()
+        storager.UpdateTable('国家', data)
 
+    data = spider.GetAllGDPDict()
+    storager.UpdateTable('国家', data)
 
