@@ -22,7 +22,7 @@ sudo apt-get install fonts-arphic* ttf-wqy* fonts-moe-standard* latex-cjk-chines
 sudo apt-get install fcitx-googlepinyin
 
 # document
-sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-zh manpages-dev manpages-posix-dev manpages-posix libx11-doc man2html
+sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-zh manpages-dev manpages-posix-dev manpages-posix libx11-doc
 
 # java
 # sudo apt-get install openjdk-7-jdk
