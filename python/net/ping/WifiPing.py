@@ -10,11 +10,43 @@ import threading
 
 class IpPool:
     def __init__(self):
-        pass
+        self.mIpList = []
+        self.mIndex = 0
 
     def AddIp(self, ip):
-        print(ip)
-  
+        ipList = self.mIpList
+        ipList.append(ip)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        ipList = self.mIpList
+        index = self.mIndex
+
+        size = len(self.mIpList)
+
+        if not ipList or size == index:
+            raise StopIteration
+        else:
+            rst = ipList[index]
+            self.mIndex += 1
+            return rst
+
+    def Ping(self, timeout): 
+        socketIcmp = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.getprotobyname("icmp")) 
+        socketIcmp.settimeout(timeout) 
+        
+        icmpRecvThread = IcmpRecvThread(socketIcmp)
+        icmpRecvThread.start() 
+        
+        icmpSender = IcmpSender(socketIcmp)
+        data = b''                              # 用于ICMP报文的负荷字节（8bit）
+        icmpSender.Send(self, data) 
+        reachableIPs = icmpRecvThread.Wait()    # 等待结束
+        for ip in reachableIPs:
+            print(ip)
+
 class IcmpSender:
     def __init__(self, sock):
         self.mSock = sock 
@@ -46,12 +78,11 @@ class IcmpSender:
   
         return packet
 
-    def Send(self, ipOrUrl, data): 
+    def Send(self, ipPool, data): 
         sock = self.mSock
         packet = self.MakeIcmpPacket(data)
-        sock.sendto(packet, (ipOrUrl, 0))
-        pass
-
+        for ip in ipPool:  # ip 作为迭代元素
+            sock.sendto(packet, (ip, 0)) 
 
 class IcmpRecvThread(threading.Thread):
     '''
@@ -66,53 +97,35 @@ class IcmpRecvThread(threading.Thread):
 
         self.mSock = sock
         self.mBufSize = bufSize
-        self.mOver = False
-
-        self.mPingOk = False
+        self.mRunning = True
+        self.mIpPool = {}
 
     def run(self): 
         #print('Icmp Recv Thread Start...') 
-        try: 
-            sock = self.mSock
-            rst = sock.recvfrom(self.mBufSize)
-            #print(rst)
-            self.mPingOk = True
-        except socket.timeout as err:
-            #print('Icmp Recv Thread ', end = '') 
-            #print(err)
-            pass
-
+        while True:
+            try: 
+                sock = self.mSock
+                (recvData, addr)= sock.recvfrom(self.mBufSize)
+                ip = addr[0]
+                self.mIpPool[ip] = ip
+                #print(ip)
+            except socket.timeout as err: # 超时退出
+                break
         #print('Icmp Recv Thread End.')
-        self.mOver = True
+        self.mRunning = False
 
-    def PingOk(self):
-        if self.mOver:
-            return self.mPingOk
-        else:
-            print('还未到超时值')
-
-def WifiPing(ipOrUrl, timeout):
-    socketIcmp = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.getprotobyname("icmp")) 
-    socketIcmp.settimeout(timeout)
-
-    icmpRecvThread = IcmpRecvThread(socketIcmp)
-    icmpRecvThread.start()
-
-    data = struct.pack('d', time.time())    # 用于ICMP报文的负荷字节（8bit）
-    icmpSender = IcmpSender(socketIcmp)
-    icmpSender.Send(ipOrUrl, data)
-    
-    time.sleep(timeout + 0.01)              # sencond 作为单位
-    return icmpRecvThread.PingOk()
+    def Wait(self):
+        while self.mRunning:
+            time.sleep(0.1) # 休眠 100 ms
+        return self.mIpPool
 
 if __name__=='__main__':
     ipPool = IpPool()
 
     ipHead = '10.33.152.'
-    for ipLast in range(1, 256):
+    for ipLast in range(1, 30):
         ip = ipHead + str(ipLast)
         ipPool.AddIp(ip)
-        print(ip)
 
-    #WifiPing()
+    ipPool.Ping(1) # 1s超时
 

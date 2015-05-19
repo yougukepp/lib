@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from WifiPing import WifiPing
+from WifiPing import IpPool
 
 if __name__=='__main__':
-    ipHead = '10.33.152.'
-    for ipLast in range(1, 256):
-        ip = ipHead + str(ipLast)
-        rst = WifiPing(ip, 0.02)  # 20ms
-        print(ip, end = '')
-        print('   ', end = '')
-        print(rst)
+    ipPool = IpPool()
 
+    ipHead = '10.33.152.'
+    for ipLast in range(1, 30):
+        ip = ipHead + str(ipLast)
+        ipPool.AddIp(ip)
+
+    ipPool.Ping(1) # 1s超时
 
