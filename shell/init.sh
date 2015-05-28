@@ -35,7 +35,7 @@ sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-
 #sudo apt-get install sbcl sbcl-doc
 
 # python & Qt
-sudo apt-get install python3-pyqt5
+sudo apt-get install python3-pyqt5 libqt5designer5 qt4-designer
 
 # python & serial
 sudo apt-get install python3-serial
