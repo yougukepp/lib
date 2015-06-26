@@ -14,6 +14,9 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4 import QtOpenGL
 
+from PyQt4.uic import loadUiType, loadUi
+UIClass = loadUiType("gl_demo.ui")
+
 try:
     from OpenGL import GL
 except ImportError: 
@@ -40,47 +43,67 @@ cIndices3 = array.array('B', [0, 3,])
     
 class GLWindow(QtGui.QWidget):
     def __init__(self):
-        super(GLWindow, self).__init__()
+        super(GLWindow, self).__init__() 
+        
+        self.mUi = UIClass[0]()
+        self.mUi.setupUi(self)
 
-        # 创建控件
-        self.mGlWidget = GLWidget()
+        # 角度
+        self.mXLabel = self.mUi.xLabel
+        self.mXSlider = self.mUi.xSlider 
+        self.mXSlider.setRange(0, 360)
 
-        #角度
-        self.mXSlider = self.createSlider()
-        self.mYSlider = self.createSlider()
-        self.mZSlider = self.createSlider()
-        self.mXSlider.setValue(0)
-        self.mYSlider.setValue(0)
-        self.mZSlider.setValue(0)
+        self.mYLabel = self.mUi.yLabel
+        self.mYSlider = self.mUi.ySlider
+        self.mYSlider.setRange(0, 360)
+
+        self.mZLabel = self.mUi.zLabel
+        self.mZSlider = self.mUi.zSlider
+        self.mZSlider.setRange(0, 360)
 
         # 距离
-        self.mDisSlider = self.createSlider()
-        self.mDisSlider.setValue(0)
+        self.mDisLabel = self.mUi.disLabel
+        self.mDisSlider = self.mUi.disSlider
+        self.mDisSlider.setRange(0, 10)
+
+        # 加载OpenGL控件
+        self.mGlWidget = GLWidget()
+        self.mGLGroupBox = self.mUi.glGroupBox
+        vbox = QtGui.QVBoxLayout()
+        vbox.addWidget(self.mGlWidget)
+        self.mGLGroupBox.setLayout(vbox)
 
         # 标题
         self.setWindowTitle("PyQt&OpenGL 演示")
 
-        mainLayout = QtGui.QHBoxLayout()
-        mainLayout.addWidget(self.mGlWidget)
-        mainLayout.addWidget(self.mXSlider)
-        mainLayout.addWidget(self.mYSlider)
-        mainLayout.addWidget(self.mZSlider)
-        mainLayout.addWidget(self.mDisSlider)
-        self.setLayout(mainLayout)
-
         # 连接事件
-        self.mXSlider.valueChanged.connect(self.mGlWidget.SetXRotation)
-        self.mYSlider.valueChanged.connect(self.mGlWidget.SetYRotation)
-        self.mZSlider.valueChanged.connect(self.mGlWidget.SetZRotation)
+        self.mXSlider.valueChanged.connect(self.SetXRotation)
+        self.mYSlider.valueChanged.connect(self.SetYRotation)
+        self.mZSlider.valueChanged.connect(self.SetZRotation)
+        self.mDisSlider.valueChanged.connect(self.SetDistance) 
 
-    def createSlider(self):
-        """
-        角度为单位
-        """
-        slider = QtGui.QSlider(QtCore.Qt.Vertical)
-        slider.setRange(0, 360)
-        return slider
+    def angle2radian(self, angle):
+        radian = angle * math.pi / 180
+        return radian
 
+    def SetXRotation(self, angle):
+        xRadian = self.angle2radian(angle)
+        self.mXLabel.setText("X%.2f" % xRadian)
+        self.mGlWidget.SetNewGLValue(xRadian, 0, 0, 0 )
+
+    def SetYRotation(self, angle):
+        yRadian = self.angle2radian(angle)
+        self.mYLabel.setText("Y%.2f" % yRadian)
+        self.mGlWidget.SetNewGLValue(0, yRadian, 0, 0 )
+
+    def SetZRotation(self, angle):
+        zRadian = self.angle2radian(angle)
+        self.mZLabel.setText("Z%.2f" % zRadian)
+        self.mGlWidget.SetNewGLValue(0, 0, zRadian, 0 )
+
+    def SetDistance(self, dis):
+        self.mGlWidget.SetNewGLValue(0, 0, 0, 0)
+        pass
 
 class GLWidget(QtOpenGL.QGLWidget):
     def __init__(self, parent=None):
@@ -104,7 +127,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glViewport(0, 0, self.width(), self.height())
 
         # 远离眼睛 保证可以看见
-        # GL.glTranslated(0.0, 0.0, self.mDis)
+        GL.glTranslated(self.mDis, 0.0, 0.0)
         GL.glRotated(self.mXRot, 1.0, 0.0, 0.0)
         GL.glRotated(self.mYRot , 0.0, 1.0, 0.0)
         GL.glRotated(self.mZRot , 0.0, 0.0, 1.0)
@@ -120,26 +143,18 @@ class GLWidget(QtOpenGL.QGLWidget):
         GL.glDisableClientState( GL.GL_COLOR_ARRAY )
         GL.glDisableClientState( GL.GL_VERTEX_ARRAY ) 
 
+    def SetNewGLValue(self, x, y, z, dis):
+        self.mXRot = x
+        self.mYRot = y
+        self.mZRot = z
+        self.mDis = dis
+        self.updateGL()
+
     def MakeObj(self):
         """
         TODO: 做3D物体
         """
         print("MakeObj")
-
-    def SetXRotation(self, angle):
-        """
-        角度为弧度
-        """
-        self.mXRot = angle * math.pi / 180
-        self.updateGL()
-
-    def SetYRotation(self, angle):
-        self.mYRot = angle * math.pi / 180
-        self.updateGL()
-
-    def SetZRotation(self, angle):
-        self.mZRot = angle * math.pi / 180
-        self.updateGL()
 
     def PrintGLInfo(self):
         print("生产商       ", end=":")
