@@ -81,24 +81,6 @@
      </item>
     </layout>
    </item>
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout_4">
-     <item>
-      <widget class="QLabel" name="disLabel">
-       <property name="text">
-        <string>距离</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="disSlider">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <resources/>
