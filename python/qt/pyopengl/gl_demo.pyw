@@ -138,8 +138,8 @@ class GLWidget(QtOpenGL.QGLWidget):
     def UpdateFps(self):
         self.mFps = self.mNowPaintTimes - self.mLasTPaintTimes
         self.mLasTPaintTimes = self.mNowPaintTimes
-        #print("姿态:x:%d, y:%d, z:%d" % (self.mX, self.mY, self.mZ))
-        #print("帧率:% 3dfps" % self.mFps)
+        print("姿态:x:%d, y:%d, z:%d" % (self.mX, self.mY, self.mZ))
+        print("帧率:% 3dfps" % self.mFps)
 
     def SetXNext(self, angle):
         self.mXNext = angle
