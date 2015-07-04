@@ -172,6 +172,9 @@ syn keyword	cType		int long short char void GLint GLvoid GLfloat GLuint GLchar
 syn keyword	cType		signed unsigned float double
 " fiberhome typedef
 syn keyword	cType		uint8 uint16 uint32 uint64 int8 int16 int32 int64
+" cmos typedef
+syn keyword	cType		FALSE TRUE NUL cmos_uint8_T cmos_uint16_T cmos_uint32_T cmos_uint64_T cmos_int8_T cmos_int16_T cmos_int32_T cmos_int64_T cmos_bool_T cmos_status_T
+
 
 if !exists("c_no_ansi") || exists("c_ansi_typedefs")
   syn keyword   cType		size_t ssize_t off_t wchar_t ptrdiff_t sig_atomic_t fpos_t
