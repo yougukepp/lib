@@ -4,7 +4,7 @@
 sudo apt-get install git sudo vim build-essential autoconf automake gcc binutils libc6 linux-headers-$(uname -r) libtool
 
 # Extra
-sudo apt-get install libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ntpdate sudo vim vim-tiny mpg123 gdb gnuplot flashplugin-nonfree tree rar unrar zip meld mplayer2 gnome-mplayer xfonts-intl-chinese xfonts-wqy gedit p7zip p7zip-full p7zip-rar pkg-config flex bison sed gawk bc u-boot-tools minicom sysv-rc-conf sylpheed zlib1g-dev subversion x-window-system-core gnome-core
+sudo apt-get install libc6-dev libncurses5-dev libreadline6-dev g++-multilib cscope ctags cflow ntpdate sudo vim vim-tiny mpg123 gdb gnuplot flashplugin-nonfree tree rar unrar zip meld mplayer2 gnome-mplayer xfonts-intl-chinese xfonts-wqy gedit p7zip p7zip-full p7zip-rar pkg-config flex bison sed gawk bc u-boot-tools minicom sysv-rc-conf sylpheed zlib1g-dev subversion x-window-system-core gnome-core libusb-1.0-0
 
 # fonts
 sudo apt-get install fonts-arphic* ttf-wqy* fonts-moe-standard* latex-cjk-chinese*
@@ -19,7 +19,7 @@ sudo apt-get install fonts-arphic* ttf-wqy* fonts-moe-standard* latex-cjk-chines
 #sudo apt-get install octave
 
 # input method
-sudo apt-get install fcitx-googlepinyin
+#sudo apt-get install fcitx-googlepinyin
 
 # document
 sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-zh manpages-dev manpages-posix-dev manpages-posix libx11-doc
@@ -34,12 +34,15 @@ sudo apt-get install binutils-doc cpp-doc gcc-doc glibc-doc stl-manual manpages-
 #sudo apt-get install scheme9
 #sudo apt-get install sbcl sbcl-doc
 
-# python & Qt
-sudo apt-get install python3-pyqt5 libqt5designer5 qt4-designer python3-tk
-sudo apt-get install libusb-1.0-0 python3-serial # python3-usb(use github install)
+# python3
+sudo apt-get install python3-tk python3-serial python3-opengl # python3-usb(use github install)
+# pyQt4
+sudo apt-get install qt4-designer python3-pyqt4 python3-pyqt4.qtopengl
+# pyQt5 (无法跨平台使用opengl 无qt5-designer 用qt4的)
+sudo apt-get install qt4-designer python3-pyqt5
 
 # OpenGL
-sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev python-opengl libglew-dev
+sudo apt-get install libegl1-mesa-dev libgles2-mesa-dev libopenvg1-mesa-dev libgles2-mesa-dev freeglut3-dev libglew-dev
 
 # Game
 #sudo apt-get install wesnoth
@@ -52,7 +55,7 @@ sudo apt-get install doxygen
 #sudo apt-get install gnuradio
 
 # ssh & samba & nfs & tftp
-# sudo apt-get install openssh-server ssh samba nfs-common nfs-kernel-server portmap
+sudo apt-get install openssh-server ssh samba nfs-common nfs-kernel-server portmap
 sudo  apt-get install tftp tftpd xinetd
 
 # update
