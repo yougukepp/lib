@@ -1,8 +1,7 @@
 all:
-	#make -C fig
-	xelatex ppcc.tex
-	xelatex ppcc.tex
-	evince ppcc.pdf
+	xelatex temple.tex
+	xelatex temple.tex
+	evince temple.pdf
 clean:
 	rm -rf *.aux *.idx *.log *.pdf *.toc *.out
 
