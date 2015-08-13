@@ -4,6 +4,10 @@
 %\documentclass{book}
 %\documentclass{article}
 
+% tikz
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
 \usepackage{xeCJK}
 \usepackage{makeidx}
 \usepackage[colorlinks,linkcolor=red]{hyperref}
@@ -74,6 +78,36 @@
 \newpage
 
 我要引用第\pageref{标签1}页。
+
+\section{pgf图片} 
+下面是图片
+\begin{figure}
+    \tdplotsetmaincoords{50}{140}
+    \begin{tikzpicture}[scale=5,tdplot_main_coords]
+        \draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$ex$};
+        \draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
+        \draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
+        \pgfmathsetmacro{\ax}{2}
+        \pgfmathsetmacro{\ay}{2}
+        \pgfmathsetmacro{\az}{1}
+        \tdplotsetrotatedcoords{20}{40}{00}
+        \draw[thick,color=red,tdplot_rotated_coords,->] (0,0,0)
+        -- (.7,0,0) node[anchor=east]{$x’$};
+        \draw[thick,color=green!50!black,tdplot_rotated_coords,->] (0,0,0)
+        -- (0,.7,0) node[anchor=west]{$y’$};
+        \draw[thick,color=blue,tdplot_rotated_coords,->] (0,0,0)
+        -- (0,0,.7) node[anchor=south]{$z’$};
+        \tdplottransformmainrot{\ax}{\ay}{\az}
+        \draw[tdplot_rotated_coords,->,blue!50] (0,0,0)
+        -- (\tdplotresx,\tdplotresy,\tdplotresz);
+        \node[tdplot_main_coords,anchor=south]
+        at (\ax,\ay,\az){Main coords: (\ax, \ay, \az)};
+        \node[tdplot_rotated_coords,anchor=north]
+        at (\tdplotresx,\tdplotresy,\tdplotresz)
+        {Rotated coords: (\tdplotresx, \tdplotresy, \tdplotresz)};
+    \end{tikzpicture}
+    \caption{tikz-3d图片}
+\end{figure}
 
 \section{表格} 
 表格例子\ref{表格例子}
