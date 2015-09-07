@@ -9,6 +9,9 @@ sudo apt-get install libc6-dev libncurses5-dev libreadline6-dev g++-multilib csc
 # fonts
 sudo apt-get install fonts-arphic* ttf-wqy* fonts-moe-standard* latex-cjk-chinese*
 
+# 办公
+sudo apt-get install libreoffice
+
 # 博客
 #sudo apt-get install jekyll python-pygments ruby-rdiscount 
 
