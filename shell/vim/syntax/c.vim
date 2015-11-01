@@ -168,13 +168,15 @@ if exists("c_gnu")
   syn keyword	cOperator	typeof __real__ __imag__
 endif
 
-syn keyword	cType		int long short char void GLint GLvoid GLfloat GLuint GLchar
-syn keyword	cType		signed unsigned float double
+syn keyword	cType int long short char void GLint GLvoid GLfloat GLuint GLchar
+syn keyword	cType signed unsigned float double
 " fiberhome typedef
-syn keyword	cType		uint8 uint16 uint32 uint64 int8 int16 int32 int64
+syn keyword	cType uint8 uint16 uint32 uint64 int8 int16 int32 int64
 " cmos typedef
-syn keyword	cType		FALSE TRUE NUL cmos_uint8_T cmos_uint16_T cmos_uint32_T cmos_uint64_T cmos_int8_T cmos_int16_T cmos_int32_T cmos_int64_T cmos_bool_T cmos_status_T
-
+syn keyword	cType FALSE TRUE NUL cmos_uint8_T cmos_uint16_T cmos_uint32_T cmos_uint64_T cmos_int8_T cmos_int16_T cmos_int32_T cmos_int64_T cmos_bool_T cmos_task_para_T cmos_func_T cmos_lib_tree_T cmos_lib_tree_node_T vfs_node_data_T
+syn keyword	cType cmos_status_T cmos_OK_E cmos_PARA_E cmos_NULL_E cmos_MEM_LACK_E cmos_CONSOLE_E cmos_DEV_TIMEOUT_E cmos_DEV_BUSY_E cmos_DEV_ERR_E cmos_ERR_E cmos_RESERVED_E
+syn keyword	cType cmos_priority_T cmos_priority_idle cmos_priority_low cmos_priority_below_normal cmos_priority_normal cmos_priority_above_normal cmos_priority_high cmos_priority_realtime cmos_priority_err
+syn keyword	cType vfs_node_type_E vfs_file vfs_dir vfs_cdev vfs_link vfs_err_type
 
 if !exists("c_no_ansi") || exists("c_ansi_typedefs")
   syn keyword   cType		size_t ssize_t off_t wchar_t ptrdiff_t sig_atomic_t fpos_t
