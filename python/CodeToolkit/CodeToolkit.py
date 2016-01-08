@@ -79,7 +79,7 @@ def ckt_count_cfile(cfile):
 
     in_blcok_comment = False
 
-    cfile_obj = open(cfile) 
+    cfile_obj = open(cfile, mode='r', encoding='utf8')
     
     block_comment_start_index = 0   # 块注释起点行号
     block_comment_end_index = 0     # 块注释终点行号
