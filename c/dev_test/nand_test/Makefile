@@ -1,14 +1,11 @@
-TARGET_MACHINE = __BCM683XX__
-#TARGET_MACHINE = __X86_64__
+#bcm
+#PREFIX=/opt/toolchains/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21/usr/bin/mips-unknown-linux-uclibc-
+#x86
+#PREFIX=
+#mtk
+PREFIX=/opt/trendchip/mips-linux-uclibc-4.3.6-v2/usr/bin/mips-unknown-linux-uclibc-
 
-ifeq ($(TARGET_MACHINE), __BCM683XX__)
-    PREFIX=/opt/toolchains/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21/usr/bin/mips-unknown-linux-uclibc-
-else
-    PREFIX=
-endif 
-
-LFLAGS = -lpthread -Wall -O2 -pedantic -std=c99 -D_BSD_SOURCE -D$(TARGET_MACHINE)
-
+LFLAGS = -lpthread -Wall -O2 -pedantic -std=c99 -D_BSD_SOURCE
 CFLAGS = -c $(LFLAGS)
 
 RM = rm -rf
