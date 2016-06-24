@@ -170,6 +170,8 @@ endif
 
 syn keyword	cType int long short char void GLint GLvoid GLfloat GLuint GLchar
 syn keyword	cType signed unsigned float double
+" flyer
+syn keyword	cType uint8_T uint16_T uint32_T uint64_T int8_T int16_T int32_T int64_T bool_T f32_T func_T
 " fiberhome typedef
 syn keyword	cType uint8 uint16 uint32 uint64 int8 int16 int32 int64
 " cmos typedef
