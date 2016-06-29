@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-os:winxp sp3 32
-pyqt:PyQt4-4.11.4-gpl-Py3.4-Qt4.8.7-x32
+os:win7 64
+pyqt:PyQt5-5.6-gpl-Py3.5-Qt5.6.0-x64-2
 opengl:pip install PyOpenGL(PyOpenGL3.1.0)
 """
 
@@ -11,11 +11,12 @@ import sys
 import math
 import array
 import datetime
-from PyQt4 import QtGui
-from PyQt4 import QtCore
-from PyQt4 import QtOpenGL
+from PyQt5 import QtGui
+from PyQt5 import QtWidgets
+from PyQt5 import QtCore
+from PyQt5 import QtOpenGL
 
-from PyQt4.uic import loadUiType, loadUi
+from PyQt5.uic import loadUiType, loadUi
 UIClass = loadUiType("gl_demo.ui")
 
 try:
@@ -26,7 +27,7 @@ except ImportError:
             "需要安装PyOpenGL(使用pip installed PyOpenGL).\n")
     sys.exit(1) 
 
-class GLWindow(QtGui.QWidget):
+class GLWindow(QtWidgets.QWidget):
     def __init__(self):
         super(GLWindow, self).__init__() 
         
@@ -51,7 +52,7 @@ class GLWindow(QtGui.QWidget):
         self.mGLGroupBox = self.mUi.glGroupBox
         # 保持方形
         self.mGLGroupBox.setFixedSize(500,500)
-        vbox = QtGui.QVBoxLayout()
+        vbox = QtWidgets.QVBoxLayout()
         vbox.addWidget(self.mGlWidget)
         self.mGLGroupBox.setLayout(vbox)
 
@@ -198,7 +199,7 @@ class GLObject():
         return self.mIndices[index].tostring()
 
 if __name__ == '__main__': 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     win= GLWindow()
     win.showMaximized()
     sys.exit(app.exec_())
