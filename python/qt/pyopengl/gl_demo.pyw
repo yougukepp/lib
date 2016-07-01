@@ -14,7 +14,6 @@ import datetime
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
-from PyQt5 import QtOpenGL
 
 from PyQt5.uic import loadUiType, loadUi
 UIClass = loadUiType("gl_demo.ui")
@@ -64,9 +63,22 @@ class GLWindow(QtWidgets.QWidget):
         self.mYSlider.valueChanged.connect(self.mGlWidget.SetYNext)
         self.mZSlider.valueChanged.connect(self.mGlWidget.SetZNext)
 
-class GLWidget(QtOpenGL.QGLWidget):
+class GLWidget(QtWidgets.QOpenGLWidget):
     def __init__(self, parent=None):
         super(GLWidget, self).__init__(parent)
+
+        """
+        目前PyQT尚未支持高版本OpenGL必须依赖PyOpenGL
+        self.mGLFunctions = QtGui.QOpenGLContext().versionFunctions()
+        print(self.mGLFunctions.initializeOpenGLFunctions)
+        print(self.mGLFunctions.glClearColor)
+        #self.mGLFunctions.glClearColor(0.0, 0.0, 0.0, 1.0)
+        #exit()
+        #self.mGLFunctions = self.mContext.versionFunctions()
+
+        for gl_fuction in dir(self.mGLFunctions):
+            print(gl_fuction)
+        """
 
         # 三维物体 及其初始角度
         self.mObj = None
@@ -91,7 +103,7 @@ class GLWidget(QtOpenGL.QGLWidget):
 
     def initializeGL(self):
         self.PrintGLInfo()
-        self.qglClearColor(QtCore.Qt.black)
+        GL.glClearColor(0.0, 0.0, 0.0, 1.0)
         self.mObj = GLObject()
 
         self.mPaintTimer = QtCore.QTimer();
@@ -134,7 +146,7 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.mNowPaintTimes += 1
 
     def Update(self):
-        self.updateGL()
+        self.update()
 
     def UpdateFps(self):
         self.mFps = self.mNowPaintTimes - self.mLasTPaintTimes
@@ -201,6 +213,6 @@ class GLObject():
 if __name__ == '__main__': 
     app = QtWidgets.QApplication(sys.argv)
     win= GLWindow()
-    win.showMaximized()
+    win.show()
     sys.exit(app.exec_())
 
